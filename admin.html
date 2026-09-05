@@ -1,0 +1,2428 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <title>إدارة حصر الطلاب | رشيد العربية</title>
+
+  <style>
+    :root{
+      --green:#07583f;
+      --green2:#0b6845;
+      --green-soft:#eef6f2;
+      --text:#17392c;
+      --muted:#6d7b75;
+      --line:#d8e4de;
+      --bg:#f6f9f7;
+      --white:#ffffff;
+      --danger:#a52828;
+      --danger-bg:#fff1f1;
+      --gold:#73591a;
+      --gold-bg:#fff7df;
+    }
+
+    *{
+      box-sizing:border-box;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      margin:0;
+      font-family:
+        Tahoma,
+        Arial,
+        sans-serif;
+      background:var(--bg);
+      color:var(--text);
+    }
+
+    button,
+    input,
+    select{
+      font-family:inherit;
+    }
+
+    .hide{
+      display:none !important;
+    }
+
+    .topbar{
+      background:var(--white);
+      border-bottom:1px solid var(--line);
+      position:sticky;
+      top:0;
+      z-index:30;
+    }
+
+    .container{
+      width:min(1180px,calc(100% - 28px));
+      margin:auto;
+    }
+
+    .nav{
+      min-height:72px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:11px;
+      text-decoration:none;
+      color:var(--green);
+      font-weight:900;
+      font-size:18px;
+    }
+
+    .brand small{
+      display:block;
+      margin-top:3px;
+      color:var(--muted);
+      font-size:11px;
+      font-weight:500;
+    }
+
+    .brand-mark{
+      width:44px;
+      height:44px;
+      border-radius:13px;
+      display:grid;
+      place-items:center;
+      background:var(--green);
+      color:#fff;
+      font-size:24px;
+      font-weight:900;
+    }
+
+    .page{
+      padding:30px 0 50px;
+    }
+
+    .page-title{
+      margin:0;
+      color:var(--green);
+      font-size:28px;
+      line-height:1.5;
+    }
+
+    .muted{
+      color:var(--muted);
+      line-height:1.8;
+    }
+
+    .panel{
+      background:var(--white);
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:22px;
+      box-shadow:0 8px 24px rgba(7,88,63,.05);
+    }
+
+    .login-wrap{
+      min-height:calc(100vh - 100px);
+      display:grid;
+      place-items:center;
+      padding:30px 0;
+    }
+
+    .login-panel{
+      width:min(470px,100%);
+    }
+
+    .login-logo{
+      text-align:center;
+      margin-bottom:20px;
+    }
+
+    .login-logo .brand-mark{
+      margin:auto;
+      width:62px;
+      height:62px;
+      font-size:32px;
+    }
+
+    .login-logo h1{
+      margin:12px 0 4px;
+      color:var(--green);
+      font-size:25px;
+    }
+
+    .login-logo p{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .field{
+      margin-bottom:15px;
+    }
+
+    .field label{
+      display:block;
+      margin-bottom:7px;
+      font-weight:800;
+      font-size:14px;
+    }
+
+    input,
+    select{
+      width:100%;
+      min-height:45px;
+      border:1px solid #cddbd4;
+      background:#fff;
+      border-radius:10px;
+      padding:9px 11px;
+      color:var(--text);
+      font-size:14px;
+      outline:none;
+    }
+
+    input:focus,
+    select:focus{
+      border-color:var(--green2);
+      box-shadow:0 0 0 3px rgba(11,104,69,.09);
+    }
+
+    .btn{
+      border:0;
+      border-radius:10px;
+      min-height:42px;
+      padding:9px 15px;
+      cursor:pointer;
+      font-weight:800;
+      font-size:14px;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:7px;
+    }
+
+    .btn-primary{
+      background:var(--green);
+      color:#fff;
+    }
+
+    .btn-primary:hover{
+      background:#064a35;
+    }
+
+    .btn-light{
+      background:#fff;
+      color:var(--green);
+      border:1px solid #bdd2c8;
+    }
+
+    .btn-light:hover{
+      background:var(--green-soft);
+    }
+
+    .btn-report{
+      background:var(--gold-bg);
+      color:var(--gold);
+      border:1px solid #dfbd55;
+    }
+
+    .btn-report:hover{
+      background:#ffefbc;
+    }
+
+    .btn-danger{
+      background:var(--danger-bg);
+      color:var(--danger);
+      border:1px solid #e5a4a4;
+    }
+
+    .btn-full{
+      width:100%;
+    }
+
+    .notice{
+      border-radius:10px;
+      padding:12px 14px;
+      margin:14px 0;
+      font-size:13px;
+      line-height:1.8;
+    }
+
+    .notice-error{
+      background:#fff1f1;
+      border:1px solid #edbaba;
+      color:#9a2525;
+    }
+
+    .notice-success{
+      background:#eef8f3;
+      border:1px solid #b7d9c9;
+      color:#07583f;
+    }
+
+    .admin-heading{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:15px;
+      flex-wrap:wrap;
+      margin-bottom:20px;
+    }
+
+    .kpis{
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:10px;
+      margin:18px 0;
+    }
+
+    .kpi{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:13px;
+      padding:13px 10px;
+      text-align:center;
+    }
+
+    .kpi span{
+      display:block;
+      color:var(--muted);
+      font-size:12px;
+      margin-bottom:5px;
+    }
+
+    .kpi strong{
+      display:block;
+      color:var(--green);
+      font-size:25px;
+    }
+
+    .actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin:16px 0;
+    }
+
+    .filters{
+      display:grid;
+      grid-template-columns:2fr repeat(4,1fr);
+      gap:8px;
+      margin:16px 0;
+    }
+
+    .table-wrap{
+      overflow:auto;
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:14px;
+    }
+
+    .table{
+      width:100%;
+      min-width:1050px;
+      border-collapse:collapse;
+      font-size:13px;
+    }
+
+    .table th,
+    .table td{
+      padding:11px 8px;
+      border-bottom:1px solid #e4ece8;
+      text-align:center;
+      vertical-align:middle;
+    }
+
+    .table th{
+      background:#eef6f2;
+      color:#134b38;
+      font-weight:900;
+      position:sticky;
+      top:0;
+    }
+
+    .table tbody tr:hover{
+      background:#fbfdfc;
+    }
+
+    .tag{
+      padding:5px 9px;
+      border-radius:999px;
+      background:#eef6f2;
+      white-space:nowrap;
+      display:inline-block;
+    }
+
+    .footer-note{
+      text-align:center;
+      color:var(--muted);
+      font-size:12px;
+      padding:24px 0 8px;
+    }
+
+    @media(max-width:900px){
+      .kpis{
+        grid-template-columns:repeat(2,1fr);
+      }
+
+      .filters{
+        grid-template-columns:1fr 1fr;
+      }
+
+      .filters input{
+        grid-column:1/-1;
+      }
+
+      .page-title{
+        font-size:23px;
+      }
+    }
+
+    @media(max-width:560px){
+      .container{
+        width:min(100% - 18px,1180px);
+      }
+
+      .nav{
+        min-height:64px;
+      }
+
+      .brand{
+        font-size:15px;
+      }
+
+      .brand-mark{
+        width:39px;
+        height:39px;
+      }
+
+      .panel{
+        padding:16px;
+      }
+
+      .kpis{
+        grid-template-columns:1fr 1fr;
+      }
+
+      .actions .btn{
+        flex:1 1 calc(50% - 8px);
+      }
+
+      .filters{
+        grid-template-columns:1fr;
+      }
+
+      .filters input{
+        grid-column:auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="topbar">
+  <div class="container nav">
+
+    <a class="brand" href="index.html">
+      <span class="brand-mark">ر</span>
+
+      <span>
+        رشيد العربية
+        <small>Rasheed Arabic</small>
+      </span>
+    </a>
+
+    <button
+      id="logoutBtn"
+      type="button"
+      class="btn btn-light hide"
+    >
+      تسجيل الخروج
+    </button>
+
+  </div>
+</header>
+
+
+<!-- تسجيل الدخول -->
+
+<section
+  id="loginSection"
+  class="login-wrap"
+>
+  <div class="container">
+
+    <div class="panel login-panel">
+
+      <div class="login-logo">
+        <span class="brand-mark">ر</span>
+
+        <h1>
+          إدارة رشيد العربية
+        </h1>
+
+        <p>
+          تسجيل دخول المدير
+        </p>
+      </div>
+
+      <form id="loginForm">
+
+        <div class="field">
+          <label for="email">
+            البريد الإلكتروني
+          </label>
+
+          <input
+            id="email"
+            type="email"
+            autocomplete="username"
+            required
+          >
+        </div>
+
+        <div class="field">
+          <label for="password">
+            كلمة المرور
+          </label>
+
+          <input
+            id="password"
+            type="password"
+            autocomplete="current-password"
+            required
+          >
+        </div>
+
+        <div
+          id="loginError"
+          class="notice notice-error hide"
+        ></div>
+
+        <button
+          id="loginBtn"
+          type="submit"
+          class="btn btn-primary btn-full"
+        >
+          دخول المدير
+        </button>
+
+      </form>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- لوحة الإدارة -->
+
+<main
+  id="adminSection"
+  class="page hide"
+>
+
+  <div class="container">
+
+    <div class="admin-heading">
+
+      <div>
+        <h1 class="page-title">
+          حصر طلاب اللغة العربية لغير الناطقين بها
+        </h1>
+
+        <p class="muted">
+          تظهر هنا البيانات التي يرسلها المعلمون والمعلمات من رابط الحصر.
+        </p>
+      </div>
+
+    </div>
+
+
+    <div class="kpis">
+
+      <div class="kpi">
+        <span>الإجمالي</span>
+        <strong id="kAll">—</strong>
+      </div>
+
+      <div class="kpi">
+        <span>البنين</span>
+        <strong id="kBoys">—</strong>
+      </div>
+
+      <div class="kpi">
+        <span>البنات</span>
+        <strong id="kGirls">—</strong>
+      </div>
+
+      <div class="kpi">
+        <span>أمريكي</span>
+        <strong id="kAm">—</strong>
+      </div>
+
+      <div class="kpi">
+        <span>بريطاني</span>
+        <strong id="kBr">—</strong>
+      </div>
+
+    </div>
+
+
+    <div class="actions">
+
+      <button
+        class="btn btn-primary"
+        id="refreshBtn"
+        type="button"
+      >
+        تحديث الآن
+      </button>
+
+      <button
+        class="btn btn-light"
+        id="csvBtn"
+        type="button"
+      >
+        تصدير CSV
+      </button>
+
+      <button
+        class="btn btn-report"
+        id="pdfBtn"
+        type="button"
+      >
+        تصدير تقرير PDF للإدارة
+      </button>
+
+      <a
+        class="btn btn-light"
+        href="register-student.html"
+        target="_blank"
+        rel="noopener"
+      >
+        فتح رابط التسجيل
+      </a>
+
+    </div>
+
+
+    <div class="filters">
+
+      <input
+        id="q"
+        type="search"
+        placeholder="بحث باسم الطالب أو المعلم..."
+      >
+
+      <select id="gender">
+        <option value="">بنين وبنات</option>
+        <option value="بنين">بنين</option>
+        <option value="بنات">بنات</option>
+      </select>
+
+      <select id="stage">
+        <option value="">كل المراحل</option>
+        <option value="رياض أطفال">رياض أطفال</option>
+        <option value="ابتدائي">ابتدائي</option>
+        <option value="متوسط">متوسط</option>
+        <option value="ثانوي">ثانوي</option>
+      </select>
+
+      <select id="curr">
+        <option value="">أمريكي وبريطاني</option>
+        <option value="أمريكي">أمريكي</option>
+        <option value="بريطاني">بريطاني</option>
+      </select>
+
+      <select id="grade">
+        <option value="">كل الصفوف</option>
+      </select>
+
+    </div>
+
+
+    <div
+      id="loadError"
+      class="notice notice-error hide"
+    ></div>
+
+
+    <div class="table-wrap">
+
+      <table class="table">
+
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>اسم الطالب</th>
+            <th>الجنس</th>
+            <th>المرحلة</th>
+            <th>الصف</th>
+            <th>الشعبة</th>
+            <th>القسم</th>
+            <th>المعلم/المعلمة</th>
+            <th>وقت التسجيل</th>
+            <th>إجراءات</th>
+          </tr>
+        </thead>
+
+        <tbody id="body">
+
+          <tr>
+            <td colspan="10">
+              جارٍ التحميل...
+            </td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+
+    <div class="footer-note">
+      رشيد العربية — نظام تعليم ومتابعة اللغة العربية لغير الناطقين بها
+    </div>
+
+  </div>
+
+</main>
+
+
+<script>
+const SUPABASE_URL =
+  "https://crnlfpuipepolflqcwuo.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY =
+  "sb_publishable_bW_x_9cHxqhuxkYdZ-g4kQ_3UAukGRV";
+
+const SESSION_KEY =
+  "rasheed_arabic_admin_session_v1";
+
+
+let rows = [];
+
+
+const $ = id =>
+  document.getElementById(id);
+
+
+function getSession(){
+
+  try{
+
+    return JSON.parse(
+      localStorage.getItem(SESSION_KEY) || "null"
+    );
+
+  }catch(error){
+
+    return null;
+
+  }
+
+}
+
+
+function setSession(session){
+
+  localStorage.setItem(
+    SESSION_KEY,
+    JSON.stringify(session)
+  );
+
+}
+
+
+function clearSession(){
+
+  localStorage.removeItem(
+    SESSION_KEY
+  );
+
+}
+
+
+async function refreshSession(session){
+
+  if(!session?.refresh_token){
+    return null;
+  }
+
+  const res =
+    await fetch(
+      SUPABASE_URL +
+      "/auth/v1/token?grant_type=refresh_token",
+      {
+        method:"POST",
+
+        headers:{
+          "apikey":
+            SUPABASE_PUBLISHABLE_KEY,
+
+          "Content-Type":
+            "application/json"
+        },
+
+        body:JSON.stringify({
+          refresh_token:
+            session.refresh_token
+        })
+      }
+    );
+
+
+  if(!res.ok){
+    return null;
+  }
+
+
+  const next =
+    await res.json();
+
+
+  setSession(next);
+
+
+  return next;
+
+}
+
+
+async function api(
+  path,
+  options = {},
+  retry = true
+){
+
+  let session =
+    getSession();
+
+
+  if(!session?.access_token){
+    throw new Error("NO_SESSION");
+  }
+
+
+  const headers = {
+
+    "apikey":
+      SUPABASE_PUBLISHABLE_KEY,
+
+    "Authorization":
+      "Bearer " +
+      session.access_token,
+
+    "Content-Type":
+      "application/json",
+
+    ...(options.headers || {})
+
+  };
+
+
+  let res =
+    await fetch(
+      SUPABASE_URL + path,
+      {
+        ...options,
+        headers
+      }
+    );
+
+
+  if(
+    res.status === 401 &&
+    retry
+  ){
+
+    session =
+      await refreshSession(session);
+
+
+    if(!session){
+
+      throw new Error(
+        "SESSION_EXPIRED"
+      );
+
+    }
+
+
+    res =
+      await fetch(
+        SUPABASE_URL + path,
+        {
+          ...options,
+
+          headers:{
+            ...headers,
+
+            "Authorization":
+              "Bearer " +
+              session.access_token
+          }
+        }
+      );
+
+  }
+
+
+  return res;
+
+}
+
+
+function safe(value){
+
+  return String(
+    value ?? ""
+  ).replace(
+    /[&<>"']/g,
+    character => ({
+
+      "&":"&amp;",
+      "<":"&lt;",
+      ">":"&gt;",
+      '"':"&quot;",
+      "'":"&#39;"
+
+    }[character])
+  );
+
+}
+
+
+function formatDate(value){
+
+  if(!value){
+    return "—";
+  }
+
+
+  try{
+
+    return new Intl.DateTimeFormat(
+      "ar-SA",
+      {
+        dateStyle:"short",
+        timeStyle:"short"
+      }
+    ).format(
+      new Date(value)
+    );
+
+  }catch(error){
+
+    return String(value);
+
+  }
+
+}
+
+
+function showLogin(){
+
+  $("loginSection")
+    .classList.remove("hide");
+
+  $("adminSection")
+    .classList.add("hide");
+
+  $("logoutBtn")
+    .classList.add("hide");
+
+}
+
+
+function showAdmin(){
+
+  $("loginSection")
+    .classList.add("hide");
+
+  $("adminSection")
+    .classList.remove("hide");
+
+  $("logoutBtn")
+    .classList.remove("hide");
+
+}
+
+
+async function checkAdmin(){
+
+  const session =
+    getSession();
+
+
+  if(!session?.access_token){
+    return false;
+  }
+
+
+  try{
+
+    /*
+      نستخدم نفس فحص صلاحية المدير
+      الموجود في النظام الحالي.
+    */
+
+    const res =
+      await api(
+        "/rest/v1/registrations?select=id&limit=1"
+      );
+
+
+    if(
+      res.status === 401 ||
+      res.status === 403
+    ){
+
+      return false;
+
+    }
+
+
+    return res.ok;
+
+  }catch(error){
+
+    return false;
+
+  }
+
+}
+
+
+async function login(
+  email,
+  password
+){
+
+  const res =
+    await fetch(
+      SUPABASE_URL +
+      "/auth/v1/token?grant_type=password",
+      {
+
+        method:"POST",
+
+        headers:{
+
+          "apikey":
+            SUPABASE_PUBLISHABLE_KEY,
+
+          "Content-Type":
+            "application/json"
+
+        },
+
+        body:JSON.stringify({
+          email,
+          password
+        })
+
+      }
+    );
+
+
+  if(!res.ok){
+
+    throw new Error(
+      "LOGIN_FAILED"
+    );
+
+  }
+
+
+  const session =
+    await res.json();
+
+
+  setSession(session);
+
+
+  const allowed =
+    await checkAdmin();
+
+
+  if(!allowed){
+
+    clearSession();
+
+    throw new Error(
+      "NOT_ADMIN"
+    );
+
+  }
+
+
+  return true;
+
+}
+
+
+async function load(){
+
+  $("loadError")
+    .classList.add("hide");
+
+
+  $("body").innerHTML = `
+    <tr>
+      <td colspan="10">
+        جارٍ التحميل...
+      </td>
+    </tr>
+  `;
+
+
+  try{
+
+    const r =
+      await api(
+        "/rest/v1/non_native_students" +
+        "?select=*" +
+        "&order=gender.asc,stage.asc,curriculum.asc,grade.asc,section_name.asc,student_name.asc"
+      );
+
+
+    if(!r.ok){
+
+      throw new Error(
+        await r.text()
+      );
+
+    }
+
+
+    rows =
+      await r.json();
+
+
+    buildGrades();
+
+    render();
+
+
+  }catch(error){
+
+    console.error(
+      "Load error:",
+      error
+    );
+
+
+    $("loadError").textContent =
+      "تعذر تحميل قائمة الطلاب. تحقق من الاتصال وصلاحيات Supabase.";
+
+
+    $("loadError")
+      .classList.remove("hide");
+
+
+    $("body").innerHTML = `
+      <tr>
+        <td colspan="10">
+          تعذر تحميل البيانات.
+        </td>
+      </tr>
+    `;
+
+  }
+
+}
+
+
+function buildGrades(){
+
+  const current =
+    $("grade").value;
+
+
+  const grades =
+    [
+      ...new Set(
+        rows
+          .map(
+            student =>
+              student.grade
+          )
+          .filter(Boolean)
+      )
+    ];
+
+
+  $("grade").innerHTML =
+    '<option value="">كل الصفوف</option>' +
+    grades
+      .map(
+        grade =>
+          `<option value="${safe(grade)}">${safe(grade)}</option>`
+      )
+      .join("");
+
+
+  if(
+    grades.includes(current)
+  ){
+
+    $("grade").value =
+      current;
+
+  }
+
+}
+
+
+function filtered(){
+
+  const q =
+    $("q")
+      .value
+      .trim()
+      .toLowerCase();
+
+
+  return rows.filter(
+    student => {
+
+      const haystack =
+        [
+          student.student_name,
+          student.submitted_by,
+          student.section_name,
+          student.grade,
+          student.stage,
+          student.curriculum
+        ]
+        .join(" ")
+        .toLowerCase();
+
+
+      return (
+
+        (
+          !q ||
+          haystack.includes(q)
+        )
+
+        &&
+
+        (
+          !$("gender").value ||
+          student.gender ===
+          $("gender").value
+        )
+
+        &&
+
+        (
+          !$("stage").value ||
+          student.stage ===
+          $("stage").value
+        )
+
+        &&
+
+        (
+          !$("curr").value ||
+          student.curriculum ===
+          $("curr").value
+        )
+
+        &&
+
+        (
+          !$("grade").value ||
+          student.grade ===
+          $("grade").value
+        )
+
+      );
+
+    }
+  );
+
+}
+
+
+function render(){
+
+  const data =
+    filtered();
+
+
+  $("kAll").textContent =
+    rows.length;
+
+
+  $("kBoys").textContent =
+    rows.filter(
+      student =>
+        student.gender ===
+        "بنين"
+    ).length;
+
+
+  $("kGirls").textContent =
+    rows.filter(
+      student =>
+        student.gender ===
+        "بنات"
+    ).length;
+
+
+  $("kAm").textContent =
+    rows.filter(
+      student =>
+        student.curriculum ===
+        "أمريكي"
+    ).length;
+
+
+  $("kBr").textContent =
+    rows.filter(
+      student =>
+        student.curriculum ===
+        "بريطاني"
+    ).length;
+
+
+  if(!data.length){
+
+    $("body").innerHTML = `
+      <tr>
+        <td colspan="10">
+          لا توجد بيانات مطابقة.
+        </td>
+      </tr>
+    `;
+
+    return;
+
+  }
+
+
+  $("body").innerHTML =
+    data.map(
+      (student,index) => `
+
+      <tr>
+
+        <td>
+          ${index + 1}
+        </td>
+
+        <td>
+          <strong>
+            ${safe(student.student_name)}
+          </strong>
+        </td>
+
+        <td>
+          <span class="tag">
+            ${safe(student.gender)}
+          </span>
+        </td>
+
+        <td>
+          ${safe(student.stage)}
+        </td>
+
+        <td>
+          ${safe(student.grade)}
+        </td>
+
+        <td>
+          ${safe(student.section_name)}
+        </td>
+
+        <td>
+          <span class="tag">
+            ${safe(student.curriculum)}
+          </span>
+        </td>
+
+        <td>
+          ${safe(student.submitted_by)}
+        </td>
+
+        <td>
+          ${safe(
+            formatDate(
+              student.created_at
+            )
+          )}
+        </td>
+
+        <td>
+
+          <button
+            type="button"
+            class="btn btn-danger delete-student"
+            data-id="${Number(student.id)}"
+          >
+            🗑️ حذف
+          </button>
+
+        </td>
+
+      </tr>
+
+    `
+    ).join("");
+
+}
+
+
+async function deleteStudent(
+  id
+){
+
+  const student =
+    rows.find(
+      item =>
+        Number(item.id) ===
+        Number(id)
+    );
+
+
+  if(!student){
+    return;
+  }
+
+
+  const confirmed =
+    window.confirm(
+      'هل أنت متأكد من حذف الطالب "' +
+      student.student_name +
+      '"؟\n\n' +
+      "سيتم استبعاده من الحصر ومن تقرير الإدارة."
+    );
+
+
+  if(!confirmed){
+    return;
+  }
+
+
+  try{
+
+    const r =
+      await api(
+        "/rest/v1/non_native_students?id=eq." +
+        encodeURIComponent(id),
+        {
+          method:"DELETE"
+        }
+      );
+
+
+    if(!r.ok){
+
+      throw new Error(
+        await r.text()
+      );
+
+    }
+
+
+    rows =
+      rows.filter(
+        item =>
+          Number(item.id) !==
+          Number(id)
+      );
+
+
+    buildGrades();
+
+    render();
+
+
+    alert(
+      'تم حذف "' +
+      student.student_name +
+      '" من الحصر بنجاح.'
+    );
+
+
+  }catch(error){
+
+    console.error(
+      "Delete error:",
+      error
+    );
+
+
+    alert(
+      "تعذر حذف الطالب. يرجى المحاولة مرة أخرى."
+    );
+
+  }
+
+}
+
+
+function exportCSV(){
+
+  const data =
+    filtered();
+
+
+  if(!data.length){
+
+    alert(
+      "لا توجد بيانات مطابقة لتصديرها."
+    );
+
+    return;
+
+  }
+
+
+  const head = [
+
+    "اسم الطالب",
+    "الجنس",
+    "المرحلة",
+    "الصف",
+    "الشعبة",
+    "القسم",
+    "المعلم/المعلمة",
+    "وقت التسجيل"
+
+  ];
+
+
+  const val =
+    value =>
+      '"' +
+      String(value ?? "")
+        .replaceAll(
+          '"',
+          '""'
+        ) +
+      '"';
+
+
+  const csv =
+    "\ufeff" +
+    [
+      head,
+
+      ...data.map(
+        student => [
+
+          student.student_name,
+          student.gender,
+          student.stage,
+          student.grade,
+          student.section_name,
+          student.curriculum,
+          student.submitted_by,
+          student.created_at
+
+        ]
+      )
+
+    ]
+    .map(
+      row =>
+        row
+          .map(val)
+          .join(",")
+    )
+    .join("\n");
+
+
+  const url =
+    URL.createObjectURL(
+      new Blob(
+        [csv],
+        {
+          type:
+            "text/csv;charset=utf-8"
+        }
+      )
+    );
+
+
+  const link =
+    document.createElement(
+      "a"
+    );
+
+
+  link.href =
+    url;
+
+
+  link.download =
+    "حصر طلاب العربية لغير الناطقين بها.csv";
+
+
+  link.click();
+
+
+  URL.revokeObjectURL(
+    url
+  );
+
+}
+
+
+function exportPDF(){
+
+  const data =
+    filtered();
+
+
+  if(!data.length){
+
+    alert(
+      "لا توجد بيانات مطابقة لتصديرها."
+    );
+
+    return;
+
+  }
+
+
+  const boys =
+    data.filter(
+      student =>
+        student.gender ===
+        "بنين"
+    ).length;
+
+
+  const girls =
+    data.filter(
+      student =>
+        student.gender ===
+        "بنات"
+    ).length;
+
+
+  const american =
+    data.filter(
+      student =>
+        student.curriculum ===
+        "أمريكي"
+    ).length;
+
+
+  const british =
+    data.filter(
+      student =>
+        student.curriculum ===
+        "بريطاني"
+    ).length;
+
+
+  const reportDate =
+    new Intl.DateTimeFormat(
+      "ar-SA",
+      {
+        dateStyle:"long",
+        timeStyle:"short"
+      }
+    ).format(
+      new Date()
+    );
+
+
+  const schoolLogoUrl =
+    new URL(
+      "new-generation-logo.jpg",
+      window.location.href
+    ).href;
+
+
+  const ministryLogoUrl =
+    new URL(
+      "ministry-logo.png",
+      window.location.href
+    ).href;
+
+
+  const cogniaLogoUrl =
+    new URL(
+      "cognia-logo.png",
+      window.location.href
+    ).href;
+
+
+  const reportRows =
+    data.map(
+      (student,index) => `
+
+      <tr>
+
+        <td>
+          ${index + 1}
+        </td>
+
+        <td class="student-name">
+          ${safe(student.student_name)}
+        </td>
+
+        <td>
+          ${safe(student.gender)}
+        </td>
+
+        <td>
+          ${safe(student.stage)}
+        </td>
+
+        <td>
+          ${safe(student.grade)}
+        </td>
+
+        <td>
+          ${safe(student.section_name)}
+        </td>
+
+        <td>
+          ${safe(student.curriculum)}
+        </td>
+
+        <td>
+          ${safe(student.submitted_by)}
+        </td>
+
+        <td class="date-cell">
+          ${safe(
+            formatDate(
+              student.created_at
+            )
+          )}
+        </td>
+
+      </tr>
+
+    `
+    ).join("");
+
+
+  const reportWindow =
+    window.open(
+      "",
+      "_blank"
+    );
+
+
+  if(!reportWindow){
+
+    alert(
+      "يرجى السماح بالنوافذ المنبثقة حتى يتم فتح التقرير."
+    );
+
+    return;
+
+  }
+
+
+  reportWindow.document.write(`
+
+<!doctype html>
+
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="utf-8">
+
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1"
+>
+
+<title>
+تقرير حصر طلاب اللغة العربية لغير الناطقين بها
+</title>
+
+<style>
+
+@page{
+  size:A4 landscape;
+  margin:10mm;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html,
+body{
+  margin:0;
+  padding:0;
+  background:#ffffff;
+}
+
+body{
+  color:#17392c;
+  font-family:
+    Tahoma,
+    Arial,
+    sans-serif;
+}
+
+.report{
+  width:100%;
+  margin:0 auto;
+}
+
+.header{
+  text-align:center;
+  padding-bottom:13px;
+  margin-bottom:15px;
+  border-bottom:4px solid #0b6845;
+}
+
+.header-layout{
+  display:grid;
+  grid-template-columns:150px 1fr 190px;
+  align-items:center;
+  gap:18px;
+  width:100%;
+}
+
+.header-school-logo{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.school-logo{
+  width:95px;
+  height:95px;
+  object-fit:contain;
+}
+
+.header-center{
+  text-align:center;
+}
+
+.header-official-logos{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:18px;
+}
+
+.official-logo{
+  object-fit:contain;
+}
+
+.ministry-logo{
+  width:92px;
+  height:72px;
+}
+
+.cognia-logo{
+  width:76px;
+  height:76px;
+}
+
+.school-name{
+  font-size:19px;
+  font-weight:900;
+  color:#07583f;
+  margin-top:2px;
+}
+
+.school-en{
+  direction:ltr;
+  font-size:9px;
+  color:#777;
+  margin-top:2px;
+}
+
+.report-title{
+  font-size:23px;
+  font-weight:900;
+  color:#153f30;
+  margin-top:13px;
+}
+
+.report-subtitle{
+  direction:ltr;
+  font-size:10px;
+  color:#777;
+  margin-top:3px;
+}
+
+.report-date{
+  font-size:11px;
+  color:#666;
+  margin-top:7px;
+}
+
+.summary{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:8px;
+  margin:15px 0;
+}
+
+.summary-card{
+  border:1px solid #cbded5;
+  border-radius:10px;
+  padding:8px 6px;
+  text-align:center;
+  background:#ffffff;
+}
+
+.summary-card span{
+  display:block;
+  font-size:10px;
+  color:#697871;
+}
+
+.summary-card strong{
+  display:block;
+  margin-top:3px;
+  font-size:20px;
+  color:#07583f;
+}
+
+.table-title{
+  font-size:14px;
+  font-weight:900;
+  color:#07583f;
+  margin:8px 0;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  table-layout:fixed;
+  font-size:9.5px;
+}
+
+th,
+td{
+  border:1px solid #cad8d2;
+  padding:6px 4px;
+  text-align:center;
+  vertical-align:middle;
+  word-wrap:break-word;
+}
+
+th{
+  background:#e8f3ee;
+  color:#123e2f;
+  font-weight:900;
+}
+
+tbody tr:nth-child(even){
+  background:#fafcfb;
+}
+
+.student-name{
+  font-weight:800;
+}
+
+.date-cell{
+  white-space:nowrap;
+  font-size:8.5px;
+}
+
+.footer{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  margin-top:22px;
+  padding-top:12px;
+  border-top:1px solid #d8e4de;
+}
+
+.prepared-by{
+  font-size:13px;
+  font-weight:900;
+  color:#07583f;
+}
+
+.teacher-role{
+  display:inline;
+  color:#17392c;
+  font-weight:700;
+}
+
+.department-head{
+  font-size:14px;
+  font-weight:900;
+  color:#07583f;
+}
+
+@media print{
+
+  body{
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
+
+  tr{
+    break-inside:avoid;
+    page-break-inside:avoid;
+  }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="report">
+
+
+  <div class="header">
+
+    <div class="header-layout">
+
+      <div class="header-school-logo">
+
+        <img
+          src="${schoolLogoUrl}"
+          alt="شعار مدارس الجيل الجديد العالمية"
+          class="school-logo"
+        >
+
+      </div>
+
+
+      <div class="header-center">
+
+        <div class="school-name">
+          مدارس الجيل الجديد العالمية
+        </div>
+
+        <div class="school-en">
+          New Generation International Schools
+        </div>
+
+        <div class="report-title">
+          تقرير حصر طلاب اللغة العربية لغير الناطقين بها
+        </div>
+
+        <div class="report-subtitle">
+          Arabic Language Program – Student Census Report
+        </div>
+
+        <div class="report-date">
+          تاريخ إعداد التقرير:
+          ${safe(reportDate)}
+        </div>
+
+      </div>
+
+
+      <div class="header-official-logos">
+
+        <img
+          src="${ministryLogoUrl}"
+          alt="شعار وزارة التعليم"
+          class="official-logo ministry-logo"
+        >
+
+        <img
+          src="${cogniaLogoUrl}"
+          alt="شعار Cognia"
+          class="official-logo cognia-logo"
+        >
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="summary">
+
+    <div class="summary-card">
+      <span>إجمالي الطلاب</span>
+      <strong>${data.length}</strong>
+    </div>
+
+    <div class="summary-card">
+      <span>البنين</span>
+      <strong>${boys}</strong>
+    </div>
+
+    <div class="summary-card">
+      <span>البنات</span>
+      <strong>${girls}</strong>
+    </div>
+
+    <div class="summary-card">
+      <span>القسم الأمريكي</span>
+      <strong>${american}</strong>
+    </div>
+
+    <div class="summary-card">
+      <span>القسم البريطاني</span>
+      <strong>${british}</strong>
+    </div>
+
+  </div>
+
+
+  <div class="table-title">
+    بيانات الطلاب
+  </div>
+
+
+  <table>
+
+    <thead>
+
+      <tr>
+
+        <th style="width:4%">
+          #
+        </th>
+
+        <th style="width:17%">
+          اسم الطالب
+        </th>
+
+        <th style="width:8%">
+          الجنس
+        </th>
+
+        <th style="width:10%">
+          المرحلة
+        </th>
+
+        <th style="width:11%">
+          الصف
+        </th>
+
+        <th style="width:7%">
+          الشعبة
+        </th>
+
+        <th style="width:9%">
+          القسم
+        </th>
+
+        <th style="width:17%">
+          المعلم / المعلمة
+        </th>
+
+        <th style="width:17%">
+          وقت التسجيل
+        </th>
+
+      </tr>
+
+    </thead>
+
+
+    <tbody>
+      ${reportRows}
+    </tbody>
+
+  </table>
+
+
+  <div class="footer">
+
+    <div>
+
+      <div class="prepared-by">
+
+        إعداد:
+        سامي سليمان السيد
+
+        <span class="teacher-role">
+          — معلم اللغة العربية لغير الناطقين بها
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div class="department-head">
+      رئيسة القسم: أ. عزيزة أحمد علي
+    </div>
+
+  </div>
+
+
+</div>
+
+
+<script>
+
+window.onload =
+  function(){
+
+    setTimeout(
+      function(){
+
+        window.print();
+
+      },
+      700
+    );
+
+  };
+
+<\/script>
+
+
+</body>
+
+</html>
+
+  `);
+
+
+  reportWindow.document.close();
+
+}
+
+
+$("loginForm")
+  .addEventListener(
+    "submit",
+    async function(event){
+
+      event.preventDefault();
+
+
+      const email =
+        $("email")
+          .value
+          .trim();
+
+
+      const password =
+        $("password").value;
+
+
+      const errorBox =
+        $("loginError");
+
+
+      const button =
+        $("loginBtn");
+
+
+      errorBox
+        .classList
+        .add("hide");
+
+
+      button.disabled =
+        true;
+
+
+      button.textContent =
+        "جارٍ تسجيل الدخول...";
+
+
+      try{
+
+        await login(
+          email,
+          password
+        );
+
+
+        showAdmin();
+
+        await load();
+
+
+      }catch(error){
+
+        console.error(
+          "Login error:",
+          error
+        );
+
+
+        if(
+          error.message ===
+          "NOT_ADMIN"
+        ){
+
+          errorBox.textContent =
+            "تم تسجيل الدخول، لكن هذا الحساب غير مخوّل كمدير.";
+
+        }else{
+
+          errorBox.textContent =
+            "تعذر تسجيل الدخول. تحقق من البريد الإلكتروني وكلمة المرور.";
+
+        }
+
+
+        errorBox
+          .classList
+          .remove("hide");
+
+      }finally{
+
+        button.disabled =
+          false;
+
+
+        button.textContent =
+          "دخول المدير";
+
+      }
+
+    }
+  );
+
+
+$("logoutBtn")
+  .addEventListener(
+    "click",
+    function(){
+
+      clearSession();
+
+      rows = [];
+
+      showLogin();
+
+      $("password").value =
+        "";
+
+    }
+  );
+
+
+[
+  "q",
+  "gender",
+  "stage",
+  "curr",
+  "grade"
+]
+.forEach(
+  id => {
+
+    $(id)
+      .addEventListener(
+        id === "q"
+          ? "input"
+          : "change",
+        render
+      );
+
+  }
+);
+
+
+$("refreshBtn")
+  .addEventListener(
+    "click",
+    load
+  );
+
+
+$("csvBtn")
+  .addEventListener(
+    "click",
+    exportCSV
+  );
+
+
+$("pdfBtn")
+  .addEventListener(
+    "click",
+    exportPDF
+  );
+
+
+$("body")
+  .addEventListener(
+    "click",
+    function(event){
+
+      const button =
+        event.target.closest(
+          ".delete-student"
+        );
+
+
+      if(!button){
+        return;
+      }
+
+
+      deleteStudent(
+        Number(
+          button.dataset.id
+        )
+      );
+
+    }
+  );
+
+
+async function init(){
+
+  const session =
+    getSession();
+
+
+  if(!session?.access_token){
+
+    showLogin();
+
+    return;
+
+  }
+
+
+  const allowed =
+    await checkAdmin();
+
+
+  if(!allowed){
+
+    clearSession();
+
+    showLogin();
+
+    return;
+
+  }
+
+
+  showAdmin();
+
+  await load();
+
+}
+
+
+init();
+
+</script>
+
+
+</body>
+</html>
