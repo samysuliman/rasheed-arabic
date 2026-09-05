@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#126b43">
+
+  <title>حصر طلاب اللغة العربية لغير الناطقين بها</title>
+
+  <style>
+    *{
+      box-sizing:border-box;
+    }
+
+    body{
+      margin:0;
+      font-family:Tahoma, Arial, sans-serif;
+      background:
+        linear-gradient(180deg,#f2f8f5 0%,#ffffff 45%,#f7f4ea 100%);
+      color:#18382c;
+      min-height:100vh;
+    }
+
+    .page{
+      width:min(100%,650px);
+      margin:auto;
+      padding:18px 12px 35px;
+    }
+
+    .card{
+      background:#fff;
+      border:1px solid #dce9e2;
+      border-radius:24px;
+      overflow:hidden;
+      box-shadow:0 12px 35px rgba(21,91,61,.10);
+    }
+
+    /* Header */
+
+    .school-header{
+      text-align:center;
+      padding:22px 20px 16px;
+      background:#fff;
+    }
+
+    .school-logo{
+      width:92px;
+      height:92px;
+      border-radius:50%;
+      object-fit:contain;
+      background:white;
+      border:3px solid #e6c96b;
+      padding:5px;
+      box-shadow:0 4px 15px rgba(0,0,0,.08);
+    }
+
+    .school-ar{
+      font-size:20px;
+      font-weight:800;
+      margin:10px 0 3px;
+      color:#176344;
+    }
+
+    .school-en{
+      direction:ltr;
+      font-size:12px;
+      color:#718077;
+      letter-spacing:.2px;
+    }
+
+    .hero{
+      background:linear-gradient(135deg,#116c43,#0b5635);
+      color:white;
+      text-align:center;
+      padding:19px 18px;
+      position:relative;
+    }
+
+    .hero:before,
+    .hero:after{
+      content:"";
+      position:absolute;
+      height:3px;
+      width:80px;
+      top:0;
+      background:#dfbd55;
+    }
+
+    .hero:before{
+      right:0;
+    }
+
+    .hero:after{
+      left:0;
+    }
+
+    .hero h1{
+      font-size:22px;
+      line-height:1.5;
+      margin:0;
+      font-weight:800;
+    }
+
+    .hero p{
+      direction:ltr;
+      margin:5px 0 0;
+      font-size:13px;
+      opacity:.9;
+    }
+
+    form{
+      padding:22px;
+    }
+
+    .field{
+      margin-bottom:20px;
+    }
+
+    label.field-label{
+      display:block;
+      margin-bottom:8px;
+      font-size:16px;
+      font-weight:800;
+      color:#244c3c;
+    }
+
+    .english-label{
+      font-size:11px;
+      color:#829087;
+      font-weight:normal;
+      margin-right:5px;
+      direction:ltr;
+      display:inline-block;
+    }
+
+    input,
+    select{
+      width:100%;
+      height:56px;
+      border-radius:14px;
+      border:1.5px solid #cadcd3;
+      background:#fbfdfc;
+      padding:0 15px;
+      font-size:16px;
+      color:#193f30;
+      outline:none;
+      transition:.2s;
+    }
+
+    input:focus,
+    select:focus{
+      border-color:#18714a;
+      box-shadow:0 0 0 3px rgba(24,113,74,.09);
+      background:#fff;
+    }
+
+    input::placeholder{
+      color:#9aa9a1;
+    }
+
+    .choice-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+    }
+
+    .choice{
+      min-height:72px;
+      border:2px solid #d8e4de;
+      border-radius:16px;
+      background:#fff;
+      cursor:pointer;
+      padding:10px;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      gap:10px;
+      transition:.18s;
+      font-family:inherit;
+      color:#264b3c;
+    }
+
+    .choice strong{
+      display:block;
+      font-size:17px;
+    }
+
+    .choice small{
+      display:block;
+      font-size:11px;
+      color:#79877f;
+      margin-top:2px;
+    }
+
+    .choice:hover{
+      transform:translateY(-1px);
+    }
+
+    /* Boys / Girls */
+
+    .gender-boy{
+      background:#f5fbff;
+      border-color:#c7e3f5;
+    }
+
+    .gender-girl{
+      background:#fff7fa;
+      border-color:#f2cedb;
+    }
+
+    .gender-boy.active{
+      border-color:#2987c8;
+      background:#eaf6ff;
+      box-shadow:0 0 0 3px rgba(41,135,200,.10);
+    }
+
+    .gender-girl.active{
+      border-color:#d76b91;
+      background:#fff0f5;
+      box-shadow:0 0 0 3px rgba(215,107,145,.10);
+    }
+
+    .person-icon{
+      width:36px;
+      height:36px;
+      flex:0 0 36px;
+    }
+
+    /* Curriculum */
+
+    .curriculum-choice{
+      min-height:88px;
+      flex-direction:column;
+      gap:6px;
+    }
+
+    .curriculum-choice.active{
+      border-color:#137047;
+      background:#f0faf5;
+      box-shadow:0 0 0 3px rgba(19,112,71,.10);
+    }
+
+    .flag{
+      width:58px;
+      height:35px;
+      border-radius:5px;
+      overflow:hidden;
+      box-shadow:0 1px 5px rgba(0,0,0,.15);
+      border:1px solid #ddd;
+    }
+
+    .curriculum-text strong{
+      font-size:16px;
+    }
+
+    .curriculum-text small{
+      display:block;
+      font-size:11px;
+      color:#728078;
+      direction:ltr;
+    }
+
+    .grade-row{
+      display:grid;
+      grid-template-columns:1fr .72fr;
+      gap:10px;
+    }
+
+    .submit-btn{
+      width:100%;
+      min-height:62px;
+      border:0;
+      border-radius:16px;
+      background:linear-gradient(135deg,#137449,#0b5d39);
+      color:white;
+      cursor:pointer;
+      font-family:inherit;
+      box-shadow:0 7px 18px rgba(15,103,64,.22);
+      transition:.2s;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:11px;
+      margin-top:5px;
+    }
+
+    .submit-btn:hover{
+      transform:translateY(-1px);
+    }
+
+    .submit-btn:disabled{
+      opacity:.65;
+      cursor:wait;
+      transform:none;
+    }
+
+    .submit-main{
+      font-size:19px;
+      font-weight:800;
+    }
+
+    .submit-en{
+      font-size:11px;
+      opacity:.85;
+      direction:ltr;
+    }
+
+    .send-icon{
+      width:25px;
+      height:25px;
+    }
+
+    .message{
+      display:none;
+      margin-top:15px;
+      padding:13px 14px;
+      border-radius:13px;
+      text-align:center;
+      font-weight:700;
+      line-height:1.6;
+    }
+
+    .message.success{
+      display:block;
+      background:#ecf9f1;
+      color:#12633f;
+      border:1px solid #b8e2c9;
+    }
+
+    .message.error{
+      display:block;
+      background:#fff0f0;
+      color:#a42a2a;
+      border:1px solid #f1c2c2;
+    }
+
+    .required{
+      color:#b82727;
+    }
+
+    .footer-note{
+      text-align:center;
+      color:#75847b;
+      font-size:12px;
+      line-height:1.8;
+      padding:0 18px 22px;
+    }
+
+    .footer-note svg{
+      vertical-align:middle;
+      margin-left:3px;
+    }
+
+    @media(max-width:480px){
+      .page{
+        padding:8px 7px 25px;
+      }
+
+      .card{
+        border-radius:19px;
+      }
+
+      form{
+        padding:18px 14px;
+      }
+
+      .school-header{
+        padding-top:17px;
+      }
+
+      .school-logo{
+        width:82px;
+        height:82px;
+      }
+
+      .school-ar{
+        font-size:18px;
+      }
+
+      .hero h1{
+        font-size:19px;
+      }
+
+      .choice{
+        min-height:68px;
+      }
+
+      .grade-row{
+        grid-template-columns:1fr 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="page">
+  <div class="card">
+
+    <div class="school-header">
+      <img
+        src="new-generation-logo.jpg"
+        alt="شعار مدارس الجيل الجديد"
+        class="school-logo"
+      >
+
+      <div class="school-ar">مدارس الجيل الجديد العالمية</div>
+      <div class="school-en">New Generation International Schools</div>
+    </div>
+
+    <div class="hero">
+      <h1>حصر طلاب اللغة العربية<br>لغير الناطقين بها</h1>
+      <p>Arabic Language Program – Student Registration</p>
+    </div>
+
+    <form id="studentForm">
+
+      <!-- Student Name -->
+      <div class="field">
+        <label class="field-label">
+          اسم الطالب / الطالبة
+          <span class="required">*</span>
+          <span class="english-label">Student Name</span>
+        </label>
+
+        <input
+          id="studentName"
+          type="text"
+          autocomplete="off"
+          placeholder="اكتب الاسم الكامل"
+          required
+        >
+      </div>
+
+      <!-- Gender -->
+      <div class="field">
+        <label class="field-label">
+          الجنس
+          <span class="required">*</span>
+          <span class="english-label">Gender</span>
+        </label>
+
+        <div class="choice-grid">
+
+          <button
+            type="button"
+            class="choice gender-boy"
+            data-gender="بنين"
+          >
+            <svg class="person-icon" viewBox="0 0 64 64">
+              <circle cx="32" cy="17" r="10" fill="#4a9ed4"/>
+              <path d="M17 55V40c0-9 6-15 15-15s15 6 15 15v15"
+                    fill="#74b8e2"/>
+              <path d="M15 36l-7 14M49 36l7 14"
+                    stroke="#4a9ed4"
+                    stroke-width="7"
+                    stroke-linecap="round"/>
+            </svg>
+
+            <span>
+              <strong>بنين</strong>
+              <small>Boys</small>
+            </span>
+          </button>
+
+          <button
+            type="button"
+            class="choice gender-girl"
+            data-gender="بنات"
+          >
+            <svg class="person-icon" viewBox="0 0 64 64">
+              <circle cx="32" cy="17" r="10" fill="#d9799b"/>
+              <path d="M32 26L17 54h30z" fill="#eca0b9"/>
+              <path d="M17 36L9 49M47 36l8 13"
+                    stroke="#d9799b"
+                    stroke-width="7"
+                    stroke-linecap="round"/>
+            </svg>
+
+            <span>
+              <strong>بنات</strong>
+              <small>Girls</small>
+            </span>
+          </button>
+
+        </div>
+      </div>
+
+      <!-- Stage -->
+      <div class="field">
+        <label class="field-label">
+          المرحلة التعليمية
+          <span class="required">*</span>
+          <span class="english-label">Educational Stage</span>
+        </label>
+
+        <select id="stage" required>
+          <option value="">اختر المرحلة</option>
+          <option value="رياض أطفال">رياض أطفال</option>
+          <option value="ابتدائي">ابتدائي</option>
+          <option value="متوسط">متوسط</option>
+          <option value="ثانوي">ثانوي</option>
+        </select>
+      </div>
+
+      <!-- Grade + Section -->
+      <div class="field">
+        <div class="grade-row">
+
+          <div>
+            <label class="field-label">
+              الصف
+              <span class="required">*</span>
+            </label>
+
+            <select id="grade" required disabled>
+              <option value="">اختر الصف</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="field-label">
+              الشعبة
+              <span class="required">*</span>
+            </label>
+
+            <input
+              id="section"
+              type="text"
+              placeholder="مثال: A"
+              required
+            >
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Curriculum -->
+      <div class="field">
+        <label class="field-label">
+          القسم / المسار
+          <span class="required">*</span>
+          <span class="english-label">Curriculum</span>
+        </label>
+
+        <div class="choice-grid">
+
+          <!-- USA -->
+          <button
+            type="button"
+            class="choice curriculum-choice"
+            data-curriculum="أمريكي"
+          >
+            <svg class="flag" viewBox="0 0 190 100"
+                 xmlns="http://www.w3.org/2000/svg">
+
+              <rect width="190" height="100" fill="#fff"/>
+
+              <g fill="#b22234">
+                <rect y="0" width="190" height="8"/>
+                <rect y="16" width="190" height="8"/>
+                <rect y="32" width="190" height="8"/>
+                <rect y="48" width="190" height="8"/>
+                <rect y="64" width="190" height="8"/>
+                <rect y="80" width="190" height="8"/>
+                <rect y="96" width="190" height="4"/>
+              </g>
+
+              <rect width="76" height="54" fill="#3c3b6e"/>
+
+              <g fill="#fff">
+                <circle cx="10" cy="9" r="2.2"/>
+                <circle cx="25" cy="9" r="2.2"/>
+                <circle cx="40" cy="9" r="2.2"/>
+                <circle cx="55" cy="9" r="2.2"/>
+                <circle cx="68" cy="9" r="2.2"/>
+
+                <circle cx="17" cy="20" r="2.2"/>
+                <circle cx="32" cy="20" r="2.2"/>
+                <circle cx="47" cy="20" r="2.2"/>
+                <circle cx="62" cy="20" r="2.2"/>
+
+                <circle cx="10" cy="31" r="2.2"/>
+                <circle cx="25" cy="31" r="2.2"/>
+                <circle cx="40" cy="31" r="2.2"/>
+                <circle cx="55" cy="31" r="2.2"/>
+                <circle cx="68" cy="31" r="2.2"/>
+
+                <circle cx="17" cy="42" r="2.2"/>
+                <circle cx="32" cy="42" r="2.2"/>
+                <circle cx="47" cy="42" r="2.2"/>
+                <circle cx="62" cy="42" r="2.2"/>
+              </g>
+
+            </svg>
+
+            <span class="curriculum-text">
+              <strong>أمريكي</strong>
+              <small>American</small>
+            </span>
+          </button>
+
+          <!-- UK -->
+          <button
+            type="button"
+            class="choice curriculum-choice"
+            data-curriculum="بريطاني"
+          >
+            <svg class="flag" viewBox="0 0 190 100"
+                 xmlns="http://www.w3.org/2000/svg">
+
+              <rect width="190" height="100" fill="#012169"/>
+
+              <path d="M0 0L190 100M190 0L0 100"
+                    stroke="#fff"
+                    stroke-width="22"/>
+
+              <path d="M0 0L190 100M190 0L0 100"
+                    stroke="#c8102e"
+                    stroke-width="10"/>
+
+              <path d="M95 0V100M0 50H190"
+                    stroke="#fff"
+                    stroke-width="30"/>
+
+              <path d="M95 0V100M0 50H190"
+                    stroke="#c8102e"
+                    stroke-width="18"/>
+
+            </svg>
+
+            <span class="curriculum-text">
+              <strong>بريطاني</strong>
+              <small>British</small>
+            </span>
+          </button>
+
+        </div>
+      </div>
+
+      <!-- Teacher -->
+      <div class="field">
+        <label class="field-label">
+          اسم المعلم / المعلمة
+          <span class="required">*</span>
+          <span class="english-label">Teacher Name</span>
+        </label>
+
+        <input
+          id="teacherName"
+          type="text"
+          autocomplete="name"
+          placeholder="اسم المعلم الذي قام بإرسال البيانات"
+          required
+        >
+      </div>
+
+      <button id="submitBtn" class="submit-btn" type="submit">
+
+        <svg class="send-icon" viewBox="0 0 24 24"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="2">
+          <path d="M22 2L11 13"/>
+          <path d="M22 2L15 22L11 13L2 9L22 2Z"/>
+        </svg>
+
+        <span>
+          <span class="submit-main">إرسال البيانات</span><br>
+          <span class="submit-en">Submit</span>
+        </span>
+
+      </button>
+
+      <div id="message" class="message"></div>
+
+    </form>
+
+    <div class="footer-note">
+      🔒 بمجرد الإرسال تصل البيانات مباشرة إلى مسؤول برنامج اللغة العربية.
+      <br>
+      Arabic Language Program
+    </div>
+
+  </div>
+</div>
+
+
+<script>
+
+const SUPABASE_URL =
+  "https://crnlfpuipepolflqcwuo.supabase.co";
+
+const SUPABASE_KEY =
+  "sb_publishable_bW_x_9cHxqhuxkYdZ-g4kQ_3UAukGRV";
+
+
+let selectedGender = "";
+let selectedCurriculum = "";
+
+
+/* Gender */
+document.querySelectorAll("[data-gender]").forEach(button => {
+
+  button.addEventListener("click", () => {
+
+    document
+      .querySelectorAll("[data-gender]")
+      .forEach(b => b.classList.remove("active"));
+
+    button.classList.add("active");
+
+    selectedGender =
+      button.getAttribute("data-gender");
+
+  });
+
+});
+
+
+/* Curriculum */
+document.querySelectorAll("[data-curriculum]").forEach(button => {
+
+  button.addEventListener("click", () => {
+
+    document
+      .querySelectorAll("[data-curriculum]")
+      .forEach(b => b.classList.remove("active"));
+
+    button.classList.add("active");
+
+    selectedCurriculum =
+      button.getAttribute("data-curriculum");
+
+  });
+
+});
+
+
+/* Grades */
+const grades = {
+
+  "رياض أطفال":[
+    "KG1",
+    "KG2",
+    "KG3"
+  ],
+
+  "ابتدائي":[
+    "الأول",
+    "الثاني",
+    "الثالث",
+    "الرابع",
+    "الخامس",
+    "السادس"
+  ],
+
+  "متوسط":[
+    "السابع",
+    "الثامن",
+    "التاسع"
+  ],
+
+  "ثانوي":[
+    "العاشر",
+    "الحادي عشر",
+    "الثاني عشر"
+  ]
+
+};
+
+
+const stage =
+  document.getElementById("stage");
+
+const grade =
+  document.getElementById("grade");
+
+
+stage.addEventListener("change", () => {
+
+  grade.innerHTML =
+    '<option value="">اختر الصف</option>';
+
+  const list =
+    grades[stage.value] || [];
+
+  list.forEach(item => {
+
+    const option =
+      document.createElement("option");
+
+    option.value = item;
+    option.textContent = item;
+
+    grade.appendChild(option);
+
+  });
+
+  grade.disabled =
+    list.length === 0;
+
+});
+
+
+/* Form Submit */
+document
+  .getElementById("studentForm")
+  .addEventListener("submit", async function(event){
+
+    event.preventDefault();
+
+    const message =
+      document.getElementById("message");
+
+    const submitBtn =
+      document.getElementById("submitBtn");
+
+
+    message.className = "message";
+    message.textContent = "";
+
+
+    if(!selectedGender){
+
+      message.className =
+        "message error";
+
+      message.textContent =
+        "يرجى اختيار بنين أو بنات.";
+
+      return;
+    }
+
+
+    if(!selectedCurriculum){
+
+      message.className =
+        "message error";
+
+      message.textContent =
+        "يرجى اختيار القسم الأمريكي أو البريطاني.";
+
+      return;
+    }
+
+
+    const payload = {
+
+      student_name:
+        document.getElementById("studentName")
+        .value.trim(),
+
+      gender:
+        selectedGender,
+
+      stage:
+        stage.value,
+
+      grade:
+        grade.value,
+
+      section_name:
+        document.getElementById("section")
+        .value.trim(),
+
+      curriculum:
+        selectedCurriculum,
+
+      submitted_by:
+        document.getElementById("teacherName")
+        .value.trim()
+
+    };
+
+
+    submitBtn.disabled = true;
+
+    submitBtn.querySelector(".submit-main")
+      .textContent = "جارٍ الإرسال...";
+
+
+    try{
+
+      const response = await fetch(
+
+        SUPABASE_URL +
+        "/rest/v1/non_native_students",
+
+        {
+          method:"POST",
+
+          headers:{
+            "apikey":SUPABASE_KEY,
+            "Authorization":
+              "Bearer " + SUPABASE_KEY,
+            "Content-Type":
+              "application/json",
+            "Prefer":
+              "return=minimal"
+          },
+
+          body:
+            JSON.stringify(payload)
+        }
+
+      );
+
+
+      if(!response.ok){
+
+        const text =
+          await response.text();
+
+        throw new Error(text);
+
+      }
+
+
+      message.className =
+        "message success";
+
+      message.innerHTML =
+        "✓ تم إرسال بيانات الطالب بنجاح.<br>" +
+        "<small>شكرًا لتعاونكم.</small>";
+
+
+      document
+        .getElementById("studentForm")
+        .reset();
+
+
+      selectedGender = "";
+      selectedCurriculum = "";
+
+
+      document
+        .querySelectorAll(".choice")
+        .forEach(b =>
+          b.classList.remove("active")
+        );
+
+
+      grade.innerHTML =
+        '<option value="">اختر الصف</option>';
+
+      grade.disabled = true;
+
+
+      window.scrollTo({
+        top:
+          document.body.scrollHeight,
+        behavior:"smooth"
+      });
+
+
+    }catch(error){
+
+      console.error(error);
+
+      message.className =
+        "message error";
+
+      message.innerHTML =
+        "تعذر إرسال البيانات حاليًا.<br>" +
+        "<small>يرجى المحاولة مرة أخرى أو التواصل مع مسؤول البرنامج.</small>";
+
+    }finally{
+
+      submitBtn.disabled = false;
+
+      submitBtn.querySelector(".submit-main")
+        .textContent = "إرسال البيانات";
+
+    }
+
+  });
+
+</script>
+
+</body>
+</html>
