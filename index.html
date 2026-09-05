@@ -107,6 +107,19 @@
       box-shadow:0 6px 20px rgba(0,0,0,.04);
     }
 
+    .card-link{
+      text-decoration:none;
+      color:inherit;
+      display:block;
+      transition:.2s;
+      cursor:pointer;
+    }
+
+    .card-link:hover{
+      transform:translateY(-3px);
+      box-shadow:0 10px 26px rgba(0,0,0,.08);
+    }
+
     .card-icon{
       font-size:34px;
       margin-bottom:12px;
@@ -133,6 +146,7 @@
     }
 
     @media(max-width:750px){
+
       header h1{
         font-size:22px;
       }
@@ -191,31 +205,44 @@
 
     <section class="cards">
 
-      <div class="card">
+      <!-- حصر الطلاب -->
+      <a class="card card-link" href="register-student.html">
         <div class="card-icon">👥</div>
+
         <h3>حصر الطلاب</h3>
+
         <p>
           تسجيل الطلاب وتصنيفهم حسب المرحلة والصف والقسم
           وإنشاء سجل إلكتروني لكل طالب.
         </p>
-      </div>
+      </a>
 
+      <!-- متابعة التقدم -->
       <div class="card">
+
         <div class="card-icon">📈</div>
+
         <h3>متابعة التقدم</h3>
+
         <p>
           متابعة مستوى الطالب في القراءة والكتابة والاستماع
           والمحادثة والواجبات.
         </p>
+
       </div>
 
+      <!-- التقارير -->
       <div class="card">
+
         <div class="card-icon">📄</div>
+
         <h3>التقارير</h3>
+
         <p>
           إعداد تقارير فردية وجماعية وتصديرها
           بصورة منظمة وجاهزة للإدارة.
         </p>
+
       </div>
 
     </section>
