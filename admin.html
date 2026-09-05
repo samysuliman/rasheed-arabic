@@ -698,10 +698,10 @@
 
 <script>
 const SUPABASE_URL =
-  "https://crnlfpuipepolflqcwuo.supabase.co";
+  "https://wcyamoqmpwpribsgspjn.supabase.co";
 
 const SUPABASE_PUBLISHABLE_KEY =
-  "sb_publishable_bW_x_9cHxqhuxkYdZ-g4kQ_3UAukGRV";
+  "sb_publishable_3eJET0uhZw4D4DowMK13fQ_oWK3PdIQ";
 
 const SESSION_KEY =
   "rasheed_arabic_admin_session_v1";
@@ -961,41 +961,55 @@ async function checkAdmin(){
   const session =
     getSession();
 
-
   if(!session?.access_token){
     return false;
   }
 
-
   try{
 
-    /*
-      نستخدم نفس فحص صلاحية المدير
-      الموجود في النظام الحالي.
-    */
+    const userId =
+      session.user?.id;
+
+    if(!userId){
+      return false;
+    }
 
     const res =
       await api(
-        "/rest/v1/registrations?select=id&limit=1"
+        "/rest/v1/admin_users" +
+        "?select=user_id" +
+        "&user_id=eq." +
+        encodeURIComponent(userId) +
+        "&limit=1"
       );
-
 
     if(
       res.status === 401 ||
       res.status === 403
     ){
-
       return false;
-
     }
 
+    if(!res.ok){
+      return false;
+    }
 
-    return res.ok;
+    const admins =
+      await res.json();
+
+    return (
+      Array.isArray(admins) &&
+      admins.length === 1
+    );
 
   }catch(error){
 
-    return false;
+    console.error(
+      "Admin check error:",
+      error
+    );
 
+    return false;
   }
 
 }
