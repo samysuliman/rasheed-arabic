@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#126b43">
+
+<title>حصر الطلاب الذين لم يستلموا كتب مواد الهوية</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:Tahoma,Arial,sans-serif;
+  background:linear-gradient(180deg,#f2f8f5 0%,#fff 45%,#f7f4ea 100%);
+  color:#18382c;
+  min-height:100vh;
+}
+
+.page{
+  width:min(100%,650px);
+  margin:auto;
+  padding:18px 12px 35px;
+}
+
+.card{
+  background:#fff;
+  border:1px solid #dce9e2;
+  border-radius:24px;
+  overflow:hidden;
+  box-shadow:0 12px 35px rgba(21,91,61,.10);
+}
+
+.school-header{
+  text-align:center;
+  padding:22px 20px 16px;
+}
+
+.school-logo{
+  width:92px;
+  height:92px;
+  border-radius:50%;
+  object-fit:contain;
+  background:white;
+  border:3px solid #e6c96b;
+  padding:5px;
+}
+
+.school-ar{
+  font-size:20px;
+  font-weight:800;
+  margin:10px 0 3px;
+  color:#176344;
+}
+
+.school-en{
+  direction:ltr;
+  font-size:12px;
+  color:#718077;
+}
+
+.hero{
+  background:linear-gradient(135deg,#116c43,#0b5635);
+  color:white;
+  text-align:center;
+  padding:20px 18px;
+}
+
+.hero h1{
+  font-size:22px;
+  line-height:1.5;
+  margin:0;
+}
+
+.hero p{
+  direction:ltr;
+  margin:6px 0 0;
+  font-size:13px;
+  opacity:.9;
+}
+
+.books-visual{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  padding:22px 15px 5px;
+  flex-wrap:wrap;
+}
+
+.book{
+  width:145px;
+  min-height:105px;
+  border-radius:14px;
+  padding:14px 8px;
+  text-align:center;
+  border:2px solid #d9e7df;
+  background:#fff;
+  box-shadow:0 4px 12px rgba(0,0,0,.05);
+}
+
+.book-icon{
+  font-size:34px;
+  margin-bottom:6px;
+}
+
+.book strong{
+  display:block;
+  color:#126b43;
+  font-size:14px;
+  line-height:1.5;
+}
+
+form{padding:22px}
+
+.field{margin-bottom:20px}
+
+.field-label{
+  display:block;
+  margin-bottom:8px;
+  font-size:16px;
+  font-weight:800;
+  color:#244c3c;
+}
+
+.english-label{
+  font-size:11px;
+  color:#829087;
+  font-weight:normal;
+  margin-right:5px;
+  direction:ltr;
+  display:inline-block;
+}
+
+.required{color:#b82727}
+
+input,select{
+  width:100%;
+  height:56px;
+  border-radius:14px;
+  border:1.5px solid #cadcd3;
+  background:#fbfdfc;
+  padding:0 15px;
+  font-size:16px;
+  color:#193f30;
+  outline:none;
+}
+
+input:focus,select:focus{
+  border-color:#18714a;
+  box-shadow:0 0 0 3px rgba(24,113,74,.09);
+}
+
+.choice-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.choice{
+  min-height:72px;
+  border:2px solid #d8e4de;
+  border-radius:16px;
+  background:#fff;
+  cursor:pointer;
+  padding:10px;
+  font-family:inherit;
+  color:#264b3c;
+  font-size:16px;
+}
+
+.choice.active{
+  border-color:#137047;
+  background:#f0faf5;
+  box-shadow:0 0 0 3px rgba(19,112,71,.10);
+}
+
+.gender-boy{background:#f5fbff}
+.gender-girl{background:#fff7fa}
+
+.grade-row{
+  display:grid;
+  grid-template-columns:1fr .72fr;
+  gap:10px;
+}
+
+/* Missing books */
+.books-select{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:10px;
+}
+
+.book-choice{
+  width:100%;
+  min-height:70px;
+  border:2px solid #d8e4de;
+  border-radius:15px;
+  background:#fff;
+  padding:12px 15px;
+  display:flex;
+  align-items:center;
+  gap:14px;
+  cursor:pointer;
+  font-family:inherit;
+  text-align:right;
+  color:#244c3c;
+}
+
+.book-choice .icon{
+  font-size:30px;
+}
+
+.book-choice strong{
+  font-size:16px;
+}
+
+.book-choice small{
+  display:block;
+  margin-top:3px;
+  color:#7b8982;
+}
+
+.book-choice.active{
+  border-color:#c84646;
+  background:#fff4f4;
+  box-shadow:0 0 0 3px rgba(200,70,70,.08);
+}
+
+.help{
+  color:#78877f;
+  font-size:12px;
+  margin-top:7px;
+  line-height:1.7;
+}
+
+.submit-btn{
+  width:100%;
+  min-height:62px;
+  border:0;
+  border-radius:16px;
+  background:linear-gradient(135deg,#137449,#0b5d39);
+  color:white;
+  cursor:pointer;
+  font-family:inherit;
+  font-size:19px;
+  font-weight:800;
+  margin-top:5px;
+}
+
+.submit-btn:disabled{
+  opacity:.65;
+  cursor:wait;
+}
+
+.message{
+  display:none;
+  margin-top:15px;
+  padding:13px;
+  border-radius:13px;
+  text-align:center;
+  font-weight:700;
+  line-height:1.6;
+}
+
+.message.success{
+  display:block;
+  background:#ecf9f1;
+  color:#12633f;
+  border:1px solid #b8e2c9;
+}
+
+.message.error{
+  display:block;
+  background:#fff0f0;
+  color:#a42a2a;
+  border:1px solid #f1c2c2;
+}
+
+.footer-note{
+  text-align:center;
+  color:#75847b;
+  font-size:12px;
+  line-height:1.8;
+  padding:0 18px 22px;
+}
+
+@media(max-width:480px){
+  .page{padding:8px 7px 25px}
+  .card{border-radius:19px}
+  form{padding:18px 14px}
+  .books-visual{gap:6px}
+  .book{width:30%;min-width:95px}
+  .grade-row{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+
+<body>
+
+<div class="page">
+<div class="card">
+
+<div class="school-header">
+  <img src="new-generation-logo.jpg"
+       alt="شعار مدارس الجيل الجديد"
+       class="school-logo">
+
+  <div class="school-ar">مدارس الجيل الجديد العالمية</div>
+  <div class="school-en">New Generation International Schools</div>
+</div>
+
+<div class="hero">
+  <h1>حصر الطلاب الذين لم يستلموا<br>كتب مواد الهوية</h1>
+  <p>Identity Subjects Books – Missing Books Registration</p>
+</div>
+
+<!-- الكتب الثلاثة -->
+<div class="books-visual">
+
+  <div class="book">
+    <div class="book-icon">📖</div>
+    <strong>الدراسات الإسلامية</strong>
+  </div>
+
+  <div class="book">
+    <div class="book-icon">📚</div>
+    <strong>اللغة العربية</strong>
+  </div>
+
+  <div class="book">
+    <div class="book-icon">🌍</div>
+    <strong>الدراسات الاجتماعية</strong>
+  </div>
+
+</div>
+
+<form id="studentForm">
+
+<div class="field">
+  <label class="field-label">
+    اسم الطالب / الطالبة
+    <span class="required">*</span>
+    <span class="english-label">Student Name</span>
+  </label>
+
+  <input id="studentName"
+         type="text"
+         placeholder="اكتب الاسم الكامل"
+         required>
+</div>
+
+<div class="field">
+  <label class="field-label">
+    الجنس <span class="required">*</span>
+  </label>
+
+  <div class="choice-grid">
+    <button type="button"
+            class="choice gender-boy"
+            data-gender="بنين">
+      👦 بنين
+    </button>
+
+    <button type="button"
+            class="choice gender-girl"
+            data-gender="بنات">
+      👧 بنات
+    </button>
+  </div>
+</div>
+
+<div class="field">
+  <label class="field-label">
+    المرحلة التعليمية
+    <span class="required">*</span>
+  </label>
+
+  <select id="stage" required>
+    <option value="">اختر المرحلة</option>
+    <option value="رياض أطفال">رياض أطفال</option>
+    <option value="ابتدائي">ابتدائي</option>
+    <option value="متوسط">متوسط</option>
+    <option value="ثانوي">ثانوي</option>
+  </select>
+</div>
+
+<div class="field">
+<div class="grade-row">
+
+<div>
+  <label class="field-label">
+    الصف <span class="required">*</span>
+  </label>
+
+  <select id="grade" required disabled>
+    <option value="">اختر الصف</option>
+  </select>
+</div>
+
+<div>
+  <label class="field-label">
+    الشعبة <span class="required">*</span>
+  </label>
+
+  <input id="section"
+         type="text"
+         placeholder="مثال: A"
+         required>
+</div>
+
+</div>
+</div>
+
+<div class="field">
+  <label class="field-label">
+    القسم / المسار
+    <span class="required">*</span>
+  </label>
+
+  <div class="choice-grid">
+    <button type="button"
+            class="choice"
+            data-curriculum="أمريكي">
+      🇺🇸 أمريكي
+    </button>
+
+    <button type="button"
+            class="choice"
+            data-curriculum="بريطاني">
+      🇬🇧 بريطاني
+    </button>
+  </div>
+</div>
+
+<!-- الكتب غير المستلمة -->
+<div class="field">
+
+  <label class="field-label">
+    حدد الكتاب أو الكتب التي لم يستلمها الطالب
+    <span class="required">*</span>
+  </label>
+
+  <div class="books-select">
+
+    <button type="button"
+            class="book-choice"
+            data-book="islamic">
+
+      <span class="icon">📖</span>
+
+      <span>
+        <strong>الدراسات الإسلامية</strong>
+        <small>Islamic Studies</small>
+      </span>
+    </button>
+
+    <button type="button"
+            class="book-choice"
+            data-book="arabic">
+
+      <span class="icon">📚</span>
+
+      <span>
+        <strong>اللغة العربية</strong>
+        <small>Arabic Language</small>
+      </span>
+    </button>
+
+    <button type="button"
+            class="book-choice"
+            data-book="social">
+
+      <span class="icon">🌍</span>
+
+      <span>
+        <strong>الدراسات الاجتماعية</strong>
+        <small>Social Studies</small>
+      </span>
+    </button>
+
+  </div>
+
+  <div class="help">
+    يمكن اختيار كتاب واحد أو كتابين أو الكتب الثلاثة.
+  </div>
+
+</div>
+
+<div class="field">
+  <label class="field-label">
+    اسم المعلم / المعلمة
+    <span class="required">*</span>
+  </label>
+
+  <input id="teacherName"
+         type="text"
+         placeholder="اسم المعلم الذي قام بإرسال البيانات"
+         required>
+</div>
+
+<button id="submitBtn"
+        class="submit-btn"
+        type="submit">
+  إرسال البيانات
+</button>
+
+<div id="message" class="message"></div>
+
+</form>
+
+<div class="footer-note">
+  🔒 بمجرد الإرسال تصل البيانات مباشرة إلى مسؤول حصر كتب مواد الهوية.
+  <br>
+  Identity Subjects Books Tracking
+</div>
+
+</div>
+</div>
+
+<script>
+
+const SUPABASE_URL =
+  "https://wcyamoqmpwpribsgspjn.supabase.co";
+
+const SUPABASE_KEY =
+  "sb_publishable_3eJET0uhZw4D4DowMK13fQ_oWK3PdIQ";
+
+let selectedGender = "";
+let selectedCurriculum = "";
+
+const missingBooks = {
+  islamic:false,
+  arabic:false,
+  social:false
+};
+
+/* الجنس */
+document.querySelectorAll("[data-gender]").forEach(button => {
+
+  button.addEventListener("click", () => {
+
+    document.querySelectorAll("[data-gender]")
+      .forEach(b => b.classList.remove("active"));
+
+    button.classList.add("active");
+
+    selectedGender =
+      button.getAttribute("data-gender");
+
+  });
+
+});
+
+/* المسار */
+document.querySelectorAll("[data-curriculum]").forEach(button => {
+
+  button.addEventListener("click", () => {
+
+    document.querySelectorAll("[data-curriculum]")
+      .forEach(b => b.classList.remove("active"));
+
+    button.classList.add("active");
+
+    selectedCurriculum =
+      button.getAttribute("data-curriculum");
+
+  });
+
+});
+
+/* اختيار الكتب */
+document.querySelectorAll("[data-book]").forEach(button => {
+
+  button.addEventListener("click", () => {
+
+    const book =
+      button.getAttribute("data-book");
+
+    missingBooks[book] =
+      !missingBooks[book];
+
+    button.classList.toggle(
+      "active",
+      missingBooks[book]
+    );
+
+  });
+
+});
+
+/* الصفوف */
+const grades = {
+
+  "رياض أطفال":[
+    "KG1","KG2","KG3"
+  ],
+
+  "ابتدائي":[
+    "الأول",
+    "الثاني",
+    "الثالث",
+    "الرابع",
+    "الخامس",
+    "السادس"
+  ],
+
+  "متوسط":[
+    "السابع",
+    "الثامن",
+    "التاسع"
+  ],
+
+  "ثانوي":[
+    "العاشر",
+    "الحادي عشر",
+    "الثاني عشر"
+  ]
+
+};
+
+const stage =
+  document.getElementById("stage");
+
+const grade =
+  document.getElementById("grade");
+
+stage.addEventListener("change", () => {
+
+  grade.innerHTML =
+    '<option value="">اختر الصف</option>';
+
+  const list =
+    grades[stage.value] || [];
+
+  list.forEach(item => {
+
+    const option =
+      document.createElement("option");
+
+    option.value = item;
+    option.textContent = item;
+
+    grade.appendChild(option);
+
+  });
+
+  grade.disabled =
+    list.length === 0;
+
+});
+
+/* إرسال البيانات */
+document
+.getElementById("studentForm")
+.addEventListener("submit", async function(event){
+
+  event.preventDefault();
+
+  const message =
+    document.getElementById("message");
+
+  const submitBtn =
+    document.getElementById("submitBtn");
+
+  message.className = "message";
+  message.textContent = "";
+
+  if(!selectedGender){
+
+    message.className =
+      "message error";
+
+    message.textContent =
+      "يرجى اختيار بنين أو بنات.";
+
+    return;
+  }
+
+  if(!selectedCurriculum){
+
+    message.className =
+      "message error";
+
+    message.textContent =
+      "يرجى اختيار القسم الأمريكي أو البريطاني.";
+
+    return;
+  }
+
+  if(
+    !missingBooks.islamic &&
+    !missingBooks.arabic &&
+    !missingBooks.social
+  ){
+
+    message.className =
+      "message error";
+
+    message.textContent =
+      "يرجى تحديد كتاب واحد على الأقل لم يستلمه الطالب.";
+
+    return;
+  }
+
+  const payload = {
+
+    student_name:
+      document.getElementById("studentName")
+      .value.trim(),
+
+    gender:selectedGender,
+
+    stage:stage.value,
+
+    grade:grade.value,
+
+    section_name:
+      document.getElementById("section")
+      .value.trim(),
+
+    curriculum:selectedCurriculum,
+
+    islamic_book:
+      missingBooks.islamic,
+
+    arabic_book:
+      missingBooks.arabic,
+
+    social_book:
+      missingBooks.social,
+
+    submitted_by:
+      document.getElementById("teacherName")
+      .value.trim()
+
+  };
+
+  submitBtn.disabled = true;
+  submitBtn.textContent =
+    "جارٍ الإرسال...";
+
+  try{
+
+    const response =
+      await fetch(
+
+        SUPABASE_URL +
+        "/rest/v1/missing_identity_books",
+
+        {
+          method:"POST",
+
+          headers:{
+            "apikey":SUPABASE_KEY,
+            "Authorization":
+              "Bearer " + SUPABASE_KEY,
+            "Content-Type":
+              "application/json",
+            "Prefer":
+              "return=minimal"
+          },
+
+          body:
+            JSON.stringify(payload)
+        }
+      );
+
+    if(!response.ok){
+
+      const text =
+        await response.text();
+
+      throw new Error(text);
+    }
+
+    message.className =
+      "message success";
+
+    message.innerHTML =
+      "✓ تم تسجيل الكتب غير المستلمة بنجاح.<br>" +
+      "<small>شكرًا لتعاونكم.</small>";
+
+    document
+      .getElementById("studentForm")
+      .reset();
+
+    selectedGender = "";
+    selectedCurriculum = "";
+
+    missingBooks.islamic = false;
+    missingBooks.arabic = false;
+    missingBooks.social = false;
+
+    document
+      .querySelectorAll(
+        ".choice,.book-choice"
+      )
+      .forEach(
+        b => b.classList.remove("active")
+      );
+
+    grade.innerHTML =
+      '<option value="">اختر الصف</option>';
+
+    grade.disabled = true;
+
+  }catch(error){
+
+    console.error(error);
+
+    message.className =
+      "message error";
+
+    message.innerHTML =
+      "تعذر إرسال البيانات حاليًا.<br>" +
+      "<small>يرجى المحاولة مرة أخرى.</small>";
+
+  }finally{
+
+    submitBtn.disabled = false;
+
+    submitBtn.textContent =
+      "إرسال البيانات";
+
+  }
+
+});
+
+</script>
+
+</body>
+</html>
