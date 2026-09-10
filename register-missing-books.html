@@ -177,7 +177,60 @@ input:focus,select:focus{
 
 .gender-boy{background:#f5fbff}
 .gender-girl{background:#fff7fa}
+/* أيقونات البنين والبنات */
+.person-icon{
+  width:36px;
+  height:36px;
+  flex:0 0 36px;
+}
 
+.choice strong{
+  display:block;
+  font-size:17px;
+}
+
+.choice small{
+  display:block;
+  font-size:11px;
+  color:#79877f;
+  margin-top:2px;
+}
+
+/* أعلام الأمريكي والبريطاني */
+.curriculum-choice{
+  min-height:88px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  gap:6px;
+}
+
+.curriculum-choice.active{
+  border-color:#137047;
+  background:#f0faf5;
+  box-shadow:0 0 0 3px rgba(19,112,71,.10);
+}
+
+.flag{
+  width:58px;
+  height:35px;
+  border-radius:5px;
+  overflow:hidden;
+  box-shadow:0 1px 5px rgba(0,0,0,.15);
+  border:1px solid #ddd;
+}
+
+.curriculum-text strong{
+  font-size:16px;
+}
+
+.curriculum-text small{
+  display:block;
+  font-size:11px;
+  color:#728078;
+  direction:ltr;
+}
 .grade-row{
   display:grid;
   grid-template-columns:1fr .72fr;
@@ -352,28 +405,72 @@ input:focus,select:focus{
 
 <div class="field">
   <label class="field-label">
-    الجنس <span class="required">*</span>
+    الجنس
+    <span class="required">*</span>
+    <span class="english-label">Gender</span>
   </label>
 
   <div class="choice-grid">
-    <button type="button"
-            class="choice gender-boy"
-            data-gender="بنين">
-      👦 بنين
+
+    <!-- بنين -->
+    <button
+      type="button"
+      class="choice gender-boy"
+      data-gender="بنين"
+    >
+      <svg class="person-icon" viewBox="0 0 64 64">
+        <circle cx="32" cy="17" r="10" fill="#4a9ed4"/>
+        <path
+          d="M17 55V40c0-9 6-15 15-15s15 6 15 15v15"
+          fill="#74b8e2"
+        />
+        <path
+          d="M15 36l-7 14M49 36l7 14"
+          stroke="#4a9ed4"
+          stroke-width="7"
+          stroke-linecap="round"
+        />
+      </svg>
+
+      <span>
+        <strong>بنين</strong>
+        <small>Boys</small>
+      </span>
     </button>
 
-    <button type="button"
-            class="choice gender-girl"
-            data-gender="بنات">
-      👧 بنات
+    <!-- بنات -->
+    <button
+      type="button"
+      class="choice gender-girl"
+      data-gender="بنات"
+    >
+      <svg class="person-icon" viewBox="0 0 64 64">
+        <circle cx="32" cy="17" r="10" fill="#d9799b"/>
+        <path
+          d="M32 26L17 54h30z"
+          fill="#eca0b9"
+        />
+        <path
+          d="M17 36L9 49M47 36l8 13"
+          stroke="#d9799b"
+          stroke-width="7"
+          stroke-linecap="round"
+        />
+      </svg>
+
+      <span>
+        <strong>بنات</strong>
+        <small>Girls</small>
+      </span>
     </button>
+
   </div>
 </div>
-
 <div class="field">
   <label class="field-label">
     المرحلة التعليمية
     <span class="required">*</span>
+    <span class="english-label">Educational Stage</span>
   </label>
 
   <select id="stage" required>
@@ -386,8 +483,7 @@ input:focus,select:focus{
 </div>
 
 <div class="field">
-<div class="grade-row">
-
+  <div class="grade-row">
 <div>
   <label class="field-label">
     الصف <span class="required">*</span>
@@ -416,20 +512,101 @@ input:focus,select:focus{
   <label class="field-label">
     القسم / المسار
     <span class="required">*</span>
+    <span class="english-label">Curriculum</span>
   </label>
 
   <div class="choice-grid">
-    <button type="button"
-            class="choice"
-            data-curriculum="أمريكي">
-      🇺🇸 أمريكي
+
+    <!-- American -->
+    <button
+      type="button"
+      class="choice curriculum-choice"
+      data-curriculum="أمريكي"
+    >
+      <svg class="flag" viewBox="0 0 190 100"
+           xmlns="http://www.w3.org/2000/svg">
+
+        <rect width="190" height="100" fill="#fff"/>
+
+        <g fill="#b22234">
+          <rect y="0" width="190" height="8"/>
+          <rect y="16" width="190" height="8"/>
+          <rect y="32" width="190" height="8"/>
+          <rect y="48" width="190" height="8"/>
+          <rect y="64" width="190" height="8"/>
+          <rect y="80" width="190" height="8"/>
+          <rect y="96" width="190" height="4"/>
+        </g>
+
+        <rect width="76" height="54" fill="#3c3b6e"/>
+
+        <g fill="#fff">
+          <circle cx="10" cy="9" r="2.2"/>
+          <circle cx="25" cy="9" r="2.2"/>
+          <circle cx="40" cy="9" r="2.2"/>
+          <circle cx="55" cy="9" r="2.2"/>
+          <circle cx="68" cy="9" r="2.2"/>
+
+          <circle cx="17" cy="20" r="2.2"/>
+          <circle cx="32" cy="20" r="2.2"/>
+          <circle cx="47" cy="20" r="2.2"/>
+          <circle cx="62" cy="20" r="2.2"/>
+
+          <circle cx="10" cy="31" r="2.2"/>
+          <circle cx="25" cy="31" r="2.2"/>
+          <circle cx="40" cy="31" r="2.2"/>
+          <circle cx="55" cy="31" r="2.2"/>
+          <circle cx="68" cy="31" r="2.2"/>
+
+          <circle cx="17" cy="42" r="2.2"/>
+          <circle cx="32" cy="42" r="2.2"/>
+          <circle cx="47" cy="42" r="2.2"/>
+          <circle cx="62" cy="42" r="2.2"/>
+        </g>
+
+      </svg>
+
+      <span class="curriculum-text">
+        <strong>أمريكي</strong>
+        <small>American</small>
+      </span>
     </button>
 
-    <button type="button"
-            class="choice"
-            data-curriculum="بريطاني">
-      🇬🇧 بريطاني
+    <!-- British -->
+    <button
+      type="button"
+      class="choice curriculum-choice"
+      data-curriculum="بريطاني"
+    >
+      <svg class="flag" viewBox="0 0 190 100"
+           xmlns="http://www.w3.org/2000/svg">
+
+        <rect width="190" height="100" fill="#012169"/>
+
+        <path d="M0 0L190 100M190 0L0 100"
+              stroke="#fff"
+              stroke-width="22"/>
+
+        <path d="M0 0L190 100M190 0L0 100"
+              stroke="#c8102e"
+              stroke-width="10"/>
+
+        <path d="M95 0V100M0 50H190"
+              stroke="#fff"
+              stroke-width="30"/>
+
+        <path d="M95 0V100M0 50H190"
+              stroke="#c8102e"
+              stroke-width="18"/>
+
+      </svg>
+
+      <span class="curriculum-text">
+        <strong>بريطاني</strong>
+        <small>British</small>
+      </span>
     </button>
+
   </div>
 </div>
 
