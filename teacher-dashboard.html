@@ -46,7 +46,7 @@ a{text-decoration:none;color:inherit}.hide{display:none!important}
 
     <article class="tool"><div class="tool-head"><div class="ico">📊</div><div><h3>التقارير والمتابعة</h3><p>متابعة ما تم إرساله والطلاب المستلمين والإنجاز.</p></div></div><div class="actions"><button class="btn btn-outline" data-action="reports">فتح التقارير</button></div></article>
   </section>
-  <div class="note">المرحلة الحالية تربط لوحة المعلم بقائمة الطلاب الحية من الحصر، وتنفذ اختيار المستلمين والفلاتر ومعاينة الإرسال. حفظ الملفات والاختبارات والحصص في قاعدة البيانات سيكون في المرحلة التالية بعد إنشاء جداول الإرسال وStorage في Supabase.</div>
+  <div class="note">المرحلة الحالية تربط لوحة المعلم بقائمة الطلاب الحية من الحصر، وتنفذ اختيار المستلمين والفلاتر ومعاينة الإرسال. المواد التعليمية (ورقة عمل، رابط، واجب، PowerPoint، ملف/PDF) أصبحت قابلة للحفظ الفعلي بعد تشغيل ملف SQL المرفق. الاختبارات والحصص وغرفة النقاش سنربطها في المراحل التالية.</div>
   <div id="pageError" class="error hide"></div>
 </main>
 
@@ -75,7 +75,38 @@ let students=[], currentAction="", currentDraft={}, selected=new Set();
 const $=id=>document.getElementById(id);
 function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
 function getSession(){try{return JSON.parse(localStorage.getItem(SESSION_KEY)||"null")}catch{return null}}
-async function api(path){const s=getSession();if(!s?.access_token)throw new Error("NO_SESSION");return fetch(SUPABASE_URL+path,{headers:{apikey:SUPABASE_PUBLISHABLE_KEY,Authorization:"Bearer "+s.access_token,"Content-Type":"application/json"}})}
+async function api(path,options={}){
+  const s=getSession();
+  if(!s?.access_token)throw new Error("NO_SESSION");
+  const headers={apikey:SUPABASE_PUBLISHABLE_KEY,Authorization:"Bearer "+s.access_token,...(options.headers||{})};
+  if(!(options.body instanceof FormData))headers["Content-Type"]="application/json";
+  return fetch(SUPABASE_URL+path,{...options,headers});
+}
+async function uploadMaterialFile(file){
+  if(!file)return {path:"",name:"",url:""};
+  const safeName=(file.name||"file").replace(/[^a-zA-Z0-9._-]+/g,"-");
+  const path=`${new Date().toISOString().slice(0,10)}/${crypto.randomUUID()}-${safeName}`;
+  const res=await api('/storage/v1/object/rasheed-materials/'+encodeURI(path),{method:'POST',headers:{'Content-Type':file.type||'application/octet-stream','x-upsert':'false'},body:file});
+  if(!res.ok)throw new Error('تعذر رفع الملف ('+res.status+')');
+  return {path,name:file.name,url:`${SUPABASE_URL}/storage/v1/object/public/rasheed-materials/${encodeURI(path)}`};
+}
+async function saveMaterial(){
+  if(!selected.size)throw new Error('اختر طالبًا واحدًا على الأقل.');
+  const type=currentAction;
+  if(!['worksheet','link','homework','powerpoint','file'].includes(type))throw new Error('هذه الخدمة سيتم ربطها في المرحلة التالية.');
+  const inputFile=$("f_file")?.files?.[0]||null;
+  let uploaded={path:"",name:"",url:""};
+  if(inputFile)uploaded=await uploadMaterialFile(inputFile);
+  const material={material_type:type,title:currentDraft.title,note:currentDraft.note||null,url:currentDraft.url||uploaded.url||null,file_path:uploaded.path||null,file_name:uploaded.name||null};
+  const matRes=await api('/rest/v1/learning_materials',{method:'POST',headers:{Prefer:'return=representation'},body:JSON.stringify(material)});
+  if(!matRes.ok)throw new Error('تعذر حفظ المادة ('+matRes.status+')');
+  const created=(await matRes.json())[0];
+  const recipients=[...selected].map(i=>({material_id:created.id,student_id:students[+i].id})).filter(x=>x.student_id!=null);
+  if(!recipients.length)throw new Error('تعذر تحديد أرقام الطلاب من الحصر.');
+  const recRes=await api('/rest/v1/learning_material_recipients',{method:'POST',headers:{Prefer:'return=minimal'},body:JSON.stringify(recipients)});
+  if(!recRes.ok)throw new Error('تم حفظ المادة لكن تعذر حفظ المستلمين ('+recRes.status+')');
+  return created;
+}
 async function loadStudents(){
   $("pageError").classList.add("hide"); $("studentCount").textContent="…"; $("heroCount").textContent="…";
   try{
@@ -111,7 +142,7 @@ function openCompose(action){
  currentAction=action;const c=configs[action];if(!c)return;$("composeTitle").textContent=c.title;$("composeFields").innerHTML=c.fields.map(fieldHtml).join('');$("composeError").classList.add('hide');$("composeBack").classList.remove('hide');
 }
 function collectDraft(){
- const c=configs[currentAction],d={action:currentAction,type:c?.title||'',title:$("f_title")?.value?.trim()||'',url:$("f_url")?.value?.trim()||'',note:$("f_note")?.value?.trim()||'',due:$("f_due")?.value||'',date:$("f_date")?.value||'',time:$("f_time")?.value||'',file:$("f_file")?.files?.[0]?.name||''};
+ const c=configs[currentAction],d={action:currentAction,type:c?.title||'',title:$("f_title")?.value?.trim()||'',url:$("f_url")?.value?.trim()||'',note:$("f_note")?.value?.trim()||'',due:$("f_due")?.value||'',date:$("f_date")?.value||'',time:$("f_time")?.value||'',file:$("f_file")?.files?.[0]?.name||'',fileObj:$("f_file")?.files?.[0]||null};
  if(!d.title){$("composeError").textContent='اكتب عنوانًا أولًا.';$("composeError").classList.remove('hide');return null}return d;
 }
 function openRecipients(viewOnly=false){
@@ -125,11 +156,16 @@ function renderStudents(){
  $("studentsList").querySelectorAll('input[type=checkbox]').forEach(cb=>cb.addEventListener('change',()=>{cb.checked?selected.add(cb.dataset.idx):selected.delete(cb.dataset.idx);updateSelected()}));updateSelected();
 }
 function updateSelected(){$("selectedCount").textContent=selected.size}
-function preview(){
+async function preview(){
  if(currentAction==='students'){closeModal('recipients');return}
  if(!selected.size){$("sendSummary").classList.remove('hide');$("sendSummary").innerHTML='<b>اختر طالبًا واحدًا على الأقل.</b>';return}
  const names=[...selected].slice(0,5).map(i=>students[+i]?.student_name).filter(Boolean);const more=selected.size>5?` + ${selected.size-5} آخرين`:'';
- $("sendSummary").classList.remove('hide');$("sendSummary").innerHTML=`<b>معاينة الإرسال</b><br>النوع: ${esc(currentDraft.type)}<br>العنوان: ${esc(currentDraft.title)}<br>المستلمون: ${esc(names.join('، '))}${esc(more)}<br>${currentDraft.file?'الملف: '+esc(currentDraft.file)+'<br>':''}${currentDraft.url?'الرابط: '+esc(currentDraft.url)+'<br>':''}<span style="color:#6f7d76">تم تجهيز الاختيار بنجاح. سيتم حفظ الإرسال فعليًا بعد ربط جداول المحتوى في Supabase.</span>`;
+ $("sendSummary").classList.remove('hide');$("sendSummary").innerHTML=`<b>جاهز للإرسال</b><br>النوع: ${esc(currentDraft.type)}<br>العنوان: ${esc(currentDraft.title)}<br>المستلمون: ${esc(names.join('، '))}${esc(more)}<br>${currentDraft.file?'الملف: '+esc(currentDraft.file)+'<br>':''}${currentDraft.url?'الرابط: '+esc(currentDraft.url)+'<br>':''}<br><button class="btn btn-primary" id="confirmActualSend">إرسال وحفظ الآن</button>`;
+ setTimeout(()=>{const b=$("confirmActualSend");if(b)b.addEventListener('click',async()=>{
+   b.disabled=true;b.textContent='جاري الإرسال...';
+   try{await saveMaterial();$("sendSummary").innerHTML=`<b style="color:#07583f">✓ تم الإرسال والحفظ بنجاح</b><br>تم إرسال «${esc(currentDraft.title)}» إلى ${selected.size} طالبًا/طالبة.`;}
+   catch(e){b.disabled=false;b.textContent='إرسال وحفظ الآن';$("sendSummary").innerHTML+=`<div class="error">${esc(e.message)}</div>`;}
+ });},0);
 }
 function closeModal(which){$(which==='compose'?'composeBack':'recipientsBack').classList.add('hide')}
 document.querySelectorAll('[data-action]').forEach(b=>b.addEventListener('click',()=>openCompose(b.dataset.action)));
