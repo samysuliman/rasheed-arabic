@@ -58,7 +58,7 @@ a{text-decoration:none;color:inherit}.hide{display:none!important}
 
     <article class="tool"><div class="tool-head"><div class="ico">📊</div><div><h3>التقارير والمتابعة</h3><p>متابعة ما تم إرساله والطلاب المستلمين والإنجاز.</p></div></div><div class="actions"><button class="btn btn-outline" data-action="reports">فتح التقارير</button></div></article>
   </section>
-  <div class="note">اللوحة مرتبطة بقائمة الطلاب الحية من الحصر. المواد التعليمية قابلة للحفظ والإرسال، كما يمكن بعد تشغيل ملف SQL الخاص بالاختبارات إنشاء اختبار أو واجب إلكتروني، اختيار الطلاب، وإنتاج رابط أداء خاص لكل طالب مع التصحيح التلقائي.</div>
+  <div class="note">اللوحة مرتبطة بقائمة الطلاب الحية من الحصر. عند إرسال مادة أو اختبار إلى الطالب سيظهر تلقائيًا داخل حسابه في رشيد العربية، مع استمرار التصحيح التلقائي وحفظ النتائج.</div>
   <div id="pageError" class="error hide"></div>
 </main>
 
@@ -83,12 +83,25 @@ a{text-decoration:none;color:inherit}.hide{display:none!important}
 const SUPABASE_URL="https://wcyamoqmpwpribsgspjn.supabase.co";
 const SUPABASE_PUBLISHABLE_KEY="sb_publishable_3eJET0uhZw4D4DowMK13fQ_oWK3PdIQ";
 const SESSION_KEY="rasheed_arabic_admin_session_v1";
+const PORTAL_SESSION_KEY="rasheed_arabic_portal_session_v1";
 let students=[], currentAction="", currentDraft={}, selected=new Set(), assessmentQuestions=[];
 const $=id=>document.getElementById(id);
 function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
-function getSession(){try{return JSON.parse(localStorage.getItem(SESSION_KEY)||"null")}catch{return null}}
-function setSession(s){localStorage.setItem(SESSION_KEY,JSON.stringify(s))}
-function clearSession(){localStorage.removeItem(SESSION_KEY)}
+function getSession(){
+  try{
+    const p=JSON.parse(localStorage.getItem(PORTAL_SESSION_KEY)||"null");
+    if(p?.access_token && (p.role==="teacher"||p.role==="admin")) return p;
+    return JSON.parse(localStorage.getItem(SESSION_KEY)||"null");
+  }catch{return null}
+}
+function setSession(s){
+  try{
+    const p=JSON.parse(localStorage.getItem(PORTAL_SESSION_KEY)||"null");
+    if(p?.role==="teacher"||p?.role==="admin") localStorage.setItem(PORTAL_SESSION_KEY,JSON.stringify({...p,user:s.user,access_token:s.access_token,refresh_token:s.refresh_token,expires_at:s.expires_at}));
+    if(p?.role==="admin"||localStorage.getItem(SESSION_KEY)) localStorage.setItem(SESSION_KEY,JSON.stringify(s));
+  }catch{localStorage.setItem(SESSION_KEY,JSON.stringify(s))}
+}
+function clearSession(){localStorage.removeItem(SESSION_KEY);localStorage.removeItem(PORTAL_SESSION_KEY)}
 
 async function refreshSession(s){
   if(!s?.refresh_token)return null;
@@ -161,7 +174,7 @@ async function loadStudents(){
   }catch(e){
     $("studentCount").textContent="—"; $("heroCount").textContent="—";
     $("pageError").classList.remove("hide");
-    $("pageError").innerHTML=e.message==='NO_SESSION'?'يلزم تسجيل الدخول أولًا من <a href="admin-hub.html"><b>مركز الإدارة</b></a> ثم العودة إلى لوحة المعلم.':'تعذر تحميل بيانات الطلاب من الحصر الآن. ('+esc(e.message)+')';
+    $("pageError").innerHTML=e.message==='NO_SESSION'?'يلزم تسجيل الدخول أولًا من <a href="login.html"><b>بوابة الدخول</b></a> ثم العودة إلى لوحة المعلم.':'تعذر تحميل بيانات الطلاب من الحصر الآن. ('+esc(e.message)+')';
   }
 }
 function fillFilter(id,vals){const el=$(id), first=el.options[0]?.outerHTML||'';el.innerHTML=first+vals.sort().map(v=>`<option>${esc(v)}</option>`).join('')}
@@ -296,10 +309,7 @@ async function preview(){
    try{
       if(currentAction==='quiz'||currentAction==='ehomework'){
         const out=await saveAssessment();
-        const first=out.recs?.[0];
-        const base=location.href.replace(/teacher-dashboard[^/]*\.html.*$/,'');
-        const example=first?`${base}student-assessment.html?token=${first.access_token}`:'';
-        $("sendSummary").innerHTML=`<b style="color:#07583f">✓ تم إنشاء النشاط وإرساله بنجاح</b><br>تم إرسال «${esc(currentDraft.title)}» إلى ${selected.size} طالبًا/طالبة.${example?`<br><br><b>مثال لرابط طالب:</b><span class="result-link">${esc(example)}</span>`:''}`;
+        $("sendSummary").innerHTML=`<b style="color:#07583f">✓ تم إنشاء النشاط وإرساله بنجاح</b><br>تم إرسال «${esc(currentDraft.title)}» إلى ${selected.size} طالبًا/طالبة، وسيظهر تلقائيًا داخل حساب كل طالب. <br><small>لا حاجة لنسخ روابط منفصلة للطلاب.</small>`;
       }else{
         await saveMaterial();
         $("sendSummary").innerHTML=`<b style="color:#07583f">✓ تم الإرسال والحفظ بنجاح</b><br>تم إرسال «${esc(currentDraft.title)}» إلى ${selected.size} طالبًا/طالبة.`;
