@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>حصر جميع الكتب غير المستلمة | رشيد العربية</title>
+<style>
+*{box-sizing:border-box}
+:root{--green:#07583f;--green2:#0b7554;--gold:#d7aa42;--bg:#f4f8f6;--line:#d7e4de;--muted:#728078}
+body{margin:0;font-family:Tahoma,Arial,sans-serif;background:var(--bg);color:#17392c}
+header{background:linear-gradient(135deg,var(--green),var(--green2));color:#fff;padding:22px 16px;text-align:center}
+header img{width:78px;height:78px;object-fit:contain;background:#fff;border-radius:18px;padding:6px;box-shadow:0 6px 18px #0002}
+header h1{margin:10px 0 4px;font-size:26px}header p{margin:0;opacity:.9;font-size:13px}
+main{width:min(1100px,94%);margin:28px auto}.panel{background:#fff;border:1px solid #d9e6df;border-radius:20px;padding:24px;box-shadow:0 8px 25px #0000000b;margin-bottom:20px}
+.intro{text-align:center}.intro h2{color:var(--green);margin:0 0 8px}.intro p{margin:0;color:#66766e;line-height:1.8}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.field label{display:block;font-weight:700;margin-bottom:7px}.en{font-size:11px;color:#829088;font-weight:400;margin-right:5px}
+input,select{width:100%;padding:13px;border:1px solid #cddbd4;border-radius:11px;font-size:15px;background:#fff;color:#17392c;outline:none}input:focus,select:focus{border-color:#2c8a68;box-shadow:0 0 0 3px #2c8a6814}
+.choice-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.choice{min-height:84px;padding:11px;border:1px solid #d5e2dc;background:#fff;border-radius:15px;cursor:pointer;font-weight:700;display:flex;align-items:center;justify-content:center;gap:10px;transition:.18s;color:#17392c}.choice:hover{transform:translateY(-1px);box-shadow:0 6px 14px #0000000d}.choice.active{border-color:#08734f;background:#edf9f4;box-shadow:0 0 0 3px #08734f16}.choice strong{display:block;font-size:16px}.choice small{display:block;color:#78867f;font-size:11px;margin-top:3px;font-weight:400;direction:ltr}
+.person-icon{width:42px;height:42px;flex:0 0 42px}.flag{width:62px;height:38px;border-radius:6px;overflow:hidden;border:1px solid #d4dbd7;box-shadow:0 2px 7px #0002;flex:0 0 auto}
+.section-title{margin:28px 0 6px;color:var(--green);font-size:19px}.note{font-size:13px;color:#6c7a73;text-align:center;margin:0 0 15px}.group-label{display:flex;align-items:center;gap:8px;font-weight:800;color:#345c4c;margin:22px 0 10px}.group-label:before{content:"";width:6px;height:20px;background:var(--gold);border-radius:8px}
+.books{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.book-card{position:relative;min-height:148px;border:1px solid var(--line);background:#fff;border-radius:16px;padding:14px 9px;cursor:pointer;transition:.18s;color:#17392c;display:flex;flex-direction:column;align-items:center;justify-content:center}.book-card:hover{transform:translateY(-2px);box-shadow:0 8px 18px #00000010}.book-card.selected{border:2px solid #08734f;background:#edf9f4;box-shadow:0 6px 16px #08734f18}.book-visual{width:64px;height:64px;margin-bottom:9px}.book-card strong{display:block;font-size:14px;line-height:1.45}.book-card small{display:block;color:#75837c;margin-top:4px;font-size:11px;direction:ltr}.tick{display:none;position:absolute;top:8px;left:8px;background:#08734f;color:#fff;width:25px;height:25px;border-radius:50%;line-height:25px;font-size:14px;font-weight:900}.book-card.selected .tick{display:block}.book-card.selected:after{content:"تم الاختيار";position:absolute;bottom:7px;background:#08734f;color:#fff;padding:3px 8px;border-radius:999px;font-size:10px}
+.actions{display:flex;gap:10px;justify-content:center;margin-top:24px}button.submit{border:0;background:var(--green);color:#fff;padding:14px 36px;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;box-shadow:0 5px 12px #07583f2a}.msg{display:none;margin-top:15px;padding:13px;border-radius:10px;text-align:center}.msg.ok{display:block;background:#e9f8f1;color:#07583f}.msg.err{display:block;background:#fff0f0;color:#9a2929}
+footer{text-align:center;color:#839088;font-size:12px;padding:3px 0 25px}
+@media(max-width:850px){.books{grid-template-columns:repeat(3,1fr)}}@media(max-width:760px){.grid{grid-template-columns:1fr}.books{grid-template-columns:repeat(2,1fr)}}@media(max-width:430px){.books{grid-template-columns:1fr 1fr;gap:9px}.book-card{min-height:138px}.book-visual{width:56px;height:56px}.choice{min-height:78px}header h1{font-size:21px}.panel{padding:18px}}
+</style>
+</head>
+<body>
+<header>
+  <img src="new-generation-logo.jpg" alt="شعار مدارس الجيل الجديد">
+  <h1>حصر جميع الكتب غير المستلمة</h1>
+  <p>Missing Books Census — All Subjects</p>
+</header>
+<main>
+<section class="panel intro"><h2>تسجيل الكتب التي لم يستلمها الطالب</h2><p>أدخل بيانات الطالب، ثم اضغط على كتاب واحد أو أكثر من الكتب غير المستلمة.</p></section>
+<form id="form" class="panel">
+<div class="grid">
+  <div class="field"><label>اسم الطالب * <span class="en">Student Name</span></label><input id="student_name" required></div>
+  <div class="field"><label>اسم المعلم / المسجل * <span class="en">Submitted By</span></label><input id="submitted_by" required></div>
+
+  <div class="field"><label>الجنس * <span class="en">Gender</span></label>
+    <div class="choice-grid">
+      <button type="button" class="choice gender" data-value="بنين">
+        <svg class="person-icon" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="17" r="10" fill="#4a9ed4"/><path d="M17 55V40c0-9 6-15 15-15s15 6 15 15v15" fill="#74b8e2"/><path d="M15 36l-7 14M49 36l7 14" stroke="#4a9ed4" stroke-width="7" stroke-linecap="round"/></svg>
+        <span><strong>بنين</strong><small>Boys</small></span>
+      </button>
+      <button type="button" class="choice gender" data-value="بنات">
+        <svg class="person-icon" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="17" r="10" fill="#d9799b"/><path d="M32 26L17 54h30z" fill="#eca0b9"/><path d="M17 36L9 49M47 36l8 13" stroke="#d9799b" stroke-width="7" stroke-linecap="round"/></svg>
+        <span><strong>بنات</strong><small>Girls</small></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="field"><label>المرحلة * <span class="en">Stage</span></label><select id="stage" required><option value="">اختر المرحلة</option><option>رياض أطفال</option><option>ابتدائي</option><option>متوسط</option><option>ثانوي</option></select></div>
+  <div class="field"><label>الصف * <span class="en">Grade</span></label><select id="grade" required><option value="">اختر الصف</option><option>Grade 1</option><option>Grade 2</option><option>Grade 3</option><option>Grade 4</option><option>Grade 5</option><option>Grade 6</option><option>Grade 7</option><option>Grade 8</option><option>Grade 9</option><option>Grade 10</option><option>Grade 11</option><option>Grade 12</option></select></div>
+  <div class="field"><label>الشعبة * <span class="en">Section</span></label><input id="section_name" placeholder="مثال: A" required></div>
+
+  <div class="field"><label>المسار * <span class="en">Curriculum</span></label>
+    <div class="choice-grid">
+      <button type="button" class="choice curriculum" data-value="أمريكي">
+        <svg class="flag" viewBox="0 0 190 100" aria-hidden="true"><rect width="190" height="100" fill="#fff"/><g fill="#b22234"><rect y="0" width="190" height="8"/><rect y="16" width="190" height="8"/><rect y="32" width="190" height="8"/><rect y="48" width="190" height="8"/><rect y="64" width="190" height="8"/><rect y="80" width="190" height="8"/><rect y="96" width="190" height="4"/></g><rect width="76" height="54" fill="#3c3b6e"/><g fill="#fff"><circle cx="10" cy="9" r="2.2"/><circle cx="25" cy="9" r="2.2"/><circle cx="40" cy="9" r="2.2"/><circle cx="55" cy="9" r="2.2"/><circle cx="68" cy="9" r="2.2"/><circle cx="17" cy="20" r="2.2"/><circle cx="32" cy="20" r="2.2"/><circle cx="47" cy="20" r="2.2"/><circle cx="62" cy="20" r="2.2"/><circle cx="10" cy="31" r="2.2"/><circle cx="25" cy="31" r="2.2"/><circle cx="40" cy="31" r="2.2"/><circle cx="55" cy="31" r="2.2"/><circle cx="68" cy="31" r="2.2"/><circle cx="17" cy="42" r="2.2"/><circle cx="32" cy="42" r="2.2"/><circle cx="47" cy="42" r="2.2"/><circle cx="62" cy="42" r="2.2"/></g></svg>
+        <span><strong>أمريكي</strong><small>American</small></span>
+      </button>
+      <button type="button" class="choice curriculum" data-value="بريطاني">
+        <svg class="flag" viewBox="0 0 190 100" aria-hidden="true"><rect width="190" height="100" fill="#012169"/><path d="M0 0L190 100M190 0L0 100" stroke="#fff" stroke-width="22"/><path d="M0 0L190 100M190 0L0 100" stroke="#c8102e" stroke-width="10"/><path d="M95 0V100M0 50H190" stroke="#fff" stroke-width="30"/><path d="M95 0V100M0 50H190" stroke="#c8102e" stroke-width="18"/></svg>
+        <span><strong>بريطاني</strong><small>British</small></span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<h3 class="section-title">اختر الكتب غير المستلمة</h3>
+<p class="note">اضغط على بطاقة الكتاب لاختياره، ويمكن اختيار أكثر من كتاب للطالب نفسه.</p>
+
+<div class="group-label">مواد الهوية</div>
+<div class="books">
+  <button type="button" class="book-card" data-book="Islamic Studies" data-book-ar="الدراسات الإسلامية"><svg class="book-visual" viewBox="0 0 64 64"><rect x="10" y="8" width="44" height="50" rx="6" fill="#198754"/><rect x="16" y="13" width="32" height="40" rx="4" fill="#effaf4"/><path d="M23 31h18M26 25h12M26 37h12" stroke="#198754" stroke-width="3" stroke-linecap="round"/><circle cx="32" cy="19" r="3" fill="#d7aa42"/></svg><strong>الدراسات الإسلامية</strong><small>Islamic Studies</small><span class="tick">✓</span></button>
+  <button type="button" class="book-card" data-book="Arabic" data-book-ar="اللغة العربية"><svg class="book-visual" viewBox="0 0 64 64"><rect x="10" y="8" width="44" height="50" rx="6" fill="#b44141"/><rect x="16" y="13" width="32" height="40" rx="4" fill="#fff4f4"/><text x="32" y="38" text-anchor="middle" font-size="22" font-weight="700" fill="#b44141">ع</text></svg><strong>اللغة العربية</strong><small>Arabic</small><span class="tick">✓</span></button>
+  <button type="button" class="book-card" data-book="Social Studies" data-book-ar="الدراسات الاجتماعية"><svg class="book-visual" viewBox="0 0 64 64"><circle cx="32" cy="32" r="24" fill="#3f8f70"/><circle cx="32" cy="32" r="18" fill="#eaf7f1"/><path d="M14 32h36M32 14c7 7 10 12 10 18s-3 11-10 18M32 14c-7 7-10 12-10 18s3 11 10 18" stroke="#3f8f70" stroke-width="3" fill="none"/></svg><strong>الدراسات الاجتماعية</strong><small>Social Studies</small><span class="tick">✓</span></button>
+  <button type="button" class="book-card" data-book="English / ELA" data-book-ar="اللغة الإنجليزية"><svg class="book-visual" viewBox="0 0 64 64"><rect x="10" y="8" width="44" height="50" rx="6" fill="#2f6fb3"/><rect x="16" y="13" width="32" height="40" rx="4" fill="#eef5fc"/><text x="32" y="39" text-anchor="middle" font-size="22" font-weight="700" fill="#2f6fb3">A</text></svg><strong>اللغة الإنجليزية</strong><small>English / ELA</small><span class="tick">✓</span></button>
+</div>
+
+<div class="group-label">الرياضيات والعلوم</div>
+<div class="books">
+  <button type="button" class="book-card" data-book="Mathematics" data-book-ar="الرياضيات"><svg class="book-visual" viewBox="0 0 64 64"><rect x="9" y="9" width="46" height="46" rx="10" fill="#604bb3"/><path d="M21 23h10M26 18v10M37 20l8 8M45 20l-8 8M21 40h10M21 46h10M37 43h9" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg><strong>الرياضيات</strong><small>Mathematics</small><span class="tick">✓</span></button>
+  <button type="button" class="book-card" data-book="Science" data-book-ar="العلوم"><svg class="book-visual" viewBox="0 0 64 64"><circle cx="32" cy="32" r="24" fill="#238b8d"/><path d="M27 14h10M29 14v13L18 47a5 5 0 0 0 4 7h20a5 5 0 0 0 4-7L35 27V14" fill="#e8fbfb" stroke="#fff" stroke-width="2"/><path d="M23 43h18" stroke="#238b8d" stroke-width="3"/></svg><strong>العلوم</strong><small>Science</small><span class="tick">✓</span></button>
+  <button type="button" class="book-card" data-book="Biology" data-book-ar="الأحياء"><svg class="book-visual" viewBox="0 0 64 64"><circle cx="32" cy="32" r="24" fill="#4a9651"/><path d="M22 15c17 5 20 16 20 34M42 15c-17 5-20 16-20 34M23 24h18M21 34h22M23 44h18" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/></svg><strong>الأحياء</strong><small>Biology</small><span class="tick">✓</span></button>
+  <button type="button" class="book-card" data-book="Chemistry" data-book-ar="الكيمياء"><svg class="book-visual" viewBox="0 0 64 64"><circle cx="32" cy="32" r="24" fill="#c17a2d"/><path d="M27 15h10M29 15v14L19 47a5 5 0 0 0 4 8h18a5 5 0 0 0 4-8L35 29V15" fill="#fff3df" stroke="#fff" stroke-width="2"/><circle cx="28" cy="43" r="2.5" fill="#c17a2d"/><circle cx="37" cy="47" r="2.5" fill="#c17a2d"/></svg><strong>الكيمياء</strong><small>Chemistry</small><span class="tick">✓</span></button>
+  <button type="button" class="book-card" data-book="Physics" data-book-ar="الفيزياء"><svg class="book-visual" viewBox="0 0 64 64"><circle cx="32" cy="32" r="24" fill="#4967a8"/><circle cx="32" cy="32" r="4" fill="#fff"/><ellipse cx="32" cy="32" rx="20" ry="8" fill="none" stroke="#fff" stroke-width="2.5"/><ellipse cx="32" cy="32" rx="20" ry="8" transform="rotate(60 32 32)" fill="none" stroke="#fff" stroke-width="2.5"/><ellipse cx="32" cy="32" rx="20" ry="8" transform="rotate(120 32 32)" fill="none" stroke="#fff" stroke-width="2.5"/></svg><strong>الفيزياء</strong><small>Physics</small><span class="tick">✓</span></button>
+</div>
+
+<div class="group-label">مواد أكاديمية أخرى</div>
+<div class="books">
+  <button type="button" class="book-card" data-book="History" data-book-ar="التاريخ"><svg class="book-visual" viewBox="0 0 64 64"><rect x="10" y="14" width="44" height="38" rx="6" fill="#9b6b3d"/><path d="M17 26h30M17 34h30M17 42h20" stroke="#fff" stroke-width="3" stroke-linecap="round"/><path d="M32 8l9 8H23z" fill="#d7aa42"/></svg><strong>التاريخ</strong><small>History</small><span class="tick">✓</span></button>
+  <button type="button" class="book-card" data-book="Geography" data-book-ar="الجغرافيا"><svg class="book-visual" viewBox="0 0 64 64"><circle cx="32" cy="28" r="19" fill="#2f8ba3"/><path d="M15 28h34M32 9c6 6 9 12 9 19s-3 13-9 19M32 9c-6 6-9 12-9 19s3 13 9 19" stroke="#fff" stroke-width="2.5" fill="none"/><path d="M25 50h14M32 47v8" stroke="#2f8ba3" stroke-width="3"/></svg><strong>الجغرافيا</strong><small>Geography</small><span class="tick">✓</span></button>
+  <button type="button" class="book-card" data-book="Economics" data-book-ar="الاقتصاد"><svg class="book-visual" viewBox="0 0 64 64"><rect x="10" y="10" width="44" height="44" rx="10" fill="#b58a2e"/><path d="M18 43l9-9 7 6 12-15" stroke="#fff" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M40 25h6v6" stroke="#fff" stroke-width="3" fill="none"/></svg><strong>الاقتصاد</strong><small>Economics</small><span class="tick">✓</span></button>
+  <button type="button" class="book-card" data-book="Computer / ICT" data-book-ar="الحاسب / تقنية المعلومات"><svg class="book-visual" viewBox="0 0 64 64"><rect x="8" y="12" width="48" height="34" rx="5" fill="#546b7a"/><rect x="13" y="17" width="38" height="24" rx="2" fill="#eaf2f5"/><path d="M24 52h16M32 46v6" stroke="#546b7a" stroke-width="4" stroke-linecap="round"/></svg><strong>الحاسب / تقنية المعلومات</strong><small>Computer / ICT</small><span class="tick">✓</span></button>
+  <button type="button" class="book-card" data-book="Art" data-book-ar="الفنون"><svg class="book-visual" viewBox="0 0 64 64"><circle cx="32" cy="32" r="24" fill="#b85b91"/><path d="M18 40c8 10 29 9 30-4 1-10-8-18-20-16-12 2-17 12-10 20z" fill="#fff0f8"/><circle cx="26" cy="28" r="3" fill="#e26b5a"/><circle cx="35" cy="25" r="3" fill="#e0a128"/><circle cx="41" cy="32" r="3" fill="#4c93c7"/><circle cx="31" cy="37" r="3" fill="#6fa34e"/></svg><strong>الفنون</strong><small>Art</small><span class="tick">✓</span></button>
+</div>
+
+<div class="actions"><button class="submit" type="submit">حفظ الحصر</button></div>
+<div id="msg" class="msg"></div>
+</form>
+</main>
+<footer>رشيد العربية — نظام حصر الكتب غير المستلمة</footer>
+<script>
+const URL='https://wcyamoqmpwpribsgspjn.supabase.co',KEY='sb_publishable_3eJET0uhZw4D4DowMK13fQ_oWK3PdIQ';
+let gender='',curriculum='';
+document.querySelectorAll('.gender').forEach(b=>b.onclick=()=>{document.querySelectorAll('.gender').forEach(x=>x.classList.remove('active'));b.classList.add('active');gender=b.dataset.value});
+document.querySelectorAll('.curriculum').forEach(b=>b.onclick=()=>{document.querySelectorAll('.curriculum').forEach(x=>x.classList.remove('active'));b.classList.add('active');curriculum=b.dataset.value});
+document.querySelectorAll('.book-card').forEach(b=>b.onclick=()=>b.classList.toggle('selected'));
+document.getElementById('form').onsubmit=async e=>{e.preventDefault();const msg=document.getElementById('msg');const selected=[...document.querySelectorAll('.book-card.selected')].map(b=>({name:b.dataset.book,ar:b.dataset.bookAr}));if(!gender||!curriculum||!selected.length){msg.className='msg err';msg.textContent='يرجى اختيار الجنس والمسار وكتاب واحد على الأقل.';return};const payload={student_name:student_name.value.trim(),gender,stage:stage.value,grade:grade.value,section_name:section_name.value.trim(),curriculum,missing_books:selected,submitted_by:submitted_by.value.trim()};try{const r=await fetch(URL+'/rest/v1/all_missing_books',{method:'POST',headers:{apikey:KEY,'Content-Type':'application/json',Prefer:'return=minimal'},body:JSON.stringify(payload)});if(!r.ok)throw new Error(await r.text());msg.className='msg ok';msg.textContent='تم تسجيل الكتب غير المستلمة بنجاح.';e.target.reset();gender='';curriculum='';document.querySelectorAll('.active,.selected').forEach(x=>x.classList.remove('active','selected'));window.scrollTo({top:0,behavior:'smooth'})}catch(err){msg.className='msg err';msg.textContent='تعذر الحفظ. يرجى المحاولة مرة أخرى.'}};
+</script>
+</body>
+</html>
