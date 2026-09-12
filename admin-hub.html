@@ -5,23 +5,35 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>مركز الإدارة | رشيد العربية</title>
 <style>
-*{box-sizing:border-box}:root{--g:#07583f;--g2:#06452f;--bg:#f4f8f6;--bd:#d7e5de;--tx:#17392c;--mut:#687a72;--gold:#c9a227}
+*{box-sizing:border-box}
+:root{--g:#07583f;--g2:#06452f;--bg:#f4f8f6;--bd:#d7e5de;--tx:#17392c;--mut:#687a72;--gold:#c9a227}
 body{margin:0;font-family:Tahoma,Arial,sans-serif;background:radial-gradient(circle at top right,rgba(7,88,63,.07),transparent 32%),var(--bg);color:var(--tx)}
-header{background:linear-gradient(135deg,var(--g),var(--g2));color:white;text-align:center;padding:18px 20px} header h1{margin:0;font-size:27px} header p{margin:6px 0 0;opacity:.9}
-main{width:min(900px,92%);margin:auto;padding:38px 0} .hero{text-align:center;margin-bottom:26px} .hero h2{color:var(--g);font-size:29px;margin:0 0 8px} .hero p{color:var(--mut);margin:0;line-height:1.8}
+header{background:linear-gradient(135deg,var(--g),var(--g2));color:#fff;text-align:center;padding:18px 20px}
+header h1{margin:0;font-size:27px} header p{margin:6px 0 0;opacity:.9}
+main{width:min(920px,92%);margin:auto;padding:38px 0}
+.hero{text-align:center;margin-bottom:26px}.hero h2{color:var(--g);font-size:29px;margin:0 0 8px}.hero p{color:var(--mut);margin:0;line-height:1.8}
 .login{max-width:470px;margin:26px auto;background:#fff;border:1px solid var(--bd);border-radius:22px;padding:27px;box-shadow:0 10px 28px rgba(0,0,0,.06)}
-.login h3{margin:0 0 18px;text-align:center;color:var(--g)} label{display:block;font-weight:700;margin:12px 0 7px} input{width:100%;padding:13px;border:1px solid #cddbd4;border-radius:12px;font-size:15px;outline:none} input:focus{border-color:var(--g)}
-button{width:100%;margin-top:18px;padding:13px;border:0;border-radius:12px;background:var(--g);color:#fff;font-weight:800;font-size:16px;cursor:pointer} .msg{min-height:24px;text-align:center;margin-top:12px;color:#a13232;font-weight:700;font-size:13px}
-.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:20px} .card{position:relative;background:#fff;border:1px solid var(--bd);border-radius:20px;padding:27px 22px;text-align:center;text-decoration:none;color:inherit;box-shadow:0 8px 24px rgba(0,0,0,.045);overflow:hidden;transition:.2s}
-.card:before{content:"";position:absolute;top:0;right:0;left:0;height:4px;background:linear-gradient(90deg,var(--g),var(--gold))} .card:hover{transform:translateY(-3px);box-shadow:0 13px 30px rgba(0,0,0,.08)} .ico{width:62px;height:62px;border-radius:18px;background:#edf7f2;color:var(--g);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:30px} .card h3{color:var(--g);margin:0 0 8px;font-size:18px} .card p{color:var(--mut);font-size:13px;line-height:1.75;margin:0}
-.top-actions{display:flex;justify-content:center;gap:10px;margin:0 0 24px;flex-wrap:wrap} .small{width:auto;margin:0;padding:9px 15px;font-size:13px} .secondary{background:#fff;color:var(--g);border:1px solid var(--bd)} .hide{display:none!important} .back{text-align:center;margin-top:25px} .back a{color:var(--g);font-weight:700;text-decoration:none} footer{text-align:center;color:#7a8781;font-size:12px;padding:18px}
+.login h3{margin:0 0 18px;text-align:center;color:var(--g)}
+label{display:block;font-weight:700;margin:12px 0 7px} input{width:100%;padding:13px;border:1px solid #cddbd4;border-radius:12px;font-size:15px;outline:none}
+input:focus{border-color:var(--g)} button{padding:11px 16px;border:0;border-radius:12px;background:var(--g);color:#fff;font-weight:800;cursor:pointer}
+.login button{width:100%;margin-top:18px;font-size:16px}
+.msg{min-height:24px;text-align:center;margin-top:12px;color:#a13232;font-weight:700;font-size:13px}
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.card{position:relative;background:#fff;border:1px solid var(--bd);border-radius:20px;padding:27px 22px;text-align:center;text-decoration:none;color:inherit;box-shadow:0 8px 24px rgba(0,0,0,.045);overflow:hidden;transition:.2s}
+.card:before{content:"";position:absolute;top:0;right:0;left:0;height:4px;background:linear-gradient(90deg,var(--g),var(--gold))}
+.card:hover{transform:translateY(-3px);box-shadow:0 13px 30px rgba(0,0,0,.08)}
+.ico{width:62px;height:62px;border-radius:18px;background:#edf7f2;color:var(--g);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:30px}
+.card h3{color:var(--g);margin:0 0 8px;font-size:18px}.card p{color:var(--mut);font-size:13px;line-height:1.75;margin:0}
+.actions{display:flex;justify-content:center;gap:10px;margin:0 0 24px;flex-wrap:wrap}.secondary{background:#fff;color:var(--g);border:1px solid var(--bd)}
+.hide{display:none!important}.back{text-align:center;margin-top:25px}.back a{color:var(--g);font-weight:700;text-decoration:none}
+footer{text-align:center;color:#7a8781;font-size:12px;padding:18px}
 @media(max-width:680px){.cards{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <header><h1>إدارة رشيد العربية</h1><p>Rasheed Arabic Administration</p></header>
 <main>
-<section class="hero"><h2>مركز الإدارة</h2><p id="heroText">سجّل الدخول مرة واحدة، وبعدها يمكنك فتح جميع لوحات الإدارة مباشرة.</p></section>
+<section class="hero"><h2>مركز الإدارة</h2><p id="heroText">سجّل الدخول مرة واحدة فقط، ثم افتح أي لوحة إدارة مباشرة.</p></section>
 
 <section id="loginBox" class="login">
 <h3>دخول الإدارة</h3>
@@ -34,14 +46,14 @@ button{width:100%;margin-top:18px;padding:13px;border:0;border-radius:12px;backg
 </section>
 
 <section id="adminArea" class="hide">
-<div class="top-actions">
-<button class="small secondary" onclick="location.href='index.html'">الصفحة الرئيسية</button>
-<button class="small" id="logoutBtn">تسجيل الخروج</button>
+<div class="actions">
+<button class="secondary" onclick="location.href='index.html'">الصفحة الرئيسية</button>
+<button id="logoutBtn">تسجيل الخروج</button>
 </div>
 <div class="cards">
-<a class="card" href="admin.html"><div class="ico">👥</div><h3>إدارة حصر غير الناطقين بالعربية</h3><p>متابعة الطلاب والإحصائيات والتقارير.</p></a>
+<a class="card" href="admin.html"><div class="ico">🌐</div><h3>إدارة حصر غير الناطقين بالعربية</h3><p>المتابعة والإحصائيات والتقارير.</p></a>
 <a class="card" href="admin-weak.html"><div class="ico">📖</div><h3>إدارة حصر الطلاب الضعاف</h3><p>متابعة الطلاب الضعاف في اللغة العربية.</p></a>
-<a class="card" href="admin-missing-books.html"><div class="ico">📚</div><h3>إدارة حصر كتب مواد الهوية</h3><p>متابعة كتب مواد الهوية غير المستلمة.</p></a>
+<a class="card" href="admin-identity-books.html"><div class="ico">📚</div><h3>إدارة حصر كتب مواد الهوية</h3><p>متابعة كتب مواد الهوية غير المستلمة.</p></a>
 <a class="card" href="admin-all-missing-books.html"><div class="ico">📦</div><h3>إدارة حصر جميع الكتب</h3><p>متابعة جميع الكتب الدراسية غير المستلمة.</p></a>
 </div>
 </section>
@@ -61,39 +73,72 @@ function clearSession(){localStorage.removeItem(SESSION_KEY)}
 
 async function refreshSession(s){
  if(!s?.refresh_token)return null;
- const r=await fetch(SUPABASE_URL+'/auth/v1/token?grant_type=refresh_token',{method:'POST',headers:{apikey:KEY,'Content-Type':'application/json'},body:JSON.stringify({refresh_token:s.refresh_token})});
+ const r=await fetch(SUPABASE_URL+'/auth/v1/token?grant_type=refresh_token',{
+  method:'POST',
+  headers:{apikey:KEY,'Content-Type':'application/json'},
+  body:JSON.stringify({refresh_token:s.refresh_token})
+ });
  if(!r.ok)return null;
  const n=await r.json();setSession(n);return n;
 }
+
 async function api(path){
- let s=getSession(); if(!s?.access_token)return null;
+ let s=getSession();
+ if(!s?.access_token)return null;
  let r=await fetch(SUPABASE_URL+path,{headers:{apikey:KEY,Authorization:'Bearer '+s.access_token}});
- if(r.status===401){s=await refreshSession(s);if(!s)return null;r=await fetch(SUPABASE_URL+path,{headers:{apikey:KEY,Authorization:'Bearer '+s.access_token}})}
+ if(r.status===401){
+  s=await refreshSession(s);
+  if(!s)return null;
+  r=await fetch(SUPABASE_URL+path,{headers:{apikey:KEY,Authorization:'Bearer '+s.access_token}});
+ }
  return r;
 }
+
 async function checkAdmin(){
- const s=getSession(); if(!s?.access_token||!s?.user?.id)return false;
+ const session=getSession();
+ if(!session?.access_token||!session?.user?.id)return false;
  try{
-  const r=await api('/rest/v1/admin_users?select=user_id&user_id=eq.'+encodeURIComponent(s.user.id)+'&limit=1');
+  const r=await api('/rest/v1/admin_users?select=user_id&user_id=eq.'+encodeURIComponent(session.user.id)+'&limit=1');
   if(!r||r.status===401||r.status===403||!r.ok)return false;
-  const a=await r.json(); return Array.isArray(a)&&a.length===1;
- }catch(e){console.error(e);return false}
+  const admins=await r.json();
+  return Array.isArray(admins)&&admins.length===1;
+ }catch(error){
+  console.error('Admin check error:',error);
+  return false;
+ }
 }
+
 function showAdmin(){
- $('loginBox').classList.add('hide'); $('adminArea').classList.remove('hide');
+ $('loginBox').classList.add('hide');
+ $('adminArea').classList.remove('hide');
  $('heroText').textContent='تم تسجيل الدخول — اختر لوحة الإدارة المطلوبة.';
 }
 function showLogin(){
- $('adminArea').classList.add('hide'); $('loginBox').classList.remove('hide');
- $('heroText').textContent='سجّل الدخول مرة واحدة، وبعدها يمكنك فتح جميع لوحات الإدارة مباشرة.';
+ $('adminArea').classList.add('hide');
+ $('loginBox').classList.remove('hide');
+ $('heroText').textContent='سجّل الدخول مرة واحدة فقط، ثم افتح أي لوحة إدارة مباشرة.';
 }
+
 async function login(){
- const msg=$('msg');msg.textContent='جارٍ التحقق...';
- const r=await fetch(SUPABASE_URL+'/auth/v1/token?grant_type=password',{method:'POST',headers:{apikey:KEY,'Content-Type':'application/json'},body:JSON.stringify({email:$('email').value.trim(),password:$('password').value})});
+ const msg=$('msg');
+ msg.textContent='جارٍ التحقق...';
+ const r=await fetch(SUPABASE_URL+'/auth/v1/token?grant_type=password',{
+  method:'POST',
+  headers:{apikey:KEY,'Content-Type':'application/json'},
+  body:JSON.stringify({email:$('email').value.trim(),password:$('password').value})
+ });
  if(!r.ok){msg.textContent='بيانات الدخول غير صحيحة';return}
- const s=await r.json();setSession(s);
- if(await checkAdmin()){msg.textContent='';showAdmin()}else{clearSession();msg.textContent='هذا الحساب ليس من حسابات الإدارة'}
+ const s=await r.json();
+ setSession(s);
+ if(await checkAdmin()){
+  msg.textContent='';
+  showAdmin();
+ }else{
+  clearSession();
+  msg.textContent='هذا الحساب ليس من حسابات الإدارة';
+ }
 }
+
 $('loginBtn').onclick=login;
 $('password').addEventListener('keydown',e=>{if(e.key==='Enter')login()});
 $('logoutBtn').onclick=()=>{clearSession();showLogin()};
@@ -103,4 +148,5 @@ $('logoutBtn').onclick=()=>{clearSession();showLogin()};
  else showLogin();
 })();
 </script>
-</body></html>
+</body>
+</html>
