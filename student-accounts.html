@@ -2,21 +2,13 @@
 <html lang="ar" dir="rtl">
 
 <head>
-
 <meta charset="utf-8">
-
-<meta
-  name="viewport"
-  content="width=device-width,initial-scale=1,viewport-fit=cover"
->
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 
 <title>إدارة حسابات الطلاب | رشيد العربية</title>
 
 <style>
-
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 :root{
   --green:#07583f;
@@ -37,19 +29,14 @@ body{
   color:var(--text);
 }
 
-button,
-input,
-select{
-  font:inherit;
-}
+button,input,select{font:inherit}
 
 a{
-  text-decoration:none;
   color:inherit;
+  text-decoration:none;
 }
 
-
-/* ===== HEADER ===== */
+/* HEADER */
 
 .topbar{
   background:var(--green);
@@ -59,9 +46,7 @@ a{
 .topbar-inner{
   width:min(1250px,94%);
   margin:auto;
-
   min-height:76px;
-
   display:flex;
   align-items:center;
   justify-content:space-between;
@@ -109,38 +94,25 @@ a{
   cursor:pointer;
 }
 
-
-/* ===== PAGE ===== */
+/* PAGE */
 
 .page{
   width:min(1250px,94%);
   margin:26px auto 60px;
 }
 
-
-/* ===== HERO ===== */
+/* HERO */
 
 .hero{
-  background:
-    linear-gradient(
-      135deg,
-      #07583f,
-      #0b6c50
-    );
-
+  background:linear-gradient(135deg,#07583f,#0b6c50);
   color:#fff;
-
   border-radius:24px;
   padding:26px;
-
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:20px;
-
-  box-shadow:
-    0 14px 35px
-    rgba(7,88,63,.12);
+  box-shadow:0 14px 35px rgba(7,88,63,.12);
 }
 
 .hero h1{
@@ -173,8 +145,7 @@ a{
   font-size:12px;
 }
 
-
-/* ===== STATS ===== */
+/* STATS */
 
 .stats{
   display:grid;
@@ -188,7 +159,6 @@ a{
   border:1px solid var(--border);
   border-radius:18px;
   padding:17px;
-  box-shadow:0 5px 18px rgba(0,0,0,.025);
 }
 
 .stat span{
@@ -204,8 +174,7 @@ a{
   font-size:28px;
 }
 
-
-/* ===== PANEL ===== */
+/* PANEL */
 
 .panel{
   background:#fff;
@@ -230,8 +199,7 @@ a{
   font-size:20px;
 }
 
-
-/* ===== BUTTONS ===== */
+/* BUTTONS */
 
 .actions{
   display:flex;
@@ -250,10 +218,6 @@ a{
 .btn-primary{
   background:var(--green);
   color:#fff;
-}
-
-.btn-primary:hover{
-  background:var(--green2);
 }
 
 .btn-gold{
@@ -276,13 +240,17 @@ a{
   color:var(--blue);
 }
 
+.btn-gray{
+  background:#eef0ef;
+  color:#596961;
+}
+
 .btn:disabled{
   opacity:.5;
   cursor:not-allowed;
 }
 
-
-/* ===== FILTERS ===== */
+/* FILTERS */
 
 .filters{
   display:grid;
@@ -301,8 +269,7 @@ a{
   outline:0;
 }
 
-
-/* ===== TABLE ===== */
+/* TABLE */
 
 .table-wrap{
   overflow:auto;
@@ -313,7 +280,7 @@ a{
 table{
   width:100%;
   border-collapse:collapse;
-  min-width:1000px;
+  min-width:1150px;
 }
 
 th{
@@ -374,9 +341,14 @@ tr:hover td{
   color:#8b6815;
 }
 
+.pill-off{
+  background:#eef0ef;
+  color:#596961;
+}
+
 .row-actions{
   display:flex;
-  gap:6px;
+  gap:5px;
   flex-wrap:wrap;
 }
 
@@ -389,8 +361,7 @@ tr:hover td{
   font-weight:700;
 }
 
-
-/* ===== STATUS ===== */
+/* NOTICES */
 
 .notice{
   padding:13px 15px;
@@ -412,24 +383,27 @@ tr:hover td{
 }
 
 .hide{
-  display:none !important;
+  display:none!important;
 }
 
+/* PROGRESS */
 
-/* ===== GENERATED ===== */
-
-.credentials-table{
-  width:100%;
-  border-collapse:collapse;
+.progress{
+  margin-top:12px;
+  background:#edf2ef;
+  height:9px;
+  border-radius:999px;
+  overflow:hidden;
 }
 
-.credentials-table th{
-  background:#f3f7f5;
+.progress-bar{
+  width:0;
+  height:100%;
+  background:var(--gold);
+  transition:.2s;
 }
 
-.credentials-table td{
-  font-size:13px;
-}
+/* GENERATED ACCOUNTS */
 
 .password-text{
   direction:ltr;
@@ -438,19 +412,16 @@ tr:hover td{
   font-weight:800;
 }
 
-
-/* ===== MODAL ===== */
+/* MODAL */
 
 .modal-back{
   position:fixed;
   inset:0;
   background:rgba(0,0,0,.48);
   z-index:1000;
-
   display:flex;
   align-items:center;
   justify-content:center;
-
   padding:18px;
 }
 
@@ -507,29 +478,7 @@ tr:hover td{
   padding:0 20px 20px;
 }
 
-
-/* ===== PROGRESS ===== */
-
-.progress{
-  margin-top:12px;
-  background:#edf2ef;
-  height:9px;
-  border-radius:999px;
-  overflow:hidden;
-}
-
-.progress-bar{
-  width:0;
-  height:100%;
-  background:var(--gold);
-  transition:.2s;
-}
-
-
-/* ===== RESPONSIVE ===== */
-
 @media(max-width:850px){
-
   .stats{
     grid-template-columns:1fr 1fr;
   }
@@ -545,19 +494,14 @@ tr:hover td{
   .hero-badge{
     margin-top:16px;
   }
-
 }
-
 </style>
 
 </head>
 
-
 <body>
 
-
 <header class="topbar">
-
   <div class="topbar-inner">
 
     <a class="brand" href="index.html">
@@ -569,21 +513,20 @@ tr:hover td{
       >
 
       <div>
-
-        <strong>
-          رشيد العربية
-        </strong>
-
-        <small>
-          إدارة حسابات الطلاب
-        </small>
-
+        <strong>رشيد العربية</strong>
+        <small>إدارة حسابات الطلاب</small>
       </div>
 
     </a>
 
-
     <div class="top-actions">
+
+      <button
+        class="top-btn"
+        onclick="location.href='index.html'"
+      >
+        الرئيسية
+      </button>
 
       <button
         class="top-btn"
@@ -602,13 +545,10 @@ tr:hover td{
     </div>
 
   </div>
-
 </header>
 
 
-
 <main class="page">
-
 
 <section class="hero">
 
@@ -619,15 +559,11 @@ tr:hover td{
     </h1>
 
     <p>
-
-      إنشاء أسماء المستخدمين وكلمات المرور
-      لطلاب برنامج العربية لغير الناطقين بها
-      مباشرة من بيانات الحصر.
-
+      إنشاء وتعديل وإدارة حسابات طلاب برنامج
+      العربية لغير الناطقين بها مباشرة من بيانات الحصر.
     </p>
 
   </div>
-
 
   <div class="hero-badge">
 
@@ -644,62 +580,29 @@ tr:hover td{
 </section>
 
 
-
 <section class="stats">
 
   <div class="stat">
-
-    <span>
-      إجمالي الطلاب
-    </span>
-
-    <strong id="statTotal">
-      —
-    </strong>
-
+    <span>إجمالي الطلاب</span>
+    <strong id="statTotal">—</strong>
   </div>
 
-
   <div class="stat">
-
-    <span>
-      لديهم حساب
-    </span>
-
-    <strong id="statAccounts">
-      —
-    </strong>
-
+    <span>لديهم حساب</span>
+    <strong id="statAccounts">—</strong>
   </div>
 
-
   <div class="stat">
-
-    <span>
-      بدون حساب
-    </span>
-
-    <strong id="statMissing">
-      —
-    </strong>
-
+    <span>بدون حساب</span>
+    <strong id="statMissing">—</strong>
   </div>
 
-
   <div class="stat">
-
-    <span>
-      حسابات مؤقتة
-    </span>
-
-    <strong id="statTemp">
-      —
-    </strong>
-
+    <span>حسابات مؤقتة</span>
+    <strong id="statTemp">—</strong>
   </div>
 
 </section>
-
 
 
 <div
@@ -708,7 +611,6 @@ tr:hover td{
 >
   جارٍ التحقق من صلاحية المدير وتحميل البيانات...
 </div>
-
 
 
 <section
@@ -722,7 +624,6 @@ tr:hover td{
       حسابات الطلاب
     </h2>
 
-
     <div class="actions">
 
       <button
@@ -732,7 +633,6 @@ tr:hover td{
         تحديث
       </button>
 
-
       <button
         id="createAllBtn"
         class="btn btn-gold"
@@ -740,19 +640,17 @@ tr:hover td{
         إنشاء جميع الحسابات الناقصة
       </button>
 
-
       <button
         id="exportBtn"
         class="btn btn-blue"
         disabled
       >
-        تنزيل بيانات الحسابات الجديدة CSV
+        تنزيل الحسابات الجديدة CSV
       </button>
 
     </div>
 
   </div>
-
 
 
   <div
@@ -761,18 +659,19 @@ tr:hover td{
   >
 
     <div id="bulkText">
-      جاري إنشاء الحسابات...
+      جارٍ إنشاء الحسابات...
     </div>
 
     <div class="progress">
+
       <div
         id="progressBar"
         class="progress-bar"
       ></div>
+
     </div>
 
   </div>
-
 
 
   <div class="filters">
@@ -782,7 +681,6 @@ tr:hover td{
       type="search"
       placeholder="بحث باسم الطالب أو اسم المستخدم أو الفصل..."
     >
-
 
     <select id="statusFilter">
 
@@ -798,8 +696,11 @@ tr:hover td{
         بدون حساب
       </option>
 
-    </select>
+      <option value="disabled">
+        حساب معطل
+      </option>
 
+    </select>
 
     <select id="curriculumFilter">
 
@@ -820,7 +721,6 @@ tr:hover td{
   </div>
 
 
-
   <div class="table-wrap">
 
     <table>
@@ -828,40 +728,26 @@ tr:hover td{
       <thead>
 
         <tr>
-
           <th>#</th>
-
           <th>اسم الطالب</th>
-
           <th>الجنس</th>
-
           <th>المرحلة</th>
-
           <th>الصف</th>
-
           <th>الشعبة</th>
-
           <th>المسار</th>
-
           <th>اسم المستخدم</th>
-
           <th>الحالة</th>
-
-          <th>الإجراء</th>
-
+          <th>الإجراءات</th>
         </tr>
 
       </thead>
 
-
       <tbody id="studentsBody">
 
         <tr>
-
           <td colspan="10">
             جارٍ التحميل...
           </td>
-
         </tr>
 
       </tbody>
@@ -871,7 +757,6 @@ tr:hover td{
   </div>
 
 </section>
-
 
 
 <section
@@ -894,36 +779,25 @@ tr:hover td{
 
   </div>
 
-
   <div class="notice notice-info">
-
-    كلمات المرور الظاهرة هنا لا يتم حفظها
-    داخل هذه الصفحة بعد إغلاقها.
-    احفظها قبل مغادرة الصفحة.
-
+    احفظ كلمات المرور قبل إغلاق الصفحة.
   </div>
-
 
   <div class="table-wrap">
 
-    <table class="credentials-table">
+    <table>
 
       <thead>
 
         <tr>
-
           <th>الطالب</th>
-
           <th>الفصل</th>
-
+          <th>المسار</th>
           <th>اسم المستخدم</th>
-
           <th>كلمة المرور المؤقتة</th>
-
         </tr>
 
       </thead>
-
 
       <tbody id="credentialsBody">
       </tbody>
@@ -934,13 +808,10 @@ tr:hover td{
 
 </section>
 
-
-
 </main>
 
 
-
-<!-- ===== نافذة بيانات الحساب ===== -->
+<!-- نافذة بيانات الحساب -->
 
 <div
   id="modalBack"
@@ -950,25 +821,17 @@ tr:hover td{
   <div class="modal">
 
     <div class="modal-head">
-
       <h3 id="modalTitle">
         بيانات الحساب
       </h3>
-
     </div>
-
 
     <div class="modal-body">
 
       <div
         id="modalStudentName"
-        style="
-          font-weight:800;
-          font-size:17px;
-          margin-bottom:13px;
-        "
+        style="font-weight:800;font-size:17px;margin-bottom:13px"
       ></div>
-
 
       <div class="credential-box">
 
@@ -982,7 +845,6 @@ tr:hover td{
 
       </div>
 
-
       <div class="credential-box">
 
         <span>
@@ -995,18 +857,12 @@ tr:hover td{
 
       </div>
 
-
       <div
         id="modalMessage"
-        style="
-          color:#6e7f77;
-          line-height:1.8;
-          font-size:12px;
-        "
+        style="color:#6e7f77;line-height:1.8;font-size:12px"
       ></div>
 
     </div>
-
 
     <div class="modal-foot">
 
@@ -1031,41 +887,32 @@ tr:hover td{
 </div>
 
 
-
 <script>
 
-
-/* ==================================================
-   رشيد العربية
-   إدارة حسابات الطلاب
-   الإصدار 1
-   ================================================== */
-
+/* =========================================
+   إعدادات رشيد العربية
+   ========================================= */
 
 const SUPABASE_URL =
   "https://wcyamoqmpwpribsgspjn.supabase.co";
 
-
 const SUPABASE_KEY =
   "sb_publishable_3eJET0uhZw4D4DowMK13fQ_oWK3PdIQ";
-
 
 const SESSION_KEY =
   "rasheed_arabic_admin_session_v1";
 
-
-const EDGE_FUNCTION =
+const CREATE_FUNCTION =
   "create-student-account";
+
+const MANAGE_FUNCTION =
+  "manage-student-account";
 
 
 let students = [];
-
 let accounts = [];
-
 let generatedCredentials = [];
-
 let currentCredential = null;
-
 
 
 const $ =
@@ -1073,11 +920,9 @@ const $ =
     document.getElementById(id);
 
 
-
-/* ================================================
-   الجلسة
-   ================================================ */
-
+/* =========================================
+   SESSION
+   ========================================= */
 
 function getSession(){
 
@@ -1098,10 +943,7 @@ function getSession(){
 }
 
 
-
-function saveSession(
-  session
-){
+function saveSession(session){
 
   localStorage.setItem(
     SESSION_KEY,
@@ -1109,7 +951,6 @@ function saveSession(
   );
 
 }
-
 
 
 function clearSession(){
@@ -1121,19 +962,11 @@ function clearSession(){
 }
 
 
+async function refreshSession(session){
 
-async function refreshSession(
-  session
-){
-
-  if(
-    !session?.refresh_token
-  ){
-
+  if(!session?.refresh_token){
     return null;
-
   }
-
 
   const response =
     await fetch(
@@ -1142,59 +975,38 @@ async function refreshSession(
       "/auth/v1/token?grant_type=refresh_token",
 
       {
-
         method:"POST",
 
         headers:{
-
-          "apikey":
-            SUPABASE_KEY,
-
-          "Content-Type":
-            "application/json"
-
+          "apikey":SUPABASE_KEY,
+          "Content-Type":"application/json"
         },
 
         body:JSON.stringify({
-
           refresh_token:
             session.refresh_token
-
         })
-
       }
 
     );
 
-
-  if(
-    !response.ok
-  ){
-
+  if(!response.ok){
     return null;
-
   }
-
 
   const next =
     await response.json();
 
-
-  saveSession(
-    next
-  );
-
+  saveSession(next);
 
   return next;
 
 }
 
 
-
-/* ================================================
-   API
-   ================================================ */
-
+/* =========================================
+   REST API
+   ========================================= */
 
 async function api(
   path,
@@ -1204,20 +1016,13 @@ async function api(
   let session =
     getSession();
 
-
-  if(
-    !session?.access_token
-  ){
-
-    throw new Error(
-      "NO_SESSION"
-    );
-
+  if(!session?.access_token){
+    throw new Error("NO_SESSION");
   }
 
 
-  const makeRequest =
-    async s => {
+  const doCall =
+    async activeSession => {
 
       const headers = {
 
@@ -1226,28 +1031,19 @@ async function api(
 
         "Authorization":
           "Bearer " +
-          s.access_token,
+          activeSession.access_token,
 
-        ...(
-          options.headers ||
-          {}
-        )
+        ...(options.headers || {})
 
       };
 
 
       if(
         options.body &&
-        !headers[
-          "Content-Type"
-        ]
+        !headers["Content-Type"]
       ){
-
-        headers[
-          "Content-Type"
-        ] =
+        headers["Content-Type"] =
           "application/json";
-
       }
 
 
@@ -1267,24 +1063,16 @@ async function api(
 
 
   let response =
-    await makeRequest(
-      session
-    );
+    await doCall(session);
 
 
-  if(
-    response.status === 401
-  ){
+  if(response.status === 401){
 
     session =
-      await refreshSession(
-        session
-      );
+      await refreshSession(session);
 
 
-    if(
-      !session
-    ){
+    if(!session){
 
       clearSession();
 
@@ -1296,9 +1084,7 @@ async function api(
 
 
     response =
-      await makeRequest(
-        session
-      );
+      await doCall(session);
 
   }
 
@@ -1308,30 +1094,134 @@ async function api(
 }
 
 
+/* =========================================
+   EDGE FUNCTIONS
+   ========================================= */
 
-/* ================================================
-   التحقق من المدير
-   ================================================ */
+async function callEdgeFunction(
+  functionName,
+  payload
+){
 
+  let session =
+    getSession();
+
+
+  if(!session?.access_token){
+    throw new Error("NO_SESSION");
+  }
+
+
+  const doCall =
+    async activeSession => {
+
+      return fetch(
+
+        SUPABASE_URL +
+        "/functions/v1/" +
+        functionName,
+
+        {
+
+          method:"POST",
+
+          headers:{
+
+            "apikey":
+              SUPABASE_KEY,
+
+            "Authorization":
+              "Bearer " +
+              activeSession.access_token,
+
+            "Content-Type":
+              "application/json"
+
+          },
+
+          body:
+            JSON.stringify(payload)
+
+        }
+
+      );
+
+    };
+
+
+  let response =
+    await doCall(session);
+
+
+  if(response.status === 401){
+
+    session =
+      await refreshSession(session);
+
+
+    if(!session){
+      throw new Error("NO_SESSION");
+    }
+
+
+    response =
+      await doCall(session);
+
+  }
+
+
+  let data = {};
+
+
+  try{
+    data =
+      await response.json();
+  }catch{}
+
+
+  if(
+    !response.ok ||
+    data?.ok === false
+  ){
+
+    throw new Error(
+      data?.error ||
+      data?.message ||
+      (
+        "HTTP_" +
+        response.status
+      )
+    );
+
+  }
+
+
+  return data;
+
+}
+
+
+/* =========================================
+   صلاحية المدير
+   ========================================= */
 
 async function verifyAdmin(){
 
   const response =
     await api(
+
       "/rest/v1/rpc/is_rasheed_arabic_admin",
+
       {
         method:"POST",
         body:"{}"
       }
+
     );
 
 
-  if(
-    !response.ok
-  ){
-
+  if(!response.ok){
     return false;
-
   }
 
 
@@ -1342,24 +1232,11 @@ async function verifyAdmin(){
 }
 
 
-
-/* ================================================
-   تحميل الطلاب والحسابات
-   ================================================ */
-
+/* =========================================
+   تحميل البيانات
+   ========================================= */
 
 async function loadData(){
-
-  const notice =
-    $("pageNotice");
-
-
-  notice.className =
-    "notice notice-info";
-
-  notice.textContent =
-    "جارٍ تحميل بيانات الطلاب والحسابات...";
-
 
   const studentResponse =
     await api(
@@ -1371,9 +1248,7 @@ async function loadData(){
     );
 
 
-  if(
-    !studentResponse.ok
-  ){
+  if(!studentResponse.ok){
 
     throw new Error(
       "STUDENTS_LOAD_FAILED"
@@ -1386,8 +1261,7 @@ async function loadData(){
     await studentResponse.json();
 
 
-
-  let accountResponse =
+  const accountResponse =
     await api(
 
       "/rest/v1/student_accounts" +
@@ -1396,29 +1270,7 @@ async function loadData(){
     );
 
 
-  /*
-    احتياط في حال كان أحد الأعمدة
-    غير موجود في نسخة القاعدة.
-  */
-
-  if(
-    !accountResponse.ok
-  ){
-
-    accountResponse =
-      await api(
-
-        "/rest/v1/student_accounts" +
-        "?select=student_id,is_active"
-
-      );
-
-  }
-
-
-  if(
-    !accountResponse.ok
-  ){
+  if(!accountResponse.ok){
 
     throw new Error(
       "ACCOUNTS_LOAD_FAILED"
@@ -1431,16 +1283,14 @@ async function loadData(){
     await accountResponse.json();
 
 
-  notice.classList.add(
-    "hide"
-  );
+  $("pageNotice")
+    .classList
+    .add("hide");
 
 
   $("mainPanel")
     .classList
-    .remove(
-      "hide"
-    );
+    .remove("hide");
 
 
   render();
@@ -1448,54 +1298,60 @@ async function loadData(){
 }
 
 
+/* =========================================
+   HELPERS
+   ========================================= */
 
-/* ================================================
-   اسم المستخدم
-   ================================================ */
-
-
-function usernameForStudent(
-  studentId
-){
+function usernameForStudent(studentId){
 
   return (
     "RA" +
-    String(
-      studentId
-    ).padStart(
-      4,
-      "0"
-    )
+    String(studentId)
+      .padStart(4,"0")
   );
 
 }
 
 
-
-function getAccount(
-  studentId
-){
+function getAccount(studentId){
 
   return accounts.find(
 
     account =>
-      Number(
-        account.student_id
-      ) ===
-      Number(
-        studentId
-      )
+      Number(account.student_id) ===
+      Number(studentId)
 
   ) || null;
 
 }
 
 
+function escapeHtml(value){
 
-/* ================================================
-   العرض
-   ================================================ */
+  return String(
+    value ?? ""
+  ).replace(
 
+    /[&<>"']/g,
+
+    character => ({
+
+      "&":"&amp;",
+      "<":"&lt;",
+      ">":"&gt;",
+      '"':"&quot;",
+      "'":"&#39;"
+
+    }[character])
+
+  );
+
+}
+
+
+/* =========================================
+   RENDER
+   ========================================= */
 
 function render(){
 
@@ -1505,56 +1361,38 @@ function render(){
 
   const accountCount =
     students.filter(
-
       student =>
         Boolean(
-          getAccount(
-            student.id
-          )
+          getAccount(student.id)
         )
-
     ).length;
 
 
   const missingCount =
-    total -
-    accountCount;
+    total - accountCount;
 
 
   const tempCount =
     accounts.filter(
-
       account =>
-        account.password_is_temporary
-        === true
-
+        account.password_is_temporary === true
     ).length;
 
 
-  $("heroTotal")
-    .textContent =
-      total;
+  $("heroTotal").textContent =
+    total;
 
+  $("statTotal").textContent =
+    total;
 
-  $("statTotal")
-    .textContent =
-      total;
+  $("statAccounts").textContent =
+    accountCount;
 
+  $("statMissing").textContent =
+    missingCount;
 
-  $("statAccounts")
-    .textContent =
-      accountCount;
-
-
-  $("statMissing")
-    .textContent =
-      missingCount;
-
-
-  $("statTemp")
-    .textContent =
-      tempCount;
-
+  $("statTemp").textContent =
+    tempCount;
 
 
   const search =
@@ -1574,15 +1412,12 @@ function render(){
       .value;
 
 
-
   const filtered =
     students.filter(
       student => {
 
         const account =
-          getAccount(
-            student.id
-          );
+          getAccount(student.id);
 
 
         const username =
@@ -1595,13 +1430,9 @@ function render(){
         const haystack = [
 
           student.student_name,
-
           student.section_name,
-
           student.grade,
-
           student.stage,
-
           username
 
         ]
@@ -1611,13 +1442,9 @@ function render(){
 
         if(
           search &&
-          !haystack.includes(
-            search
-          )
+          !haystack.includes(search)
         ){
-
           return false;
-
         }
 
 
@@ -1625,9 +1452,7 @@ function render(){
           status === "has" &&
           !account
         ){
-
           return false;
-
         }
 
 
@@ -1635,9 +1460,18 @@ function render(){
           status === "missing" &&
           account
         ){
-
           return false;
+        }
 
+
+        if(
+          status === "disabled" &&
+          (
+            !account ||
+            account.is_active !== false
+          )
+        ){
+          return false;
         }
 
 
@@ -1646,9 +1480,7 @@ function render(){
           student.curriculum !==
           curriculum
         ){
-
           return false;
-
         }
 
 
@@ -1658,30 +1490,17 @@ function render(){
     );
 
 
+  if(!filtered.length){
 
-  const body =
-    $("studentsBody");
-
-
-  if(
-    !filtered.length
-  ){
-
-    body.innerHTML = `
+    $("studentsBody").innerHTML = `
 
       <tr>
 
         <td
           colspan="10"
-          style="
-            text-align:center;
-            padding:30px;
-            color:#6e7f77;
-          "
+          style="text-align:center;padding:30px"
         >
-
           لا توجد نتائج.
-
         </td>
 
       </tr>
@@ -1693,8 +1512,7 @@ function render(){
   }
 
 
-
-  body.innerHTML =
+  $("studentsBody").innerHTML =
     filtered.map(
 
       (
@@ -1703,9 +1521,7 @@ function render(){
       ) => {
 
         const account =
-          getAccount(
-            student.id
-          );
+          getAccount(student.id);
 
 
         const username =
@@ -1715,51 +1531,119 @@ function render(){
           );
 
 
-        const statusHtml =
-          account
-          ? (
-              account
-                .password_is_temporary
-              ?
-              `<span class="pill pill-temp">
-                 حساب مؤقت
-               </span>`
-              :
-              `<span class="pill pill-ok">
-                 حساب فعال
-               </span>`
-            )
-          :
-          `<span class="pill pill-no">
-             بدون حساب
-           </span>`;
+        let statusHtml;
 
 
-        const actionsHtml =
-          account
+        if(!account){
 
-          ?
+          statusHtml = `
+            <span class="pill pill-no">
+              بدون حساب
+            </span>
+          `;
 
-          `
+        }
+
+        else if(
+          account.is_active === false
+        ){
+
+          statusHtml = `
+            <span class="pill pill-off">
+              حساب معطل
+            </span>
+          `;
+
+        }
+
+        else if(
+          account.password_is_temporary
+        ){
+
+          statusHtml = `
+            <span class="pill pill-temp">
+              حساب مؤقت
+            </span>
+          `;
+
+        }
+
+        else{
+
+          statusHtml = `
+            <span class="pill pill-ok">
+              حساب فعال
+            </span>
+          `;
+
+        }
+
+
+        let accountActions = "";
+
+
+        if(account){
+
+          accountActions += `
+
             <button
               class="small-btn btn-danger"
               onclick="resetStudentPassword(${student.id})"
             >
-              إعادة تعيين كلمة المرور
+              كلمة مرور جديدة
             </button>
-          `
 
-          :
+          `;
 
-          `
+
+          if(
+            account.is_active === false
+          ){
+
+            accountActions += `
+
+              <button
+                class="small-btn btn-primary"
+                onclick="enableStudentAccount(${student.id})"
+              >
+                تفعيل الحساب
+              </button>
+
+            `;
+
+          }
+
+          else{
+
+            accountActions += `
+
+              <button
+                class="small-btn btn-gray"
+                onclick="disableStudentAccount(${student.id})"
+              >
+                تعطيل الحساب
+              </button>
+
+            `;
+
+          }
+
+        }
+
+        else{
+
+          accountActions += `
+
             <button
               class="small-btn btn-primary"
               onclick="createStudentAccount(${student.id})"
             >
               إنشاء حساب
             </button>
+
           `;
 
+        }
 
 
         return `
@@ -1770,95 +1654,80 @@ function render(){
               ${index + 1}
             </td>
 
-
             <td>
-
               <span class="student-name">
-
                 ${escapeHtml(
                   student.student_name
                 )}
-
               </span>
-
             </td>
 
-
             <td>
-
               ${escapeHtml(
                 student.gender ||
                 "—"
               )}
-
             </td>
 
-
             <td>
-
               ${escapeHtml(
                 student.stage ||
                 "—"
               )}
-
             </td>
 
-
             <td>
-
               ${escapeHtml(
                 student.grade ||
                 "—"
               )}
-
             </td>
 
-
             <td>
-
               ${escapeHtml(
                 student.section_name ||
                 "—"
               )}
-
             </td>
 
-
             <td>
-
               ${escapeHtml(
                 student.curriculum ||
                 "—"
               )}
-
             </td>
-
 
             <td>
 
               <span class="username">
-
-                ${escapeHtml(
-                  username
-                )}
-
+                ${escapeHtml(username)}
               </span>
 
             </td>
 
-
             <td>
-
               ${statusHtml}
-
             </td>
-
 
             <td>
 
               <div class="row-actions">
 
-                ${actionsHtml}
+                <button
+                  class="small-btn btn-blue"
+                  onclick="renameStudent(${student.id})"
+                >
+                  تعديل الاسم
+                </button>
+
+                ${accountActions}
+
+                <button
+                  class="small-btn btn-danger"
+                  onclick="deleteStudent(${student.id})"
+                >
+                  حذف نهائي
+                </button>
 
               </div>
 
@@ -1875,229 +1744,9 @@ function render(){
 }
 
 
-
-/* ================================================
-   Edge Function
-   ================================================ */
-
-
-async function callStudentAccountFunction(
-  studentId,
-  resetPassword = false
-){
-
-  let session =
-    getSession();
-
-
-  if(
-    !session?.access_token
-  ){
-
-    throw new Error(
-      "NO_SESSION"
-    );
-
-  }
-
-
-  const doCall =
-    async s => {
-
-      return fetch(
-
-        SUPABASE_URL +
-        "/functions/v1/" +
-        EDGE_FUNCTION,
-
-        {
-
-          method:"POST",
-
-          headers:{
-
-            "apikey":
-              SUPABASE_KEY,
-
-            "Authorization":
-              "Bearer " +
-              s.access_token,
-
-            "Content-Type":
-              "application/json"
-
-          },
-
-          body:JSON.stringify({
-
-            student_id:
-              Number(
-                studentId
-              ),
-
-            reset_password:
-              Boolean(
-                resetPassword
-              )
-
-          })
-
-        }
-
-      );
-
-    };
-
-
-  let response =
-    await doCall(
-      session
-    );
-
-
-  if(
-    response.status === 401
-  ){
-
-    session =
-      await refreshSession(
-        session
-      );
-
-
-    if(
-      !session
-    ){
-
-      throw new Error(
-        "NO_SESSION"
-      );
-
-    }
-
-
-    response =
-      await doCall(
-        session
-      );
-
-  }
-
-
-  let data = null;
-
-
-  try{
-
-    data =
-      await response.json();
-
-  }catch{
-
-    data = {};
-
-  }
-
-
-  if(
-    !response.ok ||
-    data?.ok === false
-  ){
-
-    throw new Error(
-
-      data?.error ||
-      data?.message ||
-      (
-        "EDGE_FUNCTION_" +
-        response.status
-      )
-
-    );
-
-  }
-
-
-  return data;
-
-}
-
-
-
-/* ================================================
-   استخراج بيانات الحساب من نتيجة الدالة
-   ================================================ */
-
-
-function normalizeCredentials(
-  data,
-  student
-){
-
-  const username =
-
-    data?.username ||
-
-    data?.credentials?.username ||
-
-    data?.login?.username ||
-
-    data?.account?.username ||
-
-    usernameForStudent(
-      student.id
-    );
-
-
-  const password =
-
-    data?.password ||
-
-    data?.credentials?.password ||
-
-    data?.login?.password ||
-
-    data?.temporary_password ||
-
-    data?.temp_password ||
-
-    data?.new_password ||
-
-    "";
-
-
-  return {
-
-    student_id:
-      student.id,
-
-    student_name:
-      student.student_name,
-
-    section_name:
-      student.section_name ||
-      "",
-
-    curriculum:
-      student.curriculum ||
-      "",
-
-    username:
-      username,
-
-    password:
-      password
-
-  };
-
-}
-
-
-
-/* ================================================
-   إنشاء حساب واحد
-   ================================================ */
-
+/* =========================================
+   CREATE ACCOUNT
+   ========================================= */
 
 async function createStudentAccount(
   studentId
@@ -2105,44 +1754,42 @@ async function createStudentAccount(
 
   const student =
     students.find(
-      s =>
-        Number(
-          s.id
-        ) ===
-        Number(
-          studentId
-        )
+      item =>
+        Number(item.id) ===
+        Number(studentId)
     );
 
 
-  if(
-    !student
-  ){
-
+  if(!student){
     return;
-
   }
 
 
   if(
     !confirm(
-      "إنشاء حساب للطالب/الطالبة:\n" +
+      "إنشاء حساب للطالب/الطالبة:\n\n" +
       student.student_name +
       " ؟"
     )
   ){
-
     return;
-
   }
 
 
   try{
 
     const data =
-      await callStudentAccountFunction(
-        studentId,
-        false
+      await callEdgeFunction(
+
+        CREATE_FUNCTION,
+
+        {
+          student_id:
+            Number(studentId),
+
+          reset_password:false
+        }
+
       );
 
 
@@ -2153,9 +1800,13 @@ async function createStudentAccount(
       );
 
 
-    rememberCredential(
-      credentials
-    );
+    if(credentials.password){
+
+      rememberCredential(
+        credentials
+      );
+
+    }
 
 
     await loadData();
@@ -2170,11 +1821,6 @@ async function createStudentAccount(
   }catch(error){
 
     alert(
-      error.message ===
-      "NO_SESSION"
-      ?
-      "انتهت جلسة المدير. سجّل الدخول مرة أخرى."
-      :
       "تعذر إنشاء الحساب:\n" +
       error.message
     );
@@ -2184,11 +1830,9 @@ async function createStudentAccount(
 }
 
 
-
-/* ================================================
-   إعادة تعيين كلمة المرور
-   ================================================ */
-
+/* =========================================
+   RESET PASSWORD
+   ========================================= */
 
 async function resetStudentPassword(
   studentId
@@ -2196,44 +1840,42 @@ async function resetStudentPassword(
 
   const student =
     students.find(
-      s =>
-        Number(
-          s.id
-        ) ===
-        Number(
-          studentId
-        )
+      item =>
+        Number(item.id) ===
+        Number(studentId)
     );
 
 
-  if(
-    !student
-  ){
-
+  if(!student){
     return;
-
   }
 
 
   if(
     !confirm(
-      "سيتم إنشاء كلمة مرور جديدة للطالب/الطالبة:\n" +
+      "سيتم إنشاء كلمة مرور جديدة لـ:\n\n" +
       student.student_name +
-      "\n\nالكلمة القديمة ستتوقف عن العمل.\nهل تريد الاستمرار؟"
+      "\n\nكلمة المرور القديمة ستتوقف عن العمل."
     )
   ){
-
     return;
-
   }
 
 
   try{
 
     const data =
-      await callStudentAccountFunction(
-        studentId,
-        true
+      await callEdgeFunction(
+
+        CREATE_FUNCTION,
+
+        {
+          student_id:
+            Number(studentId),
+
+          reset_password:true
+        }
+
       );
 
 
@@ -2270,31 +1912,366 @@ async function resetStudentPassword(
 }
 
 
+/* =========================================
+   RENAME STUDENT
+   ========================================= */
 
-/* ================================================
-   إنشاء كل الحسابات الناقصة
-   ================================================ */
+async function renameStudent(
+  studentId
+){
 
+  const student =
+    students.find(
+      item =>
+        Number(item.id) ===
+        Number(studentId)
+    );
+
+
+  if(!student){
+    return;
+  }
+
+
+  const newName =
+    prompt(
+      "اكتب الاسم الجديد:",
+      student.student_name
+    );
+
+
+  if(newName === null){
+    return;
+  }
+
+
+  const cleanName =
+    newName.trim();
+
+
+  if(!cleanName){
+
+    alert(
+      "لا يمكن أن يكون الاسم فارغًا."
+    );
+
+    return;
+
+  }
+
+
+  if(
+    cleanName ===
+    student.student_name
+  ){
+    return;
+  }
+
+
+  try{
+
+    await callEdgeFunction(
+
+      MANAGE_FUNCTION,
+
+      {
+        student_id:
+          Number(studentId),
+
+        action:"rename",
+
+        student_name:
+          cleanName
+      }
+
+    );
+
+
+    await loadData();
+
+
+    alert(
+      "تم تعديل اسم الطالب بنجاح."
+    );
+
+
+  }catch(error){
+
+    alert(
+      "تعذر تعديل الاسم:\n" +
+      error.message
+    );
+
+  }
+
+}
+
+
+/* =========================================
+   DISABLE ACCOUNT
+   ========================================= */
+
+async function disableStudentAccount(
+  studentId
+){
+
+  const student =
+    students.find(
+      item =>
+        Number(item.id) ===
+        Number(studentId)
+    );
+
+
+  if(!student){
+    return;
+  }
+
+
+  if(
+    !confirm(
+      "تعطيل حساب:\n\n" +
+      student.student_name +
+      "\n\nلن يستطيع الطالب الدخول حتى إعادة تفعيل الحساب."
+    )
+  ){
+    return;
+  }
+
+
+  try{
+
+    await callEdgeFunction(
+
+      MANAGE_FUNCTION,
+
+      {
+        student_id:
+          Number(studentId),
+
+        action:"disable"
+      }
+
+    );
+
+
+    await loadData();
+
+
+    alert(
+      "تم تعطيل الحساب."
+    );
+
+
+  }catch(error){
+
+    alert(
+      "تعذر تعطيل الحساب:\n" +
+      error.message
+    );
+
+  }
+
+}
+
+
+/* =========================================
+   ENABLE ACCOUNT
+   ========================================= */
+
+async function enableStudentAccount(
+  studentId
+){
+
+  const student =
+    students.find(
+      item =>
+        Number(item.id) ===
+        Number(studentId)
+    );
+
+
+  if(!student){
+    return;
+  }
+
+
+  try{
+
+    await callEdgeFunction(
+
+      MANAGE_FUNCTION,
+
+      {
+        student_id:
+          Number(studentId),
+
+        action:"enable"
+      }
+
+    );
+
+
+    await loadData();
+
+
+    alert(
+      "تم تفعيل الحساب من جديد."
+    );
+
+
+  }catch(error){
+
+    alert(
+      "تعذر تفعيل الحساب:\n" +
+      error.message
+    );
+
+  }
+
+}
+
+
+/* =========================================
+   DELETE STUDENT + ACCOUNT
+   ========================================= */
+
+async function deleteStudent(
+  studentId
+){
+
+  const student =
+    students.find(
+      item =>
+        Number(item.id) ===
+        Number(studentId)
+    );
+
+
+  if(!student){
+    return;
+  }
+
+
+  const firstConfirm =
+    confirm(
+      "⚠ حذف نهائي\n\n" +
+      "سيتم حذف الطالب والحساب نهائيًا:\n\n" +
+      student.student_name +
+      "\n\nهذا الإجراء لا يمكن التراجع عنه.\n\nهل تريد الاستمرار؟"
+    );
+
+
+  if(!firstConfirm){
+    return;
+  }
+
+
+  const typed =
+    prompt(
+      "للتأكيد النهائي، اكتب اسم الطالب كما هو:\n\n" +
+      student.student_name
+    );
+
+
+  if(typed === null){
+    return;
+  }
+
+
+  if(
+    typed.trim() !==
+    student.student_name.trim()
+  ){
+
+    alert(
+      "الاسم غير مطابق.\nتم إلغاء الحذف."
+    );
+
+    return;
+
+  }
+
+
+  try{
+
+    const data =
+      await callEdgeFunction(
+
+        MANAGE_FUNCTION,
+
+        {
+          student_id:
+            Number(studentId),
+
+          action:"delete"
+        }
+
+      );
+
+
+    generatedCredentials =
+      generatedCredentials.filter(
+
+        item =>
+          Number(item.student_id) !==
+          Number(studentId)
+
+      );
+
+
+    renderGeneratedCredentials();
+
+
+    await loadData();
+
+
+    if(data.warning){
+
+      alert(
+        "تم حذف سجل الطالب، لكن ظهرت ملاحظة عند حذف حساب الدخول.\nيرجى مراجعة Supabase Auth."
+      );
+
+    }
+
+    else{
+
+      alert(
+        "تم حذف الطالب والحساب نهائيًا."
+      );
+
+    }
+
+
+  }catch(error){
+
+    alert(
+      "تعذر الحذف:\n" +
+      error.message
+    );
+
+  }
+
+}
+
+
+/* =========================================
+   BULK CREATE
+   ========================================= */
 
 async function createAllMissing(){
 
   const missing =
     students.filter(
-
       student =>
-        !getAccount(
-          student.id
-        )
-
+        !getAccount(student.id)
     );
 
 
-  if(
-    !missing.length
-  ){
+  if(!missing.length){
 
     alert(
-      "جميع الطلاب لديهم حسابات بالفعل."
+      "جميع الطلاب لديهم حسابات."
     );
 
     return;
@@ -2306,77 +2283,49 @@ async function createAllMissing(){
     !confirm(
       "سيتم إنشاء حسابات لعدد " +
       missing.length +
-      " طالبًا وطالبة.\n\n" +
-      "سيظهر لك اسم المستخدم وكلمة المرور لكل حساب جديد.\n\n" +
-      "هل تريد الاستمرار؟"
+      " طالبًا وطالبة.\n\nهل تريد الاستمرار؟"
     )
   ){
-
     return;
-
   }
 
 
-  const button =
-    $("createAllBtn");
-
-
-  const bulkBox =
-    $("bulkBox");
-
-
-  const bulkText =
-    $("bulkText");
-
-
-  const progressBar =
-    $("progressBar");
-
-
-  button.disabled =
+  $("createAllBtn").disabled =
     true;
 
 
-  bulkBox
+  $("bulkBox")
     .classList
-    .remove(
-      "hide"
-    );
+    .remove("hide");
 
 
-  let success =
-    0;
-
-
-  let failed =
-    0;
-
+  let success = 0;
+  let failed = 0;
 
 
   for(
-    let i = 0;
-    i < missing.length;
-    i++
+    let index = 0;
+    index < missing.length;
+    index++
   ){
 
     const student =
-      missing[i];
+      missing[index];
 
 
-    bulkText.textContent =
-
+    $("bulkText").textContent =
       "جارٍ إنشاء الحساب " +
-      (i + 1) +
+      (index + 1) +
       " من " +
       missing.length +
       " — " +
       student.student_name;
 
 
-    progressBar.style.width =
+    $("progressBar").style.width =
       (
         (
-          i /
+          index /
           missing.length
         ) *
         100
@@ -2387,9 +2336,17 @@ async function createAllMissing(){
     try{
 
       const data =
-        await callStudentAccountFunction(
-          student.id,
-          false
+        await callEdgeFunction(
+
+          CREATE_FUNCTION,
+
+          {
+            student_id:
+              Number(student.id),
+
+            reset_password:false
+          }
+
         );
 
 
@@ -2400,15 +2357,7 @@ async function createAllMissing(){
         );
 
 
-      /*
-        إذا كان الحساب ظهر موجودًا
-        بالفعل فلا نضيف كلمة مرور
-        غير موجودة.
-      */
-
-      if(
-        credentials.password
-      ){
+      if(credentials.password){
 
         rememberCredential(
           credentials
@@ -2423,9 +2372,8 @@ async function createAllMissing(){
     }catch(error){
 
       console.error(
-        "Account creation failed for student id:",
-        student.id,
-        error.message
+        student.student_name,
+        error
       );
 
 
@@ -2433,29 +2381,21 @@ async function createAllMissing(){
 
     }
 
-
-    await delay(
-      250
-    );
-
   }
 
 
-
-  progressBar.style.width =
+  $("progressBar").style.width =
     "100%";
 
 
-  bulkText.textContent =
-
+  $("bulkText").textContent =
     "اكتملت العملية. نجح: " +
     success +
     " — تعذر: " +
     failed;
 
 
-
-  button.disabled =
+  $("createAllBtn").disabled =
     false;
 
 
@@ -2464,25 +2404,67 @@ async function createAllMissing(){
 
   renderGeneratedCredentials();
 
-
-  if(
-    generatedCredentials.length
-  ){
-
-    $("generatedPanel")
-      .scrollIntoView({
-        behavior:"smooth"
-      });
-
-  }
-
 }
 
 
+/* =========================================
+   CREDENTIALS
+   ========================================= */
 
-/* ================================================
-   بيانات الحسابات المنشأة
-   ================================================ */
+function normalizeCredentials(
+  data,
+  student
+){
+
+  return {
+
+    student_id:
+      student.id,
+
+    student_name:
+      student.student_name,
+
+    section_name:
+      student.section_name ||
+      "",
+
+    curriculum:
+      student.curriculum ||
+      "",
+
+    username:
+
+      data?.username ||
+
+      data?.credentials?.username ||
+
+      data?.login?.username ||
+
+      data?.account?.username ||
+
+      usernameForStudent(
+        student.id
+      ),
+
+    password:
+
+      data?.password ||
+
+      data?.credentials?.password ||
+
+      data?.login?.password ||
+
+      data?.temporary_password ||
+
+      data?.temp_password ||
+
+      data?.new_password ||
+
+      ""
+
+  };
+
+}
 
 
 function rememberCredential(
@@ -2493,26 +2475,20 @@ function rememberCredential(
     generatedCredentials.findIndex(
 
       item =>
-        Number(
-          item.student_id
-        ) ===
-        Number(
-          credential.student_id
-        )
+        Number(item.student_id) ===
+        Number(credential.student_id)
 
     );
 
 
-  if(
-    index >= 0
-  ){
+  if(index >= 0){
 
-    generatedCredentials[
-      index
-    ] =
+    generatedCredentials[index] =
       credential;
 
-  }else{
+  }
+
+  else{
 
     generatedCredentials.push(
       credential
@@ -2526,45 +2502,32 @@ function rememberCredential(
 }
 
 
-
 function renderGeneratedCredentials(){
 
-  const panel =
-    $("generatedPanel");
+  if(!generatedCredentials.length){
 
+    $("generatedPanel")
+      .classList
+      .add("hide");
 
-  const body =
-    $("credentialsBody");
-
-
-  if(
-    !generatedCredentials.length
-  ){
-
-    panel.classList.add(
-      "hide"
-    );
-
-    $("exportBtn")
-      .disabled =
-        true;
+    $("exportBtn").disabled =
+      true;
 
     return;
 
   }
 
 
-  panel.classList.remove(
-    "hide"
-  );
+  $("generatedPanel")
+    .classList
+    .remove("hide");
 
 
-  $("exportBtn")
-    .disabled =
-      false;
+  $("exportBtn").disabled =
+    false;
 
 
-  body.innerHTML =
+  $("credentialsBody").innerHTML =
     generatedCredentials.map(
 
       item => `
@@ -2572,46 +2535,42 @@ function renderGeneratedCredentials(){
         <tr>
 
           <td>
-
             ${escapeHtml(
               item.student_name
             )}
-
           </td>
 
-
           <td>
-
             ${escapeHtml(
               item.section_name ||
               "—"
             )}
-
           </td>
 
+          <td>
+            ${escapeHtml(
+              item.curriculum ||
+              "—"
+            )}
+          </td>
 
           <td>
 
             <span class="username">
-
               ${escapeHtml(
                 item.username
               )}
-
             </span>
 
           </td>
 
-
           <td>
 
             <span class="password-text">
-
               ${escapeHtml(
                 item.password ||
                 "—"
               )}
-
             </span>
 
           </td>
@@ -2625,11 +2584,9 @@ function renderGeneratedCredentials(){
 }
 
 
-
-/* ================================================
-   نافذة بيانات الحساب
-   ================================================ */
-
+/* =========================================
+   MODAL
+   ========================================= */
 
 function showCredentialModal(
   credential,
@@ -2640,60 +2597,47 @@ function showCredentialModal(
     credential;
 
 
-  $("modalTitle")
-    .textContent =
-      title;
+  $("modalTitle").textContent =
+    title;
 
 
-  $("modalStudentName")
-    .textContent =
-      credential.student_name;
+  $("modalStudentName").textContent =
+    credential.student_name;
 
 
-  $("modalUsername")
-    .textContent =
-      credential.username ||
-      "—";
+  $("modalUsername").textContent =
+    credential.username ||
+    "—";
 
 
-  $("modalPassword")
-    .textContent =
-      credential.password ||
-      "لم تُرجع الدالة كلمة مرور جديدة";
+  $("modalPassword").textContent =
+    credential.password ||
+    "لم تُرجع الدالة كلمة مرور جديدة";
 
 
-  $("modalMessage")
-    .textContent =
-      credential.password
-      ?
-      "احفظ اسم المستخدم وكلمة المرور وأرسلها للطالب أو ولي الأمر."
-      :
-      "الحساب موجود، وإذا كنت تحتاج كلمة مرور جديدة استخدم زر إعادة تعيين كلمة المرور.";
+  $("modalMessage").textContent =
+    credential.password
+    ?
+    "احفظ اسم المستخدم وكلمة المرور وأرسلها للطالب أو ولي الأمر."
+    :
+    "الحساب موجود بالفعل. استخدم إعادة تعيين كلمة المرور عند الحاجة.";
 
 
   $("modalBack")
     .classList
-    .remove(
-      "hide"
-    );
+    .remove("hide");
 
 }
 
 
-
-/* ================================================
-   النسخ
-   ================================================ */
-
+/* =========================================
+   COPY
+   ========================================= */
 
 async function copyCurrentCredential(){
 
-  if(
-    !currentCredential
-  ){
-
+  if(!currentCredential){
     return;
-
   }
 
 
@@ -2714,18 +2658,16 @@ async function copyCurrentCredential(){
       currentCredential.password ||
       "—"
     ) +
-    "\n" +
+    "\n\n" +
 
     "رابط الدخول:\n" +
 
     "https://samysuliman.github.io/rasheed-arabic/login.html";
 
 
-  await navigator
-    .clipboard
-    .writeText(
-      text
-    );
+  await navigator.clipboard.writeText(
+    text
+  );
 
 
   alert(
@@ -2735,15 +2677,10 @@ async function copyCurrentCredential(){
 }
 
 
-
 async function copyAllCredentials(){
 
-  if(
-    !generatedCredentials.length
-  ){
-
+  if(!generatedCredentials.length){
     return;
-
   }
 
 
@@ -2770,34 +2707,26 @@ async function copyAllCredentials(){
     );
 
 
-  await navigator
-    .clipboard
-    .writeText(
-      text
-    );
+  await navigator.clipboard.writeText(
+    text
+  );
 
 
   alert(
-    "تم نسخ بيانات جميع الحسابات الجديدة."
+    "تم نسخ بيانات الحسابات."
   );
 
 }
 
 
-
-/* ================================================
+/* =========================================
    CSV
-   ================================================ */
-
+   ========================================= */
 
 function exportCSV(){
 
-  if(
-    !generatedCredentials.length
-  ){
-
+  if(!generatedCredentials.length){
     return;
-
   }
 
 
@@ -2812,19 +2741,17 @@ function exportCSV(){
     ],
 
     ...generatedCredentials.map(
+
       item => [
 
         item.student_name,
-
         item.section_name,
-
         item.curriculum,
-
         item.username,
-
         item.password
 
       ]
+
     )
 
   ];
@@ -2840,8 +2767,7 @@ function exportCSV(){
           value =>
             '"' +
             String(
-              value ??
-              ""
+              value ?? ""
             )
             .replace(
               /"/g,
@@ -2902,63 +2828,9 @@ function exportCSV(){
 }
 
 
-
-/* ================================================
-   مساعدات
-   ================================================ */
-
-
-function escapeHtml(
-  value
-){
-
-  return String(
-    value ??
-    ""
-  ).replace(
-
-    /[&<>"']/g,
-
-    character => ({
-
-      "&":"&amp;",
-
-      "<":"&lt;",
-
-      ">":"&gt;",
-
-      '"':"&quot;",
-
-      "'":"&#39;"
-
-    }[character])
-
-  );
-
-}
-
-
-
-function delay(
-  ms
-){
-
-  return new Promise(
-    resolve =>
-      setTimeout(
-        resolve,
-        ms
-      )
-  );
-
-}
-
-
-
-/* ================================================
-   الأحداث
-   ================================================ */
-
+/* =========================================
+   EVENTS
+   ========================================= */
 
 $("searchBox")
   .addEventListener(
@@ -3023,9 +2895,7 @@ $("closeModalBtn")
 
       $("modalBack")
         .classList
-        .add(
-          "hide"
-        );
+        .add("hide");
 
       currentCredential =
         null;
@@ -3046,9 +2916,7 @@ $("modalBack")
 
         $("modalBack")
           .classList
-          .add(
-            "hide"
-          );
+          .add("hide");
 
       }
 
@@ -3064,17 +2932,15 @@ $("logoutBtn")
       clearSession();
 
       location.href =
-        "admin-hub.html";
+        "login.html";
 
     }
   );
 
 
-
-/* ================================================
-   البداية
-   ================================================ */
-
+/* =========================================
+   INIT
+   ========================================= */
 
 (async function init(){
 
@@ -3088,18 +2954,18 @@ $("logoutBtn")
       getSession();
 
 
-    if(
-      !session?.access_token
-    ){
+    if(!session?.access_token){
 
       notice.className =
         "notice notice-error";
+
 
       notice.innerHTML =
 
         'يلزم تسجيل الدخول كمدير أولًا من ' +
 
-        '<a href="admin-hub.html"><b>مركز الإدارة</b></a>.';
+        '<a href="login.html"><b>صفحة تسجيل الدخول</b></a>.';
+
 
       return;
 
@@ -3110,9 +2976,7 @@ $("logoutBtn")
       await verifyAdmin();
 
 
-    if(
-      !isAdmin
-    ){
+    if(!isAdmin){
 
       notice.className =
         "notice notice-error";
@@ -3130,44 +2994,22 @@ $("logoutBtn")
 
   }catch(error){
 
-    console.error(
-      error
-    );
+    console.error(error);
 
 
     notice.className =
       "notice notice-error";
 
 
-    if(
-      error.message ===
-      "NO_SESSION"
-    ){
-
-      notice.innerHTML =
-
-        'انتهت جلسة المدير. ' +
-
-        '<a href="admin-hub.html"><b>سجّل الدخول مرة أخرى</b></a>.';
-
-    }
-
-    else{
-
-      notice.textContent =
-        "تعذر تحميل لوحة الحسابات: " +
-        error.message;
-
-    }
+    notice.textContent =
+      "تعذر تحميل لوحة الحسابات: " +
+      error.message;
 
   }
 
 })();
 
-
 </script>
 
-
 </body>
-
 </html>
