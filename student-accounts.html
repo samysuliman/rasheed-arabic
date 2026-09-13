@@ -36,8 +36,6 @@ a{
   text-decoration:none;
 }
 
-/* HEADER */
-
 .topbar{
   background:var(--green);
   color:#fff;
@@ -94,14 +92,10 @@ a{
   cursor:pointer;
 }
 
-/* PAGE */
-
 .page{
   width:min(1250px,94%);
   margin:26px auto 60px;
 }
-
-/* HERO */
 
 .hero{
   background:linear-gradient(135deg,#07583f,#0b6c50);
@@ -145,8 +139,6 @@ a{
   font-size:12px;
 }
 
-/* STATS */
-
 .stats{
   display:grid;
   grid-template-columns:repeat(4,1fr);
@@ -174,8 +166,6 @@ a{
   font-size:28px;
 }
 
-/* PANEL */
-
 .panel{
   background:#fff;
   border:1px solid var(--border);
@@ -199,8 +189,6 @@ a{
   font-size:20px;
 }
 
-/* BUTTONS */
-
 .actions{
   display:flex;
   gap:9px;
@@ -213,11 +201,16 @@ a{
   padding:10px 14px;
   cursor:pointer;
   font-weight:700;
+  transition:.15s;
 }
 
 .btn-primary{
   background:var(--green);
   color:#fff;
+}
+
+.btn-primary:hover{
+  background:var(--green2);
 }
 
 .btn-gold{
@@ -250,8 +243,6 @@ a{
   cursor:not-allowed;
 }
 
-/* FILTERS */
-
 .filters{
   display:grid;
   grid-template-columns:2fr 1fr 1fr;
@@ -268,8 +259,6 @@ a{
   background:#fff;
   outline:0;
 }
-
-/* TABLE */
 
 .table-wrap{
   overflow:auto;
@@ -361,8 +350,6 @@ tr:hover td{
   font-weight:700;
 }
 
-/* NOTICES */
-
 .notice{
   padding:13px 15px;
   border-radius:12px;
@@ -386,8 +373,6 @@ tr:hover td{
   display:none!important;
 }
 
-/* PROGRESS */
-
 .progress{
   margin-top:12px;
   background:#edf2ef;
@@ -403,16 +388,12 @@ tr:hover td{
   transition:.2s;
 }
 
-/* GENERATED ACCOUNTS */
-
 .password-text{
   direction:ltr;
   display:inline-block;
   font-family:Consolas,monospace;
   font-weight:800;
 }
-
-/* MODAL */
 
 .modal-back{
   position:fixed;
@@ -502,6 +483,7 @@ tr:hover td{
 <body>
 
 <header class="topbar">
+
   <div class="topbar-inner">
 
     <a class="brand" href="index.html">
@@ -545,10 +527,12 @@ tr:hover td{
     </div>
 
   </div>
+
 </header>
 
 
 <main class="page">
+
 
 <section class="hero">
 
@@ -559,8 +543,7 @@ tr:hover td{
     </h1>
 
     <p>
-      إنشاء وتعديل وإدارة حسابات طلاب برنامج
-      العربية لغير الناطقين بها مباشرة من بيانات الحصر.
+      إنشاء وتعديل وإدارة حسابات طلاب برنامج العربية لغير الناطقين بها.
     </p>
 
   </div>
@@ -609,7 +592,7 @@ tr:hover td{
   id="pageNotice"
   class="notice notice-info"
 >
-  جارٍ التحقق من صلاحية المدير وتحميل البيانات...
+  جارٍ تحميل البيانات...
 </div>
 
 
@@ -630,7 +613,7 @@ tr:hover td{
         id="refreshBtn"
         class="btn btn-light"
       >
-        تحديث
+        ↻ تحديث
       </button>
 
       <button
@@ -641,11 +624,18 @@ tr:hover td{
       </button>
 
       <button
-        id="exportBtn"
+        id="exportAllBtn"
         class="btn btn-blue"
+      >
+        تنزيل جميع الحسابات CSV
+      </button>
+
+      <button
+        id="exportPasswordsBtn"
+        class="btn btn-primary"
         disabled
       >
-        تنزيل الحسابات الجديدة CSV
+        تنزيل كلمات المرور الجديدة CSV
       </button>
 
     </div>
@@ -767,12 +757,12 @@ tr:hover td{
   <div class="panel-head">
 
     <h2>
-      بيانات الحسابات التي تم إنشاؤها الآن
+      كلمات المرور التي تم إنشاؤها الآن
     </h2>
 
     <button
-      class="btn btn-light"
       id="copyAllBtn"
+      class="btn btn-light"
     >
       نسخ الجميع
     </button>
@@ -780,7 +770,7 @@ tr:hover td{
   </div>
 
   <div class="notice notice-info">
-    احفظ كلمات المرور قبل إغلاق الصفحة.
+    احفظ هذه البيانات قبل إغلاق أو تحديث الصفحة.
   </div>
 
   <div class="table-wrap">
@@ -788,7 +778,6 @@ tr:hover td{
     <table>
 
       <thead>
-
         <tr>
           <th>الطالب</th>
           <th>الفصل</th>
@@ -796,11 +785,9 @@ tr:hover td{
           <th>اسم المستخدم</th>
           <th>كلمة المرور المؤقتة</th>
         </tr>
-
       </thead>
 
-      <tbody id="credentialsBody">
-      </tbody>
+      <tbody id="credentialsBody"></tbody>
 
     </table>
 
@@ -808,10 +795,9 @@ tr:hover td{
 
 </section>
 
+
 </main>
 
-
-<!-- نافذة بيانات الحساب -->
 
 <div
   id="modalBack"
@@ -835,9 +821,7 @@ tr:hover td{
 
       <div class="credential-box">
 
-        <span>
-          اسم المستخدم
-        </span>
+        <span>اسم المستخدم</span>
 
         <strong id="modalUsername">
           —
@@ -847,9 +831,7 @@ tr:hover td{
 
       <div class="credential-box">
 
-        <span>
-          كلمة المرور المؤقتة
-        </span>
+        <span>كلمة المرور المؤقتة</span>
 
         <strong id="modalPassword">
           —
@@ -889,10 +871,6 @@ tr:hover td{
 
 <script>
 
-/* =========================================
-   إعدادات رشيد العربية
-   ========================================= */
-
 const SUPABASE_URL =
   "https://wcyamoqmpwpribsgspjn.supabase.co";
 
@@ -911,7 +889,9 @@ const MANAGE_FUNCTION =
 
 let students = [];
 let accounts = [];
+
 let generatedCredentials = [];
+
 let currentCredential = null;
 
 
@@ -920,9 +900,7 @@ const $ =
     document.getElementById(id);
 
 
-/* =========================================
-   SESSION
-   ========================================= */
+/* SESSION */
 
 function getSession(){
 
@@ -968,6 +946,7 @@ async function refreshSession(session){
     return null;
   }
 
+
   const response =
     await fetch(
 
@@ -975,6 +954,7 @@ async function refreshSession(session){
       "/auth/v1/token?grant_type=refresh_token",
 
       {
+
         method:"POST",
 
         headers:{
@@ -986,27 +966,30 @@ async function refreshSession(session){
           refresh_token:
             session.refresh_token
         })
+
       }
 
     );
+
 
   if(!response.ok){
     return null;
   }
 
+
   const next =
     await response.json();
 
+
   saveSession(next);
+
 
   return next;
 
 }
 
 
-/* =========================================
-   REST API
-   ========================================= */
+/* API */
 
 async function api(
   path,
@@ -1015,6 +998,7 @@ async function api(
 
   let session =
     getSession();
+
 
   if(!session?.access_token){
     throw new Error("NO_SESSION");
@@ -1042,8 +1026,10 @@ async function api(
         options.body &&
         !headers["Content-Type"]
       ){
+
         headers["Content-Type"] =
           "application/json";
+
       }
 
 
@@ -1094,9 +1080,7 @@ async function api(
 }
 
 
-/* =========================================
-   EDGE FUNCTIONS
-   ========================================= */
+/* EDGE FUNCTIONS */
 
 async function callEdgeFunction(
   functionName,
@@ -1174,8 +1158,10 @@ async function callEdgeFunction(
 
 
   try{
+
     data =
       await response.json();
+
   }catch{}
 
 
@@ -1185,12 +1171,11 @@ async function callEdgeFunction(
   ){
 
     throw new Error(
+
       data?.error ||
       data?.message ||
-      (
-        "HTTP_" +
-        response.status
-      )
+      "HTTP_" + response.status
+
     );
 
   }
@@ -1201,9 +1186,7 @@ async function callEdgeFunction(
 }
 
 
-/* =========================================
-   صلاحية المدير
-   ========================================= */
+/* ADMIN */
 
 async function verifyAdmin(){
 
@@ -1232,9 +1215,7 @@ async function verifyAdmin(){
 }
 
 
-/* =========================================
-   تحميل البيانات
-   ========================================= */
+/* DATA */
 
 async function loadData(){
 
@@ -1298,9 +1279,7 @@ async function loadData(){
 }
 
 
-/* =========================================
-   HELPERS
-   ========================================= */
+/* HELPERS */
 
 function usernameForStudent(studentId){
 
@@ -1349,9 +1328,26 @@ function escapeHtml(value){
 }
 
 
-/* =========================================
-   RENDER
-   ========================================= */
+function accountStatus(account){
+
+  if(!account){
+    return "بدون حساب";
+  }
+
+  if(account.is_active === false){
+    return "حساب معطل";
+  }
+
+  if(account.password_is_temporary){
+    return "حساب مؤقت";
+  }
+
+  return "حساب فعال";
+
+}
+
+
+/* RENDER */
 
 function render(){
 
@@ -1368,17 +1364,6 @@ function render(){
     ).length;
 
 
-  const missingCount =
-    total - accountCount;
-
-
-  const tempCount =
-    accounts.filter(
-      account =>
-        account.password_is_temporary === true
-    ).length;
-
-
   $("heroTotal").textContent =
     total;
 
@@ -1389,10 +1374,13 @@ function render(){
     accountCount;
 
   $("statMissing").textContent =
-    missingCount;
+    total - accountCount;
 
   $("statTemp").textContent =
-    tempCount;
+    accounts.filter(
+      account =>
+        account.password_is_temporary === true
+    ).length;
 
 
   const search =
@@ -1664,45 +1652,38 @@ function render(){
 
             <td>
               ${escapeHtml(
-                student.gender ||
-                "—"
+                student.gender || "—"
               )}
             </td>
 
             <td>
               ${escapeHtml(
-                student.stage ||
-                "—"
+                student.stage || "—"
               )}
             </td>
 
             <td>
               ${escapeHtml(
-                student.grade ||
-                "—"
+                student.grade || "—"
               )}
             </td>
 
             <td>
               ${escapeHtml(
-                student.section_name ||
-                "—"
+                student.section_name || "—"
               )}
             </td>
 
             <td>
               ${escapeHtml(
-                student.curriculum ||
-                "—"
+                student.curriculum || "—"
               )}
             </td>
 
             <td>
-
               <span class="username">
                 ${escapeHtml(username)}
               </span>
-
             </td>
 
             <td>
@@ -1744,13 +1725,9 @@ function render(){
 }
 
 
-/* =========================================
-   CREATE ACCOUNT
-   ========================================= */
+/* CREATE */
 
-async function createStudentAccount(
-  studentId
-){
+async function createStudentAccount(studentId){
 
   const student =
     students.find(
@@ -1767,7 +1744,7 @@ async function createStudentAccount(
 
   if(
     !confirm(
-      "إنشاء حساب للطالب/الطالبة:\n\n" +
+      "إنشاء حساب لـ:\n\n" +
       student.student_name +
       " ؟"
     )
@@ -1784,9 +1761,7 @@ async function createStudentAccount(
         CREATE_FUNCTION,
 
         {
-          student_id:
-            Number(studentId),
-
+          student_id:Number(studentId),
           reset_password:false
         }
 
@@ -1830,13 +1805,9 @@ async function createStudentAccount(
 }
 
 
-/* =========================================
-   RESET PASSWORD
-   ========================================= */
+/* RESET PASSWORD */
 
-async function resetStudentPassword(
-  studentId
-){
+async function resetStudentPassword(studentId){
 
   const student =
     students.find(
@@ -1853,9 +1824,9 @@ async function resetStudentPassword(
 
   if(
     !confirm(
-      "سيتم إنشاء كلمة مرور جديدة لـ:\n\n" +
+      "إنشاء كلمة مرور جديدة لـ:\n\n" +
       student.student_name +
-      "\n\nكلمة المرور القديمة ستتوقف عن العمل."
+      " ؟"
     )
   ){
     return;
@@ -1870,9 +1841,7 @@ async function resetStudentPassword(
         CREATE_FUNCTION,
 
         {
-          student_id:
-            Number(studentId),
-
+          student_id:Number(studentId),
           reset_password:true
         }
 
@@ -1912,13 +1881,9 @@ async function resetStudentPassword(
 }
 
 
-/* =========================================
-   RENAME STUDENT
-   ========================================= */
+/* RENAME */
 
-async function renameStudent(
-  studentId
-){
+async function renameStudent(studentId){
 
   const student =
     students.find(
@@ -1926,11 +1891,6 @@ async function renameStudent(
         Number(item.id) ===
         Number(studentId)
     );
-
-
-  if(!student){
-    return;
-  }
 
 
   const newName =
@@ -1975,13 +1935,9 @@ async function renameStudent(
       MANAGE_FUNCTION,
 
       {
-        student_id:
-          Number(studentId),
-
+        student_id:Number(studentId),
         action:"rename",
-
-        student_name:
-          cleanName
+        student_name:cleanName
       }
 
     );
@@ -2007,13 +1963,9 @@ async function renameStudent(
 }
 
 
-/* =========================================
-   DISABLE ACCOUNT
-   ========================================= */
+/* DISABLE */
 
-async function disableStudentAccount(
-  studentId
-){
+async function disableStudentAccount(studentId){
 
   const student =
     students.find(
@@ -2023,16 +1975,11 @@ async function disableStudentAccount(
     );
 
 
-  if(!student){
-    return;
-  }
-
-
   if(
     !confirm(
       "تعطيل حساب:\n\n" +
       student.student_name +
-      "\n\nلن يستطيع الطالب الدخول حتى إعادة تفعيل الحساب."
+      " ؟"
     )
   ){
     return;
@@ -2046,9 +1993,7 @@ async function disableStudentAccount(
       MANAGE_FUNCTION,
 
       {
-        student_id:
-          Number(studentId),
-
+        student_id:Number(studentId),
         action:"disable"
       }
 
@@ -2075,26 +2020,9 @@ async function disableStudentAccount(
 }
 
 
-/* =========================================
-   ENABLE ACCOUNT
-   ========================================= */
+/* ENABLE */
 
-async function enableStudentAccount(
-  studentId
-){
-
-  const student =
-    students.find(
-      item =>
-        Number(item.id) ===
-        Number(studentId)
-    );
-
-
-  if(!student){
-    return;
-  }
-
+async function enableStudentAccount(studentId){
 
   try{
 
@@ -2103,9 +2031,7 @@ async function enableStudentAccount(
       MANAGE_FUNCTION,
 
       {
-        student_id:
-          Number(studentId),
-
+        student_id:Number(studentId),
         action:"enable"
       }
 
@@ -2116,7 +2042,7 @@ async function enableStudentAccount(
 
 
     alert(
-      "تم تفعيل الحساب من جديد."
+      "تم تفعيل الحساب."
     );
 
 
@@ -2132,13 +2058,9 @@ async function enableStudentAccount(
 }
 
 
-/* =========================================
-   DELETE STUDENT + ACCOUNT
-   ========================================= */
+/* DELETE */
 
-async function deleteStudent(
-  studentId
-){
+async function deleteStudent(studentId){
 
   const student =
     students.find(
@@ -2148,44 +2070,32 @@ async function deleteStudent(
     );
 
 
-  if(!student){
-    return;
-  }
-
-
-  const firstConfirm =
-    confirm(
+  if(
+    !confirm(
       "⚠ حذف نهائي\n\n" +
-      "سيتم حذف الطالب والحساب نهائيًا:\n\n" +
       student.student_name +
-      "\n\nهذا الإجراء لا يمكن التراجع عنه.\n\nهل تريد الاستمرار؟"
-    );
-
-
-  if(!firstConfirm){
+      "\n\nسيتم حذف الطالب والحساب.\nلا يمكن التراجع."
+    )
+  ){
     return;
   }
 
 
   const typed =
     prompt(
-      "للتأكيد النهائي، اكتب اسم الطالب كما هو:\n\n" +
+      "للتأكيد اكتب اسم الطالب كما هو:\n\n" +
       student.student_name
     );
 
 
-  if(typed === null){
-    return;
-  }
-
-
   if(
+    typed === null ||
     typed.trim() !==
     student.student_name.trim()
   ){
 
     alert(
-      "الاسم غير مطابق.\nتم إلغاء الحذف."
+      "تم إلغاء الحذف."
     );
 
     return;
@@ -2195,41 +2105,26 @@ async function deleteStudent(
 
   try{
 
-    const data =
+    const result =
       await callEdgeFunction(
 
         MANAGE_FUNCTION,
 
         {
-          student_id:
-            Number(studentId),
-
+          student_id:Number(studentId),
           action:"delete"
         }
 
       );
 
 
-    generatedCredentials =
-      generatedCredentials.filter(
-
-        item =>
-          Number(item.student_id) !==
-          Number(studentId)
-
-      );
-
-
-    renderGeneratedCredentials();
-
-
     await loadData();
 
 
-    if(data.warning){
+    if(result.warning){
 
       alert(
-        "تم حذف سجل الطالب، لكن ظهرت ملاحظة عند حذف حساب الدخول.\nيرجى مراجعة Supabase Auth."
+        "تم حذف الطالب، مع وجود ملاحظة على حذف حساب Auth."
       );
 
     }
@@ -2255,9 +2150,7 @@ async function deleteStudent(
 }
 
 
-/* =========================================
-   BULK CREATE
-   ========================================= */
+/* BULK CREATE */
 
 async function createAllMissing(){
 
@@ -2281,9 +2174,9 @@ async function createAllMissing(){
 
   if(
     !confirm(
-      "سيتم إنشاء حسابات لعدد " +
+      "سيتم إنشاء " +
       missing.length +
-      " طالبًا وطالبة.\n\nهل تريد الاستمرار؟"
+      " حسابًا.\n\nهل تريد الاستمرار؟"
     )
   ){
     return;
@@ -2304,18 +2197,18 @@ async function createAllMissing(){
 
 
   for(
-    let index = 0;
-    index < missing.length;
-    index++
+    let i = 0;
+    i < missing.length;
+    i++
   ){
 
     const student =
-      missing[index];
+      missing[i];
 
 
     $("bulkText").textContent =
-      "جارٍ إنشاء الحساب " +
-      (index + 1) +
+      "الحساب " +
+      (i + 1) +
       " من " +
       missing.length +
       " — " +
@@ -2325,7 +2218,7 @@ async function createAllMissing(){
     $("progressBar").style.width =
       (
         (
-          index /
+          i /
           missing.length
         ) *
         100
@@ -2341,8 +2234,9 @@ async function createAllMissing(){
           CREATE_FUNCTION,
 
           {
-            student_id:
-              Number(student.id),
+            student_id:Number(
+              student.id
+            ),
 
             reset_password:false
           }
@@ -2376,7 +2270,6 @@ async function createAllMissing(){
         error
       );
 
-
       failed++;
 
     }
@@ -2389,7 +2282,7 @@ async function createAllMissing(){
 
 
   $("bulkText").textContent =
-    "اكتملت العملية. نجح: " +
+    "اكتملت العملية — نجح: " +
     success +
     " — تعذر: " +
     failed;
@@ -2401,15 +2294,10 @@ async function createAllMissing(){
 
   await loadData();
 
-
-  renderGeneratedCredentials();
-
 }
 
 
-/* =========================================
-   CREDENTIALS
-   ========================================= */
+/* CREDENTIALS */
 
 function normalizeCredentials(
   data,
@@ -2425,12 +2313,10 @@ function normalizeCredentials(
       student.student_name,
 
     section_name:
-      student.section_name ||
-      "",
+      student.section_name || "",
 
     curriculum:
-      student.curriculum ||
-      "",
+      student.curriculum || "",
 
     username:
 
@@ -2510,8 +2396,11 @@ function renderGeneratedCredentials(){
       .classList
       .add("hide");
 
-    $("exportBtn").disabled =
-      true;
+
+    $("exportPasswordsBtn")
+      .disabled =
+        true;
+
 
     return;
 
@@ -2523,8 +2412,9 @@ function renderGeneratedCredentials(){
     .remove("hide");
 
 
-  $("exportBtn").disabled =
-    false;
+  $("exportPasswordsBtn")
+    .disabled =
+      false;
 
 
   $("credentialsBody").innerHTML =
@@ -2542,15 +2432,13 @@ function renderGeneratedCredentials(){
 
           <td>
             ${escapeHtml(
-              item.section_name ||
-              "—"
+              item.section_name || "—"
             )}
           </td>
 
           <td>
             ${escapeHtml(
-              item.curriculum ||
-              "—"
+              item.curriculum || "—"
             )}
           </td>
 
@@ -2568,8 +2456,7 @@ function renderGeneratedCredentials(){
 
             <span class="password-text">
               ${escapeHtml(
-                item.password ||
-                "—"
+                item.password || "—"
               )}
             </span>
 
@@ -2584,9 +2471,7 @@ function renderGeneratedCredentials(){
 }
 
 
-/* =========================================
-   MODAL
-   ========================================= */
+/* MODAL */
 
 function showCredentialModal(
   credential,
@@ -2606,21 +2491,20 @@ function showCredentialModal(
 
 
   $("modalUsername").textContent =
-    credential.username ||
-    "—";
+    credential.username || "—";
 
 
   $("modalPassword").textContent =
     credential.password ||
-    "لم تُرجع الدالة كلمة مرور جديدة";
+    "لا توجد كلمة مرور جديدة";
 
 
   $("modalMessage").textContent =
     credential.password
     ?
-    "احفظ اسم المستخدم وكلمة المرور وأرسلها للطالب أو ولي الأمر."
+    "احفظ البيانات وأرسلها للطالب أو ولي الأمر."
     :
-    "الحساب موجود بالفعل. استخدم إعادة تعيين كلمة المرور عند الحاجة.";
+    "الحساب موجود بالفعل.";
 
 
   $("modalBack")
@@ -2630,103 +2514,89 @@ function showCredentialModal(
 }
 
 
-/* =========================================
-   COPY
-   ========================================= */
+/* EXPORT ALL ACCOUNTS */
 
-async function copyCurrentCredential(){
+function exportAllAccounts(){
 
-  if(!currentCredential){
+  if(!students.length){
     return;
   }
 
 
-  const text =
+  const rows = [
 
-    "رشيد العربية\n" +
+    [
+      "اسم الطالب",
+      "الجنس",
+      "المرحلة",
+      "الصف",
+      "الشعبة",
+      "المسار",
+      "اسم المستخدم",
+      "حالة الحساب"
+    ]
 
-    "الطالب: " +
-    currentCredential.student_name +
-    "\n" +
-
-    "اسم المستخدم: " +
-    currentCredential.username +
-    "\n" +
-
-    "كلمة المرور: " +
-    (
-      currentCredential.password ||
-      "—"
-    ) +
-    "\n\n" +
-
-    "رابط الدخول:\n" +
-
-    "https://samysuliman.github.io/rasheed-arabic/login.html";
+  ];
 
 
-  await navigator.clipboard.writeText(
-    text
+  students.forEach(
+    student => {
+
+      const account =
+        getAccount(student.id);
+
+
+      rows.push([
+
+        student.student_name || "",
+
+        student.gender || "",
+
+        student.stage || "",
+
+        student.grade || "",
+
+        student.section_name || "",
+
+        student.curriculum || "",
+
+        account
+          ? (
+              account.username ||
+              usernameForStudent(
+                student.id
+              )
+            )
+          : "",
+
+        accountStatus(account)
+
+      ]);
+
+    }
   );
 
 
-  alert(
-    "تم نسخ بيانات الحساب."
+  downloadCSV(
+    rows,
+    "رشيد العربية - جميع حسابات الطلاب.csv"
   );
 
 }
 
 
-async function copyAllCredentials(){
+/* EXPORT NEW PASSWORDS */
+
+function exportNewPasswords(){
 
   if(!generatedCredentials.length){
-    return;
-  }
 
-
-  const text =
-    generatedCredentials.map(
-
-      item =>
-
-        item.student_name +
-        "\n" +
-
-        "اسم المستخدم: " +
-        item.username +
-        "\n" +
-
-        "كلمة المرور: " +
-        (
-          item.password ||
-          "—"
-        )
-
-    ).join(
-      "\n\n----------------\n\n"
+    alert(
+      "لا توجد كلمات مرور جديدة في هذه الجلسة."
     );
 
-
-  await navigator.clipboard.writeText(
-    text
-  );
-
-
-  alert(
-    "تم نسخ بيانات الحسابات."
-  );
-
-}
-
-
-/* =========================================
-   CSV
-   ========================================= */
-
-function exportCSV(){
-
-  if(!generatedCredentials.length){
     return;
+
   }
 
 
@@ -2741,21 +2611,38 @@ function exportCSV(){
     ],
 
     ...generatedCredentials.map(
-
       item => [
 
         item.student_name,
+
         item.section_name,
+
         item.curriculum,
+
         item.username,
+
         item.password
 
       ]
-
     )
 
   ];
 
+
+  downloadCSV(
+    rows,
+    "رشيد العربية - كلمات المرور الجديدة.csv"
+  );
+
+}
+
+
+/* CSV HELPER */
+
+function downloadCSV(
+  rows,
+  filename
+){
 
   const csv =
     "\uFEFF" +
@@ -2807,7 +2694,7 @@ function exportCSV(){
 
 
   link.download =
-    "رشيد العربية - حسابات الطلاب الجديدة.csv";
+    filename;
 
 
   document.body.appendChild(
@@ -2828,9 +2715,150 @@ function exportCSV(){
 }
 
 
-/* =========================================
-   EVENTS
-   ========================================= */
+/* COPY */
+
+async function copyCurrentCredential(){
+
+  if(!currentCredential){
+    return;
+  }
+
+
+  const text =
+
+    "رشيد العربية\n" +
+
+    "الطالب: " +
+    currentCredential.student_name +
+    "\n" +
+
+    "اسم المستخدم: " +
+    currentCredential.username +
+    "\n" +
+
+    "كلمة المرور: " +
+    (
+      currentCredential.password ||
+      "—"
+    ) +
+    "\n\n" +
+
+    "https://samysuliman.github.io/rasheed-arabic/login.html";
+
+
+  await navigator.clipboard.writeText(
+    text
+  );
+
+
+  alert(
+    "تم نسخ بيانات الحساب."
+  );
+
+}
+
+
+async function copyAllCredentials(){
+
+  if(!generatedCredentials.length){
+    return;
+  }
+
+
+  const text =
+    generatedCredentials.map(
+
+      item =>
+
+        item.student_name +
+        "\n" +
+
+        "اسم المستخدم: " +
+        item.username +
+        "\n" +
+
+        "كلمة المرور: " +
+        item.password
+
+    ).join(
+      "\n\n----------------\n\n"
+    );
+
+
+  await navigator.clipboard.writeText(
+    text
+  );
+
+
+  alert(
+    "تم نسخ البيانات."
+  );
+
+}
+
+
+/* REFRESH */
+
+async function refreshPageData(){
+
+  const button =
+    $("refreshBtn");
+
+
+  const originalText =
+    button.textContent;
+
+
+  button.disabled =
+    true;
+
+
+  button.textContent =
+    "جارٍ التحديث...";
+
+
+  try{
+
+    await loadData();
+
+
+    button.textContent =
+      "✓ تم التحديث";
+
+
+    setTimeout(
+      () => {
+
+        button.textContent =
+          "↻ تحديث";
+
+      },
+      1200
+    );
+
+
+  }catch(error){
+
+    alert(
+      "تعذر تحديث البيانات:\n" +
+      error.message
+    );
+
+
+    button.textContent =
+      originalText;
+
+  }finally{
+
+    button.disabled =
+      false;
+
+  }
+
+}
+
+
+/* EVENTS */
 
 $("searchBox")
   .addEventListener(
@@ -2856,7 +2884,7 @@ $("curriculumFilter")
 $("refreshBtn")
   .addEventListener(
     "click",
-    loadData
+    refreshPageData
   );
 
 
@@ -2867,10 +2895,17 @@ $("createAllBtn")
   );
 
 
-$("exportBtn")
+$("exportAllBtn")
   .addEventListener(
     "click",
-    exportCSV
+    exportAllAccounts
+  );
+
+
+$("exportPasswordsBtn")
+  .addEventListener(
+    "click",
+    exportNewPasswords
   );
 
 
@@ -2938,9 +2973,7 @@ $("logoutBtn")
   );
 
 
-/* =========================================
-   INIT
-   ========================================= */
+/* INIT */
 
 (async function init(){
 
@@ -2961,10 +2994,7 @@ $("logoutBtn")
 
 
       notice.innerHTML =
-
-        'يلزم تسجيل الدخول كمدير أولًا من ' +
-
-        '<a href="login.html"><b>صفحة تسجيل الدخول</b></a>.';
+        'يلزم تسجيل الدخول كمدير من <a href="login.html"><b>صفحة الدخول</b></a>.';
 
 
       return;
@@ -2982,7 +3012,7 @@ $("logoutBtn")
         "notice notice-error";
 
       notice.textContent =
-        "الحساب الحالي غير مخوّل لإدارة حسابات الطلاب.";
+        "الحساب الحالي غير مخوّل لإدارة الطلاب.";
 
       return;
 
@@ -3002,7 +3032,7 @@ $("logoutBtn")
 
 
     notice.textContent =
-      "تعذر تحميل لوحة الحسابات: " +
+      "تعذر تحميل الصفحة: " +
       error.message;
 
   }
