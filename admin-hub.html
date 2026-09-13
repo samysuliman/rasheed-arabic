@@ -2,428 +2,902 @@
 <html lang="ar" dir="rtl">
 
 <head>
+
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1,viewport-fit=cover"
+>
 
 <title>مركز الإدارة | رشيد العربية</title>
 
+
 <style>
-*{box-sizing:border-box}
+
+*{
+  box-sizing:border-box;
+}
+
 
 :root{
+
   --green:#07583f;
   --green2:#0b6c50;
   --gold:#c9a227;
+
   --bg:#f4f8f6;
-  --card:#fff;
+  --card:#ffffff;
+
   --text:#17392c;
   --muted:#6e7e77;
+
   --border:#d8e5df;
+
 }
+
 
 body{
+
   margin:0;
-  font-family:Tahoma,Arial,sans-serif;
+
+  font-family:
+    Tahoma,
+    Arial,
+    sans-serif;
+
   background:
-    radial-gradient(circle at top right,rgba(7,88,63,.08),transparent 30%),
+    radial-gradient(
+      circle at top right,
+      rgba(7,88,63,.08),
+      transparent 30%
+    ),
     var(--bg);
-  color:var(--text);
+
+  color:
+    var(--text);
+
 }
+
 
 a{
-  text-decoration:none;
+
   color:inherit;
+
+  text-decoration:none;
+
 }
+
 
 button{
+
   font:inherit;
+
 }
 
-/* TOPBAR */
+
+
+/* =========================
+   TOP BAR
+   ========================= */
+
 
 .topbar{
-  background:linear-gradient(135deg,var(--green),#064631);
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--green),
+      #064631
+    );
+
   color:#fff;
-  box-shadow:0 4px 18px rgba(0,0,0,.08);
+
+  box-shadow:
+    0 4px 18px
+    rgba(0,0,0,.08);
+
 }
 
+
 .nav{
-  width:min(1200px,94%);
+
+  width:
+    min(
+      1200px,
+      94%
+    );
+
   min-height:76px;
+
   margin:auto;
 
   display:flex;
+
   align-items:center;
-  justify-content:space-between;
+
+  justify-content:
+    space-between;
+
   gap:18px;
+
 }
+
 
 .brand{
+
   display:flex;
+
   align-items:center;
+
   gap:12px;
+
 }
+
 
 .logo{
+
   width:55px;
+
   height:55px;
+
   object-fit:contain;
+
   background:#fff;
+
   border-radius:14px;
+
   padding:4px;
+
 }
+
 
 .brand strong{
+
   display:block;
+
   font-size:20px;
+
 }
+
 
 .brand small{
+
   display:block;
+
   margin-top:4px;
+
   opacity:.8;
+
 }
+
 
 .nav-actions{
+
   display:flex;
+
   gap:8px;
+
   flex-wrap:wrap;
+
 }
+
 
 .nav-btn{
-  padding:9px 13px;
+
+  padding:
+    9px 13px;
+
   border-radius:11px;
-  border:1px solid rgba(255,255,255,.28);
-  background:rgba(255,255,255,.08);
+
+  border:
+    1px solid
+    rgba(255,255,255,.28);
+
+  background:
+    rgba(255,255,255,.08);
+
   color:#fff;
+
   cursor:pointer;
+
 }
 
-/* PAGE */
+
+
+/* =========================
+   PAGE
+   ========================= */
+
 
 .page{
-  width:min(1200px,94%);
-  margin:26px auto 55px;
+
+  width:
+    min(
+      1200px,
+      94%
+    );
+
+  margin:
+    26px auto 55px;
+
 }
 
-/* HERO */
+
+
+/* =========================
+   HERO
+   ========================= */
+
 
 .hero{
-  background:linear-gradient(135deg,#07583f,#0c7154);
+
+  background:
+    linear-gradient(
+      135deg,
+      #07583f,
+      #0c7154
+    );
+
   border-radius:25px;
+
   padding:28px;
+
   color:#fff;
 
   display:flex;
+
   align-items:center;
-  justify-content:space-between;
+
+  justify-content:
+    space-between;
+
   gap:20px;
 
-  box-shadow:0 14px 35px rgba(7,88,63,.12);
+  box-shadow:
+    0 14px 35px
+    rgba(7,88,63,.12);
+
 }
+
 
 .hero h1{
-  margin:0 0 8px;
+
+  margin:
+    0 0 8px;
+
   font-size:29px;
+
 }
+
 
 .hero p{
+
   margin:0;
+
   line-height:1.9;
+
   opacity:.9;
+
 }
+
 
 .hero-side{
-  background:rgba(255,255,255,.12);
-  border:1px solid rgba(255,255,255,.2);
+
+  background:
+    rgba(255,255,255,.12);
+
+  border:
+    1px solid
+    rgba(255,255,255,.2);
+
   border-radius:17px;
-  padding:15px 20px;
+
+  padding:
+    15px 20px;
+
   min-width:190px;
+
   text-align:center;
+
 }
+
 
 .hero-side strong{
+
   display:block;
+
   color:#f5d76b;
+
   font-size:18px;
+
 }
+
 
 .hero-side span{
+
   display:block;
+
   margin-top:5px;
+
   font-size:12px;
+
   opacity:.88;
+
 }
 
-/* STATS */
+
+
+/* =========================
+   STATS
+   ========================= */
+
 
 .stats{
+
   display:grid;
-  grid-template-columns:repeat(3,1fr);
+
+  grid-template-columns:
+    repeat(3,1fr);
+
   gap:14px;
-  margin:18px 0 24px;
+
+  margin:
+    18px 0 24px;
+
 }
+
 
 .stat{
+
   background:#fff;
-  border:1px solid var(--border);
+
+  border:
+    1px solid
+    var(--border);
+
   border-radius:18px;
+
   padding:18px;
+
 }
+
 
 .stat span{
+
   display:block;
-  color:var(--muted);
+
+  color:
+    var(--muted);
+
   font-size:12px;
+
 }
+
 
 .stat strong{
+
   display:block;
-  color:var(--green);
+
+  color:
+    var(--green);
+
   font-size:28px;
+
   margin-top:7px;
+
 }
 
-/* TITLES */
+
+
+/* =========================
+   TITLES
+   ========================= */
+
 
 .section-head{
-  margin:27px 0 13px;
+
+  margin:
+    27px 0 13px;
+
 }
+
 
 .section-head h2{
+
   margin:0;
-  color:var(--green);
+
+  color:
+    var(--green);
+
   font-size:22px;
+
 }
+
 
 .section-head p{
-  margin:6px 0 0;
-  color:var(--muted);
+
+  margin:
+    6px 0 0;
+
+  color:
+    var(--muted);
+
   font-size:13px;
+
 }
 
-/* MAIN CARDS */
+
+
+/* =========================
+   MAIN CARDS
+   ========================= */
+
 
 .main-grid{
+
   display:grid;
-  grid-template-columns:repeat(4,1fr);
+
+  grid-template-columns:
+    repeat(4,1fr);
+
   gap:16px;
+
 }
+
+
+/* عند دخول مالك المنصة
+   تصبح 5 بطاقات */
+
+.main-grid.owner-mode{
+
+  grid-template-columns:
+    repeat(5,1fr);
+
+}
+
 
 .card{
+
   background:#fff;
-  border:1px solid var(--border);
+
+  border:
+    1px solid
+    var(--border);
+
   border-radius:21px;
+
   padding:22px;
+
   position:relative;
+
   overflow:hidden;
+
   transition:.2s;
-  min-height:210px;
+
+  min-height:220px;
+
 }
+
 
 .card:before{
+
   content:"";
+
   position:absolute;
+
   top:0;
+
   right:0;
+
   left:0;
+
   height:5px;
-  background:linear-gradient(90deg,var(--green),var(--gold));
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--green),
+      var(--gold)
+    );
+
 }
+
 
 .card:hover{
-  transform:translateY(-4px);
-  box-shadow:0 12px 30px rgba(0,0,0,.07);
+
+  transform:
+    translateY(-4px);
+
+  box-shadow:
+    0 12px 30px
+    rgba(0,0,0,.07);
+
   border-color:#bdd8cc;
+
 }
+
 
 .icon{
+
   width:62px;
+
   height:62px;
+
   border-radius:18px;
+
   background:#edf7f2;
-  color:var(--green);
+
+  color:
+    var(--green);
+
   display:flex;
+
   align-items:center;
+
   justify-content:center;
+
   font-size:30px;
+
   margin-bottom:14px;
+
 }
+
 
 .card h3{
-  color:var(--green);
-  margin:0 0 9px;
+
+  color:
+    var(--green);
+
+  margin:
+    0 0 9px;
+
   font-size:18px;
+
 }
+
 
 .card p{
+
   margin:0;
-  color:var(--muted);
+
+  color:
+    var(--muted);
+
   line-height:1.75;
+
   font-size:13px;
+
 }
+
 
 .go{
+
   display:inline-block;
+
   margin-top:15px;
-  padding:7px 11px;
+
+  padding:
+    7px 11px;
+
   border-radius:999px;
+
   background:#f3f8f5;
-  border:1px solid #dcebe4;
-  color:var(--green);
+
+  border:
+    1px solid
+    #dcebe4;
+
+  color:
+    var(--green);
+
   font-size:11px;
+
   font-weight:700;
+
 }
 
-/* ADMIN SUBCARDS */
+
+
+/* =========================
+   ADMIN SUB CARDS
+   ========================= */
+
 
 .admin-grid{
+
   display:grid;
-  grid-template-columns:repeat(4,1fr);
+
+  grid-template-columns:
+    repeat(4,1fr);
+
   gap:12px;
+
 }
+
 
 .mini{
+
   background:#fff;
-  border:1px solid var(--border);
+
+  border:
+    1px solid
+    var(--border);
+
   border-radius:17px;
+
   padding:17px;
+
   transition:.2s;
+
 }
+
 
 .mini:hover{
+
   border-color:#b9d8c9;
-  transform:translateY(-2px);
+
+  transform:
+    translateY(-2px);
+
 }
+
 
 .mini strong{
+
   display:block;
-  color:var(--green);
+
+  color:
+    var(--green);
+
   margin-bottom:6px;
+
 }
+
 
 .mini span{
+
   font-size:12px;
-  color:var(--muted);
+
+  color:
+    var(--muted);
+
   line-height:1.7;
+
 }
 
-/* NOTICE */
+
+
+/* =========================
+   NOTICE
+   ========================= */
+
 
 .notice{
-  padding:14px 16px;
+
+  padding:
+    14px 16px;
+
   border-radius:13px;
+
   margin-bottom:16px;
+
   line-height:1.8;
+
 }
+
 
 .info{
+
   background:#eef6f2;
-  border:1px solid #d2e6dc;
-  color:var(--green);
+
+  border:
+    1px solid
+    #d2e6dc;
+
+  color:
+    var(--green);
+
 }
+
 
 .error{
+
   background:#fff1f1;
-  border:1px solid #efcccc;
+
+  border:
+    1px solid
+    #efcccc;
+
   color:#963434;
+
 }
+
 
 .hide{
-  display:none!important;
+
+  display:none !important;
+
 }
+
+
+
+/* =========================
+   FOOTER
+   ========================= */
+
 
 footer{
+
   text-align:center;
+
   color:#7a8982;
+
   font-size:12px;
-  padding:25px 10px;
+
+  padding:
+    25px 10px;
+
 }
 
-/* RESPONSIVE */
+
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+
+
+@media(max-width:1100px){
+
+  .main-grid,
+  .main-grid.owner-mode{
+
+    grid-template-columns:
+      repeat(2,1fr);
+
+  }
+
+}
+
 
 @media(max-width:950px){
-  .main-grid,
+
   .admin-grid{
-    grid-template-columns:repeat(2,1fr);
+
+    grid-template-columns:
+      repeat(2,1fr);
+
   }
+
 }
+
 
 @media(max-width:650px){
+
   .hero{
+
     display:block;
+
   }
+
 
   .hero-side{
+
     margin-top:18px;
+
   }
+
 
   .stats{
-    grid-template-columns:1fr;
+
+    grid-template-columns:
+      1fr;
+
   }
 
+
   .main-grid,
+  .main-grid.owner-mode,
   .admin-grid{
-    grid-template-columns:1fr;
+
+    grid-template-columns:
+      1fr;
+
   }
+
 }
+
 </style>
 
 </head>
 
+
+
 <body>
+
 
 <header class="topbar">
 
-  <div class="nav">
+<div class="nav">
 
-    <a class="brand" href="index.html">
 
-      <img
-        src="rasheed-arabic-logo.png"
-        class="logo"
-        alt="رشيد العربية"
-        onerror="this.style.display='none'"
-      >
+<a
+  class="brand"
+  href="admin-hub.html"
+>
 
-      <div>
-        <strong>رشيد العربية</strong>
-        <small>مركز الإدارة</small>
-      </div>
+<img
+  src="rasheed-arabic-logo.png"
+  class="logo"
+  alt="رشيد العربية"
+  onerror="this.style.display='none'"
+>
 
-    </a>
 
-    <div class="nav-actions">
+<div>
 
-      <button
-        class="nav-btn"
-        onclick="location.href='index.html'"
-      >
-        الرئيسية
-      </button>
+<strong>
+رشيد العربية
+</strong>
 
-      <button
-        class="nav-btn"
-        id="logoutBtn"
-      >
-        تسجيل الخروج
-      </button>
+<small>
+مركز الإدارة
+</small>
 
-    </div>
+</div>
 
-  </div>
+</a>
+
+
+
+<div class="nav-actions">
+
+
+<button
+  class="nav-btn"
+  onclick="location.href='admin-hub.html'"
+>
+الرئيسية
+</button>
+
+
+<button
+  class="nav-btn"
+  onclick="location.href='index.html'"
+>
+واجهة المنصة
+</button>
+
+
+<button
+  class="nav-btn"
+  id="logoutBtn"
+>
+تسجيل الخروج
+</button>
+
+
+</div>
+
+
+</div>
 
 </header>
 
 
+
 <main class="page">
+
 
 <div
   id="notice"
   class="notice info"
 >
-  جارٍ التحقق من صلاحية المدير...
+
+جارٍ التحقق من صلاحية المدير...
+
 </div>
+
 
 
 <div
@@ -431,174 +905,282 @@ footer{
   class="hide"
 >
 
+
 <section class="hero">
 
-  <div>
 
-    <h1>
-      مركز إدارة رشيد العربية
-    </h1>
+<div>
 
-    <p>
-      جميع أدوات إدارة البرنامج في مكان واحد:
-      الطلاب، الحسابات، الحصر، المحتوى، المتابعة والتقارير.
-    </p>
+<h1>
+مركز إدارة رشيد العربية
+</h1>
 
-  </div>
 
-  <div class="hero-side">
+<p>
 
-    <strong>
-      صلاحية المدير
-    </strong>
+جميع أدوات إدارة البرنامج في مكان واحد:
+الطلاب، الحسابات، المستخدمون، الحصر،
+المحتوى، المتابعة والتقارير.
 
-    <span>
-      وصول كامل إلى أدوات الإدارة
-    </span>
+</p>
 
-  </div>
+</div>
+
+
+
+<div class="hero-side">
+
+<strong id="permissionTitle">
+صلاحية المدير
+</strong>
+
+<span id="permissionText">
+وصول إلى أدوات الإدارة
+</span>
+
+</div>
+
 
 </section>
+
 
 
 <section class="stats">
 
-  <div class="stat">
-    <span>إجمالي الطلاب</span>
-    <strong id="studentCount">—</strong>
-  </div>
 
-  <div class="stat">
-    <span>حسابات الطلاب المنشأة</span>
-    <strong id="accountCount">—</strong>
-  </div>
+<div class="stat">
 
-  <div class="stat">
-    <span>حسابات لم تُنشأ بعد</span>
-    <strong id="missingCount">—</strong>
-  </div>
+<span>
+إجمالي الطلاب
+</span>
 
-</section>
-
-
-<div class="section-head">
-
-  <h2>
-    الإدارة الرئيسية
-  </h2>
-
-  <p>
-    اختر القسم الذي تريد إدارته.
-  </p>
+<strong id="studentCount">
+—
+</strong>
 
 </div>
 
 
-<section class="main-grid">
+
+<div class="stat">
+
+<span>
+حسابات الطلاب المنشأة
+</span>
+
+<strong id="accountCount">
+—
+</strong>
+
+</div>
 
 
-<a class="card" href="census-hub.html">
 
-  <div class="icon">
-    📋
-  </div>
+<div class="stat">
 
-  <h3>
-    الحصر
-  </h3>
+<span>
+حسابات لم تُنشأ بعد
+</span>
 
-  <p>
-    الوصول إلى نماذج حصر الطلاب والكتب
-    ومتابعة البيانات المسجلة.
-  </p>
+<strong id="missingCount">
+—
+</strong>
 
-  <span class="go">
-    فتح الحصر
-  </span>
-
-</a>
-
-
-<a class="card" href="student-accounts.html">
-
-  <div class="icon">
-    👨‍🎓
-  </div>
-
-  <h3>
-    حسابات الطلاب
-  </h3>
-
-  <p>
-    إنشاء الحسابات وتعديل الأسماء وكلمات المرور
-    والتفعيل والتعطيل والحذف.
-  </p>
-
-  <span class="go">
-    إدارة الحسابات
-  </span>
-
-</a>
-
-
-<a class="card" href="teacher-dashboard.html">
-
-  <div class="icon">
-    👨‍🏫
-  </div>
-
-  <h3>
-    لوحة المعلم
-  </h3>
-
-  <p>
-    إدارة الطلاب والمواد التعليمية والواجبات
-    والاختبارات ومتابعة الأنشطة.
-  </p>
-
-  <span class="go">
-    فتح لوحة المعلم
-  </span>
-
-</a>
-
-
-<a class="card" href="admin.html">
-
-  <div class="icon">
-    📊
-  </div>
-
-  <h3>
-    إدارة الطلاب
-  </h3>
-
-  <p>
-    عرض بيانات الطلاب المسجلين
-    والإحصائيات والتقارير والتصدير.
-  </p>
-
-  <span class="go">
-    فتح لوحة الإدارة
-  </span>
-
-</a>
+</div>
 
 
 </section>
 
 
+
 <div class="section-head">
 
-  <h2>
-    لوحات الحصر والإدارة
-  </h2>
+<h2>
+الإدارة الرئيسية
+</h2>
 
-  <p>
-    وصول سريع إلى الأنظمة الإدارية الحالية.
-  </p>
+<p>
+اختر القسم الذي تريد إدارته.
+</p>
 
 </div>
+
+
+
+<section
+  class="main-grid"
+  id="mainGrid"
+>
+
+
+<!-- 1 الحصر -->
+
+<a
+  class="card"
+  href="census-hub.html"
+>
+
+<div class="icon">
+📋
+</div>
+
+<h3>
+الحصر
+</h3>
+
+<p>
+
+الوصول إلى نماذج حصر الطلاب والكتب
+ومتابعة البيانات المسجلة.
+
+</p>
+
+<span class="go">
+فتح الحصر
+</span>
+
+</a>
+
+
+
+<!-- 2 حسابات الطلاب -->
+
+<a
+  class="card"
+  href="student-accounts.html"
+>
+
+<div class="icon">
+👨‍🎓
+</div>
+
+<h3>
+حسابات الطلاب
+</h3>
+
+<p>
+
+إنشاء حسابات الطلاب وتعديل الأسماء
+وكلمات المرور والتفعيل والتعطيل والحذف.
+
+</p>
+
+<span class="go">
+إدارة الحسابات
+</span>
+
+</a>
+
+
+
+<!-- 3 لوحة المعلم -->
+
+<a
+  class="card"
+  href="teacher-dashboard.html"
+>
+
+<div class="icon">
+👨‍🏫
+</div>
+
+<h3>
+لوحة المعلم
+</h3>
+
+<p>
+
+إدارة الطلاب والمواد التعليمية والواجبات
+والاختبارات ومتابعة الأنشطة.
+
+</p>
+
+<span class="go">
+فتح لوحة المعلم
+</span>
+
+</a>
+
+
+
+<!-- 4 إدارة الطلاب -->
+
+<a
+  class="card"
+  href="admin.html"
+>
+
+<div class="icon">
+📊
+</div>
+
+<h3>
+إدارة الطلاب
+</h3>
+
+<p>
+
+عرض بيانات الطلاب المسجلين والإحصائيات
+والتقارير والتصدير.
+
+</p>
+
+<span class="go">
+فتح لوحة الإدارة
+</span>
+
+</a>
+
+
+
+<!-- 5 إدارة المستخدمين
+     تظهر لمالك المنصة فقط -->
+
+<a
+  id="userManagementCard"
+  class="card hide"
+  href="user-management.html"
+>
+
+<div class="icon">
+👥
+</div>
+
+<h3>
+إدارة المستخدمين والصلاحيات
+</h3>
+
+<p>
+
+إدارة المديرين والمعلمين وأولياء الأمور
+والطلاب، وتغيير الأدوار والتفعيل
+والتعطيل والحسابات.
+
+</p>
+
+<span class="go">
+إدارة المستخدمين
+</span>
+
+</a>
+
+
+</section>
+
+
+
+<div class="section-head">
+
+<h2>
+لوحات الحصر والإدارة
+</h2>
+
+<p>
+وصول سريع إلى الأنظمة الإدارية الحالية.
+</p>
+
+</div>
+
 
 
 <section class="admin-grid">
@@ -608,83 +1190,123 @@ footer{
   class="mini"
   href="admin.html"
 >
-  <strong>
-    غير الناطقين بالعربية
-  </strong>
 
-  <span>
-    إدارة بيانات الطلاب المسجلين في البرنامج.
-  </span>
+<strong>
+غير الناطقين بالعربية
+</strong>
+
+<span>
+
+إدارة بيانات الطلاب المسجلين
+في البرنامج.
+
+</span>
+
 </a>
+
 
 
 <a
   class="mini"
   href="admin-weak.html"
 >
-  <strong>
-    الطلاب الضعاف
-  </strong>
 
-  <span>
-    متابعة حصر الطلاب الضعاف في اللغة العربية.
-  </span>
+<strong>
+الطلاب الضعاف
+</strong>
+
+<span>
+
+متابعة حصر الطلاب الضعاف
+في اللغة العربية.
+
+</span>
+
 </a>
+
 
 
 <a
   class="mini"
   href="admin-identity-books.html"
 >
-  <strong>
-    كتب مواد الهوية
-  </strong>
 
-  <span>
-    متابعة الكتب غير المستلمة لمواد الهوية.
-  </span>
+<strong>
+كتب مواد الهوية
+</strong>
+
+<span>
+
+متابعة الكتب غير المستلمة
+لمواد الهوية.
+
+</span>
+
 </a>
+
 
 
 <a
   class="mini"
   href="admin-all-missing-books.html"
 >
-  <strong>
-    جميع الكتب
-  </strong>
 
-  <span>
-    متابعة جميع الكتب الدراسية غير المستلمة.
-  </span>
+<strong>
+جميع الكتب
+</strong>
+
+<span>
+
+متابعة جميع الكتب الدراسية
+غير المستلمة.
+
+</span>
+
 </a>
 
 
 </section>
 
+
 </div>
+
 
 </main>
 
 
+
 <footer>
-  © 2026 Rasheed Arabic — جميع الحقوق محفوظة
+
+© 2026 Rasheed Arabic —
+جميع الحقوق محفوظة
+
 </footer>
+
 
 
 <script>
 
+
 const SUPABASE_URL =
-  "https://wcyamoqmpwpribsgspjn.supabase.co";
+"https://wcyamoqmpwpribsgspjn.supabase.co";
+
 
 const SUPABASE_KEY =
-  "sb_publishable_3eJET0uhZw4D4DowMK13fQ_oWK3PdIQ";
+"sb_publishable_3eJET0uhZw4D4DowMK13fQ_oWK3PdIQ";
+
 
 const ADMIN_SESSION_KEY =
-  "rasheed_arabic_admin_session_v1";
+"rasheed_arabic_admin_session_v1";
+
 
 const PORTAL_SESSION_KEY =
-  "rasheed_arabic_portal_session_v1";
+"rasheed_arabic_portal_session_v1";
+
+
+
+/* =========================
+   SESSION
+   ========================= */
 
 
 function getSession(){
@@ -692,26 +1314,37 @@ function getSession(){
   try{
 
     return (
+
       JSON.parse(
         localStorage.getItem(
           ADMIN_SESSION_KEY
         ) || "null"
       )
+
       ||
+
       JSON.parse(
         localStorage.getItem(
           PORTAL_SESSION_KEY
         ) || "null"
       )
+
     );
 
-  }catch{
+  }
+  catch{
 
     return null;
 
   }
 
 }
+
+
+
+/* =========================
+   API
+   ========================= */
 
 
 async function api(
@@ -723,7 +1356,9 @@ async function api(
     getSession();
 
 
-  if(!session?.access_token){
+  if(
+    !session?.access_token
+  ){
 
     throw new Error(
       "NO_SESSION"
@@ -741,7 +1376,9 @@ async function api(
       "Bearer " +
       session.access_token,
 
-    ...(options.headers || {})
+    ...(
+      options.headers || {}
+    )
 
   };
 
@@ -751,7 +1388,9 @@ async function api(
     !headers["Content-Type"]
   ){
 
-    headers["Content-Type"] =
+    headers[
+      "Content-Type"
+    ] =
       "application/json";
 
   }
@@ -763,13 +1402,22 @@ async function api(
     path,
 
     {
+
       ...options,
+
       headers
+
     }
 
   );
 
 }
+
+
+
+/* =========================
+   ADMIN CHECK
+   ========================= */
 
 
 async function verifyAdmin(){
@@ -780,15 +1428,22 @@ async function verifyAdmin(){
       "/rest/v1/rpc/is_rasheed_arabic_admin",
 
       {
+
         method:"POST",
+
         body:"{}"
+
       }
 
     );
 
 
-  if(!response.ok){
+  if(
+    !response.ok
+  ){
+
     return false;
+
   }
 
 
@@ -797,6 +1452,62 @@ async function verifyAdmin(){
   ) === true;
 
 }
+
+
+
+/* =========================
+   OWNER CHECK
+   ========================= */
+
+
+async function verifyOwner(){
+
+  try{
+
+    const response =
+      await api(
+
+        "/rest/v1/rpc/is_rasheed_arabic_owner",
+
+        {
+
+          method:"POST",
+
+          body:"{}"
+
+        }
+
+      );
+
+
+    if(
+      !response.ok
+    ){
+
+      return false;
+
+    }
+
+
+    return (
+      await response.json()
+    ) === true;
+
+
+  }
+  catch{
+
+    return false;
+
+  }
+
+}
+
+
+
+/* =========================
+   LOAD STATS
+   ========================= */
 
 
 async function loadStats(){
@@ -823,7 +1534,9 @@ async function loadStats(){
     !studentsResponse.ok ||
     !accountsResponse.ok
   ){
+
     return;
+
   }
 
 
@@ -856,13 +1569,71 @@ async function loadStats(){
       "missingCount"
     )
     .textContent =
+
       Math.max(
+
         0,
+
         students.length -
         accounts.length
+
       );
 
 }
+
+
+
+/* =========================
+   OWNER INTERFACE
+   ========================= */
+
+
+function enableOwnerInterface(){
+
+  const card =
+    document.getElementById(
+      "userManagementCard"
+    );
+
+
+  const grid =
+    document.getElementById(
+      "mainGrid"
+    );
+
+
+  card.classList.remove(
+    "hide"
+  );
+
+
+  grid.classList.add(
+    "owner-mode"
+  );
+
+
+  document
+    .getElementById(
+      "permissionTitle"
+    )
+    .textContent =
+      "👑 مالك المنصة";
+
+
+  document
+    .getElementById(
+      "permissionText"
+    )
+    .textContent =
+      "صلاحية التحكم الأعلى";
+
+}
+
+
+
+/* =========================
+   LOGOUT
+   ========================= */
 
 
 document
@@ -879,6 +1650,7 @@ document
         ADMIN_SESSION_KEY
       );
 
+
       localStorage.removeItem(
         PORTAL_SESSION_KEY
       );
@@ -892,6 +1664,12 @@ document
   );
 
 
+
+/* =========================
+   INIT
+   ========================= */
+
+
 (async function init(){
 
   const notice =
@@ -902,11 +1680,14 @@ document
 
   try{
 
+
     const session =
       getSession();
 
 
-    if(!session?.access_token){
+    if(
+      !session?.access_token
+    ){
 
       location.href =
         "login.html";
@@ -916,24 +1697,32 @@ document
     }
 
 
+
+    /* التحقق من المدير */
+
     const isAdmin =
       await verifyAdmin();
 
 
-    if(!isAdmin){
+    if(
+      !isAdmin
+    ){
 
       notice.className =
         "notice error";
 
 
       notice.textContent =
-        "هذا الحساب لا يملك صلاحية المدير.";
+        "هذا الحساب لا يملك صلاحية الدخول إلى مركز الإدارة.";
 
 
       return;
 
     }
 
+
+
+    /* إظهار الصفحة */
 
     notice.classList.add(
       "hide"
@@ -950,12 +1739,34 @@ document
       );
 
 
+
+    /* الإحصائيات */
+
     await loadStats();
 
 
-  }catch(error){
 
-    console.error(error);
+    /* هل الحساب هو المالك؟ */
+
+    const isOwner =
+      await verifyOwner();
+
+
+    if(
+      isOwner
+    ){
+
+      enableOwnerInterface();
+
+    }
+
+
+  }
+  catch(error){
+
+    console.error(
+      error
+    );
 
 
     notice.className =
@@ -969,7 +1780,9 @@ document
 
 })();
 
+
 </script>
+
 
 </body>
 
