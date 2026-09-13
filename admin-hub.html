@@ -2,829 +2,327 @@
 <html lang="ar" dir="rtl">
 
 <head>
-
 <meta charset="utf-8">
-
-<meta
-  name="viewport"
-  content="width=device-width,initial-scale=1,viewport-fit=cover"
->
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 
 <title>مركز الإدارة | رشيد العربية</title>
 
-
 <style>
-
-*{
-  box-sizing:border-box;
-}
-
+*{box-sizing:border-box}
 
 :root{
-
   --green:#07583f;
   --green2:#0b6c50;
   --gold:#c9a227;
-
   --bg:#f4f8f6;
-  --card:#ffffff;
-
   --text:#17392c;
   --muted:#6e7e77;
-
   --border:#d8e5df;
-
 }
-
 
 body{
-
   margin:0;
-
-  font-family:
-    Tahoma,
-    Arial,
-    sans-serif;
-
-  background:
-    radial-gradient(
-      circle at top right,
-      rgba(7,88,63,.08),
-      transparent 30%
-    ),
-    var(--bg);
-
-  color:
-    var(--text);
-
+  font-family:Tahoma,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
 }
 
-
-a{
-
-  color:inherit;
-
-  text-decoration:none;
-
-}
-
-
-button{
-
-  font:inherit;
-
-}
-
-
-
-/* =========================
-   TOP BAR
-   ========================= */
-
+a{text-decoration:none;color:inherit}
+button{font:inherit}
 
 .topbar{
-
-  background:
-    linear-gradient(
-      135deg,
-      var(--green),
-      #064631
-    );
-
+  background:linear-gradient(135deg,var(--green),#064631);
   color:#fff;
-
-  box-shadow:
-    0 4px 18px
-    rgba(0,0,0,.08);
-
 }
-
 
 .nav{
-
-  width:
-    min(
-      1200px,
-      94%
-    );
-
+  width:min(1200px,94%);
   min-height:76px;
-
   margin:auto;
-
   display:flex;
-
   align-items:center;
-
-  justify-content:
-    space-between;
-
+  justify-content:space-between;
   gap:18px;
-
 }
-
 
 .brand{
-
   display:flex;
-
   align-items:center;
-
   gap:12px;
-
 }
-
 
 .logo{
-
   width:55px;
-
   height:55px;
-
   object-fit:contain;
-
   background:#fff;
-
   border-radius:14px;
-
   padding:4px;
-
 }
-
 
 .brand strong{
-
   display:block;
-
   font-size:20px;
-
 }
-
 
 .brand small{
-
   display:block;
-
   margin-top:4px;
-
   opacity:.8;
-
 }
-
 
 .nav-actions{
-
   display:flex;
-
   gap:8px;
-
   flex-wrap:wrap;
-
 }
-
 
 .nav-btn{
-
-  padding:
-    9px 13px;
-
+  padding:9px 13px;
   border-radius:11px;
-
-  border:
-    1px solid
-    rgba(255,255,255,.28);
-
-  background:
-    rgba(255,255,255,.08);
-
+  border:1px solid rgba(255,255,255,.28);
+  background:rgba(255,255,255,.08);
   color:#fff;
-
   cursor:pointer;
-
 }
-
-
-
-/* =========================
-   PAGE
-   ========================= */
-
 
 .page{
-
-  width:
-    min(
-      1200px,
-      94%
-    );
-
-  margin:
-    26px auto 55px;
-
+  width:min(1200px,94%);
+  margin:26px auto 55px;
 }
-
-
-
-/* =========================
-   HERO
-   ========================= */
-
 
 .hero{
-
-  background:
-    linear-gradient(
-      135deg,
-      #07583f,
-      #0c7154
-    );
-
+  background:linear-gradient(135deg,#07583f,#0c7154);
   border-radius:25px;
-
   padding:28px;
-
   color:#fff;
-
   display:flex;
-
   align-items:center;
-
-  justify-content:
-    space-between;
-
+  justify-content:space-between;
   gap:20px;
-
-  box-shadow:
-    0 14px 35px
-    rgba(7,88,63,.12);
-
 }
-
 
 .hero h1{
-
-  margin:
-    0 0 8px;
-
+  margin:0 0 8px;
   font-size:29px;
-
 }
-
 
 .hero p{
-
   margin:0;
-
   line-height:1.9;
-
   opacity:.9;
-
 }
-
 
 .hero-side{
-
-  background:
-    rgba(255,255,255,.12);
-
-  border:
-    1px solid
-    rgba(255,255,255,.2);
-
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.2);
   border-radius:17px;
-
-  padding:
-    15px 20px;
-
+  padding:15px 20px;
   min-width:190px;
-
   text-align:center;
-
 }
-
 
 .hero-side strong{
-
   display:block;
-
   color:#f5d76b;
-
   font-size:18px;
-
 }
-
 
 .hero-side span{
-
   display:block;
-
   margin-top:5px;
-
   font-size:12px;
-
-  opacity:.88;
-
 }
-
-
-
-/* =========================
-   STATS
-   ========================= */
-
 
 .stats{
-
   display:grid;
-
-  grid-template-columns:
-    repeat(3,1fr);
-
+  grid-template-columns:repeat(3,1fr);
   gap:14px;
-
-  margin:
-    18px 0 24px;
-
+  margin:18px 0 24px;
 }
-
 
 .stat{
-
   background:#fff;
-
-  border:
-    1px solid
-    var(--border);
-
+  border:1px solid var(--border);
   border-radius:18px;
-
   padding:18px;
-
 }
-
 
 .stat span{
-
-  display:block;
-
-  color:
-    var(--muted);
-
+  color:var(--muted);
   font-size:12px;
-
 }
-
 
 .stat strong{
-
   display:block;
-
-  color:
-    var(--green);
-
+  color:var(--green);
   font-size:28px;
-
   margin-top:7px;
-
 }
-
-
-
-/* =========================
-   TITLES
-   ========================= */
-
 
 .section-head{
-
-  margin:
-    27px 0 13px;
-
+  margin:27px 0 13px;
 }
-
 
 .section-head h2{
-
   margin:0;
-
-  color:
-    var(--green);
-
-  font-size:22px;
-
+  color:var(--green);
 }
-
 
 .section-head p{
-
-  margin:
-    6px 0 0;
-
-  color:
-    var(--muted);
-
+  margin:6px 0 0;
+  color:var(--muted);
   font-size:13px;
-
 }
-
-
-
-/* =========================
-   MAIN CARDS
-   ========================= */
-
 
 .main-grid{
-
   display:grid;
-
-  grid-template-columns:
-    repeat(4,1fr);
-
+  grid-template-columns:repeat(4,1fr);
   gap:16px;
-
 }
-
-
-/* عند دخول مالك المنصة
-   تصبح 5 بطاقات */
 
 .main-grid.owner-mode{
-
-  grid-template-columns:
-    repeat(5,1fr);
-
+  grid-template-columns:repeat(5,1fr);
 }
-
 
 .card{
-
   background:#fff;
-
-  border:
-    1px solid
-    var(--border);
-
+  border:1px solid var(--border);
   border-radius:21px;
-
   padding:22px;
-
-  position:relative;
-
-  overflow:hidden;
-
-  transition:.2s;
-
   min-height:220px;
-
+  position:relative;
+  overflow:hidden;
 }
-
 
 .card:before{
-
   content:"";
-
   position:absolute;
-
   top:0;
-
   right:0;
-
   left:0;
-
   height:5px;
-
-  background:
-    linear-gradient(
-      90deg,
-      var(--green),
-      var(--gold)
-    );
-
+  background:linear-gradient(90deg,var(--green),var(--gold));
 }
-
 
 .card:hover{
-
-  transform:
-    translateY(-4px);
-
-  box-shadow:
-    0 12px 30px
-    rgba(0,0,0,.07);
-
-  border-color:#bdd8cc;
-
+  transform:translateY(-3px);
+  box-shadow:0 12px 30px rgba(0,0,0,.07);
 }
-
 
 .icon{
-
   width:62px;
-
   height:62px;
-
   border-radius:18px;
-
   background:#edf7f2;
-
-  color:
-    var(--green);
-
   display:flex;
-
   align-items:center;
-
   justify-content:center;
-
   font-size:30px;
-
   margin-bottom:14px;
-
 }
-
 
 .card h3{
-
-  color:
-    var(--green);
-
-  margin:
-    0 0 9px;
-
-  font-size:18px;
-
+  margin:0 0 9px;
+  color:var(--green);
 }
-
 
 .card p{
-
   margin:0;
-
-  color:
-    var(--muted);
-
-  line-height:1.75;
-
+  color:var(--muted);
   font-size:13px;
-
+  line-height:1.8;
 }
-
 
 .go{
-
   display:inline-block;
-
   margin-top:15px;
-
-  padding:
-    7px 11px;
-
+  padding:7px 11px;
   border-radius:999px;
-
   background:#f3f8f5;
-
-  border:
-    1px solid
-    #dcebe4;
-
-  color:
-    var(--green);
-
+  border:1px solid #dcebe4;
+  color:var(--green);
   font-size:11px;
-
   font-weight:700;
-
 }
-
-
-
-/* =========================
-   ADMIN SUB CARDS
-   ========================= */
-
 
 .admin-grid{
-
   display:grid;
-
-  grid-template-columns:
-    repeat(4,1fr);
-
+  grid-template-columns:repeat(4,1fr);
   gap:12px;
-
 }
-
 
 .mini{
-
   background:#fff;
-
-  border:
-    1px solid
-    var(--border);
-
+  border:1px solid var(--border);
   border-radius:17px;
-
   padding:17px;
-
-  transition:.2s;
-
 }
-
-
-.mini:hover{
-
-  border-color:#b9d8c9;
-
-  transform:
-    translateY(-2px);
-
-}
-
 
 .mini strong{
-
   display:block;
-
-  color:
-    var(--green);
-
+  color:var(--green);
   margin-bottom:6px;
-
 }
-
 
 .mini span{
-
+  color:var(--muted);
   font-size:12px;
-
-  color:
-    var(--muted);
-
   line-height:1.7;
-
 }
-
-
-
-/* =========================
-   NOTICE
-   ========================= */
-
 
 .notice{
-
-  padding:
-    14px 16px;
-
+  padding:14px 16px;
   border-radius:13px;
-
   margin-bottom:16px;
-
-  line-height:1.8;
-
 }
-
 
 .info{
-
   background:#eef6f2;
-
-  border:
-    1px solid
-    #d2e6dc;
-
-  color:
-    var(--green);
-
+  color:var(--green);
 }
-
 
 .error{
-
   background:#fff1f1;
-
-  border:
-    1px solid
-    #efcccc;
-
   color:#963434;
-
 }
 
-
-.hide{
-
-  display:none !important;
-
-}
-
-
-
-/* =========================
-   FOOTER
-   ========================= */
-
+.hide{display:none!important}
 
 footer{
-
   text-align:center;
-
   color:#7a8982;
-
+  padding:25px;
   font-size:12px;
-
-  padding:
-    25px 10px;
-
 }
-
-
-
-/* =========================
-   RESPONSIVE
-   ========================= */
-
 
 @media(max-width:1100px){
-
   .main-grid,
   .main-grid.owner-mode{
-
-    grid-template-columns:
-      repeat(2,1fr);
-
+    grid-template-columns:repeat(2,1fr);
   }
-
 }
 
-
-@media(max-width:950px){
-
-  .admin-grid{
-
-    grid-template-columns:
-      repeat(2,1fr);
-
-  }
-
-}
-
-
-@media(max-width:650px){
-
-  .hero{
-
-    display:block;
-
-  }
-
-
-  .hero-side{
-
-    margin-top:18px;
-
-  }
-
-
-  .stats{
-
-    grid-template-columns:
-      1fr;
-
-  }
-
-
+@media(max-width:700px){
+  .hero{display:block}
+  .hero-side{margin-top:16px}
+  .stats,
   .main-grid,
   .main-grid.owner-mode,
   .admin-grid{
-
-    grid-template-columns:
-      1fr;
-
+    grid-template-columns:1fr;
   }
-
 }
-
 </style>
-
 </head>
 
-
-
 <body>
-
 
 <header class="topbar">
 
 <div class="nav">
 
-
-<a
-  class="brand"
-  href="admin-hub.html"
->
+<a class="brand" href="admin-hub.html">
 
 <img
   src="rasheed-arabic-logo.png"
@@ -833,33 +331,14 @@ footer{
   onerror="this.style.display='none'"
 >
 
-
 <div>
-
-<strong>
-رشيد العربية
-</strong>
-
-<small>
-مركز الإدارة
-</small>
-
+<strong>رشيد العربية</strong>
+<small>مركز الإدارة</small>
 </div>
 
 </a>
 
-
-
 <div class="nav-actions">
-
-
-<button
-  class="nav-btn"
-  onclick="location.href='admin-hub.html'"
->
-الرئيسية
-</button>
-
 
 <button
   class="nav-btn"
@@ -868,7 +347,6 @@ footer{
 واجهة المنصة
 </button>
 
-
 <button
   class="nav-btn"
   id="logoutBtn"
@@ -876,38 +354,23 @@ footer{
 تسجيل الخروج
 </button>
 
-
 </div>
-
 
 </div>
 
 </header>
 
 
-
 <main class="page">
 
-
-<div
-  id="notice"
-  class="notice info"
->
-
-جارٍ التحقق من صلاحية المدير...
-
+<div id="notice" class="notice info">
+جارٍ التحقق من الصلاحيات...
 </div>
 
-
-
-<div
-  id="adminArea"
-  class="hide"
->
+<div id="adminArea" class="hide">
 
 
 <section class="hero">
-
 
 <div>
 
@@ -915,18 +378,12 @@ footer{
 مركز إدارة رشيد العربية
 </h1>
 
-
 <p>
-
 جميع أدوات إدارة البرنامج في مكان واحد:
-الطلاب، الحسابات، المستخدمون، الحصر،
-المحتوى، المتابعة والتقارير.
-
+الطلاب، الحسابات، المستخدمون، الحصر، المحتوى، المتابعة والتقارير.
 </p>
 
 </div>
-
-
 
 <div class="hero-side">
 
@@ -940,201 +397,97 @@ footer{
 
 </div>
 
-
 </section>
-
 
 
 <section class="stats">
 
-
 <div class="stat">
-
-<span>
-إجمالي الطلاب
-</span>
-
-<strong id="studentCount">
-—
-</strong>
-
+<span>إجمالي الطلاب</span>
+<strong id="studentCount">—</strong>
 </div>
 
-
-
 <div class="stat">
-
-<span>
-حسابات الطلاب المنشأة
-</span>
-
-<strong id="accountCount">
-—
-</strong>
-
+<span>حسابات الطلاب المنشأة</span>
+<strong id="accountCount">—</strong>
 </div>
 
-
-
 <div class="stat">
-
-<span>
-حسابات لم تُنشأ بعد
-</span>
-
-<strong id="missingCount">
-—
-</strong>
-
+<span>حسابات لم تُنشأ بعد</span>
+<strong id="missingCount">—</strong>
 </div>
-
 
 </section>
 
 
-
 <div class="section-head">
-
-<h2>
-الإدارة الرئيسية
-</h2>
-
-<p>
-اختر القسم الذي تريد إدارته.
-</p>
-
+<h2>الإدارة الرئيسية</h2>
+<p>اختر القسم الذي تريد إدارته.</p>
 </div>
 
 
-
-<section
-  class="main-grid"
-  id="mainGrid"
->
+<section class="main-grid" id="mainGrid">
 
 
-<!-- 1 الحصر -->
+<a class="card" href="census-hub.html">
 
-<a
-  class="card"
-  href="census-hub.html"
->
+<div class="icon">📋</div>
 
-<div class="icon">
-📋
-</div>
-
-<h3>
-الحصر
-</h3>
+<h3>الحصر</h3>
 
 <p>
-
-الوصول إلى نماذج حصر الطلاب والكتب
-ومتابعة البيانات المسجلة.
-
+الوصول إلى نماذج حصر الطلاب والكتب ومتابعة البيانات المسجلة.
 </p>
 
-<span class="go">
-فتح الحصر
-</span>
+<span class="go">فتح الحصر</span>
 
 </a>
 
 
+<a class="card" href="student-accounts.html">
 
-<!-- 2 حسابات الطلاب -->
+<div class="icon">👨‍🎓</div>
 
-<a
-  class="card"
-  href="student-accounts.html"
->
-
-<div class="icon">
-👨‍🎓
-</div>
-
-<h3>
-حسابات الطلاب
-</h3>
+<h3>حسابات الطلاب</h3>
 
 <p>
-
-إنشاء حسابات الطلاب وتعديل الأسماء
-وكلمات المرور والتفعيل والتعطيل والحذف.
-
+إنشاء الحسابات وتعديل الأسماء وكلمات المرور والتفعيل والتعطيل والحذف.
 </p>
 
-<span class="go">
-إدارة الحسابات
-</span>
+<span class="go">إدارة الحسابات</span>
 
 </a>
 
 
+<a class="card" href="teacher-dashboard.html">
 
-<!-- 3 لوحة المعلم -->
+<div class="icon">👨‍🏫</div>
 
-<a
-  class="card"
-  href="teacher-dashboard.html"
->
-
-<div class="icon">
-👨‍🏫
-</div>
-
-<h3>
-لوحة المعلم
-</h3>
+<h3>لوحة المعلم</h3>
 
 <p>
-
-إدارة الطلاب والمواد التعليمية والواجبات
-والاختبارات ومتابعة الأنشطة.
-
+إدارة الطلاب والمواد التعليمية والواجبات والاختبارات ومتابعة الأنشطة.
 </p>
 
-<span class="go">
-فتح لوحة المعلم
-</span>
+<span class="go">فتح لوحة المعلم</span>
 
 </a>
 
 
+<a class="card" href="admin.html">
 
-<!-- 4 إدارة الطلاب -->
+<div class="icon">📊</div>
 
-<a
-  class="card"
-  href="admin.html"
->
-
-<div class="icon">
-📊
-</div>
-
-<h3>
-إدارة الطلاب
-</h3>
+<h3>إدارة الطلاب</h3>
 
 <p>
-
-عرض بيانات الطلاب المسجلين والإحصائيات
-والتقارير والتصدير.
-
+عرض بيانات الطلاب والإحصائيات والتقارير والتصدير.
 </p>
 
-<span class="go">
-فتح لوحة الإدارة
-</span>
+<span class="go">فتح لوحة الإدارة</span>
 
 </a>
 
-
-
-<!-- 5 إدارة المستخدمين
-     تظهر لمالك المنصة فقط -->
 
 <a
   id="userManagementCard"
@@ -1142,20 +495,14 @@ footer{
   href="user-management.html"
 >
 
-<div class="icon">
-👥
-</div>
+<div class="icon">👥</div>
 
 <h3>
 إدارة المستخدمين والصلاحيات
 </h3>
 
 <p>
-
-إدارة المديرين والمعلمين وأولياء الأمور
-والطلاب، وتغيير الأدوار والتفعيل
-والتعطيل والحسابات.
-
+إدارة المديرين والمعلمين وأولياء الأمور والطلاب والتفعيل والتعطيل وتغيير الأدوار.
 </p>
 
 <span class="go">
@@ -1164,149 +511,62 @@ footer{
 
 </a>
 
-
 </section>
 
 
-
 <div class="section-head">
-
-<h2>
-لوحات الحصر والإدارة
-</h2>
-
-<p>
-وصول سريع إلى الأنظمة الإدارية الحالية.
-</p>
-
+<h2>لوحات الحصر والإدارة</h2>
+<p>وصول سريع إلى الأنظمة الإدارية الحالية.</p>
 </div>
-
 
 
 <section class="admin-grid">
 
-
-<a
-  class="mini"
-  href="admin.html"
->
-
-<strong>
-غير الناطقين بالعربية
-</strong>
-
-<span>
-
-إدارة بيانات الطلاب المسجلين
-في البرنامج.
-
-</span>
-
+<a class="mini" href="admin.html">
+<strong>غير الناطقين بالعربية</strong>
+<span>إدارة بيانات الطلاب المسجلين في البرنامج.</span>
 </a>
 
-
-
-<a
-  class="mini"
-  href="admin-weak.html"
->
-
-<strong>
-الطلاب الضعاف
-</strong>
-
-<span>
-
-متابعة حصر الطلاب الضعاف
-في اللغة العربية.
-
-</span>
-
+<a class="mini" href="admin-weak.html">
+<strong>الطلاب الضعاف</strong>
+<span>متابعة حصر الطلاب الضعاف في اللغة العربية.</span>
 </a>
 
-
-
-<a
-  class="mini"
-  href="admin-identity-books.html"
->
-
-<strong>
-كتب مواد الهوية
-</strong>
-
-<span>
-
-متابعة الكتب غير المستلمة
-لمواد الهوية.
-
-</span>
-
+<a class="mini" href="admin-identity-books.html">
+<strong>كتب مواد الهوية</strong>
+<span>متابعة الكتب غير المستلمة لمواد الهوية.</span>
 </a>
 
-
-
-<a
-  class="mini"
-  href="admin-all-missing-books.html"
->
-
-<strong>
-جميع الكتب
-</strong>
-
-<span>
-
-متابعة جميع الكتب الدراسية
-غير المستلمة.
-
-</span>
-
+<a class="mini" href="admin-all-missing-books.html">
+<strong>جميع الكتب</strong>
+<span>متابعة جميع الكتب الدراسية غير المستلمة.</span>
 </a>
-
 
 </section>
 
 
 </div>
 
-
 </main>
 
-
-
 <footer>
-
-© 2026 Rasheed Arabic —
-جميع الحقوق محفوظة
-
+© 2026 Rasheed Arabic — جميع الحقوق محفوظة
 </footer>
-
 
 
 <script>
 
-
 const SUPABASE_URL =
 "https://wcyamoqmpwpribsgspjn.supabase.co";
-
 
 const SUPABASE_KEY =
 "sb_publishable_3eJET0uhZw4D4DowMK13fQ_oWK3PdIQ";
 
-
-const ADMIN_SESSION_KEY =
+const ADMIN_KEY =
 "rasheed_arabic_admin_session_v1";
 
-
-const PORTAL_SESSION_KEY =
+const PORTAL_KEY =
 "rasheed_arabic_portal_session_v1";
-
-
-
-/* =========================
-   SESSION
-   ========================= */
 
 
 function getSession(){
@@ -1314,25 +574,18 @@ function getSession(){
   try{
 
     return (
-
       JSON.parse(
-        localStorage.getItem(
-          ADMIN_SESSION_KEY
-        ) || "null"
+        localStorage.getItem(ADMIN_KEY) ||
+        "null"
       )
-
       ||
-
       JSON.parse(
-        localStorage.getItem(
-          PORTAL_SESSION_KEY
-        ) || "null"
+        localStorage.getItem(PORTAL_KEY) ||
+        "null"
       )
-
     );
 
-  }
-  catch{
+  }catch{
 
     return null;
 
@@ -1341,111 +594,53 @@ function getSession(){
 }
 
 
-
-/* =========================
-   API
-   ========================= */
-
-
-async function api(
-  path,
-  options = {}
-){
+async function api(path,options={}){
 
   const session =
     getSession();
 
-
-  if(
-    !session?.access_token
-  ){
-
-    throw new Error(
-      "NO_SESSION"
-    );
-
+  if(!session?.access_token){
+    throw new Error("NO_SESSION");
   }
-
 
   const headers = {
-
-    "apikey":
-      SUPABASE_KEY,
-
-    "Authorization":
+    apikey:SUPABASE_KEY,
+    Authorization:
       "Bearer " +
       session.access_token,
-
-    ...(
-      options.headers || {}
-    )
-
+    ...(options.headers || {})
   };
 
-
-  if(
-    options.body &&
-    !headers["Content-Type"]
-  ){
-
-    headers[
-      "Content-Type"
-    ] =
+  if(options.body){
+    headers["Content-Type"] =
       "application/json";
-
   }
 
-
   return fetch(
-
-    SUPABASE_URL +
-    path,
-
+    SUPABASE_URL + path,
     {
-
       ...options,
-
       headers
-
     }
-
   );
 
 }
 
 
-
-/* =========================
-   ADMIN CHECK
-   ========================= */
-
-
-async function verifyAdmin(){
+async function rpc(name){
 
   const response =
     await api(
-
-      "/rest/v1/rpc/is_rasheed_arabic_admin",
-
+      "/rest/v1/rpc/" + name,
       {
-
         method:"POST",
-
         body:"{}"
-
       }
-
     );
 
-
-  if(
-    !response.ok
-  ){
-
+  if(!response.ok){
     return false;
-
   }
-
 
   return (
     await response.json()
@@ -1454,336 +649,176 @@ async function verifyAdmin(){
 }
 
 
-
-/* =========================
-   OWNER CHECK
-   ========================= */
-
-
-async function verifyOwner(){
-
-  try{
-
-    const response =
-      await api(
-
-        "/rest/v1/rpc/is_rasheed_arabic_owner",
-
-        {
-
-          method:"POST",
-
-          body:"{}"
-
-        }
-
-      );
-
-
-    if(
-      !response.ok
-    ){
-
-      return false;
-
-    }
-
-
-    return (
-      await response.json()
-    ) === true;
-
-
-  }
-  catch{
-
-    return false;
-
-  }
-
-}
-
-
-
-/* =========================
-   LOAD STATS
-   ========================= */
-
-
 async function loadStats(){
 
   const studentsResponse =
     await api(
-
-      "/rest/v1/non_native_students" +
-      "?select=id"
-
+      "/rest/v1/non_native_students?select=id"
     );
-
 
   const accountsResponse =
     await api(
-
-      "/rest/v1/student_accounts" +
-      "?select=student_id"
-
+      "/rest/v1/student_accounts?select=student_id"
     );
-
 
   if(
     !studentsResponse.ok ||
     !accountsResponse.ok
   ){
-
     return;
-
   }
-
 
   const students =
     await studentsResponse.json();
 
-
   const accounts =
     await accountsResponse.json();
 
+  document
+  .getElementById("studentCount")
+  .textContent =
+    students.length;
 
   document
-    .getElementById(
-      "studentCount"
-    )
-    .textContent =
-      students.length;
-
+  .getElementById("accountCount")
+  .textContent =
+    accounts.length;
 
   document
-    .getElementById(
-      "accountCount"
-    )
-    .textContent =
-      accounts.length;
-
-
-  document
-    .getElementById(
-      "missingCount"
-    )
-    .textContent =
-
-      Math.max(
-
-        0,
-
-        students.length -
-        accounts.length
-
-      );
+  .getElementById("missingCount")
+  .textContent =
+    Math.max(
+      0,
+      students.length -
+      accounts.length
+    );
 
 }
 
 
-
-/* =========================
-   OWNER INTERFACE
-   ========================= */
-
-
-function enableOwnerInterface(){
-
-  const card =
-    document.getElementById(
-      "userManagementCard"
-    );
-
-
-  const grid =
-    document.getElementById(
-      "mainGrid"
-    );
-
-
-  card.classList.remove(
-    "hide"
-  );
-
-
-  grid.classList.add(
-    "owner-mode"
-  );
-
+function ownerInterface(){
 
   document
-    .getElementById(
-      "permissionTitle"
-    )
-    .textContent =
-      "👑 مالك المنصة";
-
+  .getElementById(
+    "userManagementCard"
+  )
+  .classList
+  .remove("hide");
 
   document
-    .getElementById(
-      "permissionText"
-    )
-    .textContent =
-      "صلاحية التحكم الأعلى";
+  .getElementById(
+    "mainGrid"
+  )
+  .classList
+  .add("owner-mode");
+
+  document
+  .getElementById(
+    "permissionTitle"
+  )
+  .textContent =
+    "👑 مالك المنصة";
+
+  document
+  .getElementById(
+    "permissionText"
+  )
+  .textContent =
+    "صلاحية التحكم الأعلى";
 
 }
-
-
-
-/* =========================
-   LOGOUT
-   ========================= */
 
 
 document
-  .getElementById(
-    "logoutBtn"
-  )
-  .addEventListener(
+.getElementById("logoutBtn")
+.addEventListener(
+  "click",
+  () => {
 
-    "click",
+    localStorage.removeItem(
+      ADMIN_KEY
+    );
 
-    () => {
+    localStorage.removeItem(
+      PORTAL_KEY
+    );
 
-      localStorage.removeItem(
-        ADMIN_SESSION_KEY
-      );
+    location.href =
+      "login.html";
 
-
-      localStorage.removeItem(
-        PORTAL_SESSION_KEY
-      );
-
-
-      location.href =
-        "login.html";
-
-    }
-
-  );
+  }
+);
 
 
-
-/* =========================
-   INIT
-   ========================= */
-
-
-(async function init(){
+(async function(){
 
   const notice =
     document.getElementById(
       "notice"
     );
 
-
   try{
-
 
     const session =
       getSession();
 
-
-    if(
-      !session?.access_token
-    ){
+    if(!session?.access_token){
 
       location.href =
         "login.html";
 
       return;
-
     }
 
+    const admin =
+      await rpc(
+        "is_rasheed_arabic_admin"
+      );
 
-
-    /* التحقق من المدير */
-
-    const isAdmin =
-      await verifyAdmin();
-
-
-    if(
-      !isAdmin
-    ){
+    if(!admin){
 
       notice.className =
         "notice error";
 
-
       notice.textContent =
-        "هذا الحساب لا يملك صلاحية الدخول إلى مركز الإدارة.";
-
+        "هذا الحساب لا يملك صلاحية الإدارة.";
 
       return;
-
     }
 
-
-
-    /* إظهار الصفحة */
-
-    notice.classList.add(
-      "hide"
-    );
-
+    notice.classList.add("hide");
 
     document
-      .getElementById(
-        "adminArea"
-      )
-      .classList
-      .remove(
-        "hide"
-      );
-
-
-
-    /* الإحصائيات */
+    .getElementById("adminArea")
+    .classList
+    .remove("hide");
 
     await loadStats();
 
+    const owner =
+      await rpc(
+        "is_rasheed_arabic_owner"
+      );
 
-
-    /* هل الحساب هو المالك؟ */
-
-    const isOwner =
-      await verifyOwner();
-
-
-    if(
-      isOwner
-    ){
-
-      enableOwnerInterface();
-
+    if(owner){
+      ownerInterface();
     }
 
+  }catch(error){
 
-  }
-  catch(error){
-
-    console.error(
-      error
-    );
-
+    console.error(error);
 
     notice.className =
       "notice error";
 
-
     notice.textContent =
-      "تعذر فتح مركز الإدارة. سجّل الدخول مرة أخرى.";
+      "تعذر فتح مركز الإدارة.";
 
   }
 
 })();
 
-
 </script>
 
-
 </body>
-
 </html>
