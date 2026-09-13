@@ -1,0 +1,2640 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+
+<title>إدارة المستخدمين والصلاحيات | رشيد العربية</title>
+
+<style>
+
+*{
+  box-sizing:border-box;
+}
+
+:root{
+  --green:#07583f;
+  --green2:#0b6c50;
+  --gold:#c9a227;
+  --bg:#f4f8f6;
+  --card:#fff;
+  --text:#17392c;
+  --muted:#6e7e77;
+  --border:#d8e5df;
+  --red:#a43b3b;
+  --blue:#2769a3;
+  --purple:#6b4fa1;
+}
+
+body{
+  margin:0;
+  font-family:Tahoma,Arial,sans-serif;
+  background:
+    radial-gradient(circle at top right,rgba(7,88,63,.07),transparent 30%),
+    var(--bg);
+  color:var(--text);
+}
+
+button,
+input,
+select{
+  font:inherit;
+}
+
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+
+/* TOP */
+
+.topbar{
+  background:linear-gradient(135deg,var(--green),#064631);
+  color:#fff;
+}
+
+.topbar-inner{
+  width:min(1300px,94%);
+  min-height:76px;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.brand img{
+  width:55px;
+  height:55px;
+  object-fit:contain;
+  background:#fff;
+  border-radius:13px;
+  padding:4px;
+}
+
+.brand strong{
+  display:block;
+  font-size:20px;
+}
+
+.brand small{
+  display:block;
+  margin-top:3px;
+  opacity:.82;
+}
+
+.top-actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+.top-btn{
+  border:1px solid rgba(255,255,255,.28);
+  background:rgba(255,255,255,.08);
+  color:#fff;
+  border-radius:11px;
+  padding:9px 13px;
+  cursor:pointer;
+}
+
+
+/* PAGE */
+
+.page{
+  width:min(1300px,94%);
+  margin:25px auto 60px;
+}
+
+
+/* HERO */
+
+.hero{
+  background:linear-gradient(135deg,#07583f,#0b6c50);
+  color:#fff;
+  border-radius:24px;
+  padding:26px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.hero h1{
+  margin:0 0 8px;
+  font-size:28px;
+}
+
+.hero p{
+  margin:0;
+  line-height:1.9;
+  opacity:.9;
+}
+
+.owner-box{
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.2);
+  border-radius:17px;
+  padding:15px 20px;
+  text-align:center;
+  min-width:190px;
+}
+
+.owner-box strong{
+  display:block;
+  color:#f5d76b;
+  font-size:18px;
+}
+
+.owner-box span{
+  display:block;
+  font-size:12px;
+  margin-top:5px;
+}
+
+
+/* STATS */
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:12px;
+  margin:18px 0;
+}
+
+.stat{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:17px;
+  padding:16px;
+}
+
+.stat span{
+  display:block;
+  color:var(--muted);
+  font-size:12px;
+}
+
+.stat strong{
+  display:block;
+  color:var(--green);
+  margin-top:6px;
+  font-size:27px;
+}
+
+
+/* PANEL */
+
+.panel{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:21px;
+  padding:20px;
+  margin-top:17px;
+}
+
+.panel-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-bottom:16px;
+}
+
+.panel-head h2{
+  margin:0;
+  color:var(--green);
+  font-size:20px;
+}
+
+
+/* BUTTONS */
+
+.btn{
+  border:0;
+  border-radius:10px;
+  padding:9px 13px;
+  cursor:pointer;
+  font-weight:700;
+}
+
+.btn-green{
+  background:var(--green);
+  color:#fff;
+}
+
+.btn-gold{
+  background:var(--gold);
+  color:#fff;
+}
+
+.btn-light{
+  background:#eef5f1;
+  color:var(--green);
+}
+
+.btn-blue{
+  background:#edf5fc;
+  color:var(--blue);
+}
+
+.btn-red{
+  background:#fff0f0;
+  color:var(--red);
+}
+
+.btn-purple{
+  background:#f3effa;
+  color:var(--purple);
+}
+
+.btn-gray{
+  background:#eef0ef;
+  color:#596961;
+}
+
+.btn:disabled{
+  opacity:.5;
+  cursor:not-allowed;
+}
+
+
+/* CREATE FORM */
+
+.create-grid{
+  display:grid;
+  grid-template-columns:1.3fr 1.3fr 1fr auto;
+  gap:10px;
+}
+
+.create-grid input,
+.create-grid select{
+  height:45px;
+  border:1px solid var(--border);
+  border-radius:11px;
+  padding:0 12px;
+  background:#fff;
+  outline:0;
+}
+
+
+/* FILTERS */
+
+.filters{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr;
+  gap:10px;
+  margin-bottom:15px;
+}
+
+.filters input,
+.filters select{
+  height:45px;
+  border:1px solid var(--border);
+  border-radius:11px;
+  padding:0 12px;
+  background:#fff;
+  outline:0;
+}
+
+
+/* TABLE */
+
+.table-wrap{
+  overflow:auto;
+  border:1px solid var(--border);
+  border-radius:15px;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:1180px;
+}
+
+th{
+  background:#edf5f1;
+  color:var(--green);
+  padding:12px 9px;
+  font-size:12px;
+  text-align:right;
+  white-space:nowrap;
+}
+
+td{
+  border-top:1px solid #edf2ef;
+  padding:11px 9px;
+  font-size:12px;
+  vertical-align:middle;
+}
+
+tr:hover td{
+  background:#fbfdfc;
+}
+
+.name{
+  font-weight:800;
+}
+
+.email,
+.username{
+  direction:ltr;
+  display:inline-block;
+  font-family:Consolas,monospace;
+}
+
+.username{
+  color:var(--green);
+  font-weight:800;
+}
+
+
+/* PILLS */
+
+.pill{
+  display:inline-flex;
+  padding:5px 8px;
+  border-radius:999px;
+  font-size:11px;
+  font-weight:700;
+}
+
+.role-owner{
+  background:#fff6d9;
+  color:#8b6815;
+}
+
+.role-admin{
+  background:#f0eafa;
+  color:#684697;
+}
+
+.role-teacher{
+  background:#eaf3fb;
+  color:#266596;
+}
+
+.role-parent{
+  background:#fff1e7;
+  color:#9a582a;
+}
+
+.role-student{
+  background:#eaf7ef;
+  color:#197442;
+}
+
+.active{
+  background:#eaf7ef;
+  color:#197442;
+}
+
+.disabled{
+  background:#f1f2f1;
+  color:#647169;
+}
+
+.actions{
+  display:flex;
+  gap:5px;
+  flex-wrap:wrap;
+}
+
+.small{
+  border:0;
+  border-radius:8px;
+  padding:7px 8px;
+  cursor:pointer;
+  font-size:10px;
+  font-weight:700;
+}
+
+
+/* NOTICE */
+
+.notice{
+  padding:13px 15px;
+  border-radius:12px;
+  margin-bottom:15px;
+  line-height:1.8;
+}
+
+.info{
+  background:#eef6f2;
+  border:1px solid #d2e6dc;
+  color:var(--green);
+}
+
+.error{
+  background:#fff0f0;
+  border:1px solid #efcccc;
+  color:#913333;
+}
+
+.hide{
+  display:none!important;
+}
+
+
+/* AUDIT */
+
+.audit-action{
+  font-family:Consolas,monospace;
+  direction:ltr;
+  display:inline-block;
+}
+
+
+/* MODAL */
+
+.modal-back{
+  position:fixed;
+  inset:0;
+  z-index:1000;
+  background:rgba(0,0,0,.5);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+}
+
+.modal{
+  width:min(570px,100%);
+  background:#fff;
+  border-radius:22px;
+  overflow:hidden;
+}
+
+.modal-head{
+  background:var(--green);
+  color:#fff;
+  padding:18px 20px;
+}
+
+.modal-head h3{
+  margin:0;
+}
+
+.modal-body{
+  padding:20px;
+}
+
+.credential{
+  background:#f5f9f7;
+  border:1px solid var(--border);
+  border-radius:13px;
+  padding:13px;
+  margin:10px 0;
+}
+
+.credential span{
+  display:block;
+  color:var(--muted);
+  font-size:11px;
+}
+
+.credential strong{
+  display:block;
+  margin-top:6px;
+  direction:ltr;
+  text-align:left;
+  font-family:Consolas,monospace;
+  word-break:break-all;
+}
+
+.modal-foot{
+  display:flex;
+  gap:8px;
+  padding:0 20px 20px;
+}
+
+
+/* RESPONSIVE */
+
+@media(max-width:1000px){
+
+  .stats{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .create-grid,
+  .filters{
+    grid-template-columns:1fr;
+  }
+
+}
+
+@media(max-width:650px){
+
+  .hero{
+    display:block;
+  }
+
+  .owner-box{
+    margin-top:17px;
+  }
+
+  .stats{
+    grid-template-columns:1fr;
+  }
+
+}
+</style>
+
+</head>
+
+
+<body>
+
+
+<header class="topbar">
+
+<div class="topbar-inner">
+
+<a class="brand" href="admin-hub.html">
+
+<img
+  src="rasheed-arabic-logo.png"
+  alt="رشيد العربية"
+  onerror="this.style.display='none'"
+>
+
+<div>
+<strong>رشيد العربية</strong>
+<small>إدارة المستخدمين والصلاحيات</small>
+</div>
+
+</a>
+
+
+<div class="top-actions">
+
+<button
+  class="top-btn"
+  onclick="location.href='admin-hub.html'"
+>
+مركز الإدارة
+</button>
+
+<button
+  class="top-btn"
+  onclick="location.href='index.html'"
+>
+الرئيسية
+</button>
+
+<button
+  class="top-btn"
+  id="logoutBtn"
+>
+تسجيل الخروج
+</button>
+
+</div>
+
+</div>
+
+</header>
+
+
+<main class="page">
+
+
+<div
+  id="notice"
+  class="notice info"
+>
+جارٍ التحقق من صلاحية مالك المنصة...
+</div>
+
+
+<div
+  id="ownerArea"
+  class="hide"
+>
+
+
+<section class="hero">
+
+<div>
+
+<h1>
+إدارة المستخدمين والصلاحيات
+</h1>
+
+<p>
+تحكم مركزي في المديرين والمعلمين وأولياء الأمور والطلاب،
+مع حماية كاملة لحساب مالك المنصة.
+</p>
+
+</div>
+
+
+<div class="owner-box">
+
+<strong>
+👑 مالك المنصة
+</strong>
+
+<span>
+صلاحية التحكم الأعلى
+</span>
+
+</div>
+
+</section>
+
+
+<section class="stats">
+
+<div class="stat">
+<span>جميع الحسابات</span>
+<strong id="totalCount">0</strong>
+</div>
+
+<div class="stat">
+<span>المديرون</span>
+<strong id="adminCount">0</strong>
+</div>
+
+<div class="stat">
+<span>المعلمون</span>
+<strong id="teacherCount">0</strong>
+</div>
+
+<div class="stat">
+<span>أولياء الأمور</span>
+<strong id="parentCount">0</strong>
+</div>
+
+<div class="stat">
+<span>الطلاب</span>
+<strong id="studentCount">0</strong>
+</div>
+
+</section>
+
+
+<section class="panel">
+
+<div class="panel-head">
+
+<h2>
+إنشاء مستخدم جديد
+</h2>
+
+<span style="color:#6e7e77;font-size:12px">
+الطلاب يتم إنشاؤهم من صفحة حسابات الطلاب
+</span>
+
+</div>
+
+
+<div class="create-grid">
+
+<input
+  id="newName"
+  placeholder="اسم المستخدم"
+/>
+
+<input
+  id="newEmail"
+  type="email"
+  placeholder="البريد الإلكتروني"
+/>
+
+<select id="newRole">
+
+<option value="teacher">
+معلم
+</option>
+
+<option value="parent">
+ولي أمر
+</option>
+
+<option value="admin">
+مدير
+</option>
+
+</select>
+
+
+<button
+  id="createBtn"
+  class="btn btn-green"
+>
+إنشاء الحساب
+</button>
+
+</div>
+
+</section>
+
+
+<section class="panel">
+
+<div class="panel-head">
+
+<h2>
+جميع المستخدمين
+</h2>
+
+<div>
+
+<button
+  id="refreshBtn"
+  class="btn btn-light"
+>
+↻ تحديث
+</button>
+
+<button
+  class="btn btn-blue"
+  onclick="location.href='student-accounts.html'"
+>
+حسابات الطلاب
+</button>
+
+</div>
+
+</div>
+
+
+<div class="filters">
+
+<input
+  id="searchBox"
+  type="search"
+  placeholder="بحث بالاسم أو البريد أو اسم المستخدم..."
+>
+
+<select id="roleFilter">
+
+<option value="">
+كل الأدوار
+</option>
+
+<option value="owner">
+مالك المنصة
+</option>
+
+<option value="admin">
+المديرون
+</option>
+
+<option value="teacher">
+المعلمون
+</option>
+
+<option value="parent">
+أولياء الأمور
+</option>
+
+<option value="student">
+الطلاب
+</option>
+
+</select>
+
+
+<select id="statusFilter">
+
+<option value="">
+كل الحالات
+</option>
+
+<option value="active">
+الحسابات الفعالة
+</option>
+
+<option value="disabled">
+الحسابات المعطلة
+</option>
+
+</select>
+
+</div>
+
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>#</th>
+<th>الاسم</th>
+<th>الدور</th>
+<th>البريد / اسم المستخدم</th>
+<th>بيانات إضافية</th>
+<th>الحالة</th>
+<th>الإجراءات</th>
+
+</tr>
+
+</thead>
+
+
+<tbody id="usersBody">
+
+<tr>
+<td colspan="7">
+جارٍ التحميل...
+</td>
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</section>
+
+
+<section class="panel">
+
+<div class="panel-head">
+
+<h2>
+سجل العمليات الإدارية
+</h2>
+
+<button
+  id="auditRefreshBtn"
+  class="btn btn-light"
+>
+تحديث السجل
+</button>
+
+</div>
+
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+<th>التاريخ</th>
+<th>العملية</th>
+<th>الدور المستهدف</th>
+<th>التفاصيل</th>
+</tr>
+
+</thead>
+
+<tbody id="auditBody">
+
+<tr>
+<td colspan="4">
+جارٍ تحميل السجل...
+</td>
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</section>
+
+
+</div>
+
+</main>
+
+
+<div
+  id="modalBack"
+  class="modal-back hide"
+>
+
+<div class="modal">
+
+<div class="modal-head">
+<h3 id="modalTitle">
+بيانات الحساب
+</h3>
+</div>
+
+<div class="modal-body">
+
+<div id="modalName"
+style="font-weight:800;font-size:17px">
+</div>
+
+<div class="credential">
+
+<span>
+البريد الإلكتروني
+</span>
+
+<strong id="modalEmail">
+—
+</strong>
+
+</div>
+
+
+<div class="credential">
+
+<span>
+كلمة المرور المؤقتة
+</span>
+
+<strong id="modalPassword">
+—
+</strong>
+
+</div>
+
+</div>
+
+
+<div class="modal-foot">
+
+<button
+  id="copyBtn"
+  class="btn btn-green"
+>
+نسخ البيانات
+</button>
+
+<button
+  id="closeBtn"
+  class="btn btn-light"
+>
+إغلاق
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+
+const SUPABASE_URL =
+"https://wcyamoqmpwpribsgspjn.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_3eJET0uhZw4D4DowMK13fQ_oWK3PdIQ";
+
+const ADMIN_KEY =
+"rasheed_arabic_admin_session_v1";
+
+const PORTAL_KEY =
+"rasheed_arabic_portal_session_v1";
+
+const EDGE_FUNCTION =
+"manage-platform-users";
+
+
+let users = [];
+let modalData = null;
+
+
+const $ =
+id =>
+document.getElementById(id);
+
+
+/* SESSION */
+
+function getSession(){
+
+try{
+
+return (
+JSON.parse(
+localStorage.getItem(
+ADMIN_KEY
+) || "null"
+)
+||
+JSON.parse(
+localStorage.getItem(
+PORTAL_KEY
+) || "null"
+)
+);
+
+}catch{
+
+return null;
+
+}
+
+}
+
+
+/* EDGE CALL */
+
+async function callEdge(
+payload
+){
+
+const session =
+getSession();
+
+
+if(
+!session?.access_token
+){
+
+throw new Error(
+"NO_SESSION"
+);
+
+}
+
+
+const response =
+await fetch(
+
+SUPABASE_URL +
+"/functions/v1/" +
+EDGE_FUNCTION,
+
+{
+
+method:"POST",
+
+headers:{
+
+"apikey":
+SUPABASE_KEY,
+
+"Authorization":
+"Bearer " +
+session.access_token,
+
+"Content-Type":
+"application/json"
+
+},
+
+body:
+JSON.stringify(payload)
+
+}
+
+);
+
+
+let data = {};
+
+
+try{
+
+data =
+await response.json();
+
+}catch{}
+
+
+if(
+!response.ok ||
+data?.ok === false
+){
+
+throw new Error(
+data?.error ||
+"HTTP_" +
+response.status
+);
+
+}
+
+
+return data;
+
+}
+
+
+/* REST */
+
+async function rest(
+path
+){
+
+const session =
+getSession();
+
+
+if(
+!session?.access_token
+){
+
+throw new Error(
+"NO_SESSION"
+);
+
+}
+
+
+return fetch(
+
+SUPABASE_URL +
+path,
+
+{
+
+headers:{
+
+"apikey":
+SUPABASE_KEY,
+
+"Authorization":
+"Bearer " +
+session.access_token
+
+}
+
+}
+
+);
+
+}
+
+
+/* OWNER CHECK */
+
+async function verifyOwner(){
+
+const session =
+getSession();
+
+
+if(!session?.access_token){
+return false;
+}
+
+
+const response =
+await fetch(
+
+SUPABASE_URL +
+"/rest/v1/rpc/is_rasheed_arabic_owner",
+
+{
+
+method:"POST",
+
+headers:{
+
+"apikey":
+SUPABASE_KEY,
+
+"Authorization":
+"Bearer " +
+session.access_token,
+
+"Content-Type":
+"application/json"
+
+},
+
+body:"{}"
+
+}
+
+);
+
+
+if(!response.ok){
+return false;
+}
+
+
+return (
+await response.json()
+) === true;
+
+}
+
+
+/* ROLE */
+
+function roleName(role){
+
+return ({
+
+owner:"مالك المنصة",
+admin:"مدير",
+teacher:"معلم",
+parent:"ولي أمر",
+student:"طالب"
+
+})[role] || role;
+
+}
+
+
+function roleClass(role){
+
+return "role-" +
+role;
+
+}
+
+
+/* ESCAPE */
+
+function esc(value){
+
+return String(
+value ?? ""
+).replace(
+
+/[&<>"']/g,
+
+c => ({
+
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#39;"
+
+}[c])
+
+);
+
+}
+
+
+/* LOAD USERS */
+
+async function loadUsers(){
+
+const data =
+await callEdge({
+action:"list"
+});
+
+
+users =
+data.users || [];
+
+
+renderUsers();
+
+}
+
+
+/* COUNTS */
+
+function updateStats(){
+
+$("totalCount")
+.textContent =
+users.length;
+
+
+$("adminCount")
+.textContent =
+users.filter(
+u =>
+u.role === "admin"
+).length;
+
+
+$("teacherCount")
+.textContent =
+users.filter(
+u =>
+u.role === "teacher"
+).length;
+
+
+$("parentCount")
+.textContent =
+users.filter(
+u =>
+u.role === "parent"
+).length;
+
+
+$("studentCount")
+.textContent =
+users.filter(
+u =>
+u.role === "student"
+).length;
+
+}
+
+
+/* RENDER USERS */
+
+function renderUsers(){
+
+updateStats();
+
+
+const q =
+$("searchBox")
+.value
+.trim()
+.toLowerCase();
+
+
+const role =
+$("roleFilter")
+.value;
+
+
+const status =
+$("statusFilter")
+.value;
+
+
+const filtered =
+users.filter(
+user => {
+
+const searchText = [
+
+user.display_name,
+user.email,
+user.username,
+user.grade,
+user.section_name,
+user.curriculum
+
+]
+.join(" ")
+.toLowerCase();
+
+
+if(
+q &&
+!searchText.includes(q)
+){
+return false;
+}
+
+
+if(
+role &&
+user.role !== role
+){
+return false;
+}
+
+
+if(
+status === "active" &&
+user.is_active === false
+){
+return false;
+}
+
+
+if(
+status === "disabled" &&
+user.is_active !== false
+){
+return false;
+}
+
+
+return true;
+
+}
+);
+
+
+if(!filtered.length){
+
+$("usersBody").innerHTML = `
+
+<tr>
+
+<td
+colspan="7"
+style="text-align:center;padding:30px"
+>
+لا توجد نتائج.
+</td>
+
+</tr>
+
+`;
+
+return;
+
+}
+
+
+$("usersBody").innerHTML =
+filtered.map(
+(user,index) => {
+
+
+const rolePill = `
+
+<span
+class="pill ${roleClass(user.role)}"
+>
+${roleName(user.role)}
+</span>
+
+`;
+
+
+const statusPill =
+user.is_active === false
+?
+`
+<span class="pill disabled">
+معطل
+</span>
+`
+:
+`
+<span class="pill active">
+فعال
+</span>
+`;
+
+
+let loginData = "";
+
+
+if(
+user.role === "student"
+){
+
+loginData = `
+
+<span class="username">
+${esc(user.username || "—")}
+</span>
+
+`;
+
+}
+else{
+
+loginData = `
+
+<span class="email">
+${esc(user.email || "—")}
+</span>
+
+`;
+
+}
+
+
+let extra = "—";
+
+
+if(
+user.role === "student"
+){
+
+extra = [
+
+user.grade,
+user.section_name,
+user.curriculum
+
+]
+.filter(Boolean)
+.join(" • ") || "—";
+
+}
+
+
+let actions = "";
+
+
+if(user.role === "owner"){
+
+actions = `
+
+<button
+class="small btn-blue"
+onclick="renameUser('${user.user_id}')"
+>
+تعديل الاسم
+</button>
+
+<button
+class="small btn-purple"
+onclick="resetPassword('${user.user_id}')"
+>
+كلمة مرور جديدة
+</button>
+
+<span
+class="pill role-owner"
+>
+محمي
+</span>
+
+`;
+
+}
+
+
+else{
+
+actions = `
+
+<button
+class="small btn-blue"
+onclick="renameUser('${user.user_id}')"
+>
+تعديل الاسم
+</button>
+
+<button
+class="small btn-purple"
+onclick="resetPassword('${user.user_id}')"
+>
+كلمة مرور جديدة
+</button>
+
+`;
+
+
+if(
+user.is_active === false
+){
+
+actions += `
+
+<button
+class="small btn-green"
+onclick="toggleUser('${user.user_id}',true)"
+>
+تفعيل
+</button>
+
+`;
+
+}
+else{
+
+actions += `
+
+<button
+class="small btn-gray"
+onclick="toggleUser('${user.user_id}',false)"
+>
+تعطيل
+</button>
+
+`;
+
+}
+
+
+if(
+[
+"admin",
+"teacher",
+"parent"
+].includes(
+user.role
+)
+){
+
+actions += `
+
+<button
+class="small btn-gold"
+onclick="changeRole('${user.user_id}','${user.role}')"
+>
+تغيير الدور
+</button>
+
+`;
+
+}
+
+
+actions += `
+
+<button
+class="small btn-red"
+onclick="deleteAccount('${user.user_id}')"
+>
+حذف الحساب
+</button>
+
+`;
+
+}
+
+
+return `
+
+<tr>
+
+<td>
+${index + 1}
+</td>
+
+<td>
+<span class="name">
+${esc(user.display_name)}
+</span>
+</td>
+
+<td>
+${rolePill}
+</td>
+
+<td>
+${loginData}
+</td>
+
+<td>
+${esc(extra)}
+</td>
+
+<td>
+${statusPill}
+</td>
+
+<td>
+<div class="actions">
+${actions}
+</div>
+</td>
+
+</tr>
+
+`;
+
+}
+).join("");
+
+}
+
+
+/* CREATE USER */
+
+async function createUser(){
+
+const name =
+$("newName")
+.value
+.trim();
+
+
+const email =
+$("newEmail")
+.value
+.trim();
+
+
+const role =
+$("newRole")
+.value;
+
+
+if(
+!name ||
+!email
+){
+
+alert(
+"اكتب الاسم والبريد الإلكتروني."
+);
+
+return;
+
+}
+
+
+const button =
+$("createBtn");
+
+
+button.disabled =
+true;
+
+
+button.textContent =
+"جارٍ الإنشاء...";
+
+
+try{
+
+const data =
+await callEdge({
+
+action:"create",
+display_name:name,
+email:email,
+role:role
+
+});
+
+
+modalData = {
+
+name:
+data.display_name,
+
+email:
+data.email,
+
+password:
+data.password
+
+};
+
+
+$("modalTitle")
+.textContent =
+"تم إنشاء الحساب بنجاح";
+
+
+$("modalName")
+.textContent =
+data.display_name;
+
+
+$("modalEmail")
+.textContent =
+data.email;
+
+
+$("modalPassword")
+.textContent =
+data.password;
+
+
+$("modalBack")
+.classList
+.remove("hide");
+
+
+$("newName").value = "";
+$("newEmail").value = "";
+
+
+await loadUsers();
+await loadAudit();
+
+
+}catch(error){
+
+alert(
+"تعذر إنشاء الحساب:\n" +
+error.message
+);
+
+}
+finally{
+
+button.disabled =
+false;
+
+button.textContent =
+"إنشاء الحساب";
+
+}
+
+}
+
+
+/* RENAME */
+
+async function renameUser(
+userId
+){
+
+const user =
+users.find(
+u =>
+u.user_id === userId
+);
+
+
+if(!user){
+return;
+}
+
+
+const name =
+prompt(
+"الاسم الجديد:",
+user.display_name
+);
+
+
+if(
+name === null ||
+!name.trim() ||
+name.trim() === user.display_name
+){
+return;
+}
+
+
+try{
+
+await callEdge({
+
+action:"rename",
+user_id:userId,
+display_name:
+name.trim()
+
+});
+
+
+await loadUsers();
+await loadAudit();
+
+
+alert(
+"تم تعديل الاسم."
+);
+
+
+}catch(error){
+
+alert(
+"تعذر تعديل الاسم:\n" +
+error.message
+);
+
+}
+
+}
+
+
+/* RESET PASSWORD */
+
+async function resetPassword(
+userId
+){
+
+const user =
+users.find(
+u =>
+u.user_id === userId
+);
+
+
+if(!user){
+return;
+}
+
+
+if(
+!confirm(
+"إنشاء كلمة مرور جديدة لـ:\n\n" +
+user.display_name +
+" ؟"
+)
+){
+return;
+}
+
+
+try{
+
+const data =
+await callEdge({
+
+action:"reset_password",
+user_id:userId
+
+});
+
+
+modalData = {
+
+name:
+user.display_name,
+
+email:
+user.role === "student"
+?
+user.username
+:
+user.email,
+
+password:
+data.password
+
+};
+
+
+$("modalTitle")
+.textContent =
+"كلمة المرور الجديدة";
+
+
+$("modalName")
+.textContent =
+user.display_name;
+
+
+$("modalEmail")
+.textContent =
+user.role === "student"
+?
+user.username
+:
+user.email;
+
+
+$("modalPassword")
+.textContent =
+data.password;
+
+
+$("modalBack")
+.classList
+.remove("hide");
+
+
+await loadAudit();
+
+
+}catch(error){
+
+alert(
+"تعذر إعادة تعيين كلمة المرور:\n" +
+error.message
+);
+
+}
+
+}
+
+
+/* ENABLE / DISABLE */
+
+async function toggleUser(
+userId,
+enable
+){
+
+const user =
+users.find(
+u =>
+u.user_id === userId
+);
+
+
+if(!user){
+return;
+}
+
+
+if(
+!confirm(
+(enable ? "تفعيل" : "تعطيل") +
+" حساب:\n\n" +
+user.display_name +
+" ؟"
+)
+){
+return;
+}
+
+
+try{
+
+await callEdge({
+
+action:
+enable
+?
+"enable"
+:
+"disable",
+
+user_id:userId
+
+});
+
+
+await loadUsers();
+await loadAudit();
+
+
+alert(
+enable
+?
+"تم تفعيل الحساب."
+:
+"تم تعطيل الحساب."
+);
+
+
+}catch(error){
+
+alert(
+"تعذر تنفيذ العملية:\n" +
+error.message
+);
+
+}
+
+}
+
+
+/* CHANGE ROLE */
+
+async function changeRole(
+userId,
+currentRole
+){
+
+const user =
+users.find(
+u =>
+u.user_id === userId
+);
+
+
+if(!user){
+return;
+}
+
+
+const map = {
+
+"1":"admin",
+"2":"teacher",
+"3":"parent"
+
+};
+
+
+const answer =
+prompt(
+
+"تغيير دور " +
+user.display_name +
+"\n\n" +
+"1 = مدير\n" +
+"2 = معلم\n" +
+"3 = ولي أمر\n\n" +
+"الدور الحالي: " +
+roleName(currentRole)
+
+);
+
+
+if(
+answer === null
+){
+return;
+}
+
+
+const newRole =
+map[
+answer.trim()
+];
+
+
+if(!newRole){
+
+alert(
+"الاختيار غير صحيح."
+);
+
+return;
+
+}
+
+
+if(
+newRole === currentRole
+){
+return;
+}
+
+
+if(
+!confirm(
+"تأكيد تغيير الدور إلى: " +
+roleName(newRole) +
+" ؟"
+)
+){
+return;
+}
+
+
+try{
+
+await callEdge({
+
+action:"change_role",
+user_id:userId,
+role:newRole
+
+});
+
+
+await loadUsers();
+await loadAudit();
+
+
+alert(
+"تم تغيير الدور بنجاح."
+);
+
+
+}catch(error){
+
+alert(
+"تعذر تغيير الدور:\n" +
+error.message
+);
+
+}
+
+}
+
+
+/* DELETE */
+
+async function deleteAccount(
+userId
+){
+
+const user =
+users.find(
+u =>
+u.user_id === userId
+);
+
+
+if(!user){
+return;
+}
+
+
+if(
+!confirm(
+"⚠ حذف حساب الدخول نهائيًا\n\n" +
+user.display_name +
+"\n\n" +
+(
+user.role === "student"
+?
+"سيُحذف حساب الدخول فقط، وسيبقى الطالب في سجل الحصر."
+:
+"سيتم حذف حساب المستخدم."
+) +
+"\n\nهل تريد الاستمرار؟"
+)
+){
+return;
+}
+
+
+const typed =
+prompt(
+"للتأكيد اكتب:\n\nحذف"
+);
+
+
+if(
+typed !== "حذف"
+){
+
+alert(
+"تم إلغاء الحذف."
+);
+
+return;
+
+}
+
+
+try{
+
+await callEdge({
+
+action:"delete",
+user_id:userId
+
+});
+
+
+await loadUsers();
+await loadAudit();
+
+
+alert(
+"تم حذف الحساب."
+);
+
+
+}catch(error){
+
+alert(
+"تعذر حذف الحساب:\n" +
+error.message
+);
+
+}
+
+}
+
+
+/* AUDIT */
+
+async function loadAudit(){
+
+try{
+
+const response =
+await rest(
+
+"/rest/v1/platform_audit_log" +
+"?select=id,action,target_role,details,created_at" +
+"&order=created_at.desc" +
+"&limit=100"
+
+);
+
+
+if(!response.ok){
+
+throw new Error(
+"LOAD_AUDIT_FAILED"
+);
+
+}
+
+
+const rows =
+await response.json();
+
+
+if(!rows.length){
+
+$("auditBody").innerHTML = `
+
+<tr>
+<td colspan="4">
+لا توجد عمليات مسجلة بعد.
+</td>
+</tr>
+
+`;
+
+return;
+
+}
+
+
+$("auditBody").innerHTML =
+rows.map(
+row => `
+
+<tr>
+
+<td>
+${new Date(
+row.created_at
+).toLocaleString("ar-SA")}
+</td>
+
+<td>
+<span class="audit-action">
+${esc(row.action)}
+</span>
+</td>
+
+<td>
+${esc(
+roleName(
+row.target_role
+)
+)}
+</td>
+
+<td>
+${esc(
+JSON.stringify(
+row.details || {}
+)
+)}
+</td>
+
+</tr>
+
+`
+).join("");
+
+
+}catch(error){
+
+$("auditBody").innerHTML = `
+
+<tr>
+
+<td
+colspan="4"
+style="color:#913333"
+>
+تعذر تحميل سجل العمليات.
+</td>
+
+</tr>
+
+`;
+
+}
+
+}
+
+
+/* COPY */
+
+async function copyModal(){
+
+if(!modalData){
+return;
+}
+
+
+const text =
+
+"رشيد العربية\n" +
+
+"الاسم: " +
+modalData.name +
+"\n" +
+
+"اسم الدخول: " +
+modalData.email +
+"\n" +
+
+"كلمة المرور: " +
+modalData.password +
+"\n\n" +
+
+"https://samysuliman.github.io/rasheed-arabic/login.html";
+
+
+await navigator
+.clipboard
+.writeText(text);
+
+
+alert(
+"تم نسخ بيانات الحساب."
+);
+
+}
+
+
+/* EVENTS */
+
+$("searchBox")
+.addEventListener(
+"input",
+renderUsers
+);
+
+
+$("roleFilter")
+.addEventListener(
+"change",
+renderUsers
+);
+
+
+$("statusFilter")
+.addEventListener(
+"change",
+renderUsers
+);
+
+
+$("createBtn")
+.addEventListener(
+"click",
+createUser
+);
+
+
+$("refreshBtn")
+.addEventListener(
+"click",
+async () => {
+
+const b =
+$("refreshBtn");
+
+b.disabled = true;
+
+b.textContent =
+"جارٍ التحديث...";
+
+
+try{
+
+await loadUsers();
+
+b.textContent =
+"✓ تم التحديث";
+
+
+setTimeout(
+() => {
+b.textContent =
+"↻ تحديث";
+},
+1200
+);
+
+}
+finally{
+
+b.disabled =
+false;
+
+}
+
+}
+);
+
+
+$("auditRefreshBtn")
+.addEventListener(
+"click",
+loadAudit
+);
+
+
+$("copyBtn")
+.addEventListener(
+"click",
+copyModal
+);
+
+
+$("closeBtn")
+.addEventListener(
+"click",
+() => {
+
+$("modalBack")
+.classList
+.add("hide");
+
+modalData = null;
+
+}
+);
+
+
+$("modalBack")
+.addEventListener(
+"click",
+event => {
+
+if(
+event.target ===
+$("modalBack")
+){
+
+$("modalBack")
+.classList
+.add("hide");
+
+}
+
+}
+);
+
+
+$("logoutBtn")
+.addEventListener(
+"click",
+() => {
+
+localStorage.removeItem(
+ADMIN_KEY
+);
+
+localStorage.removeItem(
+PORTAL_KEY
+);
+
+location.href =
+"login.html";
+
+}
+);
+
+
+/* INIT */
+
+(async function init(){
+
+const notice =
+$("notice");
+
+
+try{
+
+const session =
+getSession();
+
+
+if(
+!session?.access_token
+){
+
+location.href =
+"login.html";
+
+return;
+
+}
+
+
+const owner =
+await verifyOwner();
+
+
+if(!owner){
+
+notice.className =
+"notice error";
+
+notice.textContent =
+"هذه الصفحة مخصصة لمالك المنصة فقط.";
+
+return;
+
+}
+
+
+notice.classList.add(
+"hide"
+);
+
+
+$("ownerArea")
+.classList
+.remove("hide");
+
+
+await loadUsers();
+
+await loadAudit();
+
+
+}catch(error){
+
+console.error(error);
+
+
+notice.className =
+"notice error";
+
+
+notice.textContent =
+"تعذر فتح إدارة المستخدمين: " +
+error.message;
+
+}
+
+})();
+
+</script>
+
+</body>
+
+</html>
