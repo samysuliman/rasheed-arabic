@@ -1,38 +1,1194 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
+
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1,viewport-fit=cover"
+>
+
 <title>تسجيل الدخول | رشيد العربية</title>
+
 <style>
-*{box-sizing:border-box}:root{--g:#07583f;--g2:#0b6c50;--gold:#c9a227;--bg:#f4f8f6;--text:#17392c;--muted:#6f8078;--border:#d7e5de}
-body{margin:0;min-height:100vh;font-family:Tahoma,Arial,sans-serif;background:radial-gradient(circle at top right,rgba(7,88,63,.1),transparent 34%),linear-gradient(180deg,#f8fbf9,#eef5f2);color:var(--text);display:grid;place-items:center;padding:24px}
-a{color:inherit;text-decoration:none}.wrap{width:min(980px,100%);display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:stretch}.hero,.login{background:#fff;border:1px solid var(--border);border-radius:28px;box-shadow:0 18px 50px rgba(7,88,63,.09)}
-.hero{padding:34px;background:linear-gradient(145deg,#07583f,#06442f);color:#fff;position:relative;overflow:hidden}.hero:after{content:"";position:absolute;width:300px;height:300px;border:52px solid rgba(201,162,39,.13);border-radius:50%;left:-120px;bottom:-150px}.brand{display:flex;align-items:center;gap:14px;position:relative;z-index:1}.brand img{width:82px;height:82px;object-fit:contain;background:#fff;border-radius:20px;padding:5px}.brand h1{margin:0;font-size:30px}.brand p{margin:5px 0 0;opacity:.85}.hero h2{font-size:27px;margin:46px 0 12px;position:relative;z-index:1}.hero>p{line-height:1.9;opacity:.92;position:relative;z-index:1}.roles{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:26px;position:relative;z-index:1}.role{border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.1);padding:12px 14px;border-radius:15px;font-weight:700}.role small{display:block;font-weight:400;opacity:.78;margin-top:4px}
-.login{padding:34px}.login h2{margin:3px 0 8px;color:var(--g);font-size:25px}.login .sub{color:var(--muted);line-height:1.7;margin-bottom:24px}.field{margin-bottom:15px}.field label{display:block;font-size:13px;font-weight:700;margin-bottom:7px}.field input{width:100%;height:50px;border:1px solid var(--border);border-radius:14px;padding:0 14px;outline:0;font:inherit}.field input:focus{border-color:#82b7a2;box-shadow:0 0 0 4px rgba(7,88,63,.08)}.btn{width:100%;height:50px;border:0;border-radius:14px;background:var(--g);color:#fff;font-weight:800;font:inherit;cursor:pointer}.btn:disabled{opacity:.55}.error{margin-top:14px;padding:12px 14px;border-radius:12px;background:#fff0f0;border:1px solid #efc7c7;color:#8c3030;line-height:1.7}.hide{display:none}.note{margin-top:16px;color:var(--muted);font-size:12px;line-height:1.8;text-align:center}.home{display:inline-block;margin-top:18px;color:var(--g);font-weight:700}
-@media(max-width:760px){.wrap{grid-template-columns:1fr}.hero{padding:25px}.hero h2{margin-top:28px}.roles{grid-template-columns:1fr 1fr}.login{padding:25px}}
+
+*{
+  box-sizing:border-box;
+}
+
+:root{
+  --g:#07583f;
+  --g2:#0b6c50;
+  --gold:#c9a227;
+  --bg:#f4f8f6;
+  --text:#17392c;
+  --muted:#6f8078;
+  --border:#d7e5de;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:Tahoma,Arial,sans-serif;
+
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(7,88,63,.1),
+      transparent 34%
+    ),
+    linear-gradient(
+      180deg,
+      #f8fbf9,
+      #eef5f2
+    );
+
+  color:var(--text);
+
+  display:grid;
+  place-items:center;
+
+  padding:24px;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+.wrap{
+  width:min(980px,100%);
+
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+
+  gap:24px;
+
+  align-items:stretch;
+}
+
+.hero,
+.login{
+  background:#fff;
+
+  border:1px solid var(--border);
+
+  border-radius:28px;
+
+  box-shadow:
+    0 18px 50px
+    rgba(7,88,63,.09);
+}
+
+
+/* الجانب الأخضر */
+
+.hero{
+  padding:34px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #07583f,
+      #06442f
+    );
+
+  color:#fff;
+
+  position:relative;
+  overflow:hidden;
+}
+
+.hero:after{
+  content:"";
+
+  position:absolute;
+
+  width:300px;
+  height:300px;
+
+  border:
+    52px solid
+    rgba(201,162,39,.13);
+
+  border-radius:50%;
+
+  left:-120px;
+  bottom:-150px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+
+  gap:14px;
+
+  position:relative;
+  z-index:1;
+}
+
+.brand img{
+  width:82px;
+  height:82px;
+
+  object-fit:contain;
+
+  background:#fff;
+
+  border-radius:20px;
+
+  padding:5px;
+}
+
+.brand h1{
+  margin:0;
+
+  font-size:30px;
+}
+
+.brand p{
+  margin:5px 0 0;
+
+  opacity:.85;
+}
+
+.hero h2{
+  font-size:27px;
+
+  margin:
+    46px 0 12px;
+
+  position:relative;
+  z-index:1;
+}
+
+.hero > p{
+  line-height:1.9;
+
+  opacity:.92;
+
+  position:relative;
+  z-index:1;
+}
+
+.roles{
+  display:grid;
+
+  grid-template-columns:
+    repeat(2,1fr);
+
+  gap:10px;
+
+  margin-top:26px;
+
+  position:relative;
+  z-index:1;
+}
+
+.role{
+  border:
+    1px solid
+    rgba(255,255,255,.22);
+
+  background:
+    rgba(255,255,255,.1);
+
+  padding:
+    12px 14px;
+
+  border-radius:15px;
+
+  font-weight:700;
+}
+
+.role small{
+  display:block;
+
+  font-weight:400;
+
+  opacity:.78;
+
+  margin-top:4px;
+
+  line-height:1.6;
+}
+
+
+/* نموذج الدخول */
+
+.login{
+  padding:34px;
+}
+
+.login h2{
+  margin:
+    3px 0 8px;
+
+  color:var(--g);
+
+  font-size:25px;
+}
+
+.login .sub{
+  color:var(--muted);
+
+  line-height:1.7;
+
+  margin-bottom:24px;
+}
+
+.field{
+  margin-bottom:15px;
+}
+
+.field label{
+  display:block;
+
+  font-size:13px;
+
+  font-weight:700;
+
+  margin-bottom:7px;
+}
+
+.field input{
+  width:100%;
+
+  height:50px;
+
+  border:
+    1px solid
+    var(--border);
+
+  border-radius:14px;
+
+  padding:
+    0 14px;
+
+  outline:0;
+
+  font:inherit;
+
+  direction:ltr;
+  text-align:left;
+}
+
+.field input:focus{
+  border-color:#82b7a2;
+
+  box-shadow:
+    0 0 0 4px
+    rgba(7,88,63,.08);
+}
+
+.btn{
+  width:100%;
+
+  height:50px;
+
+  border:0;
+
+  border-radius:14px;
+
+  background:var(--g);
+
+  color:#fff;
+
+  font-weight:800;
+
+  font:inherit;
+
+  cursor:pointer;
+
+  transition:.2s;
+}
+
+.btn:hover{
+  background:var(--g2);
+}
+
+.btn:disabled{
+  opacity:.55;
+
+  cursor:not-allowed;
+}
+
+.error{
+  margin-top:14px;
+
+  padding:
+    12px 14px;
+
+  border-radius:12px;
+
+  background:#fff0f0;
+
+  border:
+    1px solid #efc7c7;
+
+  color:#8c3030;
+
+  line-height:1.7;
+}
+
+.hide{
+  display:none;
+}
+
+.note{
+  margin-top:16px;
+
+  color:var(--muted);
+
+  font-size:12px;
+
+  line-height:1.8;
+
+  text-align:center;
+}
+
+.student-note{
+  margin:
+    14px 0 18px;
+
+  padding:
+    11px 13px;
+
+  border-radius:12px;
+
+  background:#edf7f2;
+
+  border:
+    1px solid #d4e9df;
+
+  color:var(--g);
+
+  font-size:12px;
+
+  line-height:1.8;
+}
+
+.home{
+  display:inline-block;
+
+  margin-top:18px;
+
+  color:var(--g);
+
+  font-weight:700;
+}
+
+
+@media(max-width:760px){
+
+  .wrap{
+    grid-template-columns:1fr;
+  }
+
+  .hero{
+    padding:25px;
+  }
+
+  .hero h2{
+    margin-top:28px;
+  }
+
+  .roles{
+    grid-template-columns:
+      1fr 1fr;
+  }
+
+  .login{
+    padding:25px;
+  }
+
+}
+
 </style>
+
 </head>
+
+
 <body>
+
+
 <div class="wrap">
+
+
+  <!-- الجانب التعريفي -->
+
   <section class="hero">
-    <div class="brand"><img src="rasheed-arabic-logo.png" alt="رشيد العربية" onerror="this.style.display='none'"><div><h1>رشيد العربية</h1><p>منصة تعليم العربية وإدارة البرنامج</p></div></div>
-    <h2>حساب واحد.. وكل ما يخصك في مكان واحد</h2>
-    <p>سجّل الدخول، وسيحدد النظام نوع حسابك تلقائيًا وينقلك إلى اللوحة المناسبة دون الحاجة لاختيار نوع المستخدم.</p>
-    <div class="roles"><div class="role">👨‍🎓 طالب<small>الواجبات والاختبارات والمواد والنتائج</small></div><div class="role">👨‍🏫 معلم<small>الطلاب والمحتوى والأنشطة والمتابعة</small></div><div class="role">👨‍👩‍👧 ولي أمر<small>الأبناء والتقدم والتنبيهات</small></div><div class="role">🛡️ مدير<small>الإدارة والصلاحيات والتقارير</small></div></div>
+
+    <div class="brand">
+
+      <img
+        src="rasheed-arabic-logo.png"
+        alt="رشيد العربية"
+        onerror="this.style.display='none'"
+      >
+
+      <div>
+
+        <h1>
+          رشيد العربية
+        </h1>
+
+        <p>
+          منصة تعليم العربية وإدارة البرنامج
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <h2>
+      حساب واحد.. وكل ما يخصك في مكان واحد
+    </h2>
+
+
+    <p>
+
+      سجّل الدخول وسيحدد النظام نوع حسابك
+      تلقائيًا، ثم ينقلك إلى اللوحة المناسبة
+      دون الحاجة إلى اختيار نوع المستخدم.
+
+    </p>
+
+
+    <div class="roles">
+
+      <div class="role">
+
+        👨‍🎓 طالب
+
+        <small>
+          الواجبات والاختبارات والمواد والنتائج
+        </small>
+
+      </div>
+
+
+      <div class="role">
+
+        👨‍🏫 معلم
+
+        <small>
+          الطلاب والمحتوى والأنشطة والمتابعة
+        </small>
+
+      </div>
+
+
+      <div class="role">
+
+        👨‍👩‍👧 ولي أمر
+
+        <small>
+          الأبناء والتقدم والتنبيهات
+        </small>
+
+      </div>
+
+
+      <div class="role">
+
+        🛡️ مدير
+
+        <small>
+          الإدارة والصلاحيات والتقارير
+        </small>
+
+      </div>
+
+    </div>
+
   </section>
+
+
+
+  <!-- تسجيل الدخول -->
+
   <section class="login">
-    <h2>تسجيل الدخول</h2>
-    <div class="sub">أدخل البريد الإلكتروني وكلمة المرور المرتبطين بحسابك في رشيد العربية.</div>
+
+    <h2>
+      تسجيل الدخول
+    </h2>
+
+
+    <div class="sub">
+
+      أدخل اسم المستخدم أو البريد الإلكتروني
+      وكلمة المرور المرتبطين بحسابك
+      في رشيد العربية.
+
+    </div>
+
+
+    <div class="student-note">
+
+      الطالب يستطيع تسجيل الدخول باسم المستخدم
+      مثل:
+      <b>RA0004</b>
+
+      <br>
+
+      ولا يحتاج إلى كتابة البريد الإلكتروني الداخلي.
+
+    </div>
+
+
     <form id="portalLoginForm">
-      <div class="field"><label for="email">البريد الإلكتروني</label><input id="email" type="email" autocomplete="username" required placeholder="name@example.com"></div>
-      <div class="field"><label for="password">كلمة المرور</label><input id="password" type="password" autocomplete="current-password" required placeholder="••••••••"></div>
-      <button class="btn" id="portalLoginBtn" type="submit">تسجيل الدخول</button>
-      <div id="loginError" class="error hide" role="alert"></div>
+
+
+      <div class="field">
+
+        <label for="identifier">
+
+          اسم المستخدم أو البريد الإلكتروني
+
+        </label>
+
+
+        <input
+          id="identifier"
+          type="text"
+          autocomplete="username"
+          required
+          placeholder="RA0004 أو name@example.com"
+        >
+
+      </div>
+
+
+
+      <div class="field">
+
+        <label for="password">
+
+          كلمة المرور
+
+        </label>
+
+
+        <input
+          id="password"
+          type="password"
+          autocomplete="current-password"
+          required
+          placeholder="••••••••"
+        >
+
+      </div>
+
+
+
+      <button
+        class="btn"
+        id="portalLoginBtn"
+        type="submit"
+      >
+
+        تسجيل الدخول
+
+      </button>
+
+
+      <div
+        id="loginError"
+        class="error hide"
+        role="alert"
+      ></div>
+
+
     </form>
-    <div class="note">يتم تحديد الصلاحية من قاعدة البيانات بعد نجاح تسجيل الدخول. لا توجد صلاحيات إدارية مخزنة داخل الصفحة.</div>
-    <a class="home" href="index.html">← العودة إلى الرئيسية</a>
+
+
+
+    <div class="note">
+
+      يتم تحديد نوع الحساب والصلاحيات
+      تلقائيًا من قاعدة البيانات
+      بعد نجاح تسجيل الدخول.
+
+    </div>
+
+
+    <a
+      class="home"
+      href="index.html"
+    >
+
+      ← العودة إلى الرئيسية
+
+    </a>
+
+
   </section>
+
+
 </div>
-<script src="assets/js/portal-login.js?v=1.0.0"></script>
-</body></html>
+
+
+
+<script>
+
+/* ==================================================
+   رشيد العربية
+   تسجيل الدخول الموحد - الإصدار 2
+   دخول الطالب باسم المستخدم
+   ================================================== */
+
+
+const SUPABASE_URL =
+  "https://wcyamoqmpwpribsgspjn.supabase.co";
+
+
+const SUPABASE_KEY =
+  "sb_publishable_3eJET0uhZw4D4DowMK13fQ_oWK3PdIQ";
+
+
+/* مفاتيح خاصة برشيد العربية فقط */
+
+const PORTAL_SESSION_KEY =
+  "rasheed_arabic_portal_session_v1";
+
+
+const STUDENT_SESSION_KEY =
+  "rasheed_arabic_student_session_v1";
+
+
+const ADMIN_SESSION_KEY =
+  "rasheed_arabic_admin_session_v1";
+
+
+
+/* حفظ جلسة */
+
+function saveSession(
+  key,
+  session
+){
+
+  localStorage.setItem(
+    key,
+    JSON.stringify(session)
+  );
+
+}
+
+
+
+/* مسح الجلسات القديمة */
+
+function clearSessions(){
+
+  localStorage.removeItem(
+    PORTAL_SESSION_KEY
+  );
+
+  localStorage.removeItem(
+    STUDENT_SESSION_KEY
+  );
+
+}
+
+
+
+/* ================================================
+   تحويل اسم المستخدم إلى البريد الداخلي
+   ================================================ */
+
+function identifierToEmail(
+  identifier
+){
+
+  const value =
+    identifier
+      .trim()
+      .toLowerCase();
+
+
+  /*
+    إذا أدخل المستخدم بريدًا حقيقيًا
+    نستخدمه كما هو.
+  */
+
+  if(
+    value.includes("@")
+  ){
+
+    return value;
+
+  }
+
+
+  /*
+    إذا أدخل الطالب:
+    RA0004
+
+    يصبح داخليًا:
+    ra0004@students.rasheed-arabic.com
+  */
+
+  return (
+    value +
+    "@students.rasheed-arabic.com"
+  );
+
+}
+
+
+
+/* ================================================
+   تسجيل الدخول في Supabase
+   ================================================ */
+
+async function signIn(
+  email,
+  password
+){
+
+  const response =
+    await fetch(
+
+      SUPABASE_URL +
+      "/auth/v1/token?grant_type=password",
+
+      {
+
+        method:"POST",
+
+        headers:{
+
+          "apikey":
+            SUPABASE_KEY,
+
+          "Content-Type":
+            "application/json"
+
+        },
+
+        body:JSON.stringify({
+
+          email:email,
+
+          password:password
+
+        })
+
+      }
+
+    );
+
+
+  if(
+    !response.ok
+  ){
+
+    throw new Error(
+      "LOGIN_FAILED"
+    );
+
+  }
+
+
+  return await response.json();
+
+}
+
+
+
+/* ================================================
+   معرفة نوع الحساب
+   ================================================ */
+
+async function getUserRole(
+  session
+){
+
+  const response =
+    await fetch(
+
+      SUPABASE_URL +
+      "/rest/v1/rpc/get_my_portal_role",
+
+      {
+
+        method:"POST",
+
+        headers:{
+
+          "apikey":
+            SUPABASE_KEY,
+
+          "Authorization":
+            "Bearer " +
+            session.access_token,
+
+          "Content-Type":
+            "application/json"
+
+        },
+
+        body:"{}"
+
+      }
+
+    );
+
+
+  if(
+    !response.ok
+  ){
+
+    throw new Error(
+      "ROLE_CHECK_FAILED"
+    );
+
+  }
+
+
+  const role =
+    await response.json();
+
+
+  return role;
+
+}
+
+
+
+/* ================================================
+   حفظ الجلسة
+   ================================================ */
+
+function storePortalSession(
+  session,
+  role
+){
+
+  const portalSession = {
+
+    role:role,
+
+    user:session.user,
+
+    access_token:
+      session.access_token,
+
+    refresh_token:
+      session.refresh_token,
+
+    expires_at:
+      session.expires_at
+
+  };
+
+
+  saveSession(
+    PORTAL_SESSION_KEY,
+    portalSession
+  );
+
+
+  /*
+    نحفظ جلسة مستقلة للطالب أيضًا
+    لضمان التوافق مع لوحة الطالب.
+  */
+
+  if(
+    role === "student"
+  ){
+
+    saveSession(
+      STUDENT_SESSION_KEY,
+      session
+    );
+
+  }
+
+
+  /*
+    المدير يستمر متوافقًا
+    مع مركز الإدارة الحالي.
+  */
+
+  if(
+    role === "admin"
+  ){
+
+    saveSession(
+      ADMIN_SESSION_KEY,
+      session
+    );
+
+  }
+
+}
+
+
+
+/* ================================================
+   تحديد الصفحة المناسبة
+   ================================================ */
+
+function destinationForRole(
+  role
+){
+
+  const pages = {
+
+    student:
+      "student/dashboard.html",
+
+    teacher:
+      "teacher-dashboard.html",
+
+    parent:
+      "parent/dashboard.html",
+
+    admin:
+      "admin-hub.html"
+
+  };
+
+
+  return pages[role] || null;
+
+}
+
+
+
+/* ================================================
+   تشغيل النموذج
+   ================================================ */
+
+document
+  .getElementById(
+    "portalLoginForm"
+  )
+  .addEventListener(
+
+    "submit",
+
+    async function(event){
+
+      event.preventDefault();
+
+
+      const identifier =
+        document
+          .getElementById(
+            "identifier"
+          )
+          .value
+          .trim();
+
+
+      const password =
+        document
+          .getElementById(
+            "password"
+          )
+          .value;
+
+
+      const button =
+        document
+          .getElementById(
+            "portalLoginBtn"
+          );
+
+
+      const errorBox =
+        document
+          .getElementById(
+            "loginError"
+          );
+
+
+      errorBox
+        .classList
+        .add(
+          "hide"
+        );
+
+
+      errorBox.textContent =
+        "";
+
+
+      button.disabled =
+        true;
+
+
+      button.textContent =
+        "جارٍ تسجيل الدخول...";
+
+
+      try{
+
+
+        clearSessions();
+
+
+        /*
+          تحويل RA0004 مثلًا
+          إلى البريد الداخلي تلقائيًا
+        */
+
+        const email =
+          identifierToEmail(
+            identifier
+          );
+
+
+        /*
+          تسجيل الدخول
+        */
+
+        const session =
+          await signIn(
+            email,
+            password
+          );
+
+
+        /*
+          معرفة الدور الحقيقي
+        */
+
+        const role =
+          await getUserRole(
+            session
+          );
+
+
+        if(
+          !role
+        ){
+
+          throw new Error(
+            "NO_ROLE"
+          );
+
+        }
+
+
+        /*
+          حفظ الجلسة
+        */
+
+        storePortalSession(
+          session,
+          role
+        );
+
+
+        /*
+          تحديد صفحة الحساب
+        */
+
+        const destination =
+          destinationForRole(
+            role
+          );
+
+
+        if(
+          !destination
+        ){
+
+          throw new Error(
+            "UNKNOWN_ROLE"
+          );
+
+        }
+
+
+        /*
+          الانتقال إلى اللوحة
+        */
+
+        window.location.href =
+          destination;
+
+
+      }catch(error){
+
+
+        console.error(
+          "Portal login error:",
+          error
+        );
+
+
+        if(
+          error.message ===
+          "LOGIN_FAILED"
+        ){
+
+          errorBox.textContent =
+            "اسم المستخدم أو البريد الإلكتروني أو كلمة المرور غير صحيحة.";
+
+        }
+
+        else if(
+          error.message ===
+          "NO_ROLE"
+        ){
+
+          errorBox.textContent =
+            "تم تسجيل الدخول، لكن الحساب غير مرتبط بدور فعال في رشيد العربية.";
+
+        }
+
+        else if(
+          error.message ===
+          "ROLE_CHECK_FAILED"
+        ){
+
+          errorBox.textContent =
+            "تم تسجيل الدخول، لكن تعذر التحقق من صلاحية الحساب.";
+
+        }
+
+        else{
+
+          errorBox.textContent =
+            "تعذر تسجيل الدخول حاليًا. يرجى المحاولة مرة أخرى.";
+
+        }
+
+
+        errorBox
+          .classList
+          .remove(
+            "hide"
+          );
+
+
+      }finally{
+
+
+        button.disabled =
+          false;
+
+
+        button.textContent =
+          "تسجيل الدخول";
+
+      }
+
+    }
+
+  );
+
+</script>
+
+
+</body>
+
+</html>
