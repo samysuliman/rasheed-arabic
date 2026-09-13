@@ -1,152 +1,976 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
+
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+
 <title>مركز الإدارة | رشيد العربية</title>
+
 <style>
 *{box-sizing:border-box}
-:root{--g:#07583f;--g2:#06452f;--bg:#f4f8f6;--bd:#d7e5de;--tx:#17392c;--mut:#687a72;--gold:#c9a227}
-body{margin:0;font-family:Tahoma,Arial,sans-serif;background:radial-gradient(circle at top right,rgba(7,88,63,.07),transparent 32%),var(--bg);color:var(--tx)}
-header{background:linear-gradient(135deg,var(--g),var(--g2));color:#fff;text-align:center;padding:18px 20px}
-header h1{margin:0;font-size:27px} header p{margin:6px 0 0;opacity:.9}
-main{width:min(920px,92%);margin:auto;padding:38px 0}
-.hero{text-align:center;margin-bottom:26px}.hero h2{color:var(--g);font-size:29px;margin:0 0 8px}.hero p{color:var(--mut);margin:0;line-height:1.8}
-.login{max-width:470px;margin:26px auto;background:#fff;border:1px solid var(--bd);border-radius:22px;padding:27px;box-shadow:0 10px 28px rgba(0,0,0,.06)}
-.login h3{margin:0 0 18px;text-align:center;color:var(--g)}
-label{display:block;font-weight:700;margin:12px 0 7px} input{width:100%;padding:13px;border:1px solid #cddbd4;border-radius:12px;font-size:15px;outline:none}
-input:focus{border-color:var(--g)} button{padding:11px 16px;border:0;border-radius:12px;background:var(--g);color:#fff;font-weight:800;cursor:pointer}
-.login button{width:100%;margin-top:18px;font-size:16px}
-.msg{min-height:24px;text-align:center;margin-top:12px;color:#a13232;font-weight:700;font-size:13px}
-.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
-.card{position:relative;background:#fff;border:1px solid var(--bd);border-radius:20px;padding:27px 22px;text-align:center;text-decoration:none;color:inherit;box-shadow:0 8px 24px rgba(0,0,0,.045);overflow:hidden;transition:.2s}
-.card:before{content:"";position:absolute;top:0;right:0;left:0;height:4px;background:linear-gradient(90deg,var(--g),var(--gold))}
-.card:hover{transform:translateY(-3px);box-shadow:0 13px 30px rgba(0,0,0,.08)}
-.ico{width:62px;height:62px;border-radius:18px;background:#edf7f2;color:var(--g);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:30px}
-.card h3{color:var(--g);margin:0 0 8px;font-size:18px}.card p{color:var(--mut);font-size:13px;line-height:1.75;margin:0}
-.actions{display:flex;justify-content:center;gap:10px;margin:0 0 24px;flex-wrap:wrap}.secondary{background:#fff;color:var(--g);border:1px solid var(--bd)}
-.hide{display:none!important}.back{text-align:center;margin-top:25px}.back a{color:var(--g);font-weight:700;text-decoration:none}
-footer{text-align:center;color:#7a8781;font-size:12px;padding:18px}
-@media(max-width:680px){.cards{grid-template-columns:1fr}}
+
+:root{
+  --green:#07583f;
+  --green2:#0b6c50;
+  --gold:#c9a227;
+  --bg:#f4f8f6;
+  --card:#fff;
+  --text:#17392c;
+  --muted:#6e7e77;
+  --border:#d8e5df;
+}
+
+body{
+  margin:0;
+  font-family:Tahoma,Arial,sans-serif;
+  background:
+    radial-gradient(circle at top right,rgba(7,88,63,.08),transparent 30%),
+    var(--bg);
+  color:var(--text);
+}
+
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+button{
+  font:inherit;
+}
+
+/* TOPBAR */
+
+.topbar{
+  background:linear-gradient(135deg,var(--green),#064631);
+  color:#fff;
+  box-shadow:0 4px 18px rgba(0,0,0,.08);
+}
+
+.nav{
+  width:min(1200px,94%);
+  min-height:76px;
+  margin:auto;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.logo{
+  width:55px;
+  height:55px;
+  object-fit:contain;
+  background:#fff;
+  border-radius:14px;
+  padding:4px;
+}
+
+.brand strong{
+  display:block;
+  font-size:20px;
+}
+
+.brand small{
+  display:block;
+  margin-top:4px;
+  opacity:.8;
+}
+
+.nav-actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+.nav-btn{
+  padding:9px 13px;
+  border-radius:11px;
+  border:1px solid rgba(255,255,255,.28);
+  background:rgba(255,255,255,.08);
+  color:#fff;
+  cursor:pointer;
+}
+
+/* PAGE */
+
+.page{
+  width:min(1200px,94%);
+  margin:26px auto 55px;
+}
+
+/* HERO */
+
+.hero{
+  background:linear-gradient(135deg,#07583f,#0c7154);
+  border-radius:25px;
+  padding:28px;
+  color:#fff;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+
+  box-shadow:0 14px 35px rgba(7,88,63,.12);
+}
+
+.hero h1{
+  margin:0 0 8px;
+  font-size:29px;
+}
+
+.hero p{
+  margin:0;
+  line-height:1.9;
+  opacity:.9;
+}
+
+.hero-side{
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.2);
+  border-radius:17px;
+  padding:15px 20px;
+  min-width:190px;
+  text-align:center;
+}
+
+.hero-side strong{
+  display:block;
+  color:#f5d76b;
+  font-size:18px;
+}
+
+.hero-side span{
+  display:block;
+  margin-top:5px;
+  font-size:12px;
+  opacity:.88;
+}
+
+/* STATS */
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+  margin:18px 0 24px;
+}
+
+.stat{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:18px;
+}
+
+.stat span{
+  display:block;
+  color:var(--muted);
+  font-size:12px;
+}
+
+.stat strong{
+  display:block;
+  color:var(--green);
+  font-size:28px;
+  margin-top:7px;
+}
+
+/* TITLES */
+
+.section-head{
+  margin:27px 0 13px;
+}
+
+.section-head h2{
+  margin:0;
+  color:var(--green);
+  font-size:22px;
+}
+
+.section-head p{
+  margin:6px 0 0;
+  color:var(--muted);
+  font-size:13px;
+}
+
+/* MAIN CARDS */
+
+.main-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:16px;
+}
+
+.card{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:21px;
+  padding:22px;
+  position:relative;
+  overflow:hidden;
+  transition:.2s;
+  min-height:210px;
+}
+
+.card:before{
+  content:"";
+  position:absolute;
+  top:0;
+  right:0;
+  left:0;
+  height:5px;
+  background:linear-gradient(90deg,var(--green),var(--gold));
+}
+
+.card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 12px 30px rgba(0,0,0,.07);
+  border-color:#bdd8cc;
+}
+
+.icon{
+  width:62px;
+  height:62px;
+  border-radius:18px;
+  background:#edf7f2;
+  color:var(--green);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:30px;
+  margin-bottom:14px;
+}
+
+.card h3{
+  color:var(--green);
+  margin:0 0 9px;
+  font-size:18px;
+}
+
+.card p{
+  margin:0;
+  color:var(--muted);
+  line-height:1.75;
+  font-size:13px;
+}
+
+.go{
+  display:inline-block;
+  margin-top:15px;
+  padding:7px 11px;
+  border-radius:999px;
+  background:#f3f8f5;
+  border:1px solid #dcebe4;
+  color:var(--green);
+  font-size:11px;
+  font-weight:700;
+}
+
+/* ADMIN SUBCARDS */
+
+.admin-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+}
+
+.mini{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:17px;
+  padding:17px;
+  transition:.2s;
+}
+
+.mini:hover{
+  border-color:#b9d8c9;
+  transform:translateY(-2px);
+}
+
+.mini strong{
+  display:block;
+  color:var(--green);
+  margin-bottom:6px;
+}
+
+.mini span{
+  font-size:12px;
+  color:var(--muted);
+  line-height:1.7;
+}
+
+/* NOTICE */
+
+.notice{
+  padding:14px 16px;
+  border-radius:13px;
+  margin-bottom:16px;
+  line-height:1.8;
+}
+
+.info{
+  background:#eef6f2;
+  border:1px solid #d2e6dc;
+  color:var(--green);
+}
+
+.error{
+  background:#fff1f1;
+  border:1px solid #efcccc;
+  color:#963434;
+}
+
+.hide{
+  display:none!important;
+}
+
+footer{
+  text-align:center;
+  color:#7a8982;
+  font-size:12px;
+  padding:25px 10px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:950px){
+  .main-grid,
+  .admin-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:650px){
+  .hero{
+    display:block;
+  }
+
+  .hero-side{
+    margin-top:18px;
+  }
+
+  .stats{
+    grid-template-columns:1fr;
+  }
+
+  .main-grid,
+  .admin-grid{
+    grid-template-columns:1fr;
+  }
+}
 </style>
+
 </head>
+
 <body>
-<header><h1>إدارة رشيد العربية</h1><p>Rasheed Arabic Administration</p></header>
-<main>
-<section class="hero"><h2>مركز الإدارة</h2><p id="heroText">سجّل الدخول مرة واحدة فقط، ثم افتح أي لوحة إدارة مباشرة.</p></section>
 
-<section id="loginBox" class="login">
-<h3>دخول الإدارة</h3>
-<label for="email">البريد الإلكتروني</label>
-<input id="email" type="email" autocomplete="username">
-<label for="password">كلمة المرور</label>
-<input id="password" type="password" autocomplete="current-password">
-<button id="loginBtn">دخول إلى مركز الإدارة</button>
-<div id="msg" class="msg"></div>
+<header class="topbar">
+
+  <div class="nav">
+
+    <a class="brand" href="index.html">
+
+      <img
+        src="rasheed-arabic-logo.png"
+        class="logo"
+        alt="رشيد العربية"
+        onerror="this.style.display='none'"
+      >
+
+      <div>
+        <strong>رشيد العربية</strong>
+        <small>مركز الإدارة</small>
+      </div>
+
+    </a>
+
+    <div class="nav-actions">
+
+      <button
+        class="nav-btn"
+        onclick="location.href='index.html'"
+      >
+        الرئيسية
+      </button>
+
+      <button
+        class="nav-btn"
+        id="logoutBtn"
+      >
+        تسجيل الخروج
+      </button>
+
+    </div>
+
+  </div>
+
+</header>
+
+
+<main class="page">
+
+<div
+  id="notice"
+  class="notice info"
+>
+  جارٍ التحقق من صلاحية المدير...
+</div>
+
+
+<div
+  id="adminArea"
+  class="hide"
+>
+
+<section class="hero">
+
+  <div>
+
+    <h1>
+      مركز إدارة رشيد العربية
+    </h1>
+
+    <p>
+      جميع أدوات إدارة البرنامج في مكان واحد:
+      الطلاب، الحسابات، الحصر، المحتوى، المتابعة والتقارير.
+    </p>
+
+  </div>
+
+  <div class="hero-side">
+
+    <strong>
+      صلاحية المدير
+    </strong>
+
+    <span>
+      وصول كامل إلى أدوات الإدارة
+    </span>
+
+  </div>
+
 </section>
 
-<section id="adminArea" class="hide">
-<div class="actions">
-<button class="secondary" onclick="location.href='index.html'">الصفحة الرئيسية</button>
-<button id="logoutBtn">تسجيل الخروج</button>
-</div>
-<div class="cards">
-<a class="card" href="admin.html"><div class="ico">🌐</div><h3>إدارة حصر غير الناطقين بالعربية</h3><p>المتابعة والإحصائيات والتقارير.</p></a>
-<a class="card" href="admin-weak.html"><div class="ico">📖</div><h3>إدارة حصر الطلاب الضعاف</h3><p>متابعة الطلاب الضعاف في اللغة العربية.</p></a>
-<a class="card" href="admin-identity-books.html"><div class="ico">📚</div><h3>إدارة حصر كتب مواد الهوية</h3><p>متابعة كتب مواد الهوية غير المستلمة.</p></a>
-<a class="card" href="admin-all-missing-books.html"><div class="ico">📦</div><h3>إدارة حصر جميع الكتب</h3><p>متابعة جميع الكتب الدراسية غير المستلمة.</p></a>
-</div>
+
+<section class="stats">
+
+  <div class="stat">
+    <span>إجمالي الطلاب</span>
+    <strong id="studentCount">—</strong>
+  </div>
+
+  <div class="stat">
+    <span>حسابات الطلاب المنشأة</span>
+    <strong id="accountCount">—</strong>
+  </div>
+
+  <div class="stat">
+    <span>حسابات لم تُنشأ بعد</span>
+    <strong id="missingCount">—</strong>
+  </div>
+
 </section>
-<div class="back"><a href="index.html">← العودة إلى الصفحة الرئيسية</a></div>
+
+
+<div class="section-head">
+
+  <h2>
+    الإدارة الرئيسية
+  </h2>
+
+  <p>
+    اختر القسم الذي تريد إدارته.
+  </p>
+
+</div>
+
+
+<section class="main-grid">
+
+
+<a class="card" href="census-hub.html">
+
+  <div class="icon">
+    📋
+  </div>
+
+  <h3>
+    الحصر
+  </h3>
+
+  <p>
+    الوصول إلى نماذج حصر الطلاب والكتب
+    ومتابعة البيانات المسجلة.
+  </p>
+
+  <span class="go">
+    فتح الحصر
+  </span>
+
+</a>
+
+
+<a class="card" href="student-accounts.html">
+
+  <div class="icon">
+    👨‍🎓
+  </div>
+
+  <h3>
+    حسابات الطلاب
+  </h3>
+
+  <p>
+    إنشاء الحسابات وتعديل الأسماء وكلمات المرور
+    والتفعيل والتعطيل والحذف.
+  </p>
+
+  <span class="go">
+    إدارة الحسابات
+  </span>
+
+</a>
+
+
+<a class="card" href="teacher-dashboard.html">
+
+  <div class="icon">
+    👨‍🏫
+  </div>
+
+  <h3>
+    لوحة المعلم
+  </h3>
+
+  <p>
+    إدارة الطلاب والمواد التعليمية والواجبات
+    والاختبارات ومتابعة الأنشطة.
+  </p>
+
+  <span class="go">
+    فتح لوحة المعلم
+  </span>
+
+</a>
+
+
+<a class="card" href="admin.html">
+
+  <div class="icon">
+    📊
+  </div>
+
+  <h3>
+    إدارة الطلاب
+  </h3>
+
+  <p>
+    عرض بيانات الطلاب المسجلين
+    والإحصائيات والتقارير والتصدير.
+  </p>
+
+  <span class="go">
+    فتح لوحة الإدارة
+  </span>
+
+</a>
+
+
+</section>
+
+
+<div class="section-head">
+
+  <h2>
+    لوحات الحصر والإدارة
+  </h2>
+
+  <p>
+    وصول سريع إلى الأنظمة الإدارية الحالية.
+  </p>
+
+</div>
+
+
+<section class="admin-grid">
+
+
+<a
+  class="mini"
+  href="admin.html"
+>
+  <strong>
+    غير الناطقين بالعربية
+  </strong>
+
+  <span>
+    إدارة بيانات الطلاب المسجلين في البرنامج.
+  </span>
+</a>
+
+
+<a
+  class="mini"
+  href="admin-weak.html"
+>
+  <strong>
+    الطلاب الضعاف
+  </strong>
+
+  <span>
+    متابعة حصر الطلاب الضعاف في اللغة العربية.
+  </span>
+</a>
+
+
+<a
+  class="mini"
+  href="admin-identity-books.html"
+>
+  <strong>
+    كتب مواد الهوية
+  </strong>
+
+  <span>
+    متابعة الكتب غير المستلمة لمواد الهوية.
+  </span>
+</a>
+
+
+<a
+  class="mini"
+  href="admin-all-missing-books.html"
+>
+  <strong>
+    جميع الكتب
+  </strong>
+
+  <span>
+    متابعة جميع الكتب الدراسية غير المستلمة.
+  </span>
+</a>
+
+
+</section>
+
+</div>
+
 </main>
-<footer>© 2026 Rasheed Arabic — جميع الحقوق محفوظة</footer>
+
+
+<footer>
+  © 2026 Rasheed Arabic — جميع الحقوق محفوظة
+</footer>
+
 
 <script>
-const SUPABASE_URL='https://wcyamoqmpwpribsgspjn.supabase.co';
-const KEY='sb_publishable_3eJET0uhZw4D4DowMK13fQ_oWK3PdIQ';
-const SESSION_KEY='rasheed_arabic_admin_session_v1';
-const $=id=>document.getElementById(id);
 
-function getSession(){try{return JSON.parse(localStorage.getItem(SESSION_KEY)||'null')}catch{return null}}
-function setSession(s){localStorage.setItem(SESSION_KEY,JSON.stringify(s))}
-function clearSession(){localStorage.removeItem(SESSION_KEY)}
+const SUPABASE_URL =
+  "https://wcyamoqmpwpribsgspjn.supabase.co";
 
-async function refreshSession(s){
- if(!s?.refresh_token)return null;
- const r=await fetch(SUPABASE_URL+'/auth/v1/token?grant_type=refresh_token',{
-  method:'POST',
-  headers:{apikey:KEY,'Content-Type':'application/json'},
-  body:JSON.stringify({refresh_token:s.refresh_token})
- });
- if(!r.ok)return null;
- const n=await r.json();setSession(n);return n;
+const SUPABASE_KEY =
+  "sb_publishable_3eJET0uhZw4D4DowMK13fQ_oWK3PdIQ";
+
+const ADMIN_SESSION_KEY =
+  "rasheed_arabic_admin_session_v1";
+
+const PORTAL_SESSION_KEY =
+  "rasheed_arabic_portal_session_v1";
+
+
+function getSession(){
+
+  try{
+
+    return (
+      JSON.parse(
+        localStorage.getItem(
+          ADMIN_SESSION_KEY
+        ) || "null"
+      )
+      ||
+      JSON.parse(
+        localStorage.getItem(
+          PORTAL_SESSION_KEY
+        ) || "null"
+      )
+    );
+
+  }catch{
+
+    return null;
+
+  }
+
 }
 
-async function api(path){
- let s=getSession();
- if(!s?.access_token)return null;
- let r=await fetch(SUPABASE_URL+path,{headers:{apikey:KEY,Authorization:'Bearer '+s.access_token}});
- if(r.status===401){
-  s=await refreshSession(s);
-  if(!s)return null;
-  r=await fetch(SUPABASE_URL+path,{headers:{apikey:KEY,Authorization:'Bearer '+s.access_token}});
- }
- return r;
+
+async function api(
+  path,
+  options = {}
+){
+
+  const session =
+    getSession();
+
+
+  if(!session?.access_token){
+
+    throw new Error(
+      "NO_SESSION"
+    );
+
+  }
+
+
+  const headers = {
+
+    "apikey":
+      SUPABASE_KEY,
+
+    "Authorization":
+      "Bearer " +
+      session.access_token,
+
+    ...(options.headers || {})
+
+  };
+
+
+  if(
+    options.body &&
+    !headers["Content-Type"]
+  ){
+
+    headers["Content-Type"] =
+      "application/json";
+
+  }
+
+
+  return fetch(
+
+    SUPABASE_URL +
+    path,
+
+    {
+      ...options,
+      headers
+    }
+
+  );
+
 }
 
-async function checkAdmin(){
- const session=getSession();
- if(!session?.access_token||!session?.user?.id)return false;
- try{
-  const r=await api('/rest/v1/admin_users?select=user_id&user_id=eq.'+encodeURIComponent(session.user.id)+'&limit=1');
-  if(!r||r.status===401||r.status===403||!r.ok)return false;
-  const admins=await r.json();
-  return Array.isArray(admins)&&admins.length===1;
- }catch(error){
-  console.error('Admin check error:',error);
-  return false;
- }
+
+async function verifyAdmin(){
+
+  const response =
+    await api(
+
+      "/rest/v1/rpc/is_rasheed_arabic_admin",
+
+      {
+        method:"POST",
+        body:"{}"
+      }
+
+    );
+
+
+  if(!response.ok){
+    return false;
+  }
+
+
+  return (
+    await response.json()
+  ) === true;
+
 }
 
-function showAdmin(){
- $('loginBox').classList.add('hide');
- $('adminArea').classList.remove('hide');
- $('heroText').textContent='تم تسجيل الدخول — اختر لوحة الإدارة المطلوبة.';
-}
-function showLogin(){
- $('adminArea').classList.add('hide');
- $('loginBox').classList.remove('hide');
- $('heroText').textContent='سجّل الدخول مرة واحدة فقط، ثم افتح أي لوحة إدارة مباشرة.';
+
+async function loadStats(){
+
+  const studentsResponse =
+    await api(
+
+      "/rest/v1/non_native_students" +
+      "?select=id"
+
+    );
+
+
+  const accountsResponse =
+    await api(
+
+      "/rest/v1/student_accounts" +
+      "?select=student_id"
+
+    );
+
+
+  if(
+    !studentsResponse.ok ||
+    !accountsResponse.ok
+  ){
+    return;
+  }
+
+
+  const students =
+    await studentsResponse.json();
+
+
+  const accounts =
+    await accountsResponse.json();
+
+
+  document
+    .getElementById(
+      "studentCount"
+    )
+    .textContent =
+      students.length;
+
+
+  document
+    .getElementById(
+      "accountCount"
+    )
+    .textContent =
+      accounts.length;
+
+
+  document
+    .getElementById(
+      "missingCount"
+    )
+    .textContent =
+      Math.max(
+        0,
+        students.length -
+        accounts.length
+      );
+
 }
 
-async function login(){
- const msg=$('msg');
- msg.textContent='جارٍ التحقق...';
- const r=await fetch(SUPABASE_URL+'/auth/v1/token?grant_type=password',{
-  method:'POST',
-  headers:{apikey:KEY,'Content-Type':'application/json'},
-  body:JSON.stringify({email:$('email').value.trim(),password:$('password').value})
- });
- if(!r.ok){msg.textContent='بيانات الدخول غير صحيحة';return}
- const s=await r.json();
- setSession(s);
- if(await checkAdmin()){
-  msg.textContent='';
-  showAdmin();
- }else{
-  clearSession();
-  msg.textContent='هذا الحساب ليس من حسابات الإدارة';
- }
-}
 
-$('loginBtn').onclick=login;
-$('password').addEventListener('keydown',e=>{if(e.key==='Enter')login()});
-$('logoutBtn').onclick=()=>{clearSession();showLogin()};
+document
+  .getElementById(
+    "logoutBtn"
+  )
+  .addEventListener(
 
-(async()=>{
- if(getSession()?.access_token && await checkAdmin())showAdmin();
- else showLogin();
+    "click",
+
+    () => {
+
+      localStorage.removeItem(
+        ADMIN_SESSION_KEY
+      );
+
+      localStorage.removeItem(
+        PORTAL_SESSION_KEY
+      );
+
+
+      location.href =
+        "login.html";
+
+    }
+
+  );
+
+
+(async function init(){
+
+  const notice =
+    document.getElementById(
+      "notice"
+    );
+
+
+  try{
+
+    const session =
+      getSession();
+
+
+    if(!session?.access_token){
+
+      location.href =
+        "login.html";
+
+      return;
+
+    }
+
+
+    const isAdmin =
+      await verifyAdmin();
+
+
+    if(!isAdmin){
+
+      notice.className =
+        "notice error";
+
+
+      notice.textContent =
+        "هذا الحساب لا يملك صلاحية المدير.";
+
+
+      return;
+
+    }
+
+
+    notice.classList.add(
+      "hide"
+    );
+
+
+    document
+      .getElementById(
+        "adminArea"
+      )
+      .classList
+      .remove(
+        "hide"
+      );
+
+
+    await loadStats();
+
+
+  }catch(error){
+
+    console.error(error);
+
+
+    notice.className =
+      "notice error";
+
+
+    notice.textContent =
+      "تعذر فتح مركز الإدارة. سجّل الدخول مرة أخرى.";
+
+  }
+
 })();
+
 </script>
+
 </body>
+
 </html>
