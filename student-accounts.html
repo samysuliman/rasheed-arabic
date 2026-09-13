@@ -1,0 +1,3173 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="utf-8">
+
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1,viewport-fit=cover"
+>
+
+<title>إدارة حسابات الطلاب | رشيد العربية</title>
+
+<style>
+
+*{
+  box-sizing:border-box;
+}
+
+:root{
+  --green:#07583f;
+  --green2:#0b6c50;
+  --gold:#c9a227;
+  --bg:#f3f7f5;
+  --text:#17392c;
+  --muted:#6e7f77;
+  --border:#d9e5df;
+  --red:#a43b3b;
+  --blue:#2769a3;
+}
+
+body{
+  margin:0;
+  font-family:Tahoma,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+
+button,
+input,
+select{
+  font:inherit;
+}
+
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+
+/* ===== HEADER ===== */
+
+.topbar{
+  background:var(--green);
+  color:#fff;
+}
+
+.topbar-inner{
+  width:min(1250px,94%);
+  margin:auto;
+
+  min-height:76px;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.brand img{
+  width:55px;
+  height:55px;
+  object-fit:contain;
+  background:#fff;
+  border-radius:13px;
+  padding:4px;
+}
+
+.brand strong{
+  display:block;
+  font-size:20px;
+}
+
+.brand small{
+  display:block;
+  margin-top:3px;
+  opacity:.82;
+}
+
+.top-actions{
+  display:flex;
+  gap:9px;
+  flex-wrap:wrap;
+}
+
+.top-btn{
+  border:1px solid rgba(255,255,255,.32);
+  background:rgba(255,255,255,.08);
+  color:#fff;
+  border-radius:11px;
+  padding:9px 13px;
+  cursor:pointer;
+}
+
+
+/* ===== PAGE ===== */
+
+.page{
+  width:min(1250px,94%);
+  margin:26px auto 60px;
+}
+
+
+/* ===== HERO ===== */
+
+.hero{
+  background:
+    linear-gradient(
+      135deg,
+      #07583f,
+      #0b6c50
+    );
+
+  color:#fff;
+
+  border-radius:24px;
+  padding:26px;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+
+  box-shadow:
+    0 14px 35px
+    rgba(7,88,63,.12);
+}
+
+.hero h1{
+  margin:0 0 7px;
+  font-size:27px;
+}
+
+.hero p{
+  margin:0;
+  line-height:1.9;
+  opacity:.9;
+}
+
+.hero-badge{
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.22);
+  padding:15px 18px;
+  border-radius:17px;
+  text-align:center;
+  min-width:160px;
+}
+
+.hero-badge strong{
+  display:block;
+  font-size:30px;
+  color:#f3d56c;
+}
+
+.hero-badge span{
+  font-size:12px;
+}
+
+
+/* ===== STATS ===== */
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:13px;
+  margin:18px 0;
+}
+
+.stat{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:17px;
+  box-shadow:0 5px 18px rgba(0,0,0,.025);
+}
+
+.stat span{
+  display:block;
+  color:var(--muted);
+  font-size:12px;
+}
+
+.stat strong{
+  display:block;
+  margin-top:6px;
+  color:var(--green);
+  font-size:28px;
+}
+
+
+/* ===== PANEL ===== */
+
+.panel{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:22px;
+  padding:20px;
+  margin-top:17px;
+}
+
+.panel-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-bottom:16px;
+}
+
+.panel-head h2{
+  margin:0;
+  color:var(--green);
+  font-size:20px;
+}
+
+
+/* ===== BUTTONS ===== */
+
+.actions{
+  display:flex;
+  gap:9px;
+  flex-wrap:wrap;
+}
+
+.btn{
+  border:0;
+  border-radius:11px;
+  padding:10px 14px;
+  cursor:pointer;
+  font-weight:700;
+}
+
+.btn-primary{
+  background:var(--green);
+  color:#fff;
+}
+
+.btn-primary:hover{
+  background:var(--green2);
+}
+
+.btn-gold{
+  background:var(--gold);
+  color:#fff;
+}
+
+.btn-light{
+  background:#eef5f1;
+  color:var(--green);
+}
+
+.btn-danger{
+  background:#fff0f0;
+  color:var(--red);
+}
+
+.btn-blue{
+  background:#edf5fc;
+  color:var(--blue);
+}
+
+.btn:disabled{
+  opacity:.5;
+  cursor:not-allowed;
+}
+
+
+/* ===== FILTERS ===== */
+
+.filters{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr;
+  gap:10px;
+  margin-bottom:15px;
+}
+
+.filters input,
+.filters select{
+  height:45px;
+  border:1px solid var(--border);
+  border-radius:11px;
+  padding:0 12px;
+  background:#fff;
+  outline:0;
+}
+
+
+/* ===== TABLE ===== */
+
+.table-wrap{
+  overflow:auto;
+  border:1px solid var(--border);
+  border-radius:15px;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:1000px;
+}
+
+th{
+  background:#edf5f1;
+  color:var(--green);
+  padding:12px 9px;
+  font-size:12px;
+  text-align:right;
+  white-space:nowrap;
+}
+
+td{
+  border-top:1px solid #edf2ef;
+  padding:11px 9px;
+  font-size:12px;
+  vertical-align:middle;
+}
+
+tr:hover td{
+  background:#fbfdfc;
+}
+
+.student-name{
+  font-weight:800;
+  font-size:13px;
+}
+
+.username{
+  direction:ltr;
+  display:inline-block;
+  font-family:Consolas,monospace;
+  font-weight:800;
+  color:var(--green);
+}
+
+.pill{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:999px;
+  padding:5px 8px;
+  font-size:11px;
+  font-weight:700;
+}
+
+.pill-ok{
+  background:#eaf7ef;
+  color:#15733b;
+}
+
+.pill-no{
+  background:#fff1ed;
+  color:#a54730;
+}
+
+.pill-temp{
+  background:#fff7df;
+  color:#8b6815;
+}
+
+.row-actions{
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap;
+}
+
+.small-btn{
+  border:0;
+  border-radius:9px;
+  padding:7px 9px;
+  font-size:11px;
+  cursor:pointer;
+  font-weight:700;
+}
+
+
+/* ===== STATUS ===== */
+
+.notice{
+  padding:13px 15px;
+  border-radius:12px;
+  margin-bottom:14px;
+  line-height:1.8;
+}
+
+.notice-info{
+  background:#eef6f2;
+  border:1px solid #d2e7dc;
+  color:var(--green);
+}
+
+.notice-error{
+  background:#fff0f0;
+  border:1px solid #efcaca;
+  color:#8f3030;
+}
+
+.hide{
+  display:none !important;
+}
+
+
+/* ===== GENERATED ===== */
+
+.credentials-table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+.credentials-table th{
+  background:#f3f7f5;
+}
+
+.credentials-table td{
+  font-size:13px;
+}
+
+.password-text{
+  direction:ltr;
+  display:inline-block;
+  font-family:Consolas,monospace;
+  font-weight:800;
+}
+
+
+/* ===== MODAL ===== */
+
+.modal-back{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.48);
+  z-index:1000;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  padding:18px;
+}
+
+.modal{
+  width:min(560px,100%);
+  background:#fff;
+  border-radius:22px;
+  overflow:hidden;
+  box-shadow:0 25px 70px rgba(0,0,0,.22);
+}
+
+.modal-head{
+  background:var(--green);
+  color:#fff;
+  padding:18px 20px;
+}
+
+.modal-head h3{
+  margin:0;
+}
+
+.modal-body{
+  padding:20px;
+}
+
+.credential-box{
+  background:#f5f9f7;
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:14px;
+  margin:10px 0;
+}
+
+.credential-box span{
+  display:block;
+  color:var(--muted);
+  font-size:12px;
+  margin-bottom:5px;
+}
+
+.credential-box strong{
+  display:block;
+  direction:ltr;
+  text-align:left;
+  font-family:Consolas,monospace;
+  font-size:17px;
+  word-break:break-all;
+}
+
+.modal-foot{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  padding:0 20px 20px;
+}
+
+
+/* ===== PROGRESS ===== */
+
+.progress{
+  margin-top:12px;
+  background:#edf2ef;
+  height:9px;
+  border-radius:999px;
+  overflow:hidden;
+}
+
+.progress-bar{
+  width:0;
+  height:100%;
+  background:var(--gold);
+  transition:.2s;
+}
+
+
+/* ===== RESPONSIVE ===== */
+
+@media(max-width:850px){
+
+  .stats{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .filters{
+    grid-template-columns:1fr;
+  }
+
+  .hero{
+    display:block;
+  }
+
+  .hero-badge{
+    margin-top:16px;
+  }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header class="topbar">
+
+  <div class="topbar-inner">
+
+    <a class="brand" href="index.html">
+
+      <img
+        src="rasheed-arabic-logo.png"
+        alt="رشيد العربية"
+        onerror="this.style.display='none'"
+      >
+
+      <div>
+
+        <strong>
+          رشيد العربية
+        </strong>
+
+        <small>
+          إدارة حسابات الطلاب
+        </small>
+
+      </div>
+
+    </a>
+
+
+    <div class="top-actions">
+
+      <button
+        class="top-btn"
+        onclick="location.href='admin-hub.html'"
+      >
+        مركز الإدارة
+      </button>
+
+      <button
+        class="top-btn"
+        id="logoutBtn"
+      >
+        تسجيل الخروج
+      </button>
+
+    </div>
+
+  </div>
+
+</header>
+
+
+
+<main class="page">
+
+
+<section class="hero">
+
+  <div>
+
+    <h1>
+      إدارة حسابات الطلاب
+    </h1>
+
+    <p>
+
+      إنشاء أسماء المستخدمين وكلمات المرور
+      لطلاب برنامج العربية لغير الناطقين بها
+      مباشرة من بيانات الحصر.
+
+    </p>
+
+  </div>
+
+
+  <div class="hero-badge">
+
+    <strong id="heroTotal">
+      —
+    </strong>
+
+    <span>
+      طالبًا وطالبة
+    </span>
+
+  </div>
+
+</section>
+
+
+
+<section class="stats">
+
+  <div class="stat">
+
+    <span>
+      إجمالي الطلاب
+    </span>
+
+    <strong id="statTotal">
+      —
+    </strong>
+
+  </div>
+
+
+  <div class="stat">
+
+    <span>
+      لديهم حساب
+    </span>
+
+    <strong id="statAccounts">
+      —
+    </strong>
+
+  </div>
+
+
+  <div class="stat">
+
+    <span>
+      بدون حساب
+    </span>
+
+    <strong id="statMissing">
+      —
+    </strong>
+
+  </div>
+
+
+  <div class="stat">
+
+    <span>
+      حسابات مؤقتة
+    </span>
+
+    <strong id="statTemp">
+      —
+    </strong>
+
+  </div>
+
+</section>
+
+
+
+<div
+  id="pageNotice"
+  class="notice notice-info"
+>
+  جارٍ التحقق من صلاحية المدير وتحميل البيانات...
+</div>
+
+
+
+<section
+  id="mainPanel"
+  class="panel hide"
+>
+
+  <div class="panel-head">
+
+    <h2>
+      حسابات الطلاب
+    </h2>
+
+
+    <div class="actions">
+
+      <button
+        id="refreshBtn"
+        class="btn btn-light"
+      >
+        تحديث
+      </button>
+
+
+      <button
+        id="createAllBtn"
+        class="btn btn-gold"
+      >
+        إنشاء جميع الحسابات الناقصة
+      </button>
+
+
+      <button
+        id="exportBtn"
+        class="btn btn-blue"
+        disabled
+      >
+        تنزيل بيانات الحسابات الجديدة CSV
+      </button>
+
+    </div>
+
+  </div>
+
+
+
+  <div
+    id="bulkBox"
+    class="notice notice-info hide"
+  >
+
+    <div id="bulkText">
+      جاري إنشاء الحسابات...
+    </div>
+
+    <div class="progress">
+      <div
+        id="progressBar"
+        class="progress-bar"
+      ></div>
+    </div>
+
+  </div>
+
+
+
+  <div class="filters">
+
+    <input
+      id="searchBox"
+      type="search"
+      placeholder="بحث باسم الطالب أو اسم المستخدم أو الفصل..."
+    >
+
+
+    <select id="statusFilter">
+
+      <option value="">
+        جميع الحسابات
+      </option>
+
+      <option value="has">
+        لديه حساب
+      </option>
+
+      <option value="missing">
+        بدون حساب
+      </option>
+
+    </select>
+
+
+    <select id="curriculumFilter">
+
+      <option value="">
+        أمريكي وبريطاني
+      </option>
+
+      <option value="أمريكي">
+        أمريكي
+      </option>
+
+      <option value="بريطاني">
+        بريطاني
+      </option>
+
+    </select>
+
+  </div>
+
+
+
+  <div class="table-wrap">
+
+    <table>
+
+      <thead>
+
+        <tr>
+
+          <th>#</th>
+
+          <th>اسم الطالب</th>
+
+          <th>الجنس</th>
+
+          <th>المرحلة</th>
+
+          <th>الصف</th>
+
+          <th>الشعبة</th>
+
+          <th>المسار</th>
+
+          <th>اسم المستخدم</th>
+
+          <th>الحالة</th>
+
+          <th>الإجراء</th>
+
+        </tr>
+
+      </thead>
+
+
+      <tbody id="studentsBody">
+
+        <tr>
+
+          <td colspan="10">
+            جارٍ التحميل...
+          </td>
+
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</section>
+
+
+
+<section
+  id="generatedPanel"
+  class="panel hide"
+>
+
+  <div class="panel-head">
+
+    <h2>
+      بيانات الحسابات التي تم إنشاؤها الآن
+    </h2>
+
+    <button
+      class="btn btn-light"
+      id="copyAllBtn"
+    >
+      نسخ الجميع
+    </button>
+
+  </div>
+
+
+  <div class="notice notice-info">
+
+    كلمات المرور الظاهرة هنا لا يتم حفظها
+    داخل هذه الصفحة بعد إغلاقها.
+    احفظها قبل مغادرة الصفحة.
+
+  </div>
+
+
+  <div class="table-wrap">
+
+    <table class="credentials-table">
+
+      <thead>
+
+        <tr>
+
+          <th>الطالب</th>
+
+          <th>الفصل</th>
+
+          <th>اسم المستخدم</th>
+
+          <th>كلمة المرور المؤقتة</th>
+
+        </tr>
+
+      </thead>
+
+
+      <tbody id="credentialsBody">
+      </tbody>
+
+    </table>
+
+  </div>
+
+</section>
+
+
+
+</main>
+
+
+
+<!-- ===== نافذة بيانات الحساب ===== -->
+
+<div
+  id="modalBack"
+  class="modal-back hide"
+>
+
+  <div class="modal">
+
+    <div class="modal-head">
+
+      <h3 id="modalTitle">
+        بيانات الحساب
+      </h3>
+
+    </div>
+
+
+    <div class="modal-body">
+
+      <div
+        id="modalStudentName"
+        style="
+          font-weight:800;
+          font-size:17px;
+          margin-bottom:13px;
+        "
+      ></div>
+
+
+      <div class="credential-box">
+
+        <span>
+          اسم المستخدم
+        </span>
+
+        <strong id="modalUsername">
+          —
+        </strong>
+
+      </div>
+
+
+      <div class="credential-box">
+
+        <span>
+          كلمة المرور المؤقتة
+        </span>
+
+        <strong id="modalPassword">
+          —
+        </strong>
+
+      </div>
+
+
+      <div
+        id="modalMessage"
+        style="
+          color:#6e7f77;
+          line-height:1.8;
+          font-size:12px;
+        "
+      ></div>
+
+    </div>
+
+
+    <div class="modal-foot">
+
+      <button
+        id="copyCredentialsBtn"
+        class="btn btn-primary"
+      >
+        نسخ البيانات
+      </button>
+
+      <button
+        id="closeModalBtn"
+        class="btn btn-light"
+      >
+        إغلاق
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<script>
+
+
+/* ==================================================
+   رشيد العربية
+   إدارة حسابات الطلاب
+   الإصدار 1
+   ================================================== */
+
+
+const SUPABASE_URL =
+  "https://wcyamoqmpwpribsgspjn.supabase.co";
+
+
+const SUPABASE_KEY =
+  "sb_publishable_3eJET0uhZw4D4DowMK13fQ_oWK3PdIQ";
+
+
+const SESSION_KEY =
+  "rasheed_arabic_admin_session_v1";
+
+
+const EDGE_FUNCTION =
+  "create-student-account";
+
+
+let students = [];
+
+let accounts = [];
+
+let generatedCredentials = [];
+
+let currentCredential = null;
+
+
+
+const $ =
+  id =>
+    document.getElementById(id);
+
+
+
+/* ================================================
+   الجلسة
+   ================================================ */
+
+
+function getSession(){
+
+  try{
+
+    return JSON.parse(
+      localStorage.getItem(
+        SESSION_KEY
+      ) || "null"
+    );
+
+  }catch{
+
+    return null;
+
+  }
+
+}
+
+
+
+function saveSession(
+  session
+){
+
+  localStorage.setItem(
+    SESSION_KEY,
+    JSON.stringify(session)
+  );
+
+}
+
+
+
+function clearSession(){
+
+  localStorage.removeItem(
+    SESSION_KEY
+  );
+
+}
+
+
+
+async function refreshSession(
+  session
+){
+
+  if(
+    !session?.refresh_token
+  ){
+
+    return null;
+
+  }
+
+
+  const response =
+    await fetch(
+
+      SUPABASE_URL +
+      "/auth/v1/token?grant_type=refresh_token",
+
+      {
+
+        method:"POST",
+
+        headers:{
+
+          "apikey":
+            SUPABASE_KEY,
+
+          "Content-Type":
+            "application/json"
+
+        },
+
+        body:JSON.stringify({
+
+          refresh_token:
+            session.refresh_token
+
+        })
+
+      }
+
+    );
+
+
+  if(
+    !response.ok
+  ){
+
+    return null;
+
+  }
+
+
+  const next =
+    await response.json();
+
+
+  saveSession(
+    next
+  );
+
+
+  return next;
+
+}
+
+
+
+/* ================================================
+   API
+   ================================================ */
+
+
+async function api(
+  path,
+  options = {}
+){
+
+  let session =
+    getSession();
+
+
+  if(
+    !session?.access_token
+  ){
+
+    throw new Error(
+      "NO_SESSION"
+    );
+
+  }
+
+
+  const makeRequest =
+    async s => {
+
+      const headers = {
+
+        "apikey":
+          SUPABASE_KEY,
+
+        "Authorization":
+          "Bearer " +
+          s.access_token,
+
+        ...(
+          options.headers ||
+          {}
+        )
+
+      };
+
+
+      if(
+        options.body &&
+        !headers[
+          "Content-Type"
+        ]
+      ){
+
+        headers[
+          "Content-Type"
+        ] =
+          "application/json";
+
+      }
+
+
+      return fetch(
+
+        SUPABASE_URL +
+        path,
+
+        {
+          ...options,
+          headers
+        }
+
+      );
+
+    };
+
+
+  let response =
+    await makeRequest(
+      session
+    );
+
+
+  if(
+    response.status === 401
+  ){
+
+    session =
+      await refreshSession(
+        session
+      );
+
+
+    if(
+      !session
+    ){
+
+      clearSession();
+
+      throw new Error(
+        "NO_SESSION"
+      );
+
+    }
+
+
+    response =
+      await makeRequest(
+        session
+      );
+
+  }
+
+
+  return response;
+
+}
+
+
+
+/* ================================================
+   التحقق من المدير
+   ================================================ */
+
+
+async function verifyAdmin(){
+
+  const response =
+    await api(
+      "/rest/v1/rpc/is_rasheed_arabic_admin",
+      {
+        method:"POST",
+        body:"{}"
+      }
+    );
+
+
+  if(
+    !response.ok
+  ){
+
+    return false;
+
+  }
+
+
+  return (
+    await response.json()
+  ) === true;
+
+}
+
+
+
+/* ================================================
+   تحميل الطلاب والحسابات
+   ================================================ */
+
+
+async function loadData(){
+
+  const notice =
+    $("pageNotice");
+
+
+  notice.className =
+    "notice notice-info";
+
+  notice.textContent =
+    "جارٍ تحميل بيانات الطلاب والحسابات...";
+
+
+  const studentResponse =
+    await api(
+
+      "/rest/v1/non_native_students" +
+      "?select=id,student_name,gender,stage,grade,section_name,curriculum" +
+      "&order=student_name.asc"
+
+    );
+
+
+  if(
+    !studentResponse.ok
+  ){
+
+    throw new Error(
+      "STUDENTS_LOAD_FAILED"
+    );
+
+  }
+
+
+  students =
+    await studentResponse.json();
+
+
+
+  let accountResponse =
+    await api(
+
+      "/rest/v1/student_accounts" +
+      "?select=student_id,username,is_active,password_is_temporary"
+
+    );
+
+
+  /*
+    احتياط في حال كان أحد الأعمدة
+    غير موجود في نسخة القاعدة.
+  */
+
+  if(
+    !accountResponse.ok
+  ){
+
+    accountResponse =
+      await api(
+
+        "/rest/v1/student_accounts" +
+        "?select=student_id,is_active"
+
+      );
+
+  }
+
+
+  if(
+    !accountResponse.ok
+  ){
+
+    throw new Error(
+      "ACCOUNTS_LOAD_FAILED"
+    );
+
+  }
+
+
+  accounts =
+    await accountResponse.json();
+
+
+  notice.classList.add(
+    "hide"
+  );
+
+
+  $("mainPanel")
+    .classList
+    .remove(
+      "hide"
+    );
+
+
+  render();
+
+}
+
+
+
+/* ================================================
+   اسم المستخدم
+   ================================================ */
+
+
+function usernameForStudent(
+  studentId
+){
+
+  return (
+    "RA" +
+    String(
+      studentId
+    ).padStart(
+      4,
+      "0"
+    )
+  );
+
+}
+
+
+
+function getAccount(
+  studentId
+){
+
+  return accounts.find(
+
+    account =>
+      Number(
+        account.student_id
+      ) ===
+      Number(
+        studentId
+      )
+
+  ) || null;
+
+}
+
+
+
+/* ================================================
+   العرض
+   ================================================ */
+
+
+function render(){
+
+  const total =
+    students.length;
+
+
+  const accountCount =
+    students.filter(
+
+      student =>
+        Boolean(
+          getAccount(
+            student.id
+          )
+        )
+
+    ).length;
+
+
+  const missingCount =
+    total -
+    accountCount;
+
+
+  const tempCount =
+    accounts.filter(
+
+      account =>
+        account.password_is_temporary
+        === true
+
+    ).length;
+
+
+  $("heroTotal")
+    .textContent =
+      total;
+
+
+  $("statTotal")
+    .textContent =
+      total;
+
+
+  $("statAccounts")
+    .textContent =
+      accountCount;
+
+
+  $("statMissing")
+    .textContent =
+      missingCount;
+
+
+  $("statTemp")
+    .textContent =
+      tempCount;
+
+
+
+  const search =
+    $("searchBox")
+      .value
+      .trim()
+      .toLowerCase();
+
+
+  const status =
+    $("statusFilter")
+      .value;
+
+
+  const curriculum =
+    $("curriculumFilter")
+      .value;
+
+
+
+  const filtered =
+    students.filter(
+      student => {
+
+        const account =
+          getAccount(
+            student.id
+          );
+
+
+        const username =
+          account?.username ||
+          usernameForStudent(
+            student.id
+          );
+
+
+        const haystack = [
+
+          student.student_name,
+
+          student.section_name,
+
+          student.grade,
+
+          student.stage,
+
+          username
+
+        ]
+        .join(" ")
+        .toLowerCase();
+
+
+        if(
+          search &&
+          !haystack.includes(
+            search
+          )
+        ){
+
+          return false;
+
+        }
+
+
+        if(
+          status === "has" &&
+          !account
+        ){
+
+          return false;
+
+        }
+
+
+        if(
+          status === "missing" &&
+          account
+        ){
+
+          return false;
+
+        }
+
+
+        if(
+          curriculum &&
+          student.curriculum !==
+          curriculum
+        ){
+
+          return false;
+
+        }
+
+
+        return true;
+
+      }
+    );
+
+
+
+  const body =
+    $("studentsBody");
+
+
+  if(
+    !filtered.length
+  ){
+
+    body.innerHTML = `
+
+      <tr>
+
+        <td
+          colspan="10"
+          style="
+            text-align:center;
+            padding:30px;
+            color:#6e7f77;
+          "
+        >
+
+          لا توجد نتائج.
+
+        </td>
+
+      </tr>
+
+    `;
+
+    return;
+
+  }
+
+
+
+  body.innerHTML =
+    filtered.map(
+
+      (
+        student,
+        index
+      ) => {
+
+        const account =
+          getAccount(
+            student.id
+          );
+
+
+        const username =
+          account?.username ||
+          usernameForStudent(
+            student.id
+          );
+
+
+        const statusHtml =
+          account
+          ? (
+              account
+                .password_is_temporary
+              ?
+              `<span class="pill pill-temp">
+                 حساب مؤقت
+               </span>`
+              :
+              `<span class="pill pill-ok">
+                 حساب فعال
+               </span>`
+            )
+          :
+          `<span class="pill pill-no">
+             بدون حساب
+           </span>`;
+
+
+        const actionsHtml =
+          account
+
+          ?
+
+          `
+            <button
+              class="small-btn btn-danger"
+              onclick="resetStudentPassword(${student.id})"
+            >
+              إعادة تعيين كلمة المرور
+            </button>
+          `
+
+          :
+
+          `
+            <button
+              class="small-btn btn-primary"
+              onclick="createStudentAccount(${student.id})"
+            >
+              إنشاء حساب
+            </button>
+          `;
+
+
+
+        return `
+
+          <tr>
+
+            <td>
+              ${index + 1}
+            </td>
+
+
+            <td>
+
+              <span class="student-name">
+
+                ${escapeHtml(
+                  student.student_name
+                )}
+
+              </span>
+
+            </td>
+
+
+            <td>
+
+              ${escapeHtml(
+                student.gender ||
+                "—"
+              )}
+
+            </td>
+
+
+            <td>
+
+              ${escapeHtml(
+                student.stage ||
+                "—"
+              )}
+
+            </td>
+
+
+            <td>
+
+              ${escapeHtml(
+                student.grade ||
+                "—"
+              )}
+
+            </td>
+
+
+            <td>
+
+              ${escapeHtml(
+                student.section_name ||
+                "—"
+              )}
+
+            </td>
+
+
+            <td>
+
+              ${escapeHtml(
+                student.curriculum ||
+                "—"
+              )}
+
+            </td>
+
+
+            <td>
+
+              <span class="username">
+
+                ${escapeHtml(
+                  username
+                )}
+
+              </span>
+
+            </td>
+
+
+            <td>
+
+              ${statusHtml}
+
+            </td>
+
+
+            <td>
+
+              <div class="row-actions">
+
+                ${actionsHtml}
+
+              </div>
+
+            </td>
+
+          </tr>
+
+        `;
+
+      }
+
+    ).join("");
+
+}
+
+
+
+/* ================================================
+   Edge Function
+   ================================================ */
+
+
+async function callStudentAccountFunction(
+  studentId,
+  resetPassword = false
+){
+
+  let session =
+    getSession();
+
+
+  if(
+    !session?.access_token
+  ){
+
+    throw new Error(
+      "NO_SESSION"
+    );
+
+  }
+
+
+  const doCall =
+    async s => {
+
+      return fetch(
+
+        SUPABASE_URL +
+        "/functions/v1/" +
+        EDGE_FUNCTION,
+
+        {
+
+          method:"POST",
+
+          headers:{
+
+            "apikey":
+              SUPABASE_KEY,
+
+            "Authorization":
+              "Bearer " +
+              s.access_token,
+
+            "Content-Type":
+              "application/json"
+
+          },
+
+          body:JSON.stringify({
+
+            student_id:
+              Number(
+                studentId
+              ),
+
+            reset_password:
+              Boolean(
+                resetPassword
+              )
+
+          })
+
+        }
+
+      );
+
+    };
+
+
+  let response =
+    await doCall(
+      session
+    );
+
+
+  if(
+    response.status === 401
+  ){
+
+    session =
+      await refreshSession(
+        session
+      );
+
+
+    if(
+      !session
+    ){
+
+      throw new Error(
+        "NO_SESSION"
+      );
+
+    }
+
+
+    response =
+      await doCall(
+        session
+      );
+
+  }
+
+
+  let data = null;
+
+
+  try{
+
+    data =
+      await response.json();
+
+  }catch{
+
+    data = {};
+
+  }
+
+
+  if(
+    !response.ok ||
+    data?.ok === false
+  ){
+
+    throw new Error(
+
+      data?.error ||
+      data?.message ||
+      (
+        "EDGE_FUNCTION_" +
+        response.status
+      )
+
+    );
+
+  }
+
+
+  return data;
+
+}
+
+
+
+/* ================================================
+   استخراج بيانات الحساب من نتيجة الدالة
+   ================================================ */
+
+
+function normalizeCredentials(
+  data,
+  student
+){
+
+  const username =
+
+    data?.username ||
+
+    data?.credentials?.username ||
+
+    data?.login?.username ||
+
+    data?.account?.username ||
+
+    usernameForStudent(
+      student.id
+    );
+
+
+  const password =
+
+    data?.password ||
+
+    data?.credentials?.password ||
+
+    data?.login?.password ||
+
+    data?.temporary_password ||
+
+    data?.temp_password ||
+
+    data?.new_password ||
+
+    "";
+
+
+  return {
+
+    student_id:
+      student.id,
+
+    student_name:
+      student.student_name,
+
+    section_name:
+      student.section_name ||
+      "",
+
+    curriculum:
+      student.curriculum ||
+      "",
+
+    username:
+      username,
+
+    password:
+      password
+
+  };
+
+}
+
+
+
+/* ================================================
+   إنشاء حساب واحد
+   ================================================ */
+
+
+async function createStudentAccount(
+  studentId
+){
+
+  const student =
+    students.find(
+      s =>
+        Number(
+          s.id
+        ) ===
+        Number(
+          studentId
+        )
+    );
+
+
+  if(
+    !student
+  ){
+
+    return;
+
+  }
+
+
+  if(
+    !confirm(
+      "إنشاء حساب للطالب/الطالبة:\n" +
+      student.student_name +
+      " ؟"
+    )
+  ){
+
+    return;
+
+  }
+
+
+  try{
+
+    const data =
+      await callStudentAccountFunction(
+        studentId,
+        false
+      );
+
+
+    const credentials =
+      normalizeCredentials(
+        data,
+        student
+      );
+
+
+    rememberCredential(
+      credentials
+    );
+
+
+    await loadData();
+
+
+    showCredentialModal(
+      credentials,
+      "تم إنشاء الحساب بنجاح"
+    );
+
+
+  }catch(error){
+
+    alert(
+      error.message ===
+      "NO_SESSION"
+      ?
+      "انتهت جلسة المدير. سجّل الدخول مرة أخرى."
+      :
+      "تعذر إنشاء الحساب:\n" +
+      error.message
+    );
+
+  }
+
+}
+
+
+
+/* ================================================
+   إعادة تعيين كلمة المرور
+   ================================================ */
+
+
+async function resetStudentPassword(
+  studentId
+){
+
+  const student =
+    students.find(
+      s =>
+        Number(
+          s.id
+        ) ===
+        Number(
+          studentId
+        )
+    );
+
+
+  if(
+    !student
+  ){
+
+    return;
+
+  }
+
+
+  if(
+    !confirm(
+      "سيتم إنشاء كلمة مرور جديدة للطالب/الطالبة:\n" +
+      student.student_name +
+      "\n\nالكلمة القديمة ستتوقف عن العمل.\nهل تريد الاستمرار؟"
+    )
+  ){
+
+    return;
+
+  }
+
+
+  try{
+
+    const data =
+      await callStudentAccountFunction(
+        studentId,
+        true
+      );
+
+
+    const credentials =
+      normalizeCredentials(
+        data,
+        student
+      );
+
+
+    rememberCredential(
+      credentials
+    );
+
+
+    await loadData();
+
+
+    showCredentialModal(
+      credentials,
+      "تم إنشاء كلمة مرور جديدة"
+    );
+
+
+  }catch(error){
+
+    alert(
+      "تعذر إعادة تعيين كلمة المرور:\n" +
+      error.message
+    );
+
+  }
+
+}
+
+
+
+/* ================================================
+   إنشاء كل الحسابات الناقصة
+   ================================================ */
+
+
+async function createAllMissing(){
+
+  const missing =
+    students.filter(
+
+      student =>
+        !getAccount(
+          student.id
+        )
+
+    );
+
+
+  if(
+    !missing.length
+  ){
+
+    alert(
+      "جميع الطلاب لديهم حسابات بالفعل."
+    );
+
+    return;
+
+  }
+
+
+  if(
+    !confirm(
+      "سيتم إنشاء حسابات لعدد " +
+      missing.length +
+      " طالبًا وطالبة.\n\n" +
+      "سيظهر لك اسم المستخدم وكلمة المرور لكل حساب جديد.\n\n" +
+      "هل تريد الاستمرار؟"
+    )
+  ){
+
+    return;
+
+  }
+
+
+  const button =
+    $("createAllBtn");
+
+
+  const bulkBox =
+    $("bulkBox");
+
+
+  const bulkText =
+    $("bulkText");
+
+
+  const progressBar =
+    $("progressBar");
+
+
+  button.disabled =
+    true;
+
+
+  bulkBox
+    .classList
+    .remove(
+      "hide"
+    );
+
+
+  let success =
+    0;
+
+
+  let failed =
+    0;
+
+
+
+  for(
+    let i = 0;
+    i < missing.length;
+    i++
+  ){
+
+    const student =
+      missing[i];
+
+
+    bulkText.textContent =
+
+      "جارٍ إنشاء الحساب " +
+      (i + 1) +
+      " من " +
+      missing.length +
+      " — " +
+      student.student_name;
+
+
+    progressBar.style.width =
+      (
+        (
+          i /
+          missing.length
+        ) *
+        100
+      ) +
+      "%";
+
+
+    try{
+
+      const data =
+        await callStudentAccountFunction(
+          student.id,
+          false
+        );
+
+
+      const credentials =
+        normalizeCredentials(
+          data,
+          student
+        );
+
+
+      /*
+        إذا كان الحساب ظهر موجودًا
+        بالفعل فلا نضيف كلمة مرور
+        غير موجودة.
+      */
+
+      if(
+        credentials.password
+      ){
+
+        rememberCredential(
+          credentials
+        );
+
+      }
+
+
+      success++;
+
+
+    }catch(error){
+
+      console.error(
+        "Account creation failed for student id:",
+        student.id,
+        error.message
+      );
+
+
+      failed++;
+
+    }
+
+
+    await delay(
+      250
+    );
+
+  }
+
+
+
+  progressBar.style.width =
+    "100%";
+
+
+  bulkText.textContent =
+
+    "اكتملت العملية. نجح: " +
+    success +
+    " — تعذر: " +
+    failed;
+
+
+
+  button.disabled =
+    false;
+
+
+  await loadData();
+
+
+  renderGeneratedCredentials();
+
+
+  if(
+    generatedCredentials.length
+  ){
+
+    $("generatedPanel")
+      .scrollIntoView({
+        behavior:"smooth"
+      });
+
+  }
+
+}
+
+
+
+/* ================================================
+   بيانات الحسابات المنشأة
+   ================================================ */
+
+
+function rememberCredential(
+  credential
+){
+
+  const index =
+    generatedCredentials.findIndex(
+
+      item =>
+        Number(
+          item.student_id
+        ) ===
+        Number(
+          credential.student_id
+        )
+
+    );
+
+
+  if(
+    index >= 0
+  ){
+
+    generatedCredentials[
+      index
+    ] =
+      credential;
+
+  }else{
+
+    generatedCredentials.push(
+      credential
+    );
+
+  }
+
+
+  renderGeneratedCredentials();
+
+}
+
+
+
+function renderGeneratedCredentials(){
+
+  const panel =
+    $("generatedPanel");
+
+
+  const body =
+    $("credentialsBody");
+
+
+  if(
+    !generatedCredentials.length
+  ){
+
+    panel.classList.add(
+      "hide"
+    );
+
+    $("exportBtn")
+      .disabled =
+        true;
+
+    return;
+
+  }
+
+
+  panel.classList.remove(
+    "hide"
+  );
+
+
+  $("exportBtn")
+    .disabled =
+      false;
+
+
+  body.innerHTML =
+    generatedCredentials.map(
+
+      item => `
+
+        <tr>
+
+          <td>
+
+            ${escapeHtml(
+              item.student_name
+            )}
+
+          </td>
+
+
+          <td>
+
+            ${escapeHtml(
+              item.section_name ||
+              "—"
+            )}
+
+          </td>
+
+
+          <td>
+
+            <span class="username">
+
+              ${escapeHtml(
+                item.username
+              )}
+
+            </span>
+
+          </td>
+
+
+          <td>
+
+            <span class="password-text">
+
+              ${escapeHtml(
+                item.password ||
+                "—"
+              )}
+
+            </span>
+
+          </td>
+
+        </tr>
+
+      `
+
+    ).join("");
+
+}
+
+
+
+/* ================================================
+   نافذة بيانات الحساب
+   ================================================ */
+
+
+function showCredentialModal(
+  credential,
+  title
+){
+
+  currentCredential =
+    credential;
+
+
+  $("modalTitle")
+    .textContent =
+      title;
+
+
+  $("modalStudentName")
+    .textContent =
+      credential.student_name;
+
+
+  $("modalUsername")
+    .textContent =
+      credential.username ||
+      "—";
+
+
+  $("modalPassword")
+    .textContent =
+      credential.password ||
+      "لم تُرجع الدالة كلمة مرور جديدة";
+
+
+  $("modalMessage")
+    .textContent =
+      credential.password
+      ?
+      "احفظ اسم المستخدم وكلمة المرور وأرسلها للطالب أو ولي الأمر."
+      :
+      "الحساب موجود، وإذا كنت تحتاج كلمة مرور جديدة استخدم زر إعادة تعيين كلمة المرور.";
+
+
+  $("modalBack")
+    .classList
+    .remove(
+      "hide"
+    );
+
+}
+
+
+
+/* ================================================
+   النسخ
+   ================================================ */
+
+
+async function copyCurrentCredential(){
+
+  if(
+    !currentCredential
+  ){
+
+    return;
+
+  }
+
+
+  const text =
+
+    "رشيد العربية\n" +
+
+    "الطالب: " +
+    currentCredential.student_name +
+    "\n" +
+
+    "اسم المستخدم: " +
+    currentCredential.username +
+    "\n" +
+
+    "كلمة المرور: " +
+    (
+      currentCredential.password ||
+      "—"
+    ) +
+    "\n" +
+
+    "رابط الدخول:\n" +
+
+    "https://samysuliman.github.io/rasheed-arabic/login.html";
+
+
+  await navigator
+    .clipboard
+    .writeText(
+      text
+    );
+
+
+  alert(
+    "تم نسخ بيانات الحساب."
+  );
+
+}
+
+
+
+async function copyAllCredentials(){
+
+  if(
+    !generatedCredentials.length
+  ){
+
+    return;
+
+  }
+
+
+  const text =
+    generatedCredentials.map(
+
+      item =>
+
+        item.student_name +
+        "\n" +
+
+        "اسم المستخدم: " +
+        item.username +
+        "\n" +
+
+        "كلمة المرور: " +
+        (
+          item.password ||
+          "—"
+        )
+
+    ).join(
+      "\n\n----------------\n\n"
+    );
+
+
+  await navigator
+    .clipboard
+    .writeText(
+      text
+    );
+
+
+  alert(
+    "تم نسخ بيانات جميع الحسابات الجديدة."
+  );
+
+}
+
+
+
+/* ================================================
+   CSV
+   ================================================ */
+
+
+function exportCSV(){
+
+  if(
+    !generatedCredentials.length
+  ){
+
+    return;
+
+  }
+
+
+  const rows = [
+
+    [
+      "اسم الطالب",
+      "الفصل",
+      "المسار",
+      "اسم المستخدم",
+      "كلمة المرور المؤقتة"
+    ],
+
+    ...generatedCredentials.map(
+      item => [
+
+        item.student_name,
+
+        item.section_name,
+
+        item.curriculum,
+
+        item.username,
+
+        item.password
+
+      ]
+    )
+
+  ];
+
+
+  const csv =
+    "\uFEFF" +
+    rows.map(
+
+      row =>
+        row.map(
+
+          value =>
+            '"' +
+            String(
+              value ??
+              ""
+            )
+            .replace(
+              /"/g,
+              '""'
+            ) +
+            '"'
+
+        ).join(",")
+
+    ).join("\n");
+
+
+  const blob =
+    new Blob(
+      [csv],
+      {
+        type:
+          "text/csv;charset=utf-8"
+      }
+    );
+
+
+  const url =
+    URL.createObjectURL(
+      blob
+    );
+
+
+  const link =
+    document.createElement(
+      "a"
+    );
+
+
+  link.href =
+    url;
+
+
+  link.download =
+    "رشيد العربية - حسابات الطلاب الجديدة.csv";
+
+
+  document.body.appendChild(
+    link
+  );
+
+
+  link.click();
+
+
+  link.remove();
+
+
+  URL.revokeObjectURL(
+    url
+  );
+
+}
+
+
+
+/* ================================================
+   مساعدات
+   ================================================ */
+
+
+function escapeHtml(
+  value
+){
+
+  return String(
+    value ??
+    ""
+  ).replace(
+
+    /[&<>"']/g,
+
+    character => ({
+
+      "&":"&amp;",
+
+      "<":"&lt;",
+
+      ">":"&gt;",
+
+      '"':"&quot;",
+
+      "'":"&#39;"
+
+    }[character])
+
+  );
+
+}
+
+
+
+function delay(
+  ms
+){
+
+  return new Promise(
+    resolve =>
+      setTimeout(
+        resolve,
+        ms
+      )
+  );
+
+}
+
+
+
+/* ================================================
+   الأحداث
+   ================================================ */
+
+
+$("searchBox")
+  .addEventListener(
+    "input",
+    render
+  );
+
+
+$("statusFilter")
+  .addEventListener(
+    "change",
+    render
+  );
+
+
+$("curriculumFilter")
+  .addEventListener(
+    "change",
+    render
+  );
+
+
+$("refreshBtn")
+  .addEventListener(
+    "click",
+    loadData
+  );
+
+
+$("createAllBtn")
+  .addEventListener(
+    "click",
+    createAllMissing
+  );
+
+
+$("exportBtn")
+  .addEventListener(
+    "click",
+    exportCSV
+  );
+
+
+$("copyAllBtn")
+  .addEventListener(
+    "click",
+    copyAllCredentials
+  );
+
+
+$("copyCredentialsBtn")
+  .addEventListener(
+    "click",
+    copyCurrentCredential
+  );
+
+
+$("closeModalBtn")
+  .addEventListener(
+    "click",
+    () => {
+
+      $("modalBack")
+        .classList
+        .add(
+          "hide"
+        );
+
+      currentCredential =
+        null;
+
+    }
+  );
+
+
+$("modalBack")
+  .addEventListener(
+    "click",
+    event => {
+
+      if(
+        event.target ===
+        $("modalBack")
+      ){
+
+        $("modalBack")
+          .classList
+          .add(
+            "hide"
+          );
+
+      }
+
+    }
+  );
+
+
+$("logoutBtn")
+  .addEventListener(
+    "click",
+    () => {
+
+      clearSession();
+
+      location.href =
+        "admin-hub.html";
+
+    }
+  );
+
+
+
+/* ================================================
+   البداية
+   ================================================ */
+
+
+(async function init(){
+
+  const notice =
+    $("pageNotice");
+
+
+  try{
+
+    const session =
+      getSession();
+
+
+    if(
+      !session?.access_token
+    ){
+
+      notice.className =
+        "notice notice-error";
+
+      notice.innerHTML =
+
+        'يلزم تسجيل الدخول كمدير أولًا من ' +
+
+        '<a href="admin-hub.html"><b>مركز الإدارة</b></a>.';
+
+      return;
+
+    }
+
+
+    const isAdmin =
+      await verifyAdmin();
+
+
+    if(
+      !isAdmin
+    ){
+
+      notice.className =
+        "notice notice-error";
+
+      notice.textContent =
+        "الحساب الحالي غير مخوّل لإدارة حسابات الطلاب.";
+
+      return;
+
+    }
+
+
+    await loadData();
+
+
+  }catch(error){
+
+    console.error(
+      error
+    );
+
+
+    notice.className =
+      "notice notice-error";
+
+
+    if(
+      error.message ===
+      "NO_SESSION"
+    ){
+
+      notice.innerHTML =
+
+        'انتهت جلسة المدير. ' +
+
+        '<a href="admin-hub.html"><b>سجّل الدخول مرة أخرى</b></a>.';
+
+    }
+
+    else{
+
+      notice.textContent =
+        "تعذر تحميل لوحة الحسابات: " +
+        error.message;
+
+    }
+
+  }
+
+})();
+
+
+</script>
+
+
+</body>
+
+</html>
