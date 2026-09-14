@@ -220,7 +220,7 @@ footer{background:var(--green);color:#dce9e4;padding:17px 0;margin-top:4px}
       <div class="role-grid">
         <div><input id="homeRoleStudent" name="loginRole" type="radio" value="student" checked><label for="homeRoleStudent">طالب</label></div>
         <div><input id="homeRoleTeacher" name="loginRole" type="radio" value="teacher"><label for="homeRoleTeacher">معلم</label></div>
-        <div><input id="homeRoleHod" name="loginRole" type="radio" value="hod"><label for="homeRoleHod">رئيسة القسم</label></div>
+        <div><input id="homeRoleHod" name="loginRole" type="radio" value="hod"><label for="homeRoleHod">رئيس القسم</label></div>
         <div><input id="homeRoleParent" name="loginRole" type="radio" value="parent"><label for="homeRoleParent">ولي أمر</label></div>
         <div><input id="homeRoleAdmin" name="loginRole" type="radio" value="admin"><label for="homeRoleAdmin">مدير</label></div>
       </div>
@@ -257,7 +257,7 @@ footer{background:var(--green);color:#dce9e4;padding:17px 0;margin-top:4px}
   const PORTAL_KEY='rasheed_arabic_portal_session_v1';
   const ADMIN_KEY='rasheed_arabic_admin_session_v1';
   const STUDENT_LOGIN_FUNCTION='student-login';
-
+const HOD_LOGIN_FUNCTION='hod-login';
   const form=document.getElementById('unifiedLoginForm');
   const userInput=document.getElementById('email');
   const pass=document.getElementById('password');
@@ -299,7 +299,31 @@ footer{background:var(--green);color:#dce9e4;padding:17px 0;margin-top:4px}
     box.textContent='';
     box.classList.add('hide');
   }
+function updateLoginHint(){
 
+  const role=selectedRole();
+
+  if(!userInput) return;
+
+  if(role==='student'){
+
+    userInput.placeholder=
+      'رقم الطالب أو البريد الإلكتروني (مثال: RA0004)';
+
+    userInput.inputMode='text';
+
+  }else if(role==='hod'){
+
+    userInput.placeholder='الاسم';
+    userInput.inputMode='text';
+
+  }else{
+
+    userInput.placeholder='البريد الإلكتروني';
+    userInput.inputMode='email';
+
+  }
+}
   function updateLoginHint(){
     const role=selectedRole();
     if(!userInput) return;
@@ -332,7 +356,41 @@ footer{background:var(--green);color:#dce9e4;padding:17px 0;margin-top:4px}
     }
     return data;
   }
+async function signInHodByName(name,password){
 
+  const response=await fetch(
+    SUPABASE_URL+'/functions/v1/'+HOD_LOGIN_FUNCTION,
+    {
+      method:'POST',
+      headers:{
+        'apikey':SUPABASE_KEY,
+        'Content-Type':'application/json'
+      },
+      body:JSON.stringify({
+        name:name,
+        password:password
+      })
+    }
+  );
+
+  let data={};
+
+  try{
+    data=await response.json();
+  }catch(_){}
+
+  if(
+    !response.ok ||
+    data?.ok!==true ||
+    !data?.session?.access_token
+  ){
+    throw new Error(
+      data?.error || 'INVALID_CREDENTIALS'
+    );
+  }
+
+  return data.session;
+}
   async function signInStudentByUsername(username,password){
     const response=await fetch(SUPABASE_URL+'/functions/v1/'+STUDENT_LOGIN_FUNCTION,{
       method:'POST',
@@ -403,7 +461,13 @@ footer{background:var(--green);color:#dce9e4;padding:17px 0;margin-top:4px}
     const chosenRole=selectedRole();
 
     if(!identifier || !password){
-      showError('اكتب رقم الحساب أو البريد الإلكتروني وكلمة المرور.');
+   showError(
+  chosenRole==='hod'
+    ? 'اكتب الاسم وكلمة المرور.'
+    : chosenRole==='student'
+      ? 'اكتب رقم الطالب وكلمة المرور.'
+      : 'اكتب البريد الإلكتروني وكلمة المرور.'
+);
       return;
     }
 
@@ -418,29 +482,47 @@ footer{background:var(--green);color:#dce9e4;padding:17px 0;margin-top:4px}
       let session;
       let role;
 
-      if(isStudentUsername){
-        if(chosenRole!=='student'){
-          throw new Error('STUDENT_ROLE_REQUIRED');
-        }
-        session=await signInStudentByUsername(identifier,password);
-        role='student';
-      }else{
-        if(!identifier.includes('@')){
-          throw new Error('INVALID_IDENTIFIER');
-        }
-        session=await signInByEmail(identifier,password);
-        role=await detectRole(session);
-        if(!role){
-          throw new Error('ROLE_NOT_FOUND');
-        }
-      }
+   if(chosenRole==='hod'){
+  session=await signInHodByName(identifier,password);
+  role='hod';
+
+}else if(isStudentUsername){
+
+  if(chosenRole!=='student'){
+    throw new Error('STUDENT_ROLE_REQUIRED');
+  }
+
+  session=await signInStudentByUsername(identifier,password);
+  role='student';
+
+}else{
+
+  if(!identifier.includes('@')){
+    throw new Error('INVALID_IDENTIFIER');
+  }
+
+  session=await signInByEmail(identifier,password);
+  role=await detectRole(session);
+
+  if(!role){
+    throw new Error('ROLE_NOT_FOUND');
+  }
+}   }
 
       // الاختيار في البطاقة حماية إضافية من دخول حساب بدور غير مقصود.
       if(chosenRole && role!==chosenRole && !(role==='admin' && chosenRole==='admin')){
         throw new Error('ROLE_MISMATCH');
       }
 
-      saveSession(session,role,isStudentUsername?{username:identifier.toUpperCase()}:{});
+     saveSession(
+  session,
+  role,
+  role==='student'
+    ? {username:identifier.toUpperCase()}
+    : role==='hod'
+      ? {display_name:identifier}
+      : {}
+);
       location.href=targetFor(role);
 
     }catch(error){
@@ -457,7 +539,7 @@ footer{background:var(--green);color:#dce9e4;padding:17px 0;margin-top:4px}
       }else if(code==='STUDENT_LOGIN_NOT_READY' || code==='FUNCTION_NOT_FOUND'){
         showError('خدمة دخول الطلاب لم تُفعّل بعد.');
       }else{
-        showError('تعذر تسجيل الدخول. تحقق من رقم الحساب/البريد وكلمة المرور ثم حاول مرة أخرى.');
+      showError(chosenRole==='hod'?'تعذر تسجيل الدخول. تحقق من الاسم وكلمة المرور.':chosenRole==='student'?'تعذر تسجيل الدخول. تحقق من رقم الطالب وكلمة المرور.':'تعذر تسجيل الدخول. تحقق من البريد الإلكتروني وكلمة المرور.');
       }
     }finally{
       if(btn){
