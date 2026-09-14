@@ -500,7 +500,7 @@ async function signInHodByName(name,password){
   if(!role){
     throw new Error('ROLE_NOT_FOUND');
   }
-}   }
+}   
 
       // الاختيار في البطاقة حماية إضافية من دخول حساب بدور غير مقصود.
       if(chosenRole && role!==chosenRole && !(role==='admin' && chosenRole==='admin')){
