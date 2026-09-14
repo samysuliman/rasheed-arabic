@@ -1,16 +1,12 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-
 <title>لوحة رئيس القسم | رشيد العربية</title>
 
 <style>
-
 *{box-sizing:border-box}
-
 :root{
   --g:#07583f;
   --g2:#0b7455;
@@ -22,22 +18,13 @@
   --border:#d9e7e0;
   --shadow:0 14px 40px rgba(5,56,42,.08)
 }
-
 body{
   margin:0;
   background:var(--bg);
   color:var(--text);
   font-family:Tahoma,Arial,sans-serif
 }
-
-.hide{
-  display:none!important
-}
-
-
-/* =========================
-   TOP BAR
-========================= */
+.hide{display:none!important}
 
 .top{
   background:#fff;
@@ -46,7 +33,6 @@ body{
   top:0;
   z-index:20
 }
-
 .topin{
   width:min(1240px,94%);
   min-height:76px;
@@ -56,7 +42,6 @@ body{
   justify-content:space-between;
   gap:16px
 }
-
 .brand{
   display:flex;
   align-items:center;
@@ -64,29 +49,21 @@ body{
   text-decoration:none;
   color:var(--g)
 }
-
 .brand img{
   width:54px;
   height:54px;
   object-fit:contain
 }
-
 .brand b{
   display:block;
   font-size:18px
 }
-
 .brand small{
   display:block;
   color:var(--muted);
   margin-top:3px
 }
-
-.nav{
-  display:flex;
-  gap:8px
-}
-
+.nav{display:flex;gap:8px}
 .btn{
   border:0;
   border-radius:12px;
@@ -94,22 +71,15 @@ body{
   font-weight:800;
   cursor:pointer
 }
-
 .btn-light{
   background:#edf4f1;
   color:var(--g)
 }
 
-
-/* =========================
-   PAGE
-========================= */
-
 .page{
   width:min(1240px,94%);
   margin:24px auto 60px
 }
-
 .hero{
   background:linear-gradient(135deg,#07583f,#0d7a5b);
   color:#fff;
@@ -121,23 +91,13 @@ body{
   align-items:center;
   box-shadow:var(--shadow)
 }
-
-.hero h1{
-  margin:0 0 8px;
-  font-size:26px
-}
-
-.hero p{
-  margin:0;
-  opacity:.88
-}
-
+.hero h1{margin:0 0 8px;font-size:26px}
+.hero p{margin:0;opacity:.88}
 .hero-meta{
   display:grid;
   grid-template-columns:repeat(3,110px);
   gap:10px
 }
-
 .hero-stat{
   background:rgba(255,255,255,.12);
   border:1px solid rgba(255,255,255,.17);
@@ -145,21 +105,8 @@ body{
   padding:12px;
   text-align:center
 }
-
-.hero-stat b{
-  display:block;
-  font-size:23px
-}
-
-.hero-stat span{
-  font-size:11px;
-  opacity:.9
-}
-
-
-/* =========================
-   BAR
-========================= */
+.hero-stat b{display:block;font-size:23px}
+.hero-stat span{font-size:11px;opacity:.9}
 
 .bar{
   margin-top:16px;
@@ -172,7 +119,6 @@ body{
   gap:12px;
   flex-wrap:wrap
 }
-
 .bar select{
   border:1px solid var(--border);
   border-radius:11px;
@@ -180,7 +126,6 @@ body{
   background:#fff;
   min-width:220px
 }
-
 .badge{
   display:inline-flex;
   align-items:center;
@@ -194,11 +139,6 @@ body{
   border-radius:999px
 }
 
-
-/* =========================
-   SUBJECTS
-========================= */
-
 .section-head{
   display:flex;
   justify-content:space-between;
@@ -206,12 +146,7 @@ body{
   gap:14px;
   margin:24px 0 12px
 }
-
-.section-head h2{
-  margin:0;
-  color:var(--g)
-}
-
+.section-head h2{margin:0;color:var(--g)}
 .section-head p{
   margin:6px 0 0;
   color:var(--muted);
@@ -223,15 +158,10 @@ body{
   grid-template-columns:repeat(3,minmax(0,1fr));
   gap:16px
 }
-
 .subjects.subject-open{
   grid-template-columns:minmax(280px,420px)
 }
-
-.subjects.subject-open .subject:not(.active){
-  display:none
-}
-
+.subjects.subject-open .subject:not(.active){display:none}
 .subject{
   border:1px solid var(--border);
   background:#fff;
@@ -244,7 +174,6 @@ body{
   position:relative;
   overflow:hidden
 }
-
 .subject:before{
   content:"";
   position:absolute;
@@ -253,14 +182,11 @@ body{
   height:4px;
   background:linear-gradient(90deg,var(--g),var(--gold))
 }
-
-.subject:hover,
-.subject.active{
+.subject:hover,.subject.active{
   transform:translateY(-3px);
   box-shadow:var(--shadow);
   border-color:#a9cbbb
 }
-
 .subject-icon{
   width:62px;
   height:62px;
@@ -271,24 +197,17 @@ body{
   font-size:34px;
   margin-bottom:13px
 }
-
 .subject h3{
   margin:0;
   color:var(--g);
   font-size:19px
 }
-
 .subject p{
   margin:7px 0 0;
   color:var(--muted);
   font-size:12px;
   line-height:1.7
 }
-
-
-/* =========================
-   WORKSPACE
-========================= */
 
 .workspace{
   margin-top:22px;
@@ -298,7 +217,6 @@ body{
   padding:20px;
   box-shadow:var(--shadow)
 }
-
 .workspace-title{
   display:flex;
   justify-content:space-between;
@@ -306,18 +224,12 @@ body{
   gap:12px;
   flex-wrap:wrap
 }
-
-.workspace-title h2{
-  margin:0;
-  color:var(--g)
-}
-
+.workspace-title h2{margin:0;color:var(--g)}
 .workspace-title p{
   margin:5px 0 0;
   color:var(--muted);
   font-size:12px
 }
-
 .filters{
   margin-top:15px;
   background:#f8fbf9;
@@ -329,7 +241,6 @@ body{
   align-items:center;
   flex-wrap:wrap
 }
-
 .filters select{
   min-width:200px;
   border:1px solid var(--border);
@@ -338,18 +249,12 @@ body{
   background:#fff
 }
 
-
-/* =========================
-   TOOLS
-========================= */
-
 .tools{
   display:grid;
   grid-template-columns:repeat(5,minmax(0,1fr));
   gap:10px;
   margin-top:18px
 }
-
 .tool{
   background:#fbfdfc;
   border:1px solid var(--border);
@@ -358,28 +263,17 @@ body{
   cursor:pointer;
   text-align:center
 }
-
-.tool:hover,
-.tool.active{
+.tool:hover,.tool.active{
   background:var(--gs);
   border-color:#9fc5b4
 }
-
-.tool .ico{
-  font-size:27px
-}
-
+.tool .ico{font-size:27px}
 .tool strong{
   display:block;
   margin-top:6px;
   color:var(--g);
   font-size:13px
 }
-
-
-/* =========================
-   CONTENT
-========================= */
 
 .panel{
   margin-top:16px;
@@ -388,29 +282,19 @@ body{
   padding:16px;
   background:#fbfdfc
 }
-
 .empty{
   text-align:center;
   padding:24px;
   color:var(--muted)
 }
-
-.cards{
-  display:grid;
-  gap:10px
-}
-
+.cards{display:grid;gap:10px}
 .item{
   background:#fff;
   border:1px solid var(--border);
   border-radius:15px;
   padding:13px
 }
-
-.item strong{
-  color:var(--g)
-}
-
+.item strong{color:var(--g)}
 .meta{
   color:var(--muted);
   font-size:11px;
@@ -418,56 +302,34 @@ body{
   margin-top:5px
 }
 
-
-/* =========================
-   VIEW / DOWNLOAD BUTTONS
-========================= */
-
 .action-row{
   display:flex;
   gap:8px;
   flex-wrap:wrap;
   margin-top:10px
 }
-
 .action{
   display:inline-flex;
   align-items:center;
   justify-content:center;
   gap:5px;
-
   border:1px solid #cfe2d9;
   background:#f5fbf8;
-
   color:var(--g);
   font-weight:800;
   font-size:12px;
-
   padding:8px 14px;
   border-radius:10px;
-
   text-decoration:none;
   cursor:pointer
 }
-
-.action:hover{
-  background:#e8f5ef
-}
-
+.action:hover{background:#e8f5ef}
 .action.download{
   color:#6f5a17;
   border-color:#ead59a;
   background:#fff8df
 }
-
-.action.download:hover{
-  background:#fff1bd
-}
-
-
-/* =========================
-   READ ONLY
-========================= */
+.action.download:hover{background:#fff1bd}
 
 .read-only{
   background:#fff8df;
@@ -479,49 +341,29 @@ body{
   margin-bottom:12px
 }
 
-
-/* =========================
-   STUDENTS
-========================= */
-
-.roster{
-  display:grid;
-  gap:7px
-}
-
+.roster{display:grid;gap:7px}
 .student{
   display:grid;
   grid-template-columns:42px 1.6fr repeat(3,1fr);
   gap:8px;
   align-items:center;
-
   background:#fff;
   border:1px solid #e5eee9;
   border-radius:12px;
-
   padding:9px 11px;
   font-size:12px
 }
-
 .student .num{
   width:30px;
   height:30px;
   border-radius:50%;
-
   background:var(--gs);
-
   display:grid;
   place-items:center;
-
   color:var(--g);
   font-weight:900
 }
-
-.small{
-  font-size:11px;
-  color:var(--muted)
-}
-
+.small{font-size:11px;color:var(--muted)}
 .err{
   background:#fff1f1;
   color:#963434;
@@ -532,11 +374,7 @@ body{
   margin-top:12px
 }
 
-
-/* =========================
-   GRADEBOOK
-========================= */
-
+/* GRADEBOOK */
 .grade-matrix-wrap{
   overflow:auto;
   border:1px solid var(--border);
@@ -544,7 +382,6 @@ body{
   background:#fff;
   max-height:70vh
 }
-
 .grade-matrix{
   border-collapse:separate;
   border-spacing:0;
@@ -552,9 +389,7 @@ body{
   width:100%;
   direction:rtl
 }
-
-.grade-matrix th,
-.grade-matrix td{
+.grade-matrix th,.grade-matrix td{
   border-bottom:1px solid #e7efeb;
   border-left:1px solid #edf2ef;
   padding:8px;
@@ -562,7 +397,6 @@ body{
   font-size:11px;
   white-space:nowrap
 }
-
 .grade-matrix thead th{
   position:sticky;
   top:0;
@@ -571,63 +405,51 @@ body{
   color:var(--g);
   min-width:105px
 }
-
 .grade-matrix .student-name-col{
   position:sticky;
   right:0;
   z-index:5;
-
   background:#fff;
-
   min-width:230px;
   max-width:260px;
-
   text-align:right;
   font-weight:800;
-
   box-shadow:-5px 0 10px rgba(0,0,0,.04)
 }
-
 .grade-matrix thead .student-name-col{
   z-index:7;
   background:#e8f3ee
 }
-
 .grade-matrix .student-name-col small{
   display:block;
   color:var(--muted);
   font-weight:500;
   margin-top:3px
 }
-
 .grade-matrix .item-head{
   min-width:118px;
   max-width:150px;
   white-space:normal;
   line-height:1.45
 }
-
 .grade-matrix .item-head .cat{
   display:block;
   font-size:10px;
   color:#8a6e0b;
   margin-bottom:3px
 }
-
 .grade-matrix .term-total{
   font-weight:900;
   color:var(--g);
   background:#f7fbf9;
   min-width:85px
 }
-
 .weight-summary{
   display:flex;
   gap:8px;
   flex-wrap:wrap;
   margin:10px 0
 }
-
 .weight-pill{
   background:#fff;
   border:1px solid var(--border);
@@ -635,659 +457,481 @@ body{
   padding:8px 10px;
   font-size:11px
 }
+.weight-pill b{color:var(--g)}
 
-.weight-pill b{
-  color:var(--g)
-}
-
-
-/* =========================
-   PREVIEW MODAL
-========================= */
-
+/* PREVIEW MODAL */
 .preview-modal{
   position:fixed;
   inset:0;
-
   z-index:9999;
-
   background:rgba(0,0,0,.62);
-
   display:flex;
   align-items:center;
   justify-content:center;
-
   padding:18px
 }
-
 .preview-dialog{
   width:min(1150px,97vw);
   height:min(850px,94vh);
-
   background:#fff;
-
   border-radius:20px;
   overflow:hidden;
-
   box-shadow:0 24px 80px rgba(0,0,0,.35);
-
   display:flex;
   flex-direction:column
 }
-
 .preview-head{
   min-height:58px;
-
   padding:10px 14px;
-
   border-bottom:1px solid var(--border);
-
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:10px
 }
-
-.preview-head strong{
-  color:var(--g)
-}
-
+.preview-head strong{color:var(--g)}
 .preview-close{
   border:0;
   background:#edf4f1;
   color:var(--g);
-
   border-radius:10px;
-
   padding:8px 12px;
-
   cursor:pointer;
   font-weight:900
 }
-
 .preview-body{
   flex:1;
   min-height:0;
-
   background:#eef3f1;
-
   display:flex;
   align-items:center;
-  justify-content:center
+  justify-content:center;
+  position:relative
 }
-
 .preview-frame{
   width:100%;
   height:100%;
   border:0;
   background:#fff
 }
-
 .preview-image{
   max-width:100%;
   max-height:100%;
   object-fit:contain
 }
-
 .preview-video{
   width:100%;
   height:100%;
   background:#000
 }
-
-
-/* =========================
-   MOBILE
-========================= */
-
-@media(max-width:900px){
-
-  .subjects{
-    grid-template-columns:repeat(2,1fr)
-  }
-
-  .tools{
-    grid-template-columns:repeat(3,1fr)
-  }
-
-  .hero{
-    display:block
-  }
-
-  .hero-meta{
-    margin-top:15px
-  }
-
-  .student{
-    grid-template-columns:36px 1.5fr 1fr
-  }
-
-  .student .optional{
-    display:none
-  }
-
+.preview-loading{
+  padding:30px;
+  font-weight:800;
+  color:var(--g)
+}
+.preview-fail{
+  padding:30px;
+  text-align:center;
+  line-height:2;
+  color:var(--muted)
 }
 
+@media(max-width:900px){
+  .subjects{grid-template-columns:repeat(2,1fr)}
+  .tools{grid-template-columns:repeat(3,1fr)}
+  .hero{display:block}
+  .hero-meta{margin-top:15px}
+  .student{grid-template-columns:36px 1.5fr 1fr}
+  .student .optional{display:none}
+}
 @media(max-width:580px){
-
-  .subjects,
-  .tools{
-    grid-template-columns:1fr
-  }
-
-  .hero-meta{
-    grid-template-columns:1fr 1fr
-  }
-
-  .bar select,
-  .filters select{
-    min-width:100%;
-    width:100%
-  }
-
-  .topin{
-    min-height:66px
-  }
-
-  .brand img{
-    width:48px;
-    height:48px
-  }
-
-  .nav .home{
-    display:none
-  }
-
-  .preview-modal{
-    padding:5px
-  }
-
+  .subjects,.tools{grid-template-columns:1fr}
+  .hero-meta{grid-template-columns:1fr 1fr}
+  .bar select,.filters select{min-width:100%;width:100%}
+  .topin{min-height:66px}
+  .brand img{width:48px;height:48px}
+  .nav .home{display:none}
+  .preview-modal{padding:5px}
   .preview-dialog{
     width:100%;
     height:96vh;
     border-radius:12px
   }
-
 }
-
 </style>
-
 </head>
 
 <body>
 
-
-<!-- =========================
-     TOP BAR
-========================= -->
-
 <header class="top">
+  <div class="topin">
 
-<div class="topin">
+    <a class="brand" href="index.html">
+      <img
+        src="rasheed-arabic-logo.png"
+        alt="رشيد العربية"
+        onerror="this.style.display='none'"
+      >
+      <div>
+        <b>رشيد العربية</b>
+        <small>لوحة رئيس القسم</small>
+      </div>
+    </a>
 
-<a class="brand" href="index.html">
+    <div class="nav">
+      <button
+        class="btn btn-light home"
+        onclick="location.href='index.html'"
+      >
+        الرئيسية
+      </button>
 
-<img
-  src="rasheed-arabic-logo.png"
-  alt="رشيد العربية"
-  onerror="this.style.display='none'"
->
+      <button
+        class="btn btn-light"
+        id="logoutBtn"
+      >
+        تسجيل الخروج
+      </button>
+    </div>
 
-<div>
-
-<b>
-رشيد العربية
-</b>
-
-<small>
-لوحة رئيس القسم
-</small>
-
-</div>
-
-</a>
-
-
-<div class="nav">
-
-<button
-  class="btn btn-light home"
-  onclick="location.href='index.html'"
->
-الرئيسية
-</button>
-
-<button
-  class="btn btn-light"
-  id="logoutBtn"
->
-تسجيل الخروج
-</button>
-
-</div>
-
-</div>
-
+  </div>
 </header>
-
-
-<!-- =========================
-     PAGE
-========================= -->
 
 <main class="page">
 
-
 <section class="hero">
 
-<div>
+  <div>
+    <h1 id="welcome">لوحة رئيس القسم</h1>
+    <p>
+      متابعة لوحة المعلم والطلاب والمحتوى والجريد بوك بصلاحية مشاهدة فقط.
+    </p>
+  </div>
 
-<h1 id="welcome">
-لوحة رئيس القسم
-</h1>
+  <div class="hero-meta">
 
-<p>
-متابعة لوحة المعلم والطلاب والمحتوى والجريد بوك بصلاحية مشاهدة فقط.
-</p>
+    <div class="hero-stat">
+      <b id="teacherStat">—</b>
+      <span>معلمون</span>
+    </div>
 
-</div>
+    <div class="hero-stat">
+      <b id="classStat">—</b>
+      <span>فصول</span>
+    </div>
 
+    <div class="hero-stat">
+      <b id="studentStat">—</b>
+      <span>طلاب</span>
+    </div>
 
-<div class="hero-meta">
-
-<div class="hero-stat">
-<b id="teacherStat">—</b>
-<span>معلمون</span>
-</div>
-
-<div class="hero-stat">
-<b id="classStat">—</b>
-<span>فصول</span>
-</div>
-
-<div class="hero-stat">
-<b id="studentStat">—</b>
-<span>طلاب</span>
-</div>
-
-</div>
+  </div>
 
 </section>
 
-
 <div class="bar">
 
-<strong id="yearName">
-السنة الدراسية
-</strong>
+  <strong id="yearName">
+    السنة الدراسية
+  </strong>
 
-<strong>
-الفصل:
-</strong>
+  <strong>الفصل:</strong>
+  <select id="termSelect"></select>
 
-<select id="termSelect"></select>
+  <strong>المعلم:</strong>
+  <select id="teacherSelect"></select>
 
-<strong>
-المعلم:
-</strong>
-
-<select id="teacherSelect"></select>
-
-<span class="badge">
-👁️ عرض فقط
-</span>
+  <span class="badge">
+    👁️ عرض فقط
+  </span>
 
 </div>
-
 
 <div
   id="pageError"
   class="err hide"
 ></div>
 
-
 <div class="section-head">
+  <div>
+    <h2>مواد المعلم</h2>
+    <p>
+      اختر المعلم ثم المادة والفصل الذي تريد متابعته.
+    </p>
+  </div>
 
-<div>
-
-<h2>
-مواد المعلم
-</h2>
-
-<p>
-اختر المعلم ثم المادة والفصل الذي تريد متابعته.
-</p>
-
+  <span
+    class="badge"
+    id="subjectCount"
+  >
+    0 مواد
+  </span>
 </div>
-
-<span
-  class="badge"
-  id="subjectCount"
->
-0 مواد
-</span>
-
-</div>
-
 
 <section
   id="subjectsGrid"
   class="subjects"
 >
-
-<div class="empty">
-جارٍ تحميل البيانات...
-</div>
-
+  <div class="empty">
+    جارٍ تحميل البيانات...
+  </div>
 </section>
-
 
 <section
   id="workspace"
   class="workspace hide"
 >
 
+  <div class="workspace-title">
 
-<div class="workspace-title">
+    <div>
+      <h2 id="workspaceSubject">
+        المادة
+      </h2>
 
-<div>
+      <p id="workspaceMeta">
+        —
+      </p>
+    </div>
 
-<h2 id="workspaceSubject">
-المادة
-</h2>
+    <button
+      class="btn btn-light"
+      id="backToSubjects"
+    >
+      ↩ العودة إلى المواد
+    </button>
 
-<p id="workspaceMeta">
-—
-</p>
+  </div>
 
-</div>
+  <div class="filters">
 
+    <strong>المجمع:</strong>
+    <select id="campusSelect"></select>
 
-<button
-  class="btn btn-light"
-  id="backToSubjects"
->
-↩ العودة إلى المواد
-</button>
+    <strong>القسم:</strong>
+    <select id="divisionSelect"></select>
 
-</div>
+    <strong>الفصل:</strong>
+    <select id="classSelect"></select>
 
+  </div>
 
-<div class="filters">
+  <div class="tools">
 
-<strong>
-المجمع:
-</strong>
+    <button class="tool" data-action="roster">
+      <span class="ico">👥</span>
+      <strong>الطلاب</strong>
+    </button>
 
-<select id="campusSelect"></select>
+    <button class="tool" data-action="homework">
+      <span class="ico">📝</span>
+      <strong>الواجبات</strong>
+    </button>
 
-<strong>
-القسم:
-</strong>
+    <button class="tool" data-action="quiz">
+      <span class="ico">✅</span>
+      <strong>الاختبارات</strong>
+    </button>
 
-<select id="divisionSelect"></select>
+    <button class="tool" data-action="worksheet">
+      <span class="ico">📄</span>
+      <strong>أوراق العمل</strong>
+    </button>
 
-<strong>
-الفصل:
-</strong>
+    <button class="tool" data-action="lesson_plan">
+      <span class="ico">📋</span>
+      <strong>التحضير</strong>
+    </button>
 
-<select id="classSelect"></select>
+    <button class="tool" data-action="file">
+      <span class="ico">📎</span>
+      <strong>المرفقات</strong>
+    </button>
 
-</div>
+    <button class="tool" data-action="powerpoint">
+      <span class="ico">📊</span>
+      <strong>العروض</strong>
+    </button>
 
+    <button class="tool" data-action="video">
+      <span class="ico">🎬</span>
+      <strong>الفيديوهات</strong>
+    </button>
 
-<div class="tools">
+    <button class="tool" data-action="virtual">
+      <span class="ico">🎥</span>
+      <strong>الحصص الافتراضية</strong>
+    </button>
 
-<button class="tool" data-action="roster">
-<span class="ico">👥</span>
-<strong>الطلاب</strong>
-</button>
+    <button class="tool" data-action="gradebook">
+      <span class="ico">🏆</span>
+      <strong>الجريد بوك</strong>
+    </button>
 
-<button class="tool" data-action="homework">
-<span class="ico">📝</span>
-<strong>الواجبات</strong>
-</button>
+  </div>
 
-<button class="tool" data-action="quiz">
-<span class="ico">✅</span>
-<strong>الاختبارات</strong>
-</button>
+  <div
+    id="contentPanel"
+    class="panel"
+  >
+    <div class="read-only">
+      هذه اللوحة للمتابعة فقط.
+      لا يمكن لرئيس القسم تعديل أو حذف أو إضافة محتوى أو درجات.
+    </div>
 
-<button class="tool" data-action="worksheet">
-<span class="ico">📄</span>
-<strong>أوراق العمل</strong>
-</button>
-
-<button class="tool" data-action="lesson_plan">
-<span class="ico">📋</span>
-<strong>التحضير</strong>
-</button>
-
-<button class="tool" data-action="file">
-<span class="ico">📎</span>
-<strong>المرفقات</strong>
-</button>
-
-<button class="tool" data-action="powerpoint">
-<span class="ico">📊</span>
-<strong>العروض</strong>
-</button>
-
-<button class="tool" data-action="video">
-<span class="ico">🎬</span>
-<strong>الفيديوهات</strong>
-</button>
-
-<button class="tool" data-action="virtual">
-<span class="ico">🎥</span>
-<strong>الحصص الافتراضية</strong>
-</button>
-
-<button class="tool" data-action="gradebook">
-<span class="ico">🏆</span>
-<strong>الجريد بوك</strong>
-</button>
-
-</div>
-
-
-<div
-  id="contentPanel"
-  class="panel"
->
-
-<div class="read-only">
-هذه اللوحة للمتابعة فقط.
-لا يمكن لرئيس القسم تعديل أو حذف أو إضافة محتوى أو درجات.
-</div>
-
-<div class="empty">
-اختر أداة للمتابعة.
-</div>
-
-</div>
+    <div class="empty">
+      اختر أداة للمتابعة.
+    </div>
+  </div>
 
 </section>
 
 </main>
 
-
-<!-- =========================
-     PREVIEW WINDOW
-========================= -->
-
+<!-- نافذة المعاينة -->
 <div
   id="previewModal"
   class="preview-modal hide"
 >
 
-<div class="preview-dialog">
+  <div class="preview-dialog">
 
-<div class="preview-head">
+    <div class="preview-head">
 
-<strong id="previewTitle">
-معاينة الملف
-</strong>
+      <strong id="previewTitle">
+        معاينة الملف
+      </strong>
 
-<button
-  id="closePreview"
-  class="preview-close"
->
-✕ إغلاق
-</button>
+      <button
+        id="closePreview"
+        class="preview-close"
+      >
+        ✕ إغلاق
+      </button>
 
-</div>
+    </div>
 
-<div
-  id="previewBody"
-  class="preview-body"
-></div>
+    <div
+      id="previewBody"
+      class="preview-body"
+    ></div>
 
-</div>
+  </div>
 
 </div>
 
 
 <script>
-
 (()=>{
 
-
-/* =========================
-   SETTINGS
-========================= */
-
 const SUPABASE_URL =
-'https://wcyamoqmpwpribsgspjn.supabase.co';
+  'https://wcyamoqmpwpribsgspjn.supabase.co';
 
 const KEY =
-'sb_publishable_3eJET0uhZw4D4DowMK13fQ_oWK3PdIQ';
+  'sb_publishable_3eJET0uhZw4D4DowMK13fQ_oWK3PdIQ';
 
 const PORTAL_KEY =
-'rasheed_arabic_portal_session_v1';
+  'rasheed_arabic_portal_session_v1';
 
 
 const $ =
-id =>
-document.getElementById(id);
+  id =>
+    document.getElementById(id);
 
 
 const esc =
-s =>
-String(s ?? '')
-.replace(
-  /[&<>"']/g,
-  c => ({
-    "&":"&amp;",
-    "<":"&lt;",
-    ">":"&gt;",
-    '"':"&quot;",
-    "'":"&#39;"
-  }[c])
-);
+  s =>
+    String(s ?? '')
+      .replace(
+        /[&<>"']/g,
+        c => ({
+          "&":"&amp;",
+          "<":"&lt;",
+          ">":"&gt;",
+          '"':"&quot;",
+          "'":"&#39;"
+        }[c])
+      );
 
 
 const flag =
-c =>
-String(c || '')
-.includes('أمريك')
-?
-'🇺🇸'
-:
-String(c || '')
-.includes('بريط')
-?
-'🇬🇧'
-:
-'🌐';
+  c =>
+    String(c || '')
+      .includes('أمريك')
+      ? '🇺🇸'
+      :
+      String(c || '')
+        .includes('بريط')
+        ? '🇬🇧'
+        :
+        '🌐';
 
-
-/* =========================
-   SESSION
-========================= */
 
 function session(){
 
-try{
+  try{
 
-return JSON.parse(
-localStorage.getItem(
-PORTAL_KEY
-)
-||
-'null'
-);
+    return JSON.parse(
+      localStorage.getItem(
+        PORTAL_KEY
+      ) || 'null'
+    );
 
-}catch{
+  }catch{
 
-return null;
+    return null;
 
-}
+  }
 
 }
 
-
-/* =========================
-   RPC
-========================= */
 
 async function rpc(
-name,
-body={}
+  name,
+  body = {}
 ){
 
-const s =
-session();
+  const s =
+    session();
 
-if(
-!s?.access_token
-){
-throw new Error(
-'NO_SESSION'
-);
-}
+  if(
+    !s?.access_token
+  ){
+    throw new Error(
+      'NO_SESSION'
+    );
+  }
 
+  const r =
+    await fetch(
+      `${SUPABASE_URL}/rest/v1/rpc/${name}`,
+      {
+        method:'POST',
 
-const r =
-await fetch(
+        headers:{
+          apikey:KEY,
 
-`${SUPABASE_URL}/rest/v1/rpc/${name}`,
+          Authorization:
+            `Bearer ${s.access_token}`,
 
-{
+          'Content-Type':
+            'application/json'
+        },
 
-method:'POST',
+        body:
+          JSON.stringify(body)
+      }
+    );
 
-headers:{
+  if(
+    !r.ok
+  ){
+    throw new Error(
+      await r.text()
+    );
+  }
 
-apikey:KEY,
-
-Authorization:
-`Bearer ${s.access_token}`,
-
-'Content-Type':
-'application/json'
-
-},
-
-body:
-JSON.stringify(body)
-
-}
-
-);
-
-
-if(
-!r.ok
-){
-
-throw new Error(
-await r.text()
-);
-
-}
-
-return r.json();
+  return r.json();
 
 }
 
@@ -1296,18 +940,17 @@ return r.json();
    STATE
 ========================= */
 
-let data=null;
-
-let currentTerm=null;
-
-let currentTeacher='';
-
-let currentSubject=null;
-
-let currentAssignment=null;
+let data = null;
+let currentTerm = null;
+let currentTeacher = '';
+let currentSubject = null;
+let currentAssignment = null;
 
 const previewItems =
-new Map();
+  new Map();
+
+let activeObjectUrl =
+  null;
 
 
 /* =========================
@@ -1316,99 +959,67 @@ new Map();
 
 function fileExtension(item){
 
-const source =
-String(
-item?.file_name ||
-item?.url ||
-''
-)
-.split('?')[0]
-.toLowerCase();
+  const source =
+    String(
+      item?.file_name ||
+      item?.url ||
+      ''
+    )
+      .split('?')[0]
+      .toLowerCase();
 
+  const match =
+    source.match(
+      /\.([a-z0-9]+)$/
+    );
 
-const match =
-source.match(
-/\.([a-z0-9]+)$/
-);
-
-
-return match
-?
-match[1]
-:
-'';
+  return match
+    ? match[1]
+    : '';
 
 }
 
 
-/* =========================
-   PREVIEW URL
-========================= */
+function forcedMime(ext){
 
-function previewUrl(item){
+  const map = {
 
-const url =
-String(
-item?.url || ''
-);
+    pdf:
+      'application/pdf',
 
-if(
-!url
-){
-return '';
-}
+    jpg:
+      'image/jpeg',
 
+    jpeg:
+      'image/jpeg',
 
-const ext =
-fileExtension(item);
+    png:
+      'image/png',
 
+    gif:
+      'image/gif',
 
-/*
-PDF:
-لا نفتح رابط Supabase الخام،
-بل Google Viewer.
-*/
-if(
-ext === 'pdf'
-){
+    webp:
+      'image/webp',
 
-return (
-'https://docs.google.com/gview?embedded=1&url='
-+
-encodeURIComponent(url)
-);
+    svg:
+      'image/svg+xml',
 
-}
+    mp4:
+      'video/mp4',
 
+    webm:
+      'video/webm',
 
-/*
-Word / PowerPoint / Excel:
-Microsoft Office Viewer.
-*/
-if(
-[
-'doc',
-'docx',
-'ppt',
-'pptx',
-'xls',
-'xlsx'
-].includes(ext)
-){
+    ogg:
+      'video/ogg'
 
-return (
-'https://view.officeapps.live.com/op/view.aspx?src='
-+
-encodeURIComponent(url)
-);
+  };
 
-}
-
-
-/*
-الأنواع الأخرى
-*/
-return url;
+  return (
+    map[ext] ||
+    'application/octet-stream'
+  );
 
 }
 
@@ -1419,60 +1030,94 @@ return url;
 
 function downloadUrl(item){
 
-const url =
-String(
-item?.url || ''
-);
+  const url =
+    String(
+      item?.url || ''
+    );
 
-if(
-!url
-){
-return '';
+  if(!url){
+    return '';
+  }
+
+  const filename =
+    String(
+      item?.file_name ||
+      item?.title ||
+      'file'
+    )
+      .trim()
+    ||
+    'file';
+
+  try{
+
+    const u =
+      new URL(url);
+
+    u.searchParams.set(
+      'download',
+      filename
+    );
+
+    return u.toString();
+
+  }catch{
+
+    return (
+      url +
+      (
+        url.includes('?')
+          ? '&'
+          : '?'
+      ) +
+      'download=' +
+      encodeURIComponent(filename)
+    );
+
+  }
+
+}
+
+
+/* =========================
+   OFFICE VIEWER
+========================= */
+
+function officePreviewUrl(item){
+
+  const url =
+    String(
+      item?.url || ''
+    );
+
+  return (
+    'https://view.officeapps.live.com/op/embed.aspx?src=' +
+    encodeURIComponent(url)
+  );
+
 }
 
 
-const filename =
-String(
-item?.file_name ||
-item?.title ||
-'file'
-)
-.trim()
-||
-'file';
+/* =========================
+   REVOKE OLD BLOB
+========================= */
 
+function clearObjectUrl(){
 
-try{
+  if(
+    activeObjectUrl
+  ){
 
-const u =
-new URL(url);
+    try{
+      URL.revokeObjectURL(
+        activeObjectUrl
+      );
+    }catch(_){}
 
-u.searchParams.set(
-'download',
-filename
-);
+    activeObjectUrl =
+      null;
 
-return u.toString();
-
-}catch{
-
-return (
-url
-+
-(
-url.includes('?')
-?
-'&'
-:
-'?'
-)
-+
-'download='
-+
-encodeURIComponent(filename)
-);
-
-}
+  }
 
 }
 
@@ -1481,168 +1126,267 @@ encodeURIComponent(filename)
    OPEN PREVIEW
 ========================= */
 
-function openPreview(item){
+async function openPreview(item){
 
-if(
-!item?.url
-){
-return;
-}
+  if(
+    !item?.url
+  ){
+    return;
+  }
 
+  clearObjectUrl();
 
-const ext =
-fileExtension(item);
+  const ext =
+    fileExtension(item);
 
-const url =
-String(item.url);
+  const body =
+    $('previewBody');
 
-const body =
-$('previewBody');
+  $('previewTitle')
+    .textContent =
+      item.title ||
+      item.file_name ||
+      'معاينة الملف';
 
+  $('previewModal')
+    .classList
+    .remove(
+      'hide'
+    );
 
-$('previewTitle')
-.textContent =
-item.title ||
-item.file_name ||
-'معاينة الملف';
-
-
-body.innerHTML='';
-
-
-/*
-صور
-*/
-if(
-[
-'jpg',
-'jpeg',
-'png',
-'gif',
-'webp',
-'bmp',
-'svg'
-].includes(ext)
-){
-
-const img =
-document.createElement(
-'img'
-);
-
-img.className =
-'preview-image';
-
-img.src =
-url;
-
-img.alt =
-item.title ||
-'صورة';
-
-body.appendChild(img);
-
-}
+  body.innerHTML =
+    '<div class="preview-loading">جارٍ تجهيز المعاينة...</div>';
 
 
-/*
-فيديو مرفوع
-*/
-else if(
-[
-'mp4',
-'webm',
-'ogg',
-'mov'
-].includes(ext)
-){
+  try{
 
-const video =
-document.createElement(
-'video'
-);
+    /* Word / PowerPoint / Excel */
+    if(
+      [
+        'doc',
+        'docx',
+        'ppt',
+        'pptx',
+        'xls',
+        'xlsx'
+      ].includes(ext)
+    ){
 
-video.className =
-'preview-video';
+      const frame =
+        document.createElement(
+          'iframe'
+        );
 
-video.controls =
-true;
+      frame.className =
+        'preview-frame';
 
-video.src =
-url;
+      frame.src =
+        officePreviewUrl(item);
 
-body.appendChild(
-video
-);
+      frame.allowFullscreen =
+        true;
 
-}
+      body.innerHTML = '';
 
+      body.appendChild(
+        frame
+      );
 
-/*
-PDF / Word / PPT / Excel
-*/
-else if(
-[
-'pdf',
-'doc',
-'docx',
-'ppt',
-'pptx',
-'xls',
-'xlsx'
-].includes(ext)
-){
+      return;
 
-const frame =
-document.createElement(
-'iframe'
-);
-
-frame.className =
-'preview-frame';
-
-frame.src =
-previewUrl(item);
-
-frame.allowFullscreen =
-true;
-
-body.appendChild(
-frame
-);
-
-}
+    }
 
 
-/*
-ملفات أخرى:
-نحاول عرضها داخل iframe
-*/
-else{
+    /*
+      PDF + الصور + الفيديوهات:
+      نجلب الملف أولًا كـ Blob.
+      وبذلك لا نفتح رابط Supabase الخام
+      الذي قد يجبر المتصفح على التنزيل.
+    */
 
-const frame =
-document.createElement(
-'iframe'
-);
+    const response =
+      await fetch(
+        item.url,
+        {
+          method:'GET',
+          cache:'no-store'
+        }
+      );
 
-frame.className =
-'preview-frame';
+    if(
+      !response.ok
+    ){
+      throw new Error(
+        'FILE_FETCH_FAILED'
+      );
+    }
 
-frame.src =
-previewUrl(item);
+    const originalBlob =
+      await response.blob();
 
-body.appendChild(
-frame
-);
+    const bytes =
+      await originalBlob
+        .arrayBuffer();
 
-}
+    const blob =
+      new Blob(
+        [bytes],
+        {
+          type:
+            forcedMime(ext)
+        }
+      );
+
+    activeObjectUrl =
+      URL.createObjectURL(
+        blob
+      );
 
 
-$('previewModal')
-.classList
-.remove(
-'hide'
-);
+    /* PDF */
+    if(
+      ext === 'pdf'
+    ){
+
+      const frame =
+        document.createElement(
+          'iframe'
+        );
+
+      frame.className =
+        'preview-frame';
+
+      frame.src =
+        activeObjectUrl;
+
+      body.innerHTML = '';
+
+      body.appendChild(
+        frame
+      );
+
+      return;
+
+    }
+
+
+    /* الصور */
+    if(
+      [
+        'jpg',
+        'jpeg',
+        'png',
+        'gif',
+        'webp',
+        'svg',
+        'bmp'
+      ].includes(ext)
+    ){
+
+      const img =
+        document.createElement(
+          'img'
+        );
+
+      img.className =
+        'preview-image';
+
+      img.src =
+        activeObjectUrl;
+
+      img.alt =
+        item.title ||
+        'صورة';
+
+      body.innerHTML = '';
+
+      body.appendChild(
+        img
+      );
+
+      return;
+
+    }
+
+
+    /* الفيديو */
+    if(
+      [
+        'mp4',
+        'webm',
+        'ogg',
+        'mov'
+      ].includes(ext)
+    ){
+
+      const video =
+        document.createElement(
+          'video'
+        );
+
+      video.className =
+        'preview-video';
+
+      video.controls =
+        true;
+
+      video.src =
+        activeObjectUrl;
+
+      body.innerHTML = '';
+
+      body.appendChild(
+        video
+      );
+
+      return;
+
+    }
+
+
+    /* نوع آخر */
+    const frame =
+      document.createElement(
+        'iframe'
+      );
+
+    frame.className =
+      'preview-frame';
+
+    frame.src =
+      activeObjectUrl;
+
+    body.innerHTML = '';
+
+    body.appendChild(
+      frame
+    );
+
+
+  }catch(error){
+
+    console.error(
+      'Preview error:',
+      error
+    );
+
+    body.innerHTML =
+      `
+      <div class="preview-fail">
+
+        <strong style="color:#07583f">
+          تعذر عرض هذا النوع داخل المتصفح.
+        </strong>
+
+        <br>
+
+        يمكنك تنزيل الملف من زر
+        «تنزيل».
+
+      </div>
+      `;
+
+  }
 
 }
 
@@ -1653,213 +1397,180 @@ $('previewModal')
 
 function closePreview(){
 
-$('previewModal')
-.classList
-.add(
-'hide'
-);
+  $('previewModal')
+    .classList
+    .add(
+      'hide'
+    );
 
-$('previewBody')
-.innerHTML='';
+  $('previewBody')
+    .innerHTML = '';
+
+  clearObjectUrl();
 
 }
 
 
 /* =========================
-   MATERIAL BUTTONS
+   MATERIAL ACTIONS
 ========================= */
 
 function materialActions(
-item,
-action,
-key
+  item,
+  action,
+  key
 ){
 
-if(
-!item?.url
-){
-return '';
-}
+  if(
+    !item?.url
+  ){
+    return '';
+  }
 
 
-/*
-الفيديو الخارجي
-*/
-if(
-action === 'video'
-){
+  /* رابط فيديو خارجي */
+  if(
+    action === 'video'
+  ){
 
-return `
-<div class="action-row">
+    return `
+      <div class="action-row">
 
-<a
-  class="action"
-  target="_blank"
-  rel="noopener"
-  href="${esc(item.url)}"
->
-▶ مشاهدة الفيديو
-</a>
+        <a
+          class="action"
+          target="_blank"
+          rel="noopener"
+          href="${esc(item.url)}"
+        >
+          ▶ مشاهدة الفيديو
+        </a>
 
-</div>
-`;
+      </div>
+    `;
 
-}
+  }
 
 
-/*
-ملف عادي
-*/
-return `
-<div class="action-row">
+  return `
+    <div class="action-row">
 
-<button
-  type="button"
-  class="action preview-button"
-  data-preview="${esc(key)}"
->
-👁 عرض
-</button>
+      <button
+        type="button"
+        class="action preview-button"
+        data-preview="${esc(key)}"
+      >
+        👁 عرض
+      </button>
 
-<a
-  class="action download"
-  href="${esc(downloadUrl(item))}"
->
-⬇ تنزيل
-</a>
+      <a
+        class="action download"
+        href="${esc(downloadUrl(item))}"
+      >
+        ⬇ تنزيل
+      </a>
 
-</div>
-`;
+    </div>
+  `;
 
 }
 
 
 /* =========================
-   BIND PREVIEW BUTTONS
+   PREVIEW BUTTON EVENTS
 ========================= */
 
 function bindPreviewButtons(){
 
-document
-.querySelectorAll(
-'.preview-button'
-)
-.forEach(
+  document
+    .querySelectorAll(
+      '.preview-button'
+    )
+    .forEach(
+      button => {
 
-button => {
+        button.onclick =
+          () => {
 
-button.onclick =
-() => {
+            const item =
+              previewItems.get(
+                String(
+                  button.dataset.preview
+                )
+              );
 
-const item =
-previewItems.get(
-String(
-button.dataset.preview
-)
-);
+            if(
+              item
+            ){
+              openPreview(item);
+            }
 
-if(
-item
-){
-openPreview(item);
-}
+          };
 
-};
-
-}
-
-);
+      }
+    );
 
 }
 
 
 /* =========================
-   ACADEMIC FILTER
+   ACADEMIC DATA
 ========================= */
 
 function filteredAssignments(){
 
-return (
-data?.assignments ||
-[]
-)
-.filter(
-
-a =>
-
-(
-!currentTerm
-||
-Number(a.term_id)
-===
-Number(currentTerm)
-)
-
-&&
-
-(
-!currentTeacher
-||
-a.teacher_user_id
-===
-currentTeacher
-)
-
-);
+  return (
+    data?.assignments || []
+  )
+    .filter(
+      a =>
+        (
+          !currentTerm ||
+          Number(a.term_id) ===
+          Number(currentTerm)
+        )
+        &&
+        (
+          !currentTeacher ||
+          a.teacher_user_id ===
+          currentTeacher
+        )
+    );
 
 }
 
-
-/* =========================
-   UNIQUE
-========================= */
 
 function unique(
-arr,
-key
+  arr,
+  key
 ){
 
-const m =
-new Map();
+  const m =
+    new Map();
 
-arr.forEach(
-x =>
-m.set(
-x[key],
-x
-)
-);
+  arr.forEach(
+    x =>
+      m.set(
+        x[key],
+        x
+      )
+  );
 
-return [
-...m.values()
-];
+  return [
+    ...m.values()
+  ];
 
 }
 
-
-/* =========================
-   CLASS LABEL
-========================= */
 
 function classLabel(a){
 
-return (
-`${a.campus_name||''} • `
-+
-`${a.school_section_name||''} • `
-+
-`${flag(a.curriculum)} ${a.curriculum||''} • `
-+
-`${a.grade||''}`
-+
-(
-a.section_name
-?
-' / '+a.section_name
-:
-''
-)
-);
+  return (
+    `${a.campus_name || ''} • ` +
+    `${a.school_section_name || ''} • ` +
+    `${flag(a.curriculum)} ${a.curriculum || ''} • ` +
+    `${a.grade || ''}` +
+    `${a.section_name ? ' / ' + a.section_name : ''}`
+  );
 
 }
 
@@ -1870,547 +1581,394 @@ a.section_name
 
 function fillTeacher(){
 
-const ts =
-data?.teachers ||
-[];
+  const ts =
+    data?.teachers || [];
 
+  $('teacherSelect')
+    .innerHTML =
+      ts
+        .map(
+          t =>
+            `<option value="${esc(t.user_id)}">${esc(t.display_name)}</option>`
+        )
+        .join('');
 
-$('teacherSelect')
-.innerHTML =
-ts
-.map(
-t =>
-`
-<option value="${esc(t.user_id)}">
-${esc(t.display_name)}
-</option>
-`
-)
-.join('');
+  if(
+    !currentTeacher &&
+    ts[0]
+  ){
+    currentTeacher =
+      ts[0].user_id;
+  }
 
-
-if(
-!currentTeacher
-&&
-ts[0]
-){
-
-currentTeacher =
-ts[0].user_id;
-
-}
-
-
-$('teacherSelect')
-.value =
-currentTeacher ||
-'';
+  $('teacherSelect')
+    .value =
+      currentTeacher || '';
 
 }
 
 
 /* =========================
-   RENDER SUBJECTS
+   SUBJECTS
 ========================= */
 
 function renderAll(){
 
-const as =
-filteredAssignments();
+  const as =
+    filteredAssignments();
 
+  const subs =
+    unique(
+      as,
+      'subject_id'
+    );
 
-const subs =
-unique(
-as,
-'subject_id'
-);
+  $('subjectCount')
+    .textContent =
+      subs.length +
+      ' مواد';
 
+  $('teacherStat')
+    .textContent =
+      (
+        data?.teachers || []
+      ).length;
 
-$('subjectCount')
-.textContent =
-subs.length
-+
-' مواد';
+  $('classStat')
+    .textContent =
+      new Set(
+        as.map(
+          a => a.class_id
+        )
+      ).size;
 
+  $('studentStat')
+    .textContent =
+      new Set(
+        as.flatMap(
+          a =>
+            (
+              a.students || []
+            )
+              .map(
+                s => s.id
+              )
+        )
+      ).size;
 
-$('teacherStat')
-.textContent =
-(
-data?.teachers ||
-[]
-).length;
+  $('subjectsGrid')
+    .innerHTML =
+      subs.length
+      ?
+      subs
+        .map(
+          s =>
+            `
+            <button
+              class="subject"
+              data-sub="${s.subject_id}"
+            >
 
+              <div class="subject-icon">
+                ${esc(s.subject_icon || '📚')}
+              </div>
 
-$('classStat')
-.textContent =
-new Set(
-as.map(
-a =>
-a.class_id
-)
-).size;
+              <h3>
+                ${esc(s.subject_name)}
+              </h3>
 
+              <p>
+                ${
+                  as.filter(
+                    a =>
+                      a.subject_id ===
+                      s.subject_id
+                  ).length
+                }
+                فصل/شعبة ضمن متابعة
+                ${esc(s.teacher_name || 'المعلم')}
+              </p>
 
-$('studentStat')
-.textContent =
-new Set(
-as.flatMap(
-a =>
-(
-a.students ||
-[]
-)
-.map(
-s =>
-s.id
-)
-)
-).size;
+            </button>
+            `
+        )
+        .join('')
+      :
+      '<div class="empty">لا توجد مواد ضمن الاختيار الحالي.</div>';
 
-
-$('subjectsGrid')
-.innerHTML =
-
-subs.length
-
-?
-
-subs
-.map(
-
-s =>
-`
-<button
-  class="subject"
-  data-sub="${s.subject_id}"
->
-
-<div class="subject-icon">
-${esc(
-s.subject_icon ||
-'📚'
-)}
-</div>
-
-<h3>
-${esc(
-s.subject_name
-)}
-</h3>
-
-<p>
-
-${
-as.filter(
-a =>
-a.subject_id
-===
-s.subject_id
-).length
-}
-
-فصل/شعبة ضمن متابعة
-
-${esc(
-s.teacher_name ||
-'المعلم'
-)}
-
-</p>
-
-</button>
-`
-
-)
-.join('')
-
-:
-
-'<div class="empty">لا توجد مواد ضمن الاختيار الحالي.</div>';
-
-
-document
-.querySelectorAll(
-'.subject'
-)
-.forEach(
-
-b =>
-b.onclick =
-() =>
-openSubject(
-Number(
-b.dataset.sub
-)
-)
-
-);
+  document
+    .querySelectorAll(
+      '.subject'
+    )
+    .forEach(
+      b =>
+        b.onclick =
+          () =>
+            openSubject(
+              Number(
+                b.dataset.sub
+              )
+            )
+    );
 
 }
 
-
-/* =========================
-   OPEN SUBJECT
-========================= */
 
 function openSubject(id){
 
-const as =
-filteredAssignments();
+  const as =
+    filteredAssignments();
 
+  const first =
+    as.find(
+      a =>
+        Number(
+          a.subject_id
+        ) ===
+        Number(id)
+    );
 
-const first =
-as.find(
-a =>
-Number(
-a.subject_id
-)
-===
-Number(id)
-);
+  if(
+    !first
+  ){
+    return;
+  }
 
+  currentSubject = {
+    id,
+    name:
+      first.subject_name,
+    icon:
+      first.subject_icon
+  };
 
-if(
-!first
-){
-return;
-}
+  $('subjectsGrid')
+    .classList
+    .add(
+      'subject-open'
+    );
 
+  document
+    .querySelectorAll(
+      '.subject'
+    )
+    .forEach(
+      b =>
+        b.classList
+          .toggle(
+            'active',
+            Number(
+              b.dataset.sub
+            ) ===
+            Number(id)
+          )
+    );
 
-currentSubject={
+  $('workspace')
+    .classList
+    .remove(
+      'hide'
+    );
 
-id:id,
+  $('workspaceSubject')
+    .textContent =
+      `${first.subject_icon || '📚'} ${first.subject_name}`;
 
-name:
-first.subject_name,
+  fillCampus();
 
-icon:
-first.subject_icon
-
-};
-
-
-$('subjectsGrid')
-.classList
-.add(
-'subject-open'
-);
-
-
-document
-.querySelectorAll(
-'.subject'
-)
-.forEach(
-
-b =>
-b.classList
-.toggle(
-
-'active',
-
-Number(
-b.dataset.sub
-)
-===
-Number(id)
-
-)
-
-);
-
-
-$('workspace')
-.classList
-.remove(
-'hide'
-);
-
-
-$('workspaceSubject')
-.textContent =
-`${first.subject_icon||'📚'} ${first.subject_name}`;
-
-
-fillCampus();
-
-
-$('workspace')
-.scrollIntoView({
-
-behavior:'smooth',
-
-block:'start'
-
-});
+  $('workspace')
+    .scrollIntoView({
+      behavior:'smooth',
+      block:'start'
+    });
 
 }
 
-
-/* =========================
-   SUBJECT ASSIGNMENTS
-========================= */
 
 function subjectAssignments(){
 
-return filteredAssignments()
-.filter(
-
-a =>
-currentSubject
-&&
-Number(
-a.subject_id
-)
-===
-Number(
-currentSubject.id
-)
-
-);
+  return filteredAssignments()
+    .filter(
+      a =>
+        currentSubject &&
+        Number(
+          a.subject_id
+        ) ===
+        Number(
+          currentSubject.id
+        )
+    );
 
 }
 
 
 /* =========================
-   CAMPUS
+   CAMPUS / SECTION / CLASS
 ========================= */
 
 function fillCampus(){
 
-const as =
-subjectAssignments();
+  const as =
+    subjectAssignments();
 
+  const cs =
+    unique(
+      as,
+      'campus_id'
+    );
 
-const cs =
-unique(
-as,
-'campus_id'
-);
+  $('campusSelect')
+    .innerHTML =
+      cs
+        .map(
+          x =>
+            `<option value="${x.campus_id}">${esc(x.campus_name || 'المجمع')}</option>`
+        )
+        .join('');
 
-
-$('campusSelect')
-.innerHTML =
-cs
-.map(
-
-x =>
-`
-<option value="${x.campus_id}">
-${esc(
-x.campus_name ||
-'المجمع'
-)}
-</option>
-`
-
-)
-.join('');
-
-
-fillDivision();
+  fillDivision();
 
 }
 
-
-/* =========================
-   DIVISION
-========================= */
 
 function fillDivision(){
 
-const campus =
-Number(
-$('campusSelect')
-.value
-);
+  const campus =
+    Number(
+      $('campusSelect').value
+    );
 
+  const as =
+    subjectAssignments()
+      .filter(
+        a =>
+          Number(
+            a.campus_id
+          ) ===
+          campus
+      );
 
-const as =
-subjectAssignments()
-.filter(
+  const ds =
+    unique(
+      as,
+      'school_section_id'
+    );
 
-a =>
-Number(
-a.campus_id
-)
-===
-campus
+  $('divisionSelect')
+    .innerHTML =
+      ds
+        .map(
+          x =>
+            `<option value="${x.school_section_id}">${esc(x.school_section_name || 'القسم')}</option>`
+        )
+        .join('');
 
-);
-
-
-const ds =
-unique(
-as,
-'school_section_id'
-);
-
-
-$('divisionSelect')
-.innerHTML =
-ds
-.map(
-
-x =>
-`
-<option value="${x.school_section_id}">
-${esc(
-x.school_section_name ||
-'القسم'
-)}
-</option>
-`
-
-)
-.join('');
-
-
-fillClass();
+  fillClass();
 
 }
 
-
-/* =========================
-   CLASS
-========================= */
 
 function fillClass(){
 
-const campus =
-Number(
-$('campusSelect')
-.value
-);
+  const campus =
+    Number(
+      $('campusSelect').value
+    );
 
+  const div =
+    Number(
+      $('divisionSelect').value
+    );
 
-const div =
-Number(
-$('divisionSelect')
-.value
-);
+  const as =
+    subjectAssignments()
+      .filter(
+        a =>
+          Number(
+            a.campus_id
+          ) ===
+          campus
+          &&
+          Number(
+            a.school_section_id
+          ) ===
+          div
+      );
 
+  $('classSelect')
+    .innerHTML =
+      as
+        .map(
+          a =>
+            `
+            <option value="${a.class_subject_id}">
+              ${flag(a.curriculum)}
+              ${esc(a.curriculum)}
+              •
+              ${esc(a.grade)}
+              ${
+                a.section_name
+                ? ' / ' +
+                  esc(a.section_name)
+                : ''
+              }
+            </option>
+            `
+        )
+        .join('');
 
-const as =
-subjectAssignments()
-.filter(
-
-a =>
-Number(
-a.campus_id
-)
-===
-campus
-
-&&
-
-Number(
-a.school_section_id
-)
-===
-div
-
-);
-
-
-$('classSelect')
-.innerHTML =
-as
-.map(
-
-a =>
-`
-<option value="${a.class_subject_id}">
-${flag(a.curriculum)}
-${esc(a.curriculum)}
-•
-${esc(a.grade)}
-${
-a.section_name
-?
-' / '+esc(a.section_name)
-:
-''
-}
-</option>
-`
-
-)
-.join('');
-
-
-updateClass();
+  updateClass();
 
 }
 
-
-/* =========================
-   UPDATE CLASS
-========================= */
 
 function updateClass(){
 
-const cs =
-Number(
-$('classSelect')
-.value
-);
+  const cs =
+    Number(
+      $('classSelect').value
+    );
 
+  currentAssignment =
+    subjectAssignments()
+      .find(
+        a =>
+          Number(
+            a.class_subject_id
+          ) ===
+          cs
+      )
+    ||
+    null;
 
-currentAssignment =
-subjectAssignments()
-.find(
+  if(
+    !currentAssignment
+  ){
+    return;
+  }
 
-a =>
-Number(
-a.class_subject_id
-)
-===
-cs
+  $('workspaceMeta')
+    .textContent =
+      `المعلم: ${currentAssignment.teacher_name || '—'} • ` +
+      `${classLabel(currentAssignment)} • ` +
+      `${currentAssignment.term_name || ''}`;
 
-)
-||
-null;
+  $('contentPanel')
+    .innerHTML =
+      '<div class="read-only">هذه اللوحة للمتابعة فقط.</div>' +
+      '<div class="empty">اختر أداة للمتابعة.</div>';
 
-
-if(
-!currentAssignment
-){
-return;
-}
-
-
-$('workspaceMeta')
-.textContent =
-
-`المعلم: ${currentAssignment.teacher_name||'—'} • `
-+
-`${classLabel(currentAssignment)} • `
-+
-`${currentAssignment.term_name||''}`;
-
-
-$('contentPanel')
-.innerHTML =
-
-'<div class="read-only">هذه اللوحة للمتابعة فقط.</div>'
-+
-'<div class="empty">اختر أداة للمتابعة.</div>';
-
-
-document
-.querySelectorAll(
-'.tool'
-)
-.forEach(
-
-x =>
-x.classList
-.remove(
-'active'
-)
-
-);
+  document
+    .querySelectorAll(
+      '.tool'
+    )
+    .forEach(
+      x =>
+        x.classList
+          .remove(
+            'active'
+          )
+    );
 
 }
 
@@ -2421,106 +1979,72 @@ x.classList
 
 function renderRoster(){
 
-const a =
-currentAssignment;
+  const a =
+    currentAssignment;
 
+  if(
+    !a
+  ){
+    return;
+  }
 
-if(
-!a
-){
-return;
-}
+  $('contentPanel')
+    .innerHTML =
+      `
+      <div class="read-only">
+        قائمة طلاب
+        ${esc(classLabel(a))}
+        — عرض فقط.
+      </div>
 
+      <h3>
+        👥 الطلاب
+        (${(a.students || []).length})
+      </h3>
 
-$('contentPanel')
-.innerHTML =
+      <div class="roster">
 
-`
-<div class="read-only">
+        ${
+          (
+            a.students || []
+          )
+            .map(
+              (s,i) =>
+                `
+                <div class="student">
 
-قائمة طلاب
-${esc(
-classLabel(a)
-)}
-— عرض فقط.
+                  <span class="num">
+                    ${i + 1}
+                  </span>
 
-</div>
+                  <strong>
+                    ${esc(s.student_name)}
+                  </strong>
 
-<h3>
+                  <span>
+                    ${esc(s.gender || '—')}
+                  </span>
 
-👥 الطلاب
+                  <span class="optional">
+                    ${flag(s.curriculum)}
+                    ${esc(s.curriculum || '')}
+                  </span>
 
-(${(a.students||[]).length})
+                  <span class="optional">
+                    ${esc(s.grade || '')}
+                    ${esc(s.section_name || '')}
+                  </span>
 
-</h3>
+                </div>
+                `
+            )
+            .join('')
+          ||
+          '<div class="empty">لا يوجد طلاب.</div>'
+        }
 
-<div class="roster">
-
-${
-(a.students||[])
-.map(
-
-(s,i) =>
-`
-<div class="student">
-
-<span class="num">
-${i+1}
-</span>
-
-<strong>
-${esc(
-s.student_name
-)}
-</strong>
-
-<span>
-${esc(
-s.gender ||
-'—'
-)}
-</span>
-
-<span class="optional">
-
-${flag(
-s.curriculum
-)}
-
-${esc(
-s.curriculum ||
-''
-)}
-
-</span>
-
-<span class="optional">
-
-${esc(
-s.grade ||
-''
-)}
-
-${esc(
-s.section_name ||
-''
-)}
-
-</span>
-
-</div>
-`
-
-)
-.join('')
-
-||
-
-'<div class="empty">لا يوجد طلاب.</div>'
-}
-
-</div>
-`;
+      </div>
+      `;
 
 }
 
@@ -2531,470 +2055,379 @@ s.section_name ||
 
 async function showList(action){
 
-if(
-!currentAssignment
-){
-return;
-}
+  if(
+    !currentAssignment
+  ){
+    return;
+  }
+
+  document
+    .querySelectorAll(
+      '.tool'
+    )
+    .forEach(
+      x =>
+        x.classList
+          .toggle(
+            'active',
+            x.dataset.action === action
+          )
+    );
+
+  if(
+    action === 'roster'
+  ){
+    renderRoster();
+    return;
+  }
+
+  if(
+    action === 'gradebook'
+  ){
+    await renderGradebook();
+    return;
+  }
+
+  try{
+
+    const r =
+      await rpc(
+        'get_department_head_subject_resources',
+        {
+          p_class_subject_id:
+            currentAssignment.class_subject_id
+        }
+      );
+
+
+    /* HOMEWORK / QUIZ */
+
+    if(
+      [
+        'homework',
+        'quiz'
+      ].includes(action)
+    ){
+
+      const rows =
+        (
+          r.assessments || []
+        )
+          .filter(
+            x =>
+              x.kind ===
+              (
+                action === 'quiz'
+                ? 'quiz'
+                : 'homework'
+              )
+          );
+
+      $('contentPanel')
+        .innerHTML =
+          `
+          <div class="read-only">
+            متابعة
+            ${
+              action === 'quiz'
+              ? 'الاختبارات'
+              : 'الواجبات'
+            }
+            — عرض فقط.
+          </div>
+
+          <h3>
+            ${
+              action === 'quiz'
+              ? '✅ الاختبارات'
+              : '📝 الواجبات'
+            }
+          </h3>
+
+          <div class="cards">
+
+            ${
+              rows
+                .map(
+                  x =>
+                    `
+                    <article class="item">
+
+                      <strong>
+                        ${esc(x.title)}
+                      </strong>
+
+                      <div class="meta">
+
+                        ${esc(x.instructions || '')}
+
+                        <br>
+
+                        الدرجة:
+                        ${esc(x.total_points)}
+
+                        ${
+                          x.due_at
+                          ?
+                          ' • الموعد: ' +
+                          esc(
+                            new Date(
+                              x.due_at
+                            )
+                              .toLocaleString(
+                                'ar-SA'
+                              )
+                          )
+                          :
+                          ''
+                        }
+
+                      </div>
+
+                    </article>
+                    `
+                )
+                .join('')
+              ||
+              '<div class="empty">لا توجد عناصر.</div>'
+            }
+
+          </div>
+          `;
+
+      return;
+
+    }
+
+
+    /* VIRTUAL LESSON */
+
+    if(
+      action === 'virtual'
+    ){
+
+      const rows =
+        r.virtual_lessons || [];
+
+      $('contentPanel')
+        .innerHTML =
+          `
+          <div class="read-only">
+            متابعة الحصص الافتراضية — عرض فقط.
+          </div>
 
+          <h3>
+            🎥 الحصص الافتراضية
+          </h3>
 
-document
-.querySelectorAll(
-'.tool'
-)
-.forEach(
+          <div class="cards">
 
-x =>
-x.classList
-.toggle(
+            ${
+              rows
+                .map(
+                  x =>
+                    `
+                    <article class="item">
 
-'active',
+                      <strong>
+                        ${esc(x.title)}
+                      </strong>
 
-x.dataset.action
-===
-action
+                      <div class="meta">
 
-)
+                        ${
+                          x.starts_at
+                          ?
+                          esc(
+                            new Date(
+                              x.starts_at
+                            )
+                              .toLocaleString(
+                                'ar-SA'
+                              )
+                          )
+                          :
+                          ''
+                        }
 
-);
+                        <br>
 
+                        ${esc(x.note || '')}
 
-if(
-action === 'roster'
-){
+                      </div>
 
-renderRoster();
+                      ${
+                        x.meeting_url
+                        ?
+                        `
+                        <div class="action-row">
 
-return;
+                          <a
+                            class="action"
+                            target="_blank"
+                            rel="noopener"
+                            href="${esc(x.meeting_url)}"
+                          >
+                            🎥 فتح الحصة
+                          </a>
 
-}
+                        </div>
+                        `
+                        :
+                        ''
+                      }
 
+                    </article>
+                    `
+                )
+                .join('')
+              ||
+              '<div class="empty">لا توجد حصص.</div>'
+            }
 
-if(
-action === 'gradebook'
-){
+          </div>
+          `;
 
-await renderGradebook();
+      return;
 
-return;
+    }
 
-}
 
+    /* MATERIALS */
 
-try{
+    const titles = {
 
+      worksheet:
+        '📄 أوراق العمل',
 
-const r =
-await rpc(
+      lesson_plan:
+        '📋 التحضير',
 
-'get_department_head_subject_resources',
+      file:
+        '📎 مرفقات المادة',
 
-{
+      powerpoint:
+        '📊 العروض التقديمية',
+
+      video:
+        '🎬 الفيديوهات'
+
+    };
+
+
+    const rows =
+      (
+        r.materials || []
+      )
+        .filter(
+          x =>
+            x.material_type === action
+        );
 
-p_class_subject_id:
-currentAssignment.class_subject_id
 
-}
+    previewItems.clear();
 
-);
 
+    rows.forEach(
+      (x,i) => {
 
-/* =========================
-   HOMEWORK / QUIZ
-========================= */
+        const key =
+          String(
+            x.id ?? i
+          );
 
-if(
-[
-'homework',
-'quiz'
-]
-.includes(action)
-){
+        previewItems.set(
+          key,
+          x
+        );
 
-const rows =
-(
-r.assessments ||
-[]
-)
-.filter(
+        x.__previewKey =
+          key;
 
-x =>
-x.kind
-===
-(
-action === 'quiz'
-?
-'quiz'
-:
-'homework'
-)
+      }
+    );
 
-);
 
+    $('contentPanel')
+      .innerHTML =
+        `
+        <div class="read-only">
+          ${titles[action] || 'المحتوى'}
+          — عرض فقط.
+        </div>
 
-$('contentPanel')
-.innerHTML =
-`
-<div class="read-only">
+        <h3>
+          ${titles[action] || 'المحتوى'}
+        </h3>
 
-متابعة
-${
-action === 'quiz'
-?
-'الاختبارات'
-:
-'الواجبات'
-}
-— عرض فقط.
+        <div class="cards">
 
-</div>
+          ${
+            rows
+              .map(
+                x =>
+                  `
+                  <article class="item">
 
-<h3>
+                    <strong>
+                      ${esc(x.title)}
+                    </strong>
 
-${
-action === 'quiz'
-?
-'✅ الاختبارات'
-:
-'📝 الواجبات'
-}
+                    <div class="meta">
 
-</h3>
+                      ${esc(x.note || '')}
 
-<div class="cards">
+                      <br>
 
-${
+                      ${
+                        x.created_at
+                        ?
+                        esc(
+                          new Date(
+                            x.created_at
+                          )
+                            .toLocaleString(
+                              'ar-SA'
+                            )
+                        )
+                        :
+                        ''
+                      }
 
-rows
-.map(
+                    </div>
 
-x =>
-`
-<article class="item">
+                    ${
+                      materialActions(
+                        x,
+                        action,
+                        x.__previewKey
+                      )
+                    }
 
-<strong>
-${esc(
-x.title
-)}
-</strong>
+                  </article>
+                  `
+              )
+              .join('')
+            ||
+            '<div class="empty">لا يوجد محتوى.</div>'
+          }
 
-<div class="meta">
+        </div>
+        `;
 
-${esc(
-x.instructions ||
-''
-)}
 
-<br>
+    bindPreviewButtons();
 
-الدرجة:
-${esc(
-x.total_points
-)}
 
-${
-x.due_at
-?
-' • الموعد: '
-+
-esc(
-new Date(
-x.due_at
-)
-.toLocaleString(
-'ar-SA'
-)
-)
-:
-''
-}
+  }catch(e){
 
-</div>
+    console.error(e);
 
-</article>
-`
-
-)
-.join('')
-
-||
-
-'<div class="empty">لا توجد عناصر.</div>'
-
-}
-
-</div>
-`;
-
+    $('contentPanel')
+      .innerHTML =
+        '<div class="err">تعذر تحميل هذا القسم.</div>';
 
-return;
-
-}
-
-
-/* =========================
-   VIRTUAL LESSONS
-========================= */
-
-if(
-action === 'virtual'
-){
-
-const rows =
-r.virtual_lessons ||
-[];
-
-
-$('contentPanel')
-.innerHTML =
-`
-<div class="read-only">
-متابعة الحصص الافتراضية — عرض فقط.
-</div>
-
-<h3>
-🎥 الحصص الافتراضية
-</h3>
-
-<div class="cards">
-
-${
-
-rows
-.map(
-
-x =>
-`
-<article class="item">
-
-<strong>
-${esc(
-x.title
-)}
-</strong>
-
-<div class="meta">
-
-${
-x.starts_at
-?
-esc(
-new Date(
-x.starts_at
-)
-.toLocaleString(
-'ar-SA'
-)
-)
-:
-''
-}
-
-<br>
-
-${esc(
-x.note ||
-''
-)}
-
-</div>
-
-${
-x.meeting_url
-?
-`
-<div class="action-row">
-
-<a
-  class="action"
-  target="_blank"
-  rel="noopener"
-  href="${esc(x.meeting_url)}"
->
-🎥 فتح الحصة
-</a>
-
-</div>
-`
-:
-''
-}
-
-</article>
-`
-
-)
-.join('')
-
-||
-
-'<div class="empty">لا توجد حصص.</div>'
-
-}
-
-</div>
-`;
-
-
-return;
-
-}
-
-
-/* =========================
-   MATERIALS
-========================= */
-
-const titles={
-
-worksheet:
-'📄 أوراق العمل',
-
-lesson_plan:
-'📋 التحضير',
-
-file:
-'📎 مرفقات المادة',
-
-powerpoint:
-'📊 العروض التقديمية',
-
-video:
-'🎬 الفيديوهات'
-
-};
-
-
-const rows =
-(
-r.materials ||
-[]
-)
-.filter(
-
-x =>
-x.material_type
-===
-action
-
-);
-
-
-previewItems.clear();
-
-
-rows.forEach(
-(x,i) => {
-
-const key =
-String(
-x.id ??
-i
-);
-
-previewItems.set(
-key,
-x
-);
-
-x.__previewKey =
-key;
-
-}
-);
-
-
-$('contentPanel')
-.innerHTML =
-`
-<div class="read-only">
-
-${titles[action]||'المحتوى'}
-— عرض فقط.
-
-</div>
-
-<h3>
-${titles[action]||'المحتوى'}
-</h3>
-
-<div class="cards">
-
-${
-
-rows
-.map(
-
-x =>
-`
-<article class="item">
-
-<strong>
-${esc(
-x.title
-)}
-</strong>
-
-<div class="meta">
-
-${esc(
-x.note ||
-''
-)}
-
-<br>
-
-${
-x.created_at
-?
-esc(
-new Date(
-x.created_at
-)
-.toLocaleString(
-'ar-SA'
-)
-)
-:
-''
-}
-
-</div>
-
-${materialActions(
-x,
-action,
-x.__previewKey
-)}
-
-</article>
-`
-
-)
-.join('')
-
-||
-
-'<div class="empty">لا يوجد محتوى.</div>'
-
-}
-
-</div>
-`;
-
-
-bindPreviewButtons();
-
-
-}catch(e){
-
-console.error(e);
-
-$('contentPanel')
-.innerHTML =
-'<div class="err">تعذر تحميل هذا القسم.</div>';
-
-}
+  }
 
 }
 
@@ -3005,580 +2438,442 @@ $('contentPanel')
 
 async function renderGradebook(){
 
-try{
-
-
-$('contentPanel')
-.innerHTML =
-'<div class="empty">جارٍ تحميل الجريد بوك...</div>';
-
-
-const gb =
-await rpc(
-
-'get_department_head_gradebook',
-
-{
-
-p_class_subject_id:
-currentAssignment.class_subject_id
-
-}
-
-);
-
-
-const cats =
-gb.categories ||
-[];
-
-
-const students =
-gb.students ||
-[];
-
-
-const meta =
-gb.meta ||
-{};
-
-
-const flat=[];
-
-
-cats.forEach(
-
-c =>
-(
-c.items ||
-[]
-)
-.forEach(
-
-it =>
-flat.push({
-
-...it,
-
-category_name:
-c.name_ar
-
-})
-
-)
-
-);
-
-
-/* scores map */
-
-const maps =
-new Map(
-
-flat.map(
-
-it => [
-
-Number(
-it.id
-),
-
-new Map(
-
-(
-it.scores ||
-[]
-)
-.map(
-
-s => [
-
-Number(
-s.student_id
-),
-
-s
-
-]
-
-)
-
-)
-
-]
-
-)
-
-);
-
-
-/* TERM PERCENT */
-
-function pct(id){
-
-if(
-Number(
-gb.weight_sum
-)
-!==
-100
-){
-return null;
-}
-
-
-let total=0;
-
-let has=false;
-
-
-for(
-const c of cats
-){
-
-const items =
-c.items ||
-[];
-
-
-if(
-!items.length
-){
-continue;
-}
-
-
-has=true;
-
-
-let avg=0;
-
-
-for(
-const it of items
-){
-
-const sc =
-maps
-.get(
-Number(
-it.id
-)
-)
-?.get(
-Number(id)
-);
-
-
-avg +=
-
-(
-(
-sc?.score == null
-?
-0
-:
-Number(
-sc.score
-)
-)
-
-/
-
-(
-Number(
-it.max_points
-)
-||
-1
-)
-
-)
-
-*
-100;
-
-}
-
-
-avg /=
-items.length;
-
-
-total +=
-
-avg
-*
-(
-Number(
-c.weight_percent
-)
-||
-0
-)
-/
-100;
-
-}
-
-
-return has
-?
-Math.round(
-total*100
-)
-/100
-:
-null;
-
-}
-
-
-/* HEADERS */
-
-const heads =
-flat
-.map(
-
-it =>
-`
-<th class="item-head">
-
-<span class="cat">
-${esc(
-it.category_name
-)}
-</span>
-
-${esc(
-it.title
-)}
-
-<br>
-
-<small>
-من
-${esc(
-it.max_points
-)}
-</small>
-
-</th>
-`
-
-)
-.join('');
-
-
-/* ROWS */
-
-const rows =
-students
-.map(
-
-(s,i) =>
-`
-<tr>
-
-<td class="student-name-col">
-
-${i+1}.
-${esc(
-s.student_name
-)}
-
-<small>
-
-${esc(
-s.gender ||
-''
-)}
-•
-
-${flag(
-s.curriculum
-)}
-
-${esc(
-s.curriculum ||
-''
-)}
-
-•
-
-${esc(
-s.grade ||
-''
-)}
-
-${
-s.section_name
-?
-' / '
-+
-esc(
-s.section_name
-)
-:
-''
-}
-
-</small>
-
-</td>
-
-
-${
-
-flat
-.map(
-
-it => {
-
-const sc =
-maps
-.get(
-Number(
-it.id
-)
-)
-?.get(
-Number(
-s.id
-)
-);
-
-
-return (
-'<td>'
-+
-(
-sc?.score == null
-?
-'—'
-:
-esc(
-sc.score
-)
-)
-+
-'</td>'
-);
-
-}
-
-)
-.join('')
-
-}
-
-
-<td class="term-total">
-
-${
-pct(s.id) == null
-?
-'—'
-:
-esc(
-pct(s.id)
-)
-+
-'%'
-}
-
-</td>
-
-</tr>
-`
-
-)
-.join('');
-
-
-$('contentPanel')
-.innerHTML =
-`
-<div class="read-only">
-
-🏆 جريد بوك المعلم — مشاهدة فقط.
-أسماء جميع الطلاب ثابتة في العمود الأيمن.
-
-</div>
-
-<h3>
-
-🏆
-
-${esc(
-meta.subject_name
-||
-currentSubject.name
-)}
-
-</h3>
-
-
-<div class="small">
-
-المعلم:
-
-${esc(
-(
-meta.teachers ||
-[]
-)
-.map(
-t =>
-t.display_name
-)
-.join('، ')
-)}
-
-•
-
-${esc(
-meta.campus_name ||
-''
-)}
-
-•
-
-${esc(
-meta.school_section_name ||
-''
-)}
-
-•
-
-${flag(
-meta.curriculum
-)}
-
-${esc(
-meta.curriculum ||
-''
-)}
-
-•
-
-${esc(
-meta.grade ||
-''
-)}
-
-${
-meta.section_name
-?
-' / '
-+
-esc(
-meta.section_name
-)
-:
-''
-}
-
-•
-
-${esc(
-meta.term_name ||
-''
-)}
-
-</div>
-
-
-<div class="weight-summary">
-
-${
-
-cats
-.map(
-
-c =>
-`
-<span class="weight-pill">
-
-<b>
-${esc(
-c.name_ar
-)}
-</b>
-
-:
-${esc(
-c.weight_percent
-)}
-%
-
-</span>
-`
-
-)
-.join('')
-
-}
-
-</div>
-
-
-<div class="grade-matrix-wrap">
-
-<table class="grade-matrix">
-
-<thead>
-
-<tr>
-
-<th class="student-name-col">
-اسم الطالب
-</th>
-
-${heads}
-
-<th class="term-total">
-نتيجة الفصل
-</th>
-
-</tr>
-
-</thead>
-
-
-<tbody>
-
-${
-rows
-||
-`
-<tr>
-
-<td class="student-name-col">
-لا يوجد طلاب
-</td>
-
-</tr>
-`
-}
-
-</tbody>
-
-</table>
-
-</div>
-`;
-
-
-}catch(e){
-
-console.error(e);
-
-$('contentPanel')
-.innerHTML =
-'<div class="err">تعذر تحميل الجريد بوك.</div>';
-
-}
+  try{
+
+    $('contentPanel')
+      .innerHTML =
+        '<div class="empty">جارٍ تحميل الجريد بوك...</div>';
+
+
+    const gb =
+      await rpc(
+        'get_department_head_gradebook',
+        {
+          p_class_subject_id:
+            currentAssignment.class_subject_id
+        }
+      );
+
+
+    const cats =
+      gb.categories || [];
+
+    const students =
+      gb.students || [];
+
+    const meta =
+      gb.meta || {};
+
+    const flat = [];
+
+
+    cats.forEach(
+      c =>
+        (
+          c.items || []
+        )
+          .forEach(
+            it =>
+              flat.push({
+                ...it,
+                category_name:
+                  c.name_ar
+              })
+          )
+    );
+
+
+    const maps =
+      new Map(
+        flat.map(
+          it => [
+            Number(it.id),
+
+            new Map(
+              (
+                it.scores || []
+              )
+                .map(
+                  s => [
+                    Number(
+                      s.student_id
+                    ),
+                    s
+                  ]
+                )
+            )
+          ]
+        )
+      );
+
+
+    function pct(id){
+
+      if(
+        Number(
+          gb.weight_sum
+        ) !== 100
+      ){
+        return null;
+      }
+
+      let total = 0;
+      let has = false;
+
+
+      for(
+        const c of cats
+      ){
+
+        const items =
+          c.items || [];
+
+        if(
+          !items.length
+        ){
+          continue;
+        }
+
+        has = true;
+
+        let avg = 0;
+
+
+        for(
+          const it of items
+        ){
+
+          const sc =
+            maps
+              .get(
+                Number(
+                  it.id
+                )
+              )
+              ?.get(
+                Number(id)
+              );
+
+
+          avg +=
+            (
+              (
+                sc?.score == null
+                ?
+                0
+                :
+                Number(
+                  sc.score
+                )
+              )
+              /
+              (
+                Number(
+                  it.max_points
+                )
+                ||
+                1
+              )
+            )
+            *
+            100;
+
+        }
+
+
+        avg /=
+          items.length;
+
+
+        total +=
+          avg
+          *
+          (
+            Number(
+              c.weight_percent
+            )
+            ||
+            0
+          )
+          /
+          100;
+
+      }
+
+
+      return has
+        ?
+        Math.round(
+          total * 100
+        ) / 100
+        :
+        null;
+
+    }
+
+
+    const heads =
+      flat
+        .map(
+          it =>
+            `
+            <th class="item-head">
+
+              <span class="cat">
+                ${esc(it.category_name)}
+              </span>
+
+              ${esc(it.title)}
+
+              <br>
+
+              <small>
+                من ${esc(it.max_points)}
+              </small>
+
+            </th>
+            `
+        )
+        .join('');
+
+
+    const rows =
+      students
+        .map(
+          (s,i) =>
+            `
+            <tr>
+
+              <td class="student-name-col">
+
+                ${i + 1}.
+                ${esc(s.student_name)}
+
+                <small>
+
+                  ${esc(s.gender || '')}
+                  •
+
+                  ${flag(s.curriculum)}
+                  ${esc(s.curriculum || '')}
+                  •
+
+                  ${esc(s.grade || '')}
+
+                  ${
+                    s.section_name
+                    ?
+                    ' / ' +
+                    esc(
+                      s.section_name
+                    )
+                    :
+                    ''
+                  }
+
+                </small>
+
+              </td>
+
+              ${
+                flat
+                  .map(
+                    it => {
+
+                      const sc =
+                        maps
+                          .get(
+                            Number(
+                              it.id
+                            )
+                          )
+                          ?.get(
+                            Number(
+                              s.id
+                            )
+                          );
+
+
+                      return (
+                        `<td>` +
+                        (
+                          sc?.score == null
+                          ?
+                          '—'
+                          :
+                          esc(
+                            sc.score
+                          )
+                        )
+                        +
+                        `</td>`
+                      );
+
+                    }
+                  )
+                  .join('')
+              }
+
+              <td class="term-total">
+
+                ${
+                  pct(s.id) == null
+                  ?
+                  '—'
+                  :
+                  esc(
+                    pct(s.id)
+                  )
+                  +
+                  '%'
+                }
+
+              </td>
+
+            </tr>
+            `
+        )
+        .join('');
+
+
+    $('contentPanel')
+      .innerHTML =
+        `
+        <div class="read-only">
+          🏆 جريد بوك المعلم — مشاهدة فقط.
+          أسماء جميع الطلاب ثابتة في العمود الأيمن.
+        </div>
+
+        <h3>
+          🏆
+          ${esc(
+            meta.subject_name ||
+            currentSubject.name
+          )}
+        </h3>
+
+        <div class="small">
+
+          المعلم:
+          ${esc(
+            (
+              meta.teachers || []
+            )
+              .map(
+                t => t.display_name
+              )
+              .join('، ')
+          )}
+
+          •
+
+          ${esc(meta.campus_name || '')}
+
+          •
+
+          ${esc(meta.school_section_name || '')}
+
+          •
+
+          ${flag(meta.curriculum)}
+          ${esc(meta.curriculum || '')}
+
+          •
+
+          ${esc(meta.grade || '')}
+
+          ${
+            meta.section_name
+            ?
+            ' / ' +
+            esc(
+              meta.section_name
+            )
+            :
+            ''
+          }
+
+          •
+
+          ${esc(meta.term_name || '')}
+
+        </div>
+
+        <div class="weight-summary">
+
+          ${
+            cats
+              .map(
+                c =>
+                  `
+                  <span class="weight-pill">
+
+                    <b>
+                      ${esc(c.name_ar)}
+                    </b>
+
+                    :
+                    ${esc(c.weight_percent)}%
+
+                  </span>
+                  `
+              )
+              .join('')
+          }
+
+        </div>
+
+        <div class="grade-matrix-wrap">
+
+          <table class="grade-matrix">
+
+            <thead>
+              <tr>
+
+                <th class="student-name-col">
+                  اسم الطالب
+                </th>
+
+                ${heads}
+
+                <th class="term-total">
+                  نتيجة الفصل
+                </th>
+
+              </tr>
+            </thead>
+
+            <tbody>
+
+              ${
+                rows
+                ||
+                `
+                <tr>
+                  <td class="student-name-col">
+                    لا يوجد طلاب
+                  </td>
+                </tr>
+                `
+              }
+
+            </tbody>
+
+          </table>
+
+        </div>
+        `;
+
+
+  }catch(e){
+
+    console.error(e);
+
+    $('contentPanel')
+      .innerHTML =
+        '<div class="err">تعذر تحميل الجريد بوك.</div>';
+
+  }
 
 }
 
@@ -3589,122 +2884,106 @@ $('contentPanel')
 
 async function init(){
 
-const s =
-session();
+  const s =
+    session();
 
 
-if(
-!s?.access_token
-){
+  if(
+    !s?.access_token
+  ){
 
-location.replace(
-'index.html'
-);
+    location.replace(
+      'index.html'
+    );
 
-return;
+    return;
 
-}
-
-
-try{
-
-data =
-await rpc(
-'get_my_department_head_dashboard'
-);
+  }
 
 
-$('welcome')
-.textContent =
+  try{
 
-'مرحبًا '
-+
-(
-data.department_head?.display_name
-||
-'رئيس القسم'
-)
-+
-' 🌿';
+    data =
+      await rpc(
+        'get_my_department_head_dashboard'
+      );
 
 
-$('yearName')
-.textContent =
-data.year?.name
-||
-'السنة الدراسية';
+    $('welcome')
+      .textContent =
+        'مرحبًا ' +
+        (
+          data.department_head?.display_name
+          ||
+          'رئيس القسم'
+        )
+        +
+        ' 🌿';
 
 
-$('termSelect')
-.innerHTML =
-(
-data.terms ||
-[]
-)
-.map(
-
-t =>
-`
-<option value="${t.id}">
-${esc(
-t.name_ar
-)}
-</option>
-`
-
-)
-.join('');
+    $('yearName')
+      .textContent =
+        data.year?.name
+        ||
+        'السنة الدراسية';
 
 
-const ct =
-(
-data.terms ||
-[]
-)
-.find(
-t =>
-t.is_current
-)
-||
-(
-data.terms ||
-[]
-)[0];
+    $('termSelect')
+      .innerHTML =
+        (
+          data.terms || []
+        )
+          .map(
+            t =>
+              `<option value="${t.id}">${esc(t.name_ar)}</option>`
+          )
+          .join('');
 
 
-currentTerm =
-ct?.id ||
-null;
+    const ct =
+      (
+        data.terms || []
+      )
+        .find(
+          t => t.is_current
+        )
+      ||
+      (
+        data.terms || []
+      )[0];
 
 
-$('termSelect')
-.value =
-currentTerm ||
-'';
+    currentTerm =
+      ct?.id || null;
 
 
-fillTeacher();
-
-renderAll();
-
-
-}catch(e){
-
-console.error(e);
+    $('termSelect')
+      .value =
+        currentTerm || '';
 
 
-$('pageError')
-.textContent =
-'هذا الحساب غير مرتبط بصلاحية رئيس قسم نشطة.';
+    fillTeacher();
+
+    renderAll();
 
 
-$('pageError')
-.classList
-.remove(
-'hide'
-);
+  }catch(e){
 
-}
+    console.error(e);
+
+
+    $('pageError')
+      .textContent =
+        'هذا الحساب غير مرتبط بصلاحية رئيس قسم نشطة.';
+
+
+    $('pageError')
+      .classList
+      .remove(
+        'hide'
+      );
+
+  }
 
 }
 
@@ -3714,233 +2993,199 @@ $('pageError')
 ========================= */
 
 $('termSelect')
-.onchange =
-() => {
+  .onchange =
+    () => {
 
-currentTerm =
-Number(
-$('termSelect')
-.value
-);
+      currentTerm =
+        Number(
+          $('termSelect').value
+        );
 
-currentSubject =
-null;
+      currentSubject =
+        null;
 
-currentAssignment =
-null;
+      currentAssignment =
+        null;
 
-$('workspace')
-.classList
-.add(
-'hide'
-);
+      $('workspace')
+        .classList
+        .add(
+          'hide'
+        );
 
-$('subjectsGrid')
-.classList
-.remove(
-'subject-open'
-);
+      $('subjectsGrid')
+        .classList
+        .remove(
+          'subject-open'
+        );
 
-renderAll();
+      renderAll();
 
-};
+    };
 
 
 $('teacherSelect')
-.onchange =
-() => {
+  .onchange =
+    () => {
 
-currentTeacher =
-$('teacherSelect')
-.value;
+      currentTeacher =
+        $('teacherSelect').value;
 
-currentSubject =
-null;
+      currentSubject =
+        null;
 
-currentAssignment =
-null;
+      currentAssignment =
+        null;
 
-$('workspace')
-.classList
-.add(
-'hide'
-);
+      $('workspace')
+        .classList
+        .add(
+          'hide'
+        );
 
-$('subjectsGrid')
-.classList
-.remove(
-'subject-open'
-);
+      $('subjectsGrid')
+        .classList
+        .remove(
+          'subject-open'
+        );
 
-renderAll();
+      renderAll();
 
-};
+    };
 
 
 $('campusSelect')
-.onchange =
-fillDivision;
+  .onchange =
+    fillDivision;
 
 
 $('divisionSelect')
-.onchange =
-fillClass;
+  .onchange =
+    fillClass;
 
 
 $('classSelect')
-.onchange =
-updateClass;
+  .onchange =
+    updateClass;
 
 
 $('backToSubjects')
-.onclick =
-() => {
+  .onclick =
+    () => {
 
-currentSubject =
-null;
+      currentSubject =
+        null;
 
-currentAssignment =
-null;
+      currentAssignment =
+        null;
 
+      $('subjectsGrid')
+        .classList
+        .remove(
+          'subject-open'
+        );
 
-$('subjectsGrid')
-.classList
-.remove(
-'subject-open'
-);
+      document
+        .querySelectorAll(
+          '.subject'
+        )
+        .forEach(
+          x =>
+            x.classList
+              .remove(
+                'active'
+              )
+        );
+
+      $('workspace')
+        .classList
+        .add(
+          'hide'
+        );
+
+    };
 
 
 document
-.querySelectorAll(
-'.subject'
-)
-.forEach(
+  .addEventListener(
+    'click',
+    e => {
 
-x =>
-x.classList
-.remove(
-'active'
-)
+      const b =
+        e.target
+          .closest(
+            '.tool'
+          );
 
-);
+      if(
+        b
+      ){
+        showList(
+          b.dataset.action
+        );
+      }
 
+    }
+  );
 
-$('workspace')
-.classList
-.add(
-'hide'
-);
-
-};
-
-
-/* TOOL CLICK */
-
-document
-.addEventListener(
-
-'click',
-
-e => {
-
-const b =
-e.target
-.closest(
-'.tool'
-);
-
-
-if(
-b
-){
-
-showList(
-b.dataset.action
-);
-
-}
-
-}
-
-);
-
-
-/* PREVIEW CLOSE */
 
 $('closePreview')
-.onclick =
-closePreview;
+  .onclick =
+    closePreview;
 
 
 $('previewModal')
-.addEventListener(
+  .addEventListener(
+    'click',
+    e => {
 
-'click',
+      if(
+        e.target ===
+        $('previewModal')
+      ){
+        closePreview();
+      }
 
-e => {
+    }
+  );
 
-if(
-e.target
-===
-$('previewModal')
-){
-
-closePreview();
-
-}
-
-}
-
-);
-
-
-/* ESC CLOSE */
 
 document
-.addEventListener(
+  .addEventListener(
+    'keydown',
+    e => {
 
-'keydown',
+      if(
+        e.key === 'Escape'
+      ){
+        closePreview();
+      }
 
-e => {
+    }
+  );
 
-if(
-e.key === 'Escape'
-){
-
-closePreview();
-
-}
-
-}
-
-);
-
-
-/* LOGOUT */
 
 $('logoutBtn')
-.onclick =
-() => {
+  .onclick =
+    () => {
 
-localStorage
-.removeItem(
-PORTAL_KEY
-);
+      clearObjectUrl();
 
-location.replace(
-'index.html'
-);
+      localStorage
+        .removeItem(
+          PORTAL_KEY
+        );
 
-};
+      location.replace(
+        'index.html'
+      );
 
+    };
 
-/* START */
 
 init();
 
-
 })();
-
 </script>
 
 </body>
