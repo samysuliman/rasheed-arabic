@@ -1,35 +1,164 @@
 <!doctype html>
-<html lang="ar" dir="rtl"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>لوحة الطالب | رشيد العربية</title>
 <style>
-*{box-sizing:border-box}:root{--g:#07583f;--g2:#0b6c50;--soft:#edf7f2;--gold:#c9a227;--bg:#f4f8f6;--text:#17392c;--muted:#6f8078;--border:#d7e5de;--red:#9b3434}body{margin:0;font-family:Tahoma,Arial,sans-serif;background:var(--bg);color:var(--text)}a{text-decoration:none;color:inherit}.hide{display:none!important}.top{background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:10}.nav{width:min(1180px,94%);min-height:74px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:16px}.brand{display:flex;align-items:center;gap:11px}.brand img{width:58px;height:58px;object-fit:contain}.brand b{font-size:19px;color:var(--g)}.brand small{display:block;color:var(--muted);margin-top:3px}.logout{border:1px solid var(--border);background:#fff;color:var(--g);padding:9px 13px;border-radius:11px;font-weight:700;cursor:pointer}.page{width:min(1180px,94%);margin:25px auto 55px}.hero{background:linear-gradient(135deg,var(--g),#06452f);color:#fff;border-radius:26px;padding:26px;display:flex;align-items:center;justify-content:space-between;gap:18px;box-shadow:0 12px 35px rgba(7,88,63,.12)}.hero h1{margin:0 0 7px;font-size:27px}.hero p{margin:0;opacity:.88;line-height:1.8}.profile-badge{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:17px;padding:13px 16px;min-width:230px}.profile-badge b{display:block;color:#ffe28a;font-size:19px}.profile-badge span{font-size:12px;opacity:.9}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin:18px 0}.stat,.panel{background:#fff;border:1px solid var(--border);border-radius:19px;box-shadow:0 7px 22px rgba(0,0,0,.035)}.stat{padding:16px;text-align:center}.stat .ico{font-size:27px}.stat b{display:block;font-size:24px;color:var(--gold);margin:5px 0}.stat span{font-size:12px;color:var(--muted)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.panel{padding:20px}.panel h2{margin:0 0 15px;color:var(--g);font-size:19px}.info{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.info div{background:#f8fbf9;border:1px solid #e5efea;border-radius:13px;padding:11px}.info small{display:block;color:var(--muted);margin-bottom:4px}.info b{font-size:14px}.item{border:1px solid #e1ebe6;border-radius:15px;padding:14px;margin:10px 0;background:#fff}.item-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.item h3{margin:0;color:var(--text);font-size:15px}.item p{color:var(--muted);font-size:12px;line-height:1.7;margin:7px 0}.chips{display:flex;gap:7px;flex-wrap:wrap;margin-top:7px}.chip{background:var(--soft);color:var(--g);padding:5px 8px;border-radius:999px;font-size:11px;font-weight:700}.action{display:inline-block;background:var(--g);color:#fff;padding:8px 11px;border-radius:10px;font-size:12px;font-weight:700;margin-top:8px}.action.soft{background:#fff;color:var(--g);border:1px solid var(--border)}.score{color:var(--gold);font-weight:900}.empty{color:var(--muted);text-align:center;padding:22px 10px}.error{background:#fff0f0;color:#8c3030;border:1px solid #efc7c7;padding:13px;border-radius:13px;margin:15px 0}.section-wide{grid-column:1/-1}.coming{background:#fffaf0;border:1px dashed #e3ce84;border-radius:14px;padding:14px;color:#715d16;font-size:12px;line-height:1.8}
-@media(max-width:850px){.stats{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}.section-wide{grid-column:auto}.hero{display:block}.profile-badge{margin-top:15px;min-width:0}.info{grid-template-columns:1fr 1fr}}@media(max-width:480px){.info{grid-template-columns:1fr}.brand small{display:none}}
-</style></head><body>
-<header class="top"><div class="nav"><a class="brand" href="../index.html"><img src="../rasheed-arabic-logo.png" alt="رشيد العربية" onerror="this.style.display='none'"><div><b>رشيد العربية</b><small>لوحة الطالب</small></div></a><button id="logoutBtn" class="logout">تسجيل الخروج</button></div></header>
+*{box-sizing:border-box}
+:root{--g:#07583f;--g2:#0b6e51;--gs:#edf7f2;--gold:#c9a227;--bg:#f4f8f6;--card:#fff;--text:#17392c;--muted:#6f7f77;--border:#d8e6df;--danger:#9d2d2d;--shadow:0 12px 32px rgba(7,88,63,.08)}
+html{scroll-behavior:smooth}body{margin:0;font-family:Tahoma,Arial,sans-serif;background:radial-gradient(circle at top right,rgba(7,88,63,.08),transparent 30%),var(--bg);color:var(--text)}button,a{font:inherit}a{text-decoration:none;color:inherit}.hide{display:none!important}
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+.topin{width:min(1220px,94%);margin:auto;min-height:74px;display:flex;align-items:center;justify-content:space-between;gap:14px}.brand{display:flex;align-items:center;gap:11px}.brand img{width:58px;height:58px;object-fit:contain}.brand b{display:block;color:var(--g);font-size:20px}.brand small{color:var(--muted)}
+.btn{border:0;border-radius:12px;padding:10px 14px;font-weight:800;cursor:pointer}.btn-light{background:#fff;border:1px solid var(--border);color:var(--g)}.btn-green{background:var(--g);color:#fff}.btn:disabled{opacity:.5;cursor:not-allowed}
+.page{width:min(1220px,94%);margin:24px auto 50px}.loading,.error{padding:14px 16px;border-radius:14px;margin-bottom:16px}.loading{background:#fff;border:1px solid var(--border);color:var(--muted)}.error{background:#fff1f1;border:1px solid #efc5c5;color:#8d2f2f}
+.profile{background:linear-gradient(135deg,#07583f,#063f2e);border-radius:28px;padding:22px;color:#fff;box-shadow:var(--shadow);display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center;overflow:hidden;position:relative}.profile:after{content:"";position:absolute;width:260px;height:260px;border:45px solid rgba(201,162,39,.13);border-radius:50%;left:-100px;top:-120px}.avatar{width:86px;height:86px;border-radius:24px;background:rgba(255,255,255,.12);display:grid;place-items:center;font-size:44px;border:1px solid rgba(255,255,255,.2);position:relative;z-index:1}.pbody{position:relative;z-index:1}.pbody h1{margin:0 0 8px;font-size:26px}.chips{display:flex;flex-wrap:wrap;gap:8px}.chip{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);padding:6px 10px;border-radius:999px;font-size:12px;font-weight:700}.yearbox{position:relative;z-index:1;min-width:220px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);padding:13px 15px;border-radius:16px}.yearbox b{display:block;color:#ffe28a;margin-bottom:5px}.yearbox span{font-size:12px;opacity:.92;display:block;line-height:1.7}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:12px;margin:28px 2px 14px}.section-head h2{margin:0;color:var(--g);font-size:22px}.section-head p{margin:5px 0 0;color:var(--muted);font-size:13px}.badge{background:var(--gs);border:1px solid #d4e9df;color:var(--g);padding:7px 10px;border-radius:999px;font-size:12px;font-weight:800}
+.subjects{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.subject{border:1px solid var(--border);background:#fff;border-radius:23px;padding:20px;text-align:right;cursor:pointer;box-shadow:0 7px 22px rgba(0,0,0,.03);transition:.18s;position:relative;overflow:hidden}.subject:before{content:"";position:absolute;inset-inline:0;top:0;height:4px;background:linear-gradient(90deg,var(--g),var(--gold))}.subject:hover,.subject.active{transform:translateY(-3px);box-shadow:var(--shadow);border-color:#a9cbbb}.subject-icon{width:62px;height:62px;border-radius:18px;background:var(--gs);display:grid;place-items:center;font-size:34px;margin-bottom:13px}.subject h3{margin:0;color:var(--g);font-size:19px}.subject p{margin:7px 0 0;color:var(--muted);font-size:12px;line-height:1.7}.subject .teacher{margin-top:10px;color:#8a6e0b;font-size:12px;font-weight:700}
+.workspace{margin-top:22px;background:#fff;border:1px solid var(--border);border-radius:26px;padding:20px;box-shadow:var(--shadow)}.workspace-title{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}.workspace-title h2{margin:0;color:var(--g)}.workspace-title p{margin:5px 0 0;color:var(--muted);font-size:12px}.tools{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:18px}.tool{background:#fbfdfc;border:1px solid var(--border);border-radius:18px;padding:14px;cursor:pointer;text-align:center;transition:.16s}.tool:hover,.tool.active{background:var(--gs);border-color:#9fc5b4}.tool .ico{font-size:30px}.tool strong{display:block;margin-top:6px;color:var(--g);font-size:14px}
+.content{margin-top:18px;border-top:1px solid var(--border);padding-top:18px}.content h3{margin:0 0 12px;color:var(--g)}.empty{padding:22px;text-align:center;color:var(--muted);border:1px dashed var(--border);border-radius:16px;background:#fafcfb}.list{display:grid;gap:10px}.item{border:1px solid var(--border);border-radius:15px;padding:14px;background:#fff}.itemtop{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;flex-wrap:wrap}.item strong{color:var(--text)}.meta{font-size:12px;color:var(--muted);margin-top:5px;line-height:1.7}.action{display:inline-flex;margin-top:9px;background:var(--g);color:#fff;padding:8px 11px;border-radius:10px;font-size:12px;font-weight:800}
+.grade-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.grade-cat{border:1px solid var(--border);border-radius:17px;padding:14px;background:#fbfdfc}.grade-cat b{display:block;color:var(--g)}.grade-cat .weight{font-size:12px;color:var(--muted);margin-top:5px}.grade-cat .score{font-size:26px;font-weight:900;color:var(--gold);margin-top:8px}.grade-summary{margin-top:14px;padding:15px;border-radius:16px;background:#f7faf8;border:1px solid var(--border);line-height:1.9}.grade-summary strong{color:var(--g)}
+.flag{font-size:18px}.small-note{font-size:12px;color:var(--muted);margin-top:10px}.setup-note{background:#fff8e7;border:1px solid #efdda0;color:#715f1c;padding:13px;border-radius:14px;margin-top:14px}
+@media(max-width:980px){.subjects{grid-template-columns:repeat(2,1fr)}.tools{grid-template-columns:repeat(2,1fr)}.grade-grid{grid-template-columns:repeat(2,1fr)}.profile{grid-template-columns:auto 1fr}.yearbox{grid-column:1/-1;min-width:0}}
+@media(max-width:580px){.page{width:min(94%,100%)}.profile{grid-template-columns:1fr;text-align:center}.avatar{margin:auto}.chips{justify-content:center}.subjects,.tools,.grade-grid{grid-template-columns:1fr}.topin{min-height:66px}.brand img{width:48px;height:48px}.brand b{font-size:17px}.section-head{align-items:flex-start;flex-direction:column}.workspace{padding:15px}}
+</style>
+</head>
+<body>
+<header class="top"><div class="topin">
+  <a class="brand" href="../index.html"><img src="../rasheed-arabic-logo.png" alt="رشيد العربية" onerror="this.style.display='none'"><span><b>رشيد العربية</b><small>بوابة الطالب التعليمية</small></span></a>
+  <button class="btn btn-light" id="logoutBtn" type="button">تسجيل الخروج</button>
+</div></header>
+
 <main class="page">
-<div id="pageError" class="error hide"></div>
-<section class="hero"><div><h1 id="welcome">مرحبًا بك 🌿</h1><p>هنا تجد موادك التعليمية وواجباتك واختباراتك ونتائجك في حساب واحد ثابت.</p></div><div class="profile-badge"><b id="heroName">الطالب</b><span id="heroClass">جارٍ تحميل البيانات...</span></div></section>
-<section class="stats"><div class="stat"><div class="ico">📚</div><b id="materialsCount">0</b><span>مادة تعليمية</span></div><div class="stat"><div class="ico">📝</div><b id="pendingCount">0</b><span>واجب/اختبار مطلوب</span></div><div class="stat"><div class="ico">✅</div><b id="doneCount">0</b><span>نشاط تم تسليمه</span></div><div class="stat"><div class="ico">🎥</div><b>—</b><span>الحصص الافتراضية قريبًا</span></div></section>
-<section class="grid">
-<div class="panel"><h2>👤 ملفي الشخصي</h2><div id="profileInfo" class="info"><div><small>الاسم</small><b>...</b></div></div></div>
-<div class="panel"><h2>🔔 تنبيهات الحساب</h2><div class="coming">ستظهر هنا رسائل المعلم ومواعيد الحصص والتنبيهات في المرحلة التالية. الحساب الحالي جاهز للمواد والاختبارات والنتائج.</div></div>
-<div class="panel section-wide"><h2>📝 واجباتي واختباراتي</h2><div id="assessmentsList"><div class="empty">جارٍ التحميل...</div></div></div>
-<div class="panel section-wide"><h2>📚 موادي التعليمية</h2><div id="materialsList"><div class="empty">جارٍ التحميل...</div></div></div>
-</section>
+  <div id="loading" class="loading">جارٍ تحميل ملف الطالب والمواد...</div>
+  <div id="errorBox" class="error hide"></div>
+
+  <section id="profileCard" class="profile hide">
+    <div class="avatar">👤</div>
+    <div class="pbody">
+      <h1 id="studentName">الطالب</h1>
+      <div class="chips">
+        <span class="chip" id="accountChip">الحساب: —</span>
+        <span class="chip" id="gradeChip">الصف: —</span>
+        <span class="chip" id="sectionChip">الشعبة: —</span>
+        <span class="chip" id="curriculumChip"><span class="flag">🏫</span> المسار: —</span>
+        <span class="chip">🟢 طالب نشط</span>
+      </div>
+    </div>
+    <div class="yearbox"><b id="yearName">السنة الدراسية</b><span id="termName">الفصل الدراسي</span><span id="termWeight">وزن الفصل في النتيجة السنوية: 50%</span></div>
+  </section>
+
+  <div class="section-head"><div><h2>موادي الدراسية</h2><p>تظهر المواد المسندة إلى صفك ومسارك في الفصل الدراسي الحالي.</p></div><span class="badge" id="subjectCount">0 مواد</span></div>
+  <section id="subjectsGrid" class="subjects"><div class="empty">جارٍ تحميل المواد...</div></section>
+
+  <section id="workspace" class="workspace hide">
+    <div class="workspace-title"><div><h2 id="workspaceSubject">المادة</h2><p id="workspaceMeta">—</p></div><span class="badge" id="workspaceTeacher">المعلم: —</span></div>
+    <div class="tools" id="toolsGrid">
+      <button class="tool" data-view="homework"><span class="ico">📝</span><strong>الواجبات</strong></button>
+      <button class="tool" data-view="tests"><span class="ico">✅</span><strong>الاختبارات</strong></button>
+      <button class="tool" data-view="worksheets"><span class="ico">📄</span><strong>أوراق العمل</strong></button>
+      <button class="tool" data-view="attachments"><span class="ico">📎</span><strong>مرفقات المادة</strong></button>
+      <button class="tool" data-view="presentations"><span class="ico">📊</span><strong>العروض التقديمية</strong></button>
+      <button class="tool" data-view="videos"><span class="ico">🎬</span><strong>الفيديوهات</strong></button>
+      <button class="tool" data-view="virtual"><span class="ico">🎥</span><strong>الحصص الافتراضية</strong></button>
+      <button class="tool" data-view="gradebook"><span class="ico">🏆</span><strong>سجل الدرجات</strong></button>
+    </div>
+    <div class="content" id="contentPanel"><div class="empty">اختر إحدى أدوات المادة أعلاه.</div></div>
+  </section>
 </main>
+
 <script>
-const SUPABASE_URL="https://wcyamoqmpwpribsgspjn.supabase.co", KEY="sb_publishable_3eJET0uhZw4D4DowMK13fQ_oWK3PdIQ";
-const SESSION_KEY="rasheed_arabic_portal_session_v1"; const $=id=>document.getElementById(id); const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-function getSession(){try{return JSON.parse(localStorage.getItem(SESSION_KEY)||"null")}catch{return null}}
-function setSession(s){localStorage.setItem(SESSION_KEY,JSON.stringify(s))}
-async function refreshSession(s){if(!s?.refresh_token)return null;const r=await fetch(SUPABASE_URL+"/auth/v1/token?grant_type=refresh_token",{method:"POST",headers:{apikey:KEY,"Content-Type":"application/json"},body:JSON.stringify({refresh_token:s.refresh_token})});if(!r.ok)return null;const n=await r.json();const merged={...s,user:n.user,access_token:n.access_token,refresh_token:n.refresh_token,expires_at:n.expires_at};setSession(merged);return merged}
-async function rpc(fn,body={}){let s=getSession();if(!s?.access_token||s.role!=="student"){location.replace("../login.html");throw new Error("NO_SESSION")}const call=x=>fetch(SUPABASE_URL+"/rest/v1/rpc/"+fn,{method:"POST",headers:{apikey:KEY,Authorization:"Bearer "+x.access_token,"Content-Type":"application/json"},body:JSON.stringify(body)});let r=await call(s);if(r.status===401){s=await refreshSession(s);if(!s){localStorage.removeItem(SESSION_KEY);location.replace("../login.html");throw new Error("NO_SESSION")}r=await call(s)}return r}
-function fmt(d){if(!d)return "—";try{return new Date(d).toLocaleString("ar-SA")}catch{return d}}
-function typeName(t){return ({worksheet:"ورقة عمل",link:"رابط تعليمي",homework:"واجب",powerpoint:"عرض PowerPoint",file:"ملف / PDF"})[t]||t||"مادة"}
-async function load(){try{const [pr,mr,ar]=await Promise.all([rpc("get_my_student_profile"),rpc("get_my_learning_materials"),rpc("get_my_assessments")]);if(!pr.ok||!mr.ok||!ar.ok)throw new Error("تعذر تحميل بيانات الحساب.");const p=await pr.json(), mats=await mr.json(), ass=await ar.json();if(!p)throw new Error("هذا الحساب غير مرتبط بسجل طالب.");$("welcome").textContent="مرحبًا "+(p.student_name||"")+" 🌿";$("heroName").textContent=p.student_name||"الطالب";$("heroClass").textContent=[p.stage,p.grade,p.section_name,p.curriculum].filter(Boolean).join(" • ");$("profileInfo").innerHTML=[["الاسم",p.student_name],["الجنس",p.gender],["المرحلة",p.stage],["الصف",p.grade],["الشعبة",p.section_name],["المسار",p.curriculum]].map(x=>`<div><small>${esc(x[0])}</small><b>${esc(x[1]||"—")}</b></div>`).join("");$("materialsCount").textContent=mats.length;const done=ass.filter(x=>x.submitted_at), pending=ass.filter(x=>!x.submitted_at);$("doneCount").textContent=done.length;$("pendingCount").textContent=pending.length;
-$("assessmentsList").innerHTML=ass.length?ass.map(a=>`<article class="item"><div class="item-head"><div><h3>${esc(a.title)}</h3><div class="chips"><span class="chip">${a.kind==='quiz'?'اختبار إلكتروني':'واجب إلكتروني'}</span><span class="chip">${a.submitted_at?'تم التسليم':'مطلوب'}</span>${a.due_at?`<span class="chip">التسليم: ${esc(fmt(a.due_at))}</span>`:''}</div></div>${a.submitted_at?`<span class="score">${esc(a.score)} / ${esc(a.total_points)}</span>`:''}</div>${a.instructions?`<p>${esc(a.instructions)}</p>`:''}<a class="action ${a.submitted_at?'soft':''}" href="../student-assessment.html?id=${encodeURIComponent(a.recipient_id)}">${a.submitted_at?'عرض النتيجة':'فتح النشاط'}</a></article>`).join(""):'<div class="empty">لا توجد واجبات أو اختبارات مرسلة لك حاليًا.</div>';
-$("materialsList").innerHTML=mats.length?mats.map(m=>`<article class="item"><div class="item-head"><div><h3>${esc(m.title)}</h3><div class="chips"><span class="chip">${esc(typeName(m.material_type))}</span><span class="chip">${esc(fmt(m.created_at))}</span></div></div></div>${m.note?`<p>${esc(m.note)}</p>`:''}${m.url?`<a class="action" href="${esc(m.url)}" target="_blank" rel="noopener">فتح المادة</a>`:''}</article>`).join(""):'<div class="empty">لم تُرسل لك مواد تعليمية بعد.</div>';
-}catch(e){if(e.message!=="NO_SESSION"){$("pageError").textContent=e.message||"تعذر تحميل الصفحة.";$("pageError").classList.remove("hide")}}}
-$("logoutBtn").onclick=()=>{localStorage.removeItem(SESSION_KEY);location.href="../login.html"};load();
-</script></body></html>
+(()=>{
+const SUPABASE_URL='https://wcyamoqmpwpribsgspjn.supabase.co';
+const SUPABASE_KEY='sb_publishable_3eJET0uhZw4D4DowMK13fQ_oWK3PdIQ';
+const PORTAL_KEY='rasheed_arabic_portal_session_v1';
+const ADMIN_KEY='rasheed_arabic_admin_session_v1';
+let portal=null, currentSubject=null, resourcesCache=new Map();
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':'&quot;',"'":'&#39;'}[c]));
+function session(){try{return JSON.parse(localStorage.getItem(PORTAL_KEY)||'null')||JSON.parse(localStorage.getItem(ADMIN_KEY)||'null')}catch{return null}}
+function showError(msg){$('loading').classList.add('hide');$('errorBox').textContent=msg;$('errorBox').classList.remove('hide')}
+async function api(path,options={}){const s=session();if(!s?.access_token)throw new Error('NO_SESSION');const h={apikey:SUPABASE_KEY,Authorization:'Bearer '+s.access_token,'Content-Type':'application/json',...(options.headers||{})};return fetch(SUPABASE_URL+path,{...options,headers:h})}
+async function rpc(name,body={}){const r=await api('/rest/v1/rpc/'+name,{method:'POST',body:JSON.stringify(body)});if(!r.ok){const t=await r.text();throw new Error(t||('HTTP_'+r.status))}return r.json()}
+function flagFor(v){v=String(v||'');if(v.includes('أمريك'))return '🇺🇸';if(v.includes('بريطان'))return '🇬🇧';return '🏫'}
+function fmt(v){if(!v)return '—';try{return new Intl.DateTimeFormat('ar-SA-u-ca-gregory',{dateStyle:'medium',timeStyle:'short'}).format(new Date(v))}catch{return v}}
+function validUrl(v){try{const u=new URL(v);return ['http:','https:'].includes(u.protocol)}catch{return false}}
+
+async function init(){
+  const s=session();
+  if(!s?.access_token){location.replace('../index.html#login');return}
+  try{
+    portal=await rpc('get_my_academic_portal');
+    renderPortal();
+  }catch(e){
+    console.error(e);
+    if(String(e.message).includes('get_my_academic_portal')){
+      showError('يلزم تشغيل ملف ACADEMIC_STRUCTURE_V1.sql أولًا في Supabase، ثم إعادة فتح لوحة الطالب.');
+    }else if(String(e.message).includes('STUDENT_ACCOUNT_REQUIRED')){
+      showError('هذا الحساب غير مرتبط بطالب نشط.');
+    }else{
+      showError('تعذر تحميل لوحة الطالب الآن.');
+    }
+  }
+}
+function renderPortal(){
+  $('loading').classList.add('hide');$('profileCard').classList.remove('hide');
+  const p=portal?.profile||{},term=portal?.term||{},year=portal?.year||{},cls=portal?.class||{};
+  $('studentName').textContent=p.student_name||'الطالب';
+  $('accountChip').textContent='الحساب: '+(p.username||'—');
+  $('gradeChip').textContent='الصف: '+(p.grade||cls.grade||'—');
+  $('sectionChip').textContent='الشعبة: '+(p.section_name||cls.section_name||'—');
+  const cur=p.curriculum||cls.curriculum||'';$('curriculumChip').innerHTML=`<span class="flag">${flagFor(cur)}</span> المسار: ${esc(cur||'—')}`;
+  $('yearName').textContent=year.name?'السنة الدراسية '+year.name:'السنة الدراسية —';
+  $('termName').textContent=term.name_ar||'الفصل الدراسي —';
+  $('termWeight').textContent='وزن الفصل في النتيجة السنوية: '+(term.weight_percent??50)+'%';
+  renderSubjects(portal?.subjects||[]);
+}
+function renderSubjects(rows){
+  $('subjectCount').textContent=`${rows.length} مواد`;
+  $('subjectsGrid').innerHTML=rows.length?rows.map(s=>`<button class="subject" data-cs="${esc(s.class_subject_id)}"><div class="subject-icon">${esc(s.icon||'📚')}</div><h3>${esc(s.name_ar)}</h3><p>افتح المادة للوصول إلى الواجبات والاختبارات والملفات والحصص.</p><div class="teacher">👨‍🏫 ${esc(s.teacher_name||'سيتم إسناد المعلم')}</div></button>`).join(''):'<div class="empty">لا توجد مواد مسندة إلى صفك في الفصل الحالي.</div>';
+  document.querySelectorAll('.subject').forEach(b=>b.addEventListener('click',()=>openSubject(Number(b.dataset.cs))));
+}
+async function openSubject(csId){
+  const s=(portal.subjects||[]).find(x=>Number(x.class_subject_id)===Number(csId));if(!s)return;
+  currentSubject=s;document.querySelectorAll('.subject').forEach(x=>x.classList.toggle('active',Number(x.dataset.cs)===csId));
+  $('workspace').classList.remove('hide');$('workspaceSubject').textContent=(s.icon||'📚')+' '+s.name_ar;$('workspaceTeacher').textContent='المعلم: '+(s.teacher_name||'—');
+  const p=portal.profile||{},t=portal.term||{};$('workspaceMeta').textContent=[p.curriculum,p.grade,p.section_name,t.name_ar].filter(Boolean).join(' • ');
+  document.querySelectorAll('.tool').forEach(x=>x.classList.remove('active'));$('contentPanel').innerHTML='<div class="empty">اختر إحدى أدوات المادة أعلاه.</div>';
+  $('workspace').scrollIntoView({behavior:'smooth',block:'start'});
+  if(!resourcesCache.has(csId)){
+    try{resourcesCache.set(csId,await rpc('get_my_subject_resources',{p_class_subject_id:csId}))}catch(e){console.warn(e);}
+  }
+}
+function currentResources(){return currentSubject?resourcesCache.get(Number(currentSubject.class_subject_id))||null:null}
+function materialsOf(types){const r=currentResources();return (r?.materials||[]).filter(x=>types.includes(String(x.material_type||'').toLowerCase()))}
+function assessmentsOf(kinds){const r=currentResources();return (r?.assessments||[]).filter(x=>kinds.includes(String(x.kind||'').toLowerCase()))}
+function listItems(title,rows,renderer){$('contentPanel').innerHTML=`<h3>${title}</h3>`+(rows.length?`<div class="list">${rows.map(renderer).join('')}</div>`:'<div class="empty">لا يوجد محتوى متاح في هذا القسم حاليًا.</div>')}
+function materialCard(x){const u=x.url||'';return `<article class="item"><div class="itemtop"><div><strong>${esc(x.title||x.file_name||'مادة تعليمية')}</strong><div class="meta">${esc(x.note||'')}<br>${esc(fmt(x.created_at))}</div></div><span class="badge">${esc(x.material_type||'ملف')}</span></div>${validUrl(u)?`<a class="action" target="_blank" rel="noopener" href="${esc(u)}">فتح المحتوى</a>`:''}</article>`}
+function assessmentCard(x){const done=x.submitted_at!=null;return `<article class="item"><div class="itemtop"><div><strong>${esc(x.title||'نشاط')}</strong><div class="meta">${esc(x.instructions||'')}<br>الموعد: ${esc(fmt(x.due_at))}</div></div><span class="badge">${done?'تم التسليم':'متاح'}</span></div>${x.score!=null?`<div class="meta"><b>الدرجة: ${esc(x.score)} / ${esc(x.total_points??100)}</b></div>`:''}</article>`}
+function virtualCard(x){return `<article class="item"><div class="itemtop"><div><strong>${esc(x.title||'حصة افتراضية')}</strong><div class="meta">${esc(fmt(x.starts_at))}${x.note?'<br>'+esc(x.note):''}</div></div><span class="badge">🎥 حصة</span></div>${validUrl(x.meeting_url)?`<a class="action" target="_blank" rel="noopener" href="${esc(x.meeting_url)}">دخول الحصة</a>`:''}</article>`}
+function renderGradebook(){
+  const r=currentResources();if(!r){$('contentPanel').innerHTML='<div class="empty">جارٍ تحميل سجل الدرجات...</div>';return}
+  const cats=r.gradebook||[];const weights=Number(r.gradebook_weight_sum||0);const configured=weights===100;
+  $('contentPanel').innerHTML=`<h3>🏆 سجل الدرجات — ${esc(currentSubject.name_ar)}</h3><div class="grade-grid">${cats.map(c=>`<div class="grade-cat"><b>${esc(c.name_ar)}</b><div class="weight">الوزن: ${Number(c.weight_percent)>0?esc(c.weight_percent)+'%':'لم يعتمد بعد'}</div><div class="score">${c.earned_percent==null?'—':esc(c.earned_percent)+'%'}</div></div>`).join('')}</div><div class="grade-summary">${configured?`<strong>درجة الفصل:</strong> ${r.term_percent==null?'—':esc(r.term_percent)+' / 100'}<br><strong>وزن الفصل في السنة:</strong> ${esc(r.subject?.term_weight??50)}%<br><strong>المحتسب في النتيجة السنوية:</strong> ${r.annual_contribution==null?'—':esc(r.annual_contribution)+'%'}`:`<strong>تقسيم الجريد بوك جاهز:</strong> الواجبات + المشاركات + الاختبارات القصيرة + المشروع.<br>بانتظار اعتماد أوزان الفئات، ويجب أن يكون مجموعها 100% داخل الفصل الدراسي.`}</div><div class="small-note">كل فصل دراسي يظهر من 100%، ثم يُحتسب منه 50% في النتيجة السنوية.</div>`;
+}
+async function showView(view,btn){
+  if(!currentSubject)return;document.querySelectorAll('.tool').forEach(x=>x.classList.remove('active'));btn.classList.add('active');
+  const cs=Number(currentSubject.class_subject_id);if(!resourcesCache.has(cs)){$('contentPanel').innerHTML='<div class="empty">جارٍ تحميل المحتوى...</div>';try{resourcesCache.set(cs,await rpc('get_my_subject_resources',{p_class_subject_id:cs}))}catch(e){console.error(e);$('contentPanel').innerHTML='<div class="empty">تعذر تحميل محتوى المادة.</div>';return}}
+  if(view==='homework'){const rows=[...assessmentsOf(['homework','assignment']),...materialsOf(['homework'])];listItems('📝 الواجبات',rows,x=>x.kind?assessmentCard(x):materialCard(x));return}
+  if(view==='tests'){const rows=assessmentsOf(['quiz','test','exam']);listItems('✅ الاختبارات',rows,assessmentCard);return}
+  if(view==='worksheets'){listItems('📄 أوراق العمل',materialsOf(['worksheet']),materialCard);return}
+  if(view==='attachments'){listItems('📎 مرفقات المادة',materialsOf(['file','pdf','link','attachment']),materialCard);return}
+  if(view==='presentations'){listItems('📊 العروض التقديمية',materialsOf(['powerpoint','presentation','ppt','pptx']),materialCard);return}
+  if(view==='videos'){listItems('🎬 الفيديوهات',materialsOf(['video']),materialCard);return}
+  if(view==='virtual'){listItems('🎥 الحصص الافتراضية',currentResources()?.virtual_lessons||[],virtualCard);return}
+  if(view==='gradebook'){renderGradebook();return}
+}
+
+document.addEventListener('click',e=>{const b=e.target.closest('.tool');if(b)showView(b.dataset.view,b)});
+$('logoutBtn').addEventListener('click',()=>{localStorage.removeItem(PORTAL_KEY);localStorage.removeItem(ADMIN_KEY);location.replace('../index.html')});
+init();
+})();
+</script>
+</body>
+</html>
