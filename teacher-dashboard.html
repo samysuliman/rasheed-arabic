@@ -23,6 +23,21 @@ body{margin:0;font-family:Tahoma,Arial,sans-serif;background:radial-gradient(cir
 
 @media(max-width:950px){.subjects{grid-template-columns:repeat(2,1fr)}.tools{grid-template-columns:repeat(2,1fr)}.grade-grid{grid-template-columns:repeat(2,1fr)}.hero{display:block}.hero-meta{margin-top:15px}.student{grid-template-columns:36px 1.5fr 1fr}.student .optional{display:none}}
 @media(max-width:580px){.subjects,.tools,.grade-grid,.weightsbar{grid-template-columns:1fr}.hero-meta{grid-template-columns:1fr 1fr}.fields{grid-template-columns:1fr}.field.full{grid-column:auto}.classbar select{min-width:100%;width:100%}.topin{min-height:66px}.brand img{width:48px;height:48px}.nav .home{display:none}.qchoices{grid-template-columns:1fr}.inline-form-grid{grid-template-columns:1fr}}
+
+/* Gradebook matrix V5 */
+.grade-matrix-wrap{overflow:auto;border:1px solid var(--border);border-radius:16px;background:#fff;max-height:68vh}
+.grade-matrix{border-collapse:separate;border-spacing:0;min-width:max-content;width:100%;direction:rtl}
+.grade-matrix th,.grade-matrix td{border-bottom:1px solid #e7efeb;border-left:1px solid #edf2ef;padding:8px;text-align:center;font-size:11px;white-space:nowrap}
+.grade-matrix thead th{position:sticky;top:0;z-index:4;background:#eef6f2;color:var(--g);min-width:105px}
+.grade-matrix .student-name-col{position:sticky;right:0;z-index:5;background:#fff;min-width:230px;max-width:260px;text-align:right;font-weight:800;box-shadow:-5px 0 10px rgba(0,0,0,.04)}
+.grade-matrix thead .student-name-col{z-index:7;background:#e8f3ee}
+.grade-matrix .student-name-col small{display:block;color:var(--muted);font-weight:500;margin-top:3px}
+.grade-matrix .item-head{min-width:118px;max-width:150px;white-space:normal;line-height:1.45}
+.grade-matrix .item-head .cat{display:block;font-size:10px;color:#8a6e0b;margin-bottom:3px}
+.grade-matrix .matrix-score{width:76px;border:1px solid var(--border);border-radius:8px;padding:6px;text-align:center;background:#fff}
+.grade-matrix .matrix-score:focus{outline:2px solid #b9d8cb;border-color:#72aa91}
+.grade-matrix .term-total{font-weight:900;color:var(--g);background:#f7fbf9;min-width:85px}
+.gradebook-note{background:#fffaf0;border:1px solid #eddca5;color:#6f5a17;border-radius:12px;padding:10px;font-size:11px}
 </style>
 </head>
 <body>
@@ -103,14 +118,42 @@ async function renderGradebook(){
     const gb=await rpc('get_teacher_gradebook',{p_class_subject_id:cs});
     const cats=gb.categories||[],students=gb.students||[],meta=gb.meta||{};
     const scope=[meta.campus_name,meta.school_section_name,(meta.curriculum?flag(meta.curriculum)+' '+meta.curriculum:''),meta.grade+(meta.section_name?' / '+meta.section_name:''),meta.term_name].filter(Boolean).join(' • ');
+    const flatItems=[];
+    cats.forEach(c=>(c.items||[]).forEach(it=>flatItems.push({...it,category_id:c.id,category_name:c.name_ar,category_weight:Number(c.weight_percent)||0})));
+    const scoreMaps=new Map(flatItems.map(it=>[Number(it.id),new Map((it.scores||[]).map(s=>[Number(s.student_id),s]))]));
+    function studentTermPercent(studentId){
+      if(Number(gb.weight_sum)!==100)return null;
+      let total=0,hasAny=false;
+      for(const c of cats){
+        const items=c.items||[];
+        if(!items.length)continue;
+        hasAny=true;
+        let avg=0;
+        for(const it of items){
+          const sc=scoreMaps.get(Number(it.id))?.get(Number(studentId));
+          const score=sc?.score==null?0:Number(sc.score);
+          const max=Number(it.max_points)||1;
+          avg+=(score/max)*100;
+        }
+        avg/=items.length;
+        total+=avg*(Number(c.weight_percent)||0)/100;
+      }
+      return hasAny?Math.round(total*100)/100:null;
+    }
+    const matrixHead=flatItems.map(it=>`<th class="item-head"><span class="cat">${esc(it.category_name)}</span>${esc(it.title)}<br><small>من ${esc(it.max_points)}</small></th>`).join('');
+    const matrixRows=students.map((st,i)=>`<tr><td class="student-name-col">${i+1}. ${esc(st.student_name)}<small>${esc(st.gender||'')} • ${flag(st.curriculum)} ${esc(st.curriculum||'')} • ${esc(st.grade||'')}${st.section_name?' / '+esc(st.section_name):''}</small></td>${flatItems.map(it=>{const sc=scoreMaps.get(Number(it.id))?.get(Number(st.id))||{};return `<td><input class="matrix-score" data-item="${it.id}" data-student="${st.id}" data-max="${esc(it.max_points)}" type="number" min="0" max="${esc(it.max_points)}" step="0.25" value="${sc.score==null?'':esc(sc.score)}" title="${esc(sc.feedback||'')}"></td>`}).join('')}<td class="term-total">${studentTermPercent(st.id)==null?'—':esc(studentTermPercent(st.id))+'%'}</td></tr>`).join('');
+
     $('contentPanel').innerHTML=`<div class="gradebook-wrap">
       <div class="grade-editor-head"><div><h3 style="margin:0">🏆 سجل الدرجات — ${esc(meta.subject_name||currentSubject.name)}</h3><div class="small">${esc(scope)}</div></div><button class="btn btn-light" id="refreshGradebook">↻ تحديث</button></div>
-      <div class="scopebox"><b>نطاق هذا السجل:</b> الدرجات هنا تخص هذه المادة وهذا الفصل الدراسي وهذه الشعبة فقط. لا تختلط مع قسم آخر أو مسار آخر أو فصل آخر.</div>
+      <div class="scopebox"><b>نطاق هذا السجل:</b> ${esc(scope)}. أسماء جميع الطلاب ثابتة في العمود الأيمن، والدرجات موزعة أمام كل طالب.</div>
       <div class="weightsbar">${cats.map(c=>`<div class="weightbox"><b>${esc(c.name_ar)}</b><label class="small">الوزن داخل الفصل</label><input class="weightInput" data-id="${c.id}" type="number" min="0" max="100" step="1" value="${esc(c.weight_percent)}"></div>`).join('')}</div>
       <div class="grade-total">المجموع الحالي: <b id="weightTotal">${esc(gb.weight_sum||0)}%</b> — يجب أن يساوي 100% قبل اعتماد النتيجة.</div>
       <div><button class="btn btn-primary" id="saveWeights">حفظ أوزان الفئات</button><span class="save-status" id="weightStatus"></span></div>
-      <div id="gradeCategories">${cats.map(c=>`<section class="category-block" data-cat="${c.id}"><div class="category-head"><div><h4>${esc(c.name_ar)}</h4><span class="small">الوزن: ${esc(c.weight_percent)}%</span></div><button class="btn btn-soft addGradeItem" data-cat="${c.id}" data-name="${esc(c.name_ar)}">+ إضافة بند يدوي</button></div><div class="grade-items">${(c.items||[]).length?(c.items||[]).map(it=>`<div class="grade-item"><div class="info"><strong>${esc(it.title)}</strong><div class="meta">الدرجة القصوى: ${esc(it.max_points)}${it.due_at?' • الموعد: '+esc(new Date(it.due_at).toLocaleString('ar-SA')):''}</div>${it.assessment_id?'<span class="locked-badge">مرتبط بواجب/اختبار إلكتروني</span>':''}</div><div class="grade-actions"><button class="btn btn-soft scoreBtn" data-item="${it.id}" data-cat="${c.id}">إدخال الدرجات</button>${it.assessment_id?'':`<button class="btn btn-danger deleteGradeItem" data-item="${it.id}">حذف</button>`}</div></div>`).join(''):'<div class="empty">لا توجد بنود درجات في هذه الفئة بعد.</div>'}<div class="gradeFormSlot" id="gradeForm_${c.id}"></div></div></section>`).join('')}</div>
-      <div id="scoreEditor"></div>
+      <div class="gradebook-note">📌 الجدول التالي هو الجريد بوك الرئيسي: اسم الطالب ثابت على اليمين، ثم تظهر جميع بنود الدرجات أمامه. يمكنك إدخال الدرجات مباشرة ثم الضغط على «حفظ جميع الدرجات».</div>
+      <div class="grade-matrix-wrap"><table class="grade-matrix"><thead><tr><th class="student-name-col">اسم الطالب</th>${matrixHead}<th class="term-total">نتيجة الفصل</th></tr></thead><tbody>${matrixRows||'<tr><td class="student-name-col">لا يوجد طلاب</td></tr>'}</tbody></table></div>
+      <div><button class="btn btn-primary" id="saveMatrixScores" ${flatItems.length?'':'disabled'}>حفظ جميع الدرجات</button><span class="save-status" id="matrixStatus"></span></div>
+      <div class="section-head" style="margin-top:8px"><div><h3 style="margin:0">إدارة بنود الدرجات</h3><p>أضف بنود المشاركة والمشروع وغيرها. الواجبات والاختبارات الإلكترونية ترتبط بالجريد بوك تلقائيًا.</p></div></div>
+      <div id="gradeCategories">${cats.map(c=>`<section class="category-block" data-cat="${c.id}"><div class="category-head"><div><h4>${esc(c.name_ar)}</h4><span class="small">الوزن: ${esc(c.weight_percent)}%</span></div><button class="btn btn-soft addGradeItem" data-cat="${c.id}" data-name="${esc(c.name_ar)}">+ إضافة بند يدوي</button></div><div class="grade-items">${(c.items||[]).length?(c.items||[]).map(it=>`<div class="grade-item"><div class="info"><strong>${esc(it.title)}</strong><div class="meta">الدرجة القصوى: ${esc(it.max_points)}${it.due_at?' • الموعد: '+esc(new Date(it.due_at).toLocaleString('ar-SA')):''}</div>${it.assessment_id?'<span class="locked-badge">مرتبط بواجب/اختبار إلكتروني</span>':''}</div><div class="grade-actions">${it.assessment_id?'':`<button class="btn btn-danger deleteGradeItem" data-item="${it.id}">حذف</button>`}</div></div>`).join(''):'<div class="empty">لا توجد بنود درجات في هذه الفئة بعد.</div>'}<div class="gradeFormSlot" id="gradeForm_${c.id}"></div></div></section>`).join('')}</div>
     </div>`;
 
     function weightSum(){const total=[...document.querySelectorAll('.weightInput')].reduce((a,x)=>a+(Number(x.value)||0),0);$('weightTotal').textContent=total+'%';return total}
@@ -118,22 +161,29 @@ async function renderGradebook(){
     $('saveWeights').onclick=async()=>{try{const total=weightSum();if(total!==100){alert('مجموع الأوزان يجب أن يساوي 100%.');return}const weights={};document.querySelectorAll('.weightInput').forEach(x=>weights[x.dataset.id]=Number(x.value)||0);$('saveWeights').disabled=true;$('weightStatus').textContent='جارٍ الحفظ...';await rpc('teacher_save_gradebook_weights',{p_class_subject_id:cs,p_weights:weights});$('weightStatus').textContent='✓ تم الحفظ';setTimeout(()=>renderGradebook(),500)}catch(e){console.error(e);alert('تعذر حفظ الأوزان: '+e.message)}finally{if($('saveWeights'))$('saveWeights').disabled=false}};
     $('refreshGradebook').onclick=renderGradebook;
 
+    if($('saveMatrixScores'))$('saveMatrixScores').onclick=async()=>{
+      try{
+        const inputs=[...document.querySelectorAll('.matrix-score')];
+        const toSave=inputs.filter(x=>x.value!=='');
+        if(!toSave.length){alert('لا توجد درجات مدخلة للحفظ.');return}
+        $('saveMatrixScores').disabled=true;$('matrixStatus').textContent='جارٍ حفظ الدرجات...';
+        let done=0;
+        for(const inp of toSave){
+          const itemId=Number(inp.dataset.item),studentId=Number(inp.dataset.student),max=Number(inp.dataset.max),score=Number(inp.value);
+          if(score<0||score>max)throw new Error('هناك درجة خارج النطاق المسموح.');
+          await rpc('teacher_save_gradebook_score',{p_gradebook_item_id:itemId,p_student_id:studentId,p_score:score,p_feedback:null});
+          done++;$('matrixStatus').textContent=`تم حفظ ${done} من ${toSave.length}`;
+        }
+        $('matrixStatus').textContent='✓ تم حفظ جميع الدرجات';setTimeout(()=>renderGradebook(),650);
+      }catch(e){console.error(e);$('matrixStatus').textContent='';alert('تعذر حفظ الدرجات: '+e.message)}finally{if($('saveMatrixScores'))$('saveMatrixScores').disabled=false}
+    };
+
     document.querySelectorAll('.addGradeItem').forEach(b=>b.onclick=()=>{
       const cat=Number(b.dataset.cat),slot=$('gradeForm_'+cat);if(!slot)return;
       slot.innerHTML=`<div class="inline-form"><div class="inline-form-grid"><div><label>اسم بند الدرجة</label><input id="gi_title_${cat}" placeholder="مثال: مشاركة الأسبوع الأول"></div><div><label>الدرجة القصوى</label><input id="gi_max_${cat}" type="number" min="1" step="1" value="10"></div><div><label>الموعد (اختياري)</label><input id="gi_due_${cat}" type="datetime-local"></div><button class="btn btn-primary" id="gi_save_${cat}">حفظ البند</button></div><div class="small" style="margin-top:7px">الفئة: ${esc(b.dataset.name||'')}</div></div>`;
       $('gi_save_'+cat).onclick=async()=>{try{const title=$('gi_title_'+cat).value.trim(),max=Number($('gi_max_'+cat).value),due=$('gi_due_'+cat).value;if(!title){alert('اكتب اسم بند الدرجة.');return}if(!(max>0)){alert('اكتب درجة قصوى صحيحة.');return}$('gi_save_'+cat).disabled=true;await rpc('teacher_create_gradebook_item',{p_class_subject_id:cs,p_category_id:cat,p_title:title,p_max_points:max,p_due_at:due?new Date(due).toISOString():null});await renderGradebook()}catch(e){console.error(e);alert('تعذر إنشاء بند الدرجة: '+e.message)}};
     });
-
     document.querySelectorAll('.deleteGradeItem').forEach(b=>b.onclick=async()=>{if(!confirm('حذف بند الدرجة ودرجاته؟'))return;try{b.disabled=true;await rpc('teacher_delete_gradebook_item',{p_gradebook_item_id:Number(b.dataset.item)});await renderGradebook()}catch(e){console.error(e);alert(e.message.includes('LINKED_TO_ASSESSMENT')?'هذا البند مرتبط بواجب أو اختبار إلكتروني ولا يحذف من الجريد بوك منفردًا.':'تعذر حذف البند: '+e.message)}});
-
-    document.querySelectorAll('.scoreBtn').forEach(b=>b.onclick=()=>{
-      const itemId=Number(b.dataset.item),catId=Number(b.dataset.cat),cat=cats.find(x=>Number(x.id)===catId),item=(cat?.items||[]).find(x=>Number(x.id)===itemId);if(!item)return;
-      const scoreMap=new Map((item.scores||[]).map(x=>[Number(x.student_id),x]));
-      $('scoreEditor').innerHTML=`<div class="panel" style="margin-top:0"><div class="grade-editor-head"><div><h3 style="margin:0">✍️ إدخال الدرجات — ${esc(item.title)}</h3><div class="small">${esc(cat.name_ar)} • الدرجة القصوى ${esc(item.max_points)}</div></div><button class="btn btn-light" id="closeScoreEditor">إغلاق</button></div><div class="grade-table-wrap"><table class="grade-table"><thead><tr><th>#</th><th>اسم الطالب</th><th>القسم</th><th>المسار</th><th>الدرجة / ${esc(item.max_points)}</th><th>ملاحظة</th></tr></thead><tbody>${students.map((st,i)=>{const sc=scoreMap.get(Number(st.id))||{};return `<tr><td>${i+1}</td><td><b>${esc(st.student_name)}</b></td><td>${esc(st.gender||'—')}</td><td>${flag(st.curriculum)} ${esc(st.curriculum||'—')}</td><td><input class="scorein scoreValue" data-student="${st.id}" type="number" min="0" max="${esc(item.max_points)}" step="0.25" value="${sc.score==null?'':esc(sc.score)}"></td><td><input class="feedbackValue" data-student="${st.id}" value="${esc(sc.feedback||'')}" placeholder="اختياري"></td></tr>`}).join('')}</tbody></table></div><div style="margin-top:11px"><button class="btn btn-primary" id="saveAllScores">حفظ جميع الدرجات</button><span id="scoreStatus" class="save-status"></span></div></div>`;
-      $('closeScoreEditor').onclick=()=>{$('scoreEditor').innerHTML=''};
-      $('saveAllScores').onclick=async()=>{try{const inputs=[...document.querySelectorAll('.scoreValue')],toSave=inputs.filter(x=>x.value!=='');if(!toSave.length){alert('أدخل درجة لطالب واحد على الأقل.');return}$('saveAllScores').disabled=true;$('scoreStatus').textContent='جارٍ حفظ الدرجات...';let done=0;for(const inp of toSave){const st=Number(inp.dataset.student),score=Number(inp.value);if(score<0||score>Number(item.max_points)){throw new Error('هناك درجة خارج النطاق من 0 إلى '+item.max_points)}const fb=document.querySelector(`.feedbackValue[data-student="${st}"]`)?.value||'';await rpc('teacher_save_gradebook_score',{p_gradebook_item_id:itemId,p_student_id:st,p_score:score,p_feedback:fb||null});done++;$('scoreStatus').textContent=`تم حفظ ${done} من ${toSave.length}`}$('scoreStatus').textContent='✓ تم حفظ جميع الدرجات';setTimeout(()=>renderGradebook(),600)}catch(e){console.error(e);$('scoreStatus').textContent='';alert('تعذر حفظ الدرجات: '+e.message)}finally{if($('saveAllScores'))$('saveAllScores').disabled=false}};
-      $('scoreEditor').scrollIntoView({behavior:'smooth',block:'start'});
-    });
   }catch(e){console.error(e);$('contentPanel').innerHTML='<div class="err">تعذر تحميل سجل الدرجات. تأكد من تشغيل ملف المرحلة الرابعة في Supabase.</div>'}
 }
 $('termSelect').onchange=()=>{currentTerm=Number($('termSelect').value);currentSubject=null;currentAssignment=null;renderAll()};$('campusSelect').onchange=fillDivisionFilter;$('divisionSelect').onchange=fillClassFilter;$('classSelect').onchange=updateClass;$('backToSubjects').onclick=()=>{currentSubject=null;currentAssignment=null;$('subjectsGrid').classList.remove('subject-open');document.querySelectorAll('.subject').forEach(x=>x.classList.remove('active'));$('workspace').classList.add('hide');$('subjectsGrid').scrollIntoView({behavior:'smooth',block:'start'})};$('showRoster').onclick=renderRoster;document.addEventListener('click',e=>{const b=e.target.closest('.tool');if(!b)return;const a=b.dataset.action;if(a==='gradebook')showList(a);else showList(a)});$('closeModal').onclick=$('cancelModal').onclick=()=>{editingMaterial=null;$('modalBack').classList.add('hide')};$('saveModal').onclick=saveModal;$('logoutBtn').onclick=()=>{[PORTAL_KEY,ADMIN_KEY,LEGACY].forEach(k=>localStorage.removeItem(k));location.replace('index.html')};init();

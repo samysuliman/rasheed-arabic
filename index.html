@@ -95,7 +95,7 @@ img{display:block;max-width:100%}
 .login-card h2{text-align:center;color:var(--green);font-size:21px;margin:5px 0 3px}
 .login-sub{text-align:center;color:var(--muted);font-size:12px;margin:0 0 15px;line-height:1.6}
 .role-title{font-size:11px;font-weight:900;color:#526b62;display:block;margin-bottom:7px}
-.role-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-bottom:12px}
+.role-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-bottom:12px}
 .role-grid input{display:none}
 .role-grid label{min-height:36px;padding:5px 3px;border:1px solid #d9e5df;border-radius:10px;background:#fff;display:flex;align-items:center;justify-content:center;text-align:center;font-size:11px;font-weight:900;cursor:pointer;color:#4f675f;transition:.18s}
 .role-grid input:checked+label{background:var(--green);border-color:var(--green);color:#fff;box-shadow:0 5px 14px rgba(6,63,52,.18)}
@@ -220,6 +220,7 @@ footer{background:var(--green);color:#dce9e4;padding:17px 0;margin-top:4px}
       <div class="role-grid">
         <div><input id="homeRoleStudent" name="loginRole" type="radio" value="student" checked><label for="homeRoleStudent">طالب</label></div>
         <div><input id="homeRoleTeacher" name="loginRole" type="radio" value="teacher"><label for="homeRoleTeacher">معلم</label></div>
+        <div><input id="homeRoleHod" name="loginRole" type="radio" value="hod"><label for="homeRoleHod">رئيسة القسم</label></div>
         <div><input id="homeRoleParent" name="loginRole" type="radio" value="parent"><label for="homeRoleParent">ولي أمر</label></div>
         <div><input id="homeRoleAdmin" name="loginRole" type="radio" value="admin"><label for="homeRoleAdmin">مدير</label></div>
       </div>
@@ -281,6 +282,7 @@ footer{background:var(--green);color:#dce9e4;padding:17px 0;margin-top:4px}
     return ({
       admin:'admin-hub.html',
       teacher:'teacher-dashboard.html',
+      hod:'hod-dashboard.html',
       parent:'parent/dashboard.html',
       student:'student/dashboard.html'
     })[role] || 'index.html';
@@ -371,7 +373,7 @@ footer{background:var(--green);color:#dce9e4;padding:17px 0;margin-top:4px}
     if(owner===true) return 'admin';
 
     const role=await rpc(session,'get_my_portal_role');
-    if(['admin','teacher','parent','student'].includes(role)) return role;
+    if(['admin','hod','teacher','parent','student'].includes(role)) return role;
 
     const admin=await rpc(session,'is_rasheed_arabic_admin');
     if(admin===true) return 'admin';
