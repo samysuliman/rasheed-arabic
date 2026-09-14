@@ -324,14 +324,7 @@ function updateLoginHint(){
 
   }
 }
-  function updateLoginHint(){
-    const role=selectedRole();
-    if(!userInput) return;
-    userInput.placeholder=role==='student'
-      ? 'رقم الطالب أو البريد الإلكتروني (مثال: RA0004)'
-      : 'البريد الإلكتروني';
-    userInput.inputMode=role==='student'?'text':'email';
-  }
+
   roleInputs.forEach(r=>r.addEventListener('change',updateLoginHint));
   updateLoginHint();
 
