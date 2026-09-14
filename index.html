@@ -215,7 +215,7 @@ footer{background:var(--green);color:#dce9e4;padding:17px 0;margin-top:4px}
     <p class="login-sub">سجّل الدخول ليتم توجيهك تلقائيًا إلى لوحتك الحالية.</p>
 
     <!-- نفس عقد عناصر الدخول الذي يستخدمه نظام Rasheed Arabic الحالي -->
-    <form id="unifiedLoginForm" novalidate action="#" method="post">
+   <form id="unifiedLoginForm" novalidate action="#" method="post" onsubmit="return false;">
       <span class="role-title">نوع الحساب</span>
       <div class="role-grid">
         <div><input id="homeRoleStudent" name="loginRole" type="radio" value="student" checked><label for="homeRoleStudent">طالب</label></div>
