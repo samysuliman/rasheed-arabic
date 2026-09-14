@@ -41,6 +41,7 @@ main{width:min(1280px,96%);margin:22px auto 40px}.panel{background:#fff;border:1
     <button onclick="loadData()">↻ تحديث الآن</button>
     <button onclick="exportCSV()">تصدير CSV</button>
     <button class="gold" onclick="printReport()">طباعة / حفظ PDF</button>
+    <button class="gold" onclick="exportWord()">تصدير تقرير Word للإدارة</button>
     <a class="btn alt" href="register-all-missing-books.html">فتح رابط التسجيل</a>
     <a class="btn alt" href="admin-hub.html">مركز الإدارة</a>
     <button class="danger" onclick="logout()">تسجيل الخروج</button>
@@ -130,6 +131,53 @@ $('rowsBody').innerHTML=data.map((r,i)=>`<tr><td>${i+1}</td><td><b>${esc(r.stude
 async function delRow(id){if(!confirm('هل تريد حذف هذا السجل؟'))return;const r=await api('/rest/v1/all_missing_books?id=eq.'+id,{method:'DELETE'});if(r&&r.ok)loadData();else alert('تعذر الحذف')}
 function csvCell(v){return '"'+String(v??'').replace(/"/g,'""')+'"'}
 function exportCSV(){const d=filtered();const lines=[['اسم الطالب','الجنس','المرحلة','الصف','الشعبة','المسار','الكتب غير المستلمة','المعلم/المعلمة']];d.forEach(r=>lines.push([r.student_name,r.gender,r.stage,r.grade,r.section_name,r.curriculum,booksOf(r).map(labelBook).join(' - '),r.submitted_by||'']));const csv='\uFEFF'+lines.map(row=>row.map(csvCell).join(',')).join('\n');const blob=new Blob([csv],{type:'text/csv;charset=utf-8'});const a=document.createElement('a');a.href=window.window.URL.createObjectURL(blob);a.download='all-missing-books.csv';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>window.window.URL.revokeObjectURL(a.href),1000)}
+
+function wordSafe(value){return String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function exportWord(){
+  const data=filtered();
+  if(!data.length){alert("لا توجد بيانات مطابقة لتصديرها.");return}
+
+  const reportDate=new Intl.DateTimeFormat("ar-SA",{dateStyle:"long",timeStyle:"short"}).format(new Date());
+  const totalBooks=data.reduce((n,r)=>n+booksOf(r).length,0);
+  const gradeCount=new Set(data.map(r=>[r.stage,r.grade].join("|"))).size;
+  const typeCount=new Set(data.flatMap(booksOf).map(labelBook)).size;
+
+  const activeFilters=[
+    $("fStage").value?"المرحلة: "+$("fStage").value:"",
+    $("fGrade").value?"الصف: "+$("fGrade").value:"",
+    $("fSection").value?"الشعبة: "+$("fSection").value:"",
+    $("fCurr").value?"المسار: "+$("fCurr").value:"",
+    $("fGender").value?"الجنس: "+$("fGender").value:"",
+    $("fBook").value?"الكتاب: "+$("fBook").value:""
+  ].filter(Boolean).join(" | ");
+
+  const counts={};
+  data.forEach(r=>booksOf(r).forEach(b=>{const k=labelBook(b);if(k)counts[k]=(counts[k]||0)+1}));
+  const summaryRows=Object.entries(counts).sort((a,b)=>b[1]-a[1]).map(([book,count],i)=>
+    `<tr><td>${i+1}</td><td class="name">${wordSafe(book)}</td><td>${count}</td></tr>`).join("");
+
+  const detailRows=data.map((r,i)=>`<tr>
+    <td>${i+1}</td><td class="name">${wordSafe(r.student_name)}</td><td>${wordSafe(r.gender)}</td>
+    <td>${wordSafe(r.stage)}</td><td>${wordSafe(r.grade)}</td><td>${wordSafe(r.section_name)}</td>
+    <td>${wordSafe(r.curriculum)}</td><td>${wordSafe(booksOf(r).map(labelBook).join(" - "))}</td>
+    <td>${wordSafe(r.submitted_by||"")}</td></tr>`).join("");
+
+  const html=`<!doctype html><html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40" lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="ProgId" content="Word.Document"><title>تقرير حصر جميع الكتب غير المستلمة</title><style>
+    @page{size:A4 landscape;margin:12mm}body{direction:rtl;font-family:Tahoma,Arial,sans-serif;color:#17392c;font-size:11pt;line-height:1.55}.header{text-align:center;border-bottom:3px solid #07583f;padding-bottom:10px;margin-bottom:14px}.header h1{color:#07583f;font-size:19pt;margin:0 0 4px}.school{font-size:13pt;font-weight:700}.date{color:#65776f;font-size:9.5pt}.stats{width:100%;border-collapse:separate;border-spacing:6px;margin:10px 0 14px}.stats td{border:1px solid #cfe0d8;background:#f5faf7;text-align:center;padding:9px 6px}.stats strong{display:block;color:#07583f;font-size:15pt}.filters{border:1px solid #d6e3dd;background:#fbfdfc;padding:8px 10px;margin:8px 0 12px;font-size:9.5pt}.title{font-weight:800;color:#07583f;font-size:13pt;margin:14px 0 7px}table.report{width:100%;border-collapse:collapse}table.report th,table.report td{border:1px solid #aebdb5;padding:6px 5px;text-align:center;vertical-align:middle;font-size:9.5pt}table.report th{background:#07583f;color:#fff}.name{font-weight:700;text-align:right!important}.footer{margin-top:18px;border-top:1px solid #b7c7bf;padding-top:9px;text-align:center;font-size:9.5pt}
+  </style></head><body>
+    <div class="header"><div class="school">مدارس الجيل الجديد العالمية</div><h1>تقرير حصر جميع الكتب غير المستلمة</h1><div class="date">تاريخ إعداد التقرير: ${reportDate}</div></div>
+    <table class="stats"><tr><td><strong>${data.length}</strong>طلاب لديهم نواقص</td><td><strong>${totalBooks}</strong>إجمالي الكتب المطلوبة</td><td><strong>${gradeCount}</strong>صفوف مشاركة</td><td><strong>${typeCount}</strong>أنواع كتب مختلفة</td></tr></table>
+    ${activeFilters?`<div class="filters"><b>الفلاتر المطبقة:</b> ${wordSafe(activeFilters)}</div>`:""}
+    <div class="title">الملخص التنفيذي — إجمالي كل كتاب</div>
+    <table class="report"><thead><tr><th>م</th><th>الكتاب</th><th>العدد المطلوب</th></tr></thead><tbody>${summaryRows}</tbody></table>
+    <div class="title">أسماء الطلاب والكتب غير المستلمة</div>
+    <table class="report"><thead><tr><th>م</th><th>اسم الطالب</th><th>الجنس</th><th>المرحلة</th><th>الصف</th><th>الشعبة</th><th>المسار</th><th>الكتب غير المستلمة</th><th>المعلم/المعلمة</th></tr></thead><tbody>${detailRows}</tbody></table>
+    <div class="footer">إعداد: سامي سليمان السيد &nbsp;&nbsp; | &nbsp;&nbsp; رئيسة القسم: أ. عزيزة أحمد علي</div>
+  </body></html>`;
+  const blob=new Blob(["\ufeff",html],{type:"application/msword;charset=utf-8"});
+  const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download="تقرير-حصر-جميع-الكتب-غير-المستلمة.doc";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1200)
+}
+
 function printReport(){const now=new Date();$('printDate').textContent='تاريخ التقرير: '+now.toLocaleDateString('ar-SA')+' — '+now.toLocaleTimeString('ar-SA',{hour:'2-digit',minute:'2-digit'});window.print()}
 (async()=>{
   const s=getSession();

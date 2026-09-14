@@ -600,6 +600,14 @@
         تصدير تقرير PDF للإدارة
       </button>
 
+      <button
+        class="btn btn-report"
+        id="wordBtn"
+        type="button"
+      >
+        تصدير تقرير Word للإدارة
+      </button>
+
       <a
         class="btn btn-light"
         href="register-student.html"
@@ -1593,6 +1601,134 @@ function exportCSV(){
 }
 
 
+
+function downloadWordDocument(fileName,title,summaryHtml,tableHtml){
+  const reportDate = new Intl.DateTimeFormat(
+    "ar-SA",
+    {dateStyle:"long",timeStyle:"short"}
+  ).format(new Date());
+
+  const html = `<!doctype html>
+  <html xmlns:o="urn:schemas-microsoft-com:office:office"
+        xmlns:w="urn:schemas-microsoft-com:office:word"
+        xmlns="http://www.w3.org/TR/REC-html40"
+        lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8">
+    <meta name="ProgId" content="Word.Document">
+    <meta name="Generator" content="Rasheed Arabic">
+    <title>${title}</title>
+    <style>
+      @page{size:A4 landscape;margin:12mm}
+      body{direction:rtl;font-family:Tahoma,Arial,sans-serif;color:#17392c;font-size:11pt;line-height:1.55}
+      .header{text-align:center;border-bottom:3px solid #07583f;padding-bottom:10px;margin-bottom:14px}
+      .header h1{color:#07583f;font-size:19pt;margin:0 0 4px}
+      .header .school{font-size:13pt;font-weight:700;margin:0 0 3px}
+      .header .date{color:#65776f;font-size:9.5pt;margin:0}
+      .summary{margin:12px 0 16px}
+      .summary table{width:100%;border-collapse:separate;border-spacing:6px}
+      .summary td{border:1px solid #cfe0d8;background:#f5faf7;text-align:center;padding:9px 6px;border-radius:6px}
+      .summary strong{display:block;color:#07583f;font-size:15pt;margin-bottom:2px}
+      .section-title{font-weight:800;color:#07583f;font-size:13pt;margin:12px 0 7px}
+      table.report{width:100%;border-collapse:collapse;table-layout:auto}
+      table.report th,table.report td{border:1px solid #aebdb5;padding:6px 5px;text-align:center;vertical-align:middle;font-size:9.5pt}
+      table.report th{background:#07583f;color:#fff;font-weight:800}
+      table.report tr:nth-child(even) td{background:#f7faf8}
+      .name{font-weight:700;text-align:right!important}
+      .filters{border:1px solid #d6e3dd;background:#fbfdfc;padding:8px 10px;margin:8px 0 12px;font-size:9.5pt}
+      .footer{margin-top:18px;border-top:1px solid #b7c7bf;padding-top:9px;font-size:9.5pt}
+      .footer table{width:100%;border-collapse:collapse}
+      .footer td{width:50%;padding:5px;text-align:center}
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="school">مدارس الجيل الجديد العالمية</div>
+      <h1>${title}</h1>
+      <p class="date">تاريخ إعداد التقرير: ${reportDate}</p>
+    </div>
+    ${summaryHtml || ""}
+    <div class="section-title">التفاصيل</div>
+    ${tableHtml}
+    <div class="footer">
+      <table><tr>
+        <td>إعداد: سامي سليمان السيد</td>
+        <td>رئيسة القسم: أ. عزيزة أحمد علي</td>
+      </tr></table>
+    </div>
+  </body></html>`;
+
+  const blob = new Blob(["\ufeff",html],{
+    type:"application/msword;charset=utf-8"
+  });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = fileName;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),1200);
+}
+
+function exportWord(){
+  const data = filtered();
+  if(!data.length){
+    alert("لا توجد بيانات مطابقة لتصديرها.");
+    return;
+  }
+
+  const w = value => safe(value ?? "");
+  const boys = data.filter(s=>s.gender === "بنين").length;
+  const girls = data.filter(s=>s.gender === "بنات").length;
+  const american = data.filter(s=>s.curriculum === "أمريكي").length;
+  const british = data.filter(s=>s.curriculum === "بريطاني").length;
+
+  const activeFilters = [
+    $("q").value.trim() ? "بحث: " + $("q").value.trim() : "",
+    $("gender").value ? "الجنس: " + $("gender").value : "",
+    $("stage").value ? "المرحلة: " + $("stage").value : "",
+    $("grade").value ? "الصف: " + $("grade").value : "",
+    $("curr").value ? "القسم: " + $("curr").value : ""
+  ].filter(Boolean).join(" | ");
+
+  const summaryHtml = `
+    <div class="summary"><table><tr>
+      <td><strong>${data.length}</strong>إجمالي الطلاب</td>
+      <td><strong>${boys}</strong>بنين</td>
+      <td><strong>${girls}</strong>بنات</td>
+      <td><strong>${american}</strong>أمريكي</td>
+      <td><strong>${british}</strong>بريطاني</td>
+    </tr></table></div>
+    ${activeFilters ? `<div class="filters"><b>الفلاتر المطبقة:</b> ${w(activeFilters)}</div>` : ""}`;
+
+  const rowsHtml = data.map((student,index)=>`
+    <tr>
+      <td>${index+1}</td>
+      <td class="name">${w(student.student_name)}</td>
+      <td>${w(student.gender)}</td>
+      <td>${w(student.stage)}</td>
+      <td>${w(student.grade)}</td>
+      <td>${w(student.section_name)}</td>
+      <td>${w(student.curriculum)}</td>
+      <td>${w(student.submitted_by)}</td>
+      <td>${w(formatDate(student.created_at))}</td>
+    </tr>`).join("");
+
+  const tableHtml = `<table class="report">
+    <thead><tr>
+      <th>م</th><th>اسم الطالب</th><th>الجنس</th><th>المرحلة</th>
+      <th>الصف</th><th>الشعبة</th><th>القسم</th><th>المعلم/المعلمة</th><th>وقت التسجيل</th>
+    </tr></thead><tbody>${rowsHtml}</tbody></table>`;
+
+  downloadWordDocument(
+    "تقرير-حصر-غير-الناطقين-بالعربية.doc",
+    "تقرير حصر طلاب اللغة العربية لغير الناطقين بها",
+    summaryHtml,
+    tableHtml
+  );
+}
+
 function exportPDF(){
 
   const data =
@@ -2368,6 +2504,13 @@ $("pdfBtn")
     exportPDF
   );
 
+
+
+$("wordBtn")
+  .addEventListener(
+    "click",
+    exportWord
+  );
 
 $("body")
   .addEventListener(
