@@ -41,6 +41,8 @@ html{scroll-behavior:smooth}body{margin:0;font-family:Tahoma,Arial,sans-serif;ba
         <span class="chip" id="accountChip">الحساب: —</span>
         <span class="chip" id="gradeChip">الصف: —</span>
         <span class="chip" id="sectionChip">الشعبة: —</span>
+        <span class="chip" id="campusChip">🏫 المجمع: —</span>
+        <span class="chip" id="schoolSectionChip">👥 القسم: —</span>
         <span class="chip" id="curriculumChip"><span class="flag">🏫</span> المسار: —</span>
         <span class="chip">🟢 طالب نشط</span>
       </div>
@@ -108,6 +110,8 @@ function renderPortal(){
   $('accountChip').textContent='الحساب: '+(p.username||'—');
   $('gradeChip').textContent='الصف: '+(p.grade||cls.grade||'—');
   $('sectionChip').textContent='الشعبة: '+(p.section_name||cls.section_name||'—');
+  $('campusChip').textContent='🏫 المجمع: '+(cls.campus_name||'—');
+  const sg=cls.school_section_gender||'';$('schoolSectionChip').textContent=(sg==='بنين'?'👦':sg==='بنات'?'👧':'👥')+' القسم: '+(cls.school_section_name||'—');
   const cur=p.curriculum||cls.curriculum||'';$('curriculumChip').innerHTML=`<span class="flag">${flagFor(cur)}</span> المسار: ${esc(cur||'—')}`;
   $('yearName').textContent=year.name?'السنة الدراسية '+year.name:'السنة الدراسية —';
   $('termName').textContent=term.name_ar||'الفصل الدراسي —';
@@ -129,7 +133,7 @@ async function openSubject(csId){
   });
   $('subjectsGrid').classList.add('subject-open');
   $('workspace').classList.remove('hide');$('workspaceSubject').textContent=(s.icon||'📚')+' '+s.name_ar;$('workspaceTeacher').textContent='المعلم: '+(s.teacher_name||'—');
-  const p=portal.profile||{},t=portal.term||{};$('workspaceMeta').textContent=[p.curriculum,p.grade,p.section_name,t.name_ar].filter(Boolean).join(' • ');
+  const p=portal.profile||{},t=portal.term||{},c=portal.class||{};$('workspaceMeta').textContent=[c.campus_name,c.school_section_name,p.curriculum,p.grade,p.section_name,t.name_ar].filter(Boolean).join(' • ');
   document.querySelectorAll('.tool').forEach(x=>x.classList.remove('active'));$('contentPanel').innerHTML='<div class="empty">اختر إحدى أدوات المادة أعلاه.</div>';
   $('workspace').scrollIntoView({behavior:'smooth',block:'start'});
   if(!resourcesCache.has(csId)){
