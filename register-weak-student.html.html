@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#126b43">
+
+ <title>حصر الطلاب الضعاف في اللغة العربية</title>
+  <style>
+    *{
+      box-sizing:border-box;
+    }
+
+    body{
+      margin:0;
+      font-family:Tahoma, Arial, sans-serif;
+      background:
+        linear-gradient(180deg,#f2f8f5 0%,#ffffff 45%,#f7f4ea 100%);
+      color:#18382c;
+      min-height:100vh;
+    }
+
+    .page{
+      width:min(100%,650px);
+      margin:auto;
+      padding:18px 12px 35px;
+    }
+
+    .card{
+      background:#fff;
+      border:1px solid #dce9e2;
+      border-radius:24px;
+      overflow:hidden;
+      box-shadow:0 12px 35px rgba(21,91,61,.10);
+    }
+
+    /* Header */
+
+    .school-header{
+      text-align:center;
+      padding:22px 20px 16px;
+      background:#fff;
+    }
+
+    .school-logo{
+      width:92px;
+      height:92px;
+      border-radius:50%;
+      object-fit:contain;
+      background:white;
+      border:3px solid #e6c96b;
+      padding:5px;
+      box-shadow:0 4px 15px rgba(0,0,0,.08);
+    }
+
+    .school-ar{
+      font-size:20px;
+      font-weight:800;
+      margin:10px 0 3px;
+      color:#176344;
+    }
+
+    .school-en{
+      direction:ltr;
+      font-size:12px;
+      color:#718077;
+      letter-spacing:.2px;
+    }
+
+    .hero{
+      background:linear-gradient(135deg,#116c43,#0b5635);
+      color:white;
+      text-align:center;
+      padding:19px 18px;
+      position:relative;
+    }
+
+    .hero:before,
+    .hero:after{
+      content:"";
+      position:absolute;
+      height:3px;
+      width:80px;
+      top:0;
+      background:#dfbd55;
+    }
+
+    .hero:before{
+      right:0;
+    }
+
+    .hero:after{
+      left:0;
+    }
+
+    .hero h1{
+      font-size:22px;
+      line-height:1.5;
+      margin:0;
+      font-weight:800;
+    }
+
+    .hero p{
+      direction:ltr;
+      margin:5px 0 0;
+      font-size:13px;
+      opacity:.9;
+    }
+
+    form{
+      padding:22px;
+    }
+
+    .field{
+      margin-bottom:20px;
+    }
+
+    label.field-label{
+      display:block;
+      margin-bottom:8px;
+      font-size:16px;
+      font-weight:800;
+      color:#244c3c;
+    }
+
+    .english-label{
+      font-size:11px;
+      color:#829087;
+      font-weight:normal;
+      margin-right:5px;
+      direction:ltr;
+      display:inline-block;
+    }
+
+    input,
+    select{
+      width:100%;
+      height:56px;
+      border-radius:14px;
+      border:1.5px solid #cadcd3;
+      background:#fbfdfc;
+      padding:0 15px;
+      font-size:16px;
+      color:#193f30;
+      outline:none;
+      transition:.2s;
+    }
+
+    input:focus,
+    select:focus{
+      border-color:#18714a;
+      box-shadow:0 0 0 3px rgba(24,113,74,.09);
+      background:#fff;
+    }
+
+    input::placeholder{
+      color:#9aa9a1;
+    }
+
+    .choice-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+    }
+
+    .choice{
+      min-height:72px;
+      border:2px solid #d8e4de;
+      border-radius:16px;
+      background:#fff;
+      cursor:pointer;
+      padding:10px;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      gap:10px;
+      transition:.18s;
+      font-family:inherit;
+      color:#264b3c;
+    }
+
+    .choice strong{
+      display:block;
+      font-size:17px;
+    }
+
+    .choice small{
+      display:block;
+      font-size:11px;
+      color:#79877f;
+      margin-top:2px;
+    }
+
+    .choice:hover{
+      transform:translateY(-1px);
+    }
+
+    /* Boys / Girls */
+
+    .gender-boy{
+      background:#f5fbff;
+      border-color:#c7e3f5;
+    }
+
+    .gender-girl{
+      background:#fff7fa;
+      border-color:#f2cedb;
+    }
+
+    .gender-boy.active{
+      border-color:#2987c8;
+      background:#eaf6ff;
+      box-shadow:0 0 0 3px rgba(41,135,200,.10);
+    }
+
+    .gender-girl.active{
+      border-color:#d76b91;
+      background:#fff0f5;
+      box-shadow:0 0 0 3px rgba(215,107,145,.10);
+    }
+
+    .person-icon{
+      width:36px;
+      height:36px;
+      flex:0 0 36px;
+    }
+
+    /* Curriculum */
+
+    .curriculum-choice{
+      min-height:88px;
+      flex-direction:column;
+      gap:6px;
+    }
+
+    .curriculum-choice.active{
+      border-color:#137047;
+      background:#f0faf5;
+      box-shadow:0 0 0 3px rgba(19,112,71,.10);
+    }
+
+    .flag{
+      width:58px;
+      height:35px;
+      border-radius:5px;
+      overflow:hidden;
+      box-shadow:0 1px 5px rgba(0,0,0,.15);
+      border:1px solid #ddd;
+    }
+
+    .curriculum-text strong{
+      font-size:16px;
+    }
+
+    .curriculum-text small{
+      display:block;
+      font-size:11px;
+      color:#728078;
+      direction:ltr;
+    }
+
+    .grade-row{
+      display:grid;
+      grid-template-columns:1fr .72fr;
+      gap:10px;
+    }
+
+    .submit-btn{
+      width:100%;
+      min-height:62px;
+      border:0;
+      border-radius:16px;
+      background:linear-gradient(135deg,#137449,#0b5d39);
+      color:white;
+      cursor:pointer;
+      font-family:inherit;
+      box-shadow:0 7px 18px rgba(15,103,64,.22);
+      transition:.2s;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:11px;
+      margin-top:5px;
+    }
+
+    .submit-btn:hover{
+      transform:translateY(-1px);
+    }
+
+    .submit-btn:disabled{
+      opacity:.65;
+      cursor:wait;
+      transform:none;
+    }
+
+    .submit-main{
+      font-size:19px;
+      font-weight:800;
+    }
+
+    .submit-en{
+      font-size:11px;
+      opacity:.85;
+      direction:ltr;
+    }
+
+    .send-icon{
+      width:25px;
+      height:25px;
+    }
+
+    .message{
+      display:none;
+      margin-top:15px;
+      padding:13px 14px;
+      border-radius:13px;
+      text-align:center;
+      font-weight:700;
+      line-height:1.6;
+    }
+
+    .message.success{
+      display:block;
+      background:#ecf9f1;
+      color:#12633f;
+      border:1px solid #b8e2c9;
+    }
+
+    .message.error{
+      display:block;
+      background:#fff0f0;
+      color:#a42a2a;
+      border:1px solid #f1c2c2;
+    }
+
+    .required{
+      color:#b82727;
+    }
+
+    .footer-note{
+      text-align:center;
+      color:#75847b;
+      font-size:12px;
+      line-height:1.8;
+      padding:0 18px 22px;
+    }
+
+    .footer-note svg{
+      vertical-align:middle;
+      margin-left:3px;
+    }
+
+    @media(max-width:480px){
+      .page{
+        padding:8px 7px 25px;
+      }
+
+      .card{
+        border-radius:19px;
+      }
+
+      form{
+        padding:18px 14px;
+      }
+
+      .school-header{
+        padding-top:17px;
+      }
+
+      .school-logo{
+        width:82px;
+        height:82px;
+      }
+
+      .school-ar{
+        font-size:18px;
+      }
+
+      .hero h1{
+        font-size:19px;
+      }
+
+      .choice{
+        min-height:68px;
+      }
+
+      .grade-row{
+        grid-template-columns:1fr 1fr;
+      }
+    }
+
+    .mode-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}.mode-btn{min-height:62px;border:2px solid #d8e4de;border-radius:16px;background:#fff;font-family:inherit;font-weight:800;color:#244c3c;cursor:pointer}.mode-btn.active{border-color:#137047;background:#f0faf5;box-shadow:0 0 0 3px rgba(19,112,71,.10)}.existing-panel{display:none;background:#f8fbf9;border:1px solid #dce9e2;border-radius:18px;padding:14px;margin-bottom:20px}.existing-panel.show{display:block}.student-list{display:grid;gap:8px;max-height:310px;overflow:auto;margin-top:10px}.student-item{width:100%;text-align:right;border:1px solid #d8e4de;background:#fff;border-radius:12px;padding:11px 13px;font-family:inherit;color:#244c3c;cursor:pointer}.student-item strong{display:flex;align-items:center;gap:8px;font-size:15px}.student-number{display:inline-flex;align-items:center;justify-content:center;min-width:28px;height:28px;border-radius:50%;background:#eef8f3;color:#137047;font-size:12px;font-weight:800}.filter-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.filter-row select{height:48px;font-size:14px}@media(max-width:480px){.filter-row{grid-template-columns:1fr 1fr}}.student-item small{color:#718077}.student-item.selected{border-color:#137047;background:#eef9f3}.multi-card{border:1.5px solid #d7e6de;border-radius:18px;padding:15px;background:#fbfdfc;margin-bottom:20px}.multi-title{display:flex;align-items:center;gap:10px;font-weight:800;font-size:16px;margin-bottom:12px}.multi-icon{font-size:26px}.check-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.check-item{display:flex;align-items:center;gap:8px;border:1px solid #dce7e1;border-radius:12px;padding:10px;background:#fff;cursor:pointer;font-size:14px}.check-item input{width:18px;height:18px;accent-color:#137047;flex:0 0 18px}.selected-count{font-size:12px;color:#137047;font-weight:700;margin-top:10px}.readonly-note{display:none;background:#eef8f3;border:1px solid #cbe4d6;border-radius:12px;padding:10px 12px;margin-bottom:15px;font-size:13px}.readonly-note.show{display:block}@media(max-width:480px){.check-grid{grid-template-columns:1fr}.mode-grid{grid-template-columns:1fr 1fr}}
+  </style>
+</head>
+
+<body>
+
+<div class="page">
+  <div class="card">
+
+    <div class="school-header">
+      <img
+        src="new-generation-logo.jpg"
+        alt="شعار مدارس الجيل الجديد"
+        class="school-logo"
+      >
+
+      <div class="school-ar">مدارس الجيل الجديد العالمية</div>
+      <div class="school-en">New Generation International Schools</div>
+    </div>
+
+    <div class="hero">
+    <h1>حصر الطلاب الضعاف<br>في اللغة العربية</h1>
+    <p>Arabic Learning Support – Student Registration</p>
+    </div>
+
+    <form id="studentForm">
+      <div class="field">
+        <label class="field-label">طريقة العمل</label>
+        <div class="mode-grid">
+          <button type="button" class="mode-btn active" id="existingMode">تحديث طالب مسجل</button>
+          <button type="button" class="mode-btn" id="newMode">إضافة طالب جديد</button>
+        </div>
+        <div id="existingPanel" class="existing-panel show">
+          <input id="studentSearch" type="text" placeholder="ابحث باسم الطالب...">
+          <div class="filter-row">
+            <select id="studentGenderFilter"><option value="">كل الطلاب</option><option value="بنين">بنين</option><option value="بنات">بنات</option></select>
+            <select id="studentGradeFilter"><option value="">كل الصفوف</option></select>
+          </div>
+          <div id="studentList" class="student-list"><div style="text-align:center;color:#718077;padding:10px">جارٍ تحميل الطلاب المسجلين...</div></div>
+        </div>
+        <div id="readonlyNote" class="readonly-note">✓ تم اختيار طالب مسجل. بياناته الأساسية معروضة كما هي؛ المطلوب فقط تحديد المهارات وطرق العلاج ثم حفظ التقييم.</div>
+      </div>
+
+
+      <!-- Student Name -->
+      <div class="field">
+        <label class="field-label">
+          اسم الطالب / الطالبة
+          <span class="required">*</span>
+          <span class="english-label">Student Name</span>
+        </label>
+
+        <input
+          id="studentName"
+          type="text"
+          autocomplete="off"
+          placeholder="اكتب الاسم الكامل"
+          required
+        >
+      </div>
+
+      <!-- Gender -->
+      <div class="field">
+        <label class="field-label">
+          الجنس
+          <span class="required">*</span>
+          <span class="english-label">Gender</span>
+        </label>
+
+        <div class="choice-grid">
+
+          <button
+            type="button"
+            class="choice gender-boy"
+            data-gender="بنين"
+          >
+            <svg class="person-icon" viewBox="0 0 64 64">
+              <circle cx="32" cy="17" r="10" fill="#4a9ed4"/>
+              <path d="M17 55V40c0-9 6-15 15-15s15 6 15 15v15"
+                    fill="#74b8e2"/>
+              <path d="M15 36l-7 14M49 36l7 14"
+                    stroke="#4a9ed4"
+                    stroke-width="7"
+                    stroke-linecap="round"/>
+            </svg>
+
+            <span>
+              <strong>بنين</strong>
+              <small>Boys</small>
+            </span>
+          </button>
+
+          <button
+            type="button"
+            class="choice gender-girl"
+            data-gender="بنات"
+          >
+            <svg class="person-icon" viewBox="0 0 64 64">
+              <circle cx="32" cy="17" r="10" fill="#d9799b"/>
+              <path d="M32 26L17 54h30z" fill="#eca0b9"/>
+              <path d="M17 36L9 49M47 36l8 13"
+                    stroke="#d9799b"
+                    stroke-width="7"
+                    stroke-linecap="round"/>
+            </svg>
+
+            <span>
+              <strong>بنات</strong>
+              <small>Girls</small>
+            </span>
+          </button>
+
+        </div>
+      </div>
+
+      <!-- Stage -->
+      <div class="field">
+        <label class="field-label">
+          المرحلة التعليمية
+          <span class="required">*</span>
+          <span class="english-label">Educational Stage</span>
+        </label>
+
+        <select id="stage" required>
+          <option value="">اختر المرحلة</option>
+          <option value="رياض أطفال">رياض أطفال</option>
+          <option value="ابتدائي">ابتدائي</option>
+          <option value="متوسط">متوسط</option>
+          <option value="ثانوي">ثانوي</option>
+        </select>
+      </div>
+
+      <!-- Grade + Section -->
+      <div class="field">
+        <div class="grade-row">
+
+          <div>
+            <label class="field-label">
+              الصف
+              <span class="required">*</span>
+            </label>
+
+            <select id="grade" required disabled>
+              <option value="">اختر الصف</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="field-label">
+              الشعبة
+              <span class="required">*</span>
+            </label>
+
+            <input
+              id="section"
+              type="text"
+              placeholder="مثال: A"
+              required
+            >
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Curriculum -->
+      <div class="field">
+        <label class="field-label">
+          القسم / المسار
+          <span class="required">*</span>
+          <span class="english-label">Curriculum</span>
+        </label>
+
+        <div class="choice-grid">
+
+          <!-- USA -->
+          <button
+            type="button"
+            class="choice curriculum-choice"
+            data-curriculum="أمريكي"
+          >
+            <svg class="flag" viewBox="0 0 190 100"
+                 xmlns="http://www.w3.org/2000/svg">
+
+              <rect width="190" height="100" fill="#fff"/>
+
+              <g fill="#b22234">
+                <rect y="0" width="190" height="8"/>
+                <rect y="16" width="190" height="8"/>
+                <rect y="32" width="190" height="8"/>
+                <rect y="48" width="190" height="8"/>
+                <rect y="64" width="190" height="8"/>
+                <rect y="80" width="190" height="8"/>
+                <rect y="96" width="190" height="4"/>
+              </g>
+
+              <rect width="76" height="54" fill="#3c3b6e"/>
+
+              <g fill="#fff">
+                <circle cx="10" cy="9" r="2.2"/>
+                <circle cx="25" cy="9" r="2.2"/>
+                <circle cx="40" cy="9" r="2.2"/>
+                <circle cx="55" cy="9" r="2.2"/>
+                <circle cx="68" cy="9" r="2.2"/>
+
+                <circle cx="17" cy="20" r="2.2"/>
+                <circle cx="32" cy="20" r="2.2"/>
+                <circle cx="47" cy="20" r="2.2"/>
+                <circle cx="62" cy="20" r="2.2"/>
+
+                <circle cx="10" cy="31" r="2.2"/>
+                <circle cx="25" cy="31" r="2.2"/>
+                <circle cx="40" cy="31" r="2.2"/>
+                <circle cx="55" cy="31" r="2.2"/>
+                <circle cx="68" cy="31" r="2.2"/>
+
+                <circle cx="17" cy="42" r="2.2"/>
+                <circle cx="32" cy="42" r="2.2"/>
+                <circle cx="47" cy="42" r="2.2"/>
+                <circle cx="62" cy="42" r="2.2"/>
+              </g>
+
+            </svg>
+
+            <span class="curriculum-text">
+              <strong>أمريكي</strong>
+              <small>American</small>
+            </span>
+          </button>
+
+          <!-- UK -->
+          <button
+            type="button"
+            class="choice curriculum-choice"
+            data-curriculum="بريطاني"
+          >
+            <svg class="flag" viewBox="0 0 190 100"
+                 xmlns="http://www.w3.org/2000/svg">
+
+              <rect width="190" height="100" fill="#012169"/>
+
+              <path d="M0 0L190 100M190 0L0 100"
+                    stroke="#fff"
+                    stroke-width="22"/>
+
+              <path d="M0 0L190 100M190 0L0 100"
+                    stroke="#c8102e"
+                    stroke-width="10"/>
+
+              <path d="M95 0V100M0 50H190"
+                    stroke="#fff"
+                    stroke-width="30"/>
+
+              <path d="M95 0V100M0 50H190"
+                    stroke="#c8102e"
+                    stroke-width="18"/>
+
+            </svg>
+
+            <span class="curriculum-text">
+              <strong>بريطاني</strong>
+              <small>British</small>
+            </span>
+          </button>
+
+        </div>
+      </div>
+
+      <!-- Teacher -->
+      <div class="field">
+        <label class="field-label">
+          اسم المعلم / المعلمة
+          <span class="required">*</span>
+          <span class="english-label">Teacher Name</span>
+        </label>
+
+        <input
+          id="teacherName"
+          type="text"
+          autocomplete="name"
+          placeholder="اسم المعلم الذي قام بإرسال البيانات"
+          required
+        >
+      </div>
+
+
+      <div class="multi-card"><div class="multi-title"><span class="multi-icon">🎯</span><span>المهارات التي تحتاج إلى خطة علاجية</span></div><div class="check-grid"><label class="check-item"><input type="checkbox" name="supportSkill" value="التعرّف على الحروف وأشكالها"><span>التعرّف على الحروف وأشكالها</span></label><label class="check-item"><input type="checkbox" name="supportSkill" value="أصوات الحروف والتمييز بينها"><span>أصوات الحروف والتمييز بينها</span></label><label class="check-item"><input type="checkbox" name="supportSkill" value="الحركات القصيرة"><span>الحركات القصيرة</span></label><label class="check-item"><input type="checkbox" name="supportSkill" value="المدود والحركات الطويلة"><span>المدود والحركات الطويلة</span></label><label class="check-item"><input type="checkbox" name="supportSkill" value="تركيب الحروف وبناء الكلمات"><span>تركيب الحروف وبناء الكلمات</span></label><label class="check-item"><input type="checkbox" name="supportSkill" value="القراءة والنطق الصحيح"><span>القراءة والنطق الصحيح</span></label><label class="check-item"><input type="checkbox" name="supportSkill" value="القراءة بطلاقة"><span>القراءة بطلاقة</span></label><label class="check-item"><input type="checkbox" name="supportSkill" value="فهم المقروء"><span>فهم المقروء</span></label><label class="check-item"><input type="checkbox" name="supportSkill" value="الكتابة والإملاء"><span>الكتابة والإملاء</span></label><label class="check-item"><input type="checkbox" name="supportSkill" value="تكوين الجمل"><span>تكوين الجمل</span></label><label class="check-item"><input type="checkbox" name="supportSkill" value="المفردات والثروة اللغوية"><span>المفردات والثروة اللغوية</span></label><label class="check-item"><input type="checkbox" name="supportSkill" value="الاستماع والفهم"><span>الاستماع والفهم</span></label><label class="check-item"><input type="checkbox" name="supportSkill" value="التحدث والتواصل الشفهي"><span>التحدث والتواصل الشفهي</span></label><label class="check-item"><input type="checkbox" name="supportSkill" value="القواعد والتراكيب الأساسية"><span>القواعد والتراكيب الأساسية</span></label></div><div id="skillsCount" class="selected-count">لم يتم اختيار مهارات بعد</div></div>
+      <div class="multi-card"><div class="multi-title"><span class="multi-icon">🩺</span><span>طرق العلاج المقترحة</span></div><div class="check-grid"><label class="check-item"><input type="checkbox" name="treatmentMethod" value="حصص علاجية فردية"><span>حصص علاجية فردية</span></label><label class="check-item"><input type="checkbox" name="treatmentMethod" value="مجموعة علاجية صغيرة"><span>مجموعة علاجية صغيرة</span></label><label class="check-item"><input type="checkbox" name="treatmentMethod" value="أوراق عمل علاجية"><span>أوراق عمل علاجية</span></label><label class="check-item"><input type="checkbox" name="treatmentMethod" value="تدريبات قراءة موجهة"><span>تدريبات قراءة موجهة</span></label><label class="check-item"><input type="checkbox" name="treatmentMethod" value="تدريبات كتابة وإملاء"><span>تدريبات كتابة وإملاء</span></label><label class="check-item"><input type="checkbox" name="treatmentMethod" value="تدريبات استماع ونطق"><span>تدريبات استماع ونطق</span></label><label class="check-item"><input type="checkbox" name="treatmentMethod" value="أنشطة تفاعلية وألعاب تعليمية"><span>أنشطة تفاعلية وألعاب تعليمية</span></label><label class="check-item"><input type="checkbox" name="treatmentMethod" value="واجبات علاجية منزلية"><span>واجبات علاجية منزلية</span></label><label class="check-item"><input type="checkbox" name="treatmentMethod" value="مواد مرئية / فيديوهات تعليمية"><span>مواد مرئية / فيديوهات تعليمية</span></label><label class="check-item"><input type="checkbox" name="treatmentMethod" value="متابعة أسبوعية لمستوى الطالب"><span>متابعة أسبوعية لمستوى الطالب</span></label><label class="check-item"><input type="checkbox" name="treatmentMethod" value="التواصل مع ولي الأمر"><span>التواصل مع ولي الأمر</span></label><label class="check-item"><input type="checkbox" name="treatmentMethod" value="إعادة التقييم بعد انتهاء الخطة"><span>إعادة التقييم بعد انتهاء الخطة</span></label></div><div id="methodsCount" class="selected-count">لم يتم اختيار طرق علاج بعد</div></div>
+      <button id="submitBtn" class="submit-btn" type="submit">
+
+        <svg class="send-icon" viewBox="0 0 24 24"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="2">
+          <path d="M22 2L11 13"/>
+          <path d="M22 2L15 22L11 13L2 9L22 2Z"/>
+        </svg>
+
+        <span>
+          <span class="submit-main">إرسال البيانات</span><br>
+          <span class="submit-en">Submit</span>
+        </span>
+
+      </button>
+
+      <div id="message" class="message"></div>
+
+    </form>
+
+    <div class="footer-note">
+     🔒 بمجرد الإرسال تصل البيانات مباشرة إلى مسؤول برنامج دعم اللغة العربية.
+      <br>
+     Arabic Learning Support Program
+    </div>
+
+  </div>
+</div>
+
+
+<script>
+
+/* =========================================================
+   Rasheed Arabic - Independent Supabase Project
+   ========================================================= */
+
+const SUPABASE_URL =
+  "https://wcyamoqmpwpribsgspjn.supabase.co";
+
+const SUPABASE_KEY =
+  "sb_publishable_3eJET0uhZw4D4DowMK13fQ_oWK3PdIQ";
+
+
+let selectedGender = "";
+let selectedCurriculum = "";
+let selectedStudentId = null;
+let allStudents = [];
+let formMode = "existing";
+
+const basicIds=["studentName","stage","grade","section","teacherName"];
+function setBasicLocked(locked){ basicIds.slice(0,4).forEach(id=>{const el=document.getElementById(id); if(el) el.disabled=locked;}); document.querySelectorAll("[data-gender],[data-curriculum]").forEach(b=>b.disabled=locked); }
+function updateCounts(){ const a=document.querySelectorAll('input[name="supportSkill"]:checked').length,b=document.querySelectorAll('input[name="treatmentMethod"]:checked').length; document.getElementById('skillsCount').textContent=a?`تم اختيار ${a} مهارة`:'لم يتم اختيار مهارات بعد'; document.getElementById('methodsCount').textContent=b?`تم اختيار ${b} طريقة علاج`:'لم يتم اختيار طرق علاج بعد'; }
+document.querySelectorAll('input[name="supportSkill"],input[name="treatmentMethod"]').forEach(x=>x.addEventListener('change',updateCounts));
+function clearChecks(){document.querySelectorAll('input[name="supportSkill"],input[name="treatmentMethod"]').forEach(x=>x.checked=false);updateCounts()}
+function setMode(mode){formMode=mode;selectedStudentId=null;document.getElementById('existingMode').classList.toggle('active',mode==='existing');document.getElementById('newMode').classList.toggle('active',mode==='new');document.getElementById('existingPanel').classList.toggle('show',mode==='existing');document.getElementById('readonlyNote').classList.remove('show');document.getElementById('studentForm').reset();selectedGender='';selectedCurriculum='';document.querySelectorAll('.choice').forEach(b=>b.classList.remove('active'));setBasicLocked(false);clearChecks(); document.querySelector('#submitBtn .submit-main').textContent=mode==='existing'?'حفظ التقييم':'إرسال البيانات'; if(mode==='existing') renderStudents(allStudents);}
+document.getElementById('existingMode').onclick=()=>setMode('existing');document.getElementById('newMode').onclick=()=>setMode('new');
+async function loadStudents(){try{const r=await fetch(SUPABASE_URL+'/rest/v1/weak_arabic_students?select=*&order=student_name.asc',{headers:{apikey:SUPABASE_KEY,Authorization:'Bearer '+SUPABASE_KEY}});if(!r.ok)throw new Error(await r.text());allStudents=await r.json();populateStudentGradeFilter();applyStudentFilters()}catch(e){document.getElementById('studentList').innerHTML='<div style="color:#a42a2a;padding:10px">تعذر تحميل قائمة الطلاب.</div>'}}
+function renderStudents(list){const box=document.getElementById('studentList');if(!list.length){box.innerHTML='<div style="padding:10px;color:#718077">لا توجد نتائج.</div>';return}box.innerHTML=list.map((s,i)=>`<button type="button" class="student-item" data-i="${allStudents.indexOf(s)}"><strong><span class="student-number">${i+1}</span><span>${s.student_name||''}</span></strong><small>${[s.gender,s.stage,s.grade,s.section_name,s.curriculum].filter(Boolean).join(' • ')}</small>${((s.support_skills||[]).length||(s.treatment_methods||[]).length)?'<div style="margin-top:6px;color:#137047;font-size:12px;font-weight:800">✓ تم تحديد الخطة العلاجية</div>':'<div style="margin-top:6px;color:#9a7a22;font-size:12px;font-weight:700">○ لم تُستكمل الخطة العلاجية</div>'}</button>`).join('');box.querySelectorAll('.student-item').forEach(b=>b.onclick=()=>selectStudent(allStudents[Number(b.dataset.i)],b));}
+function selectStudent(s,b){selectedStudentId=s.id;document.querySelectorAll('.student-item').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');setBasicLocked(false);document.getElementById('studentName').value=s.student_name||'';document.getElementById('stage').value=s.stage||'';stage.dispatchEvent(new Event('change'));document.getElementById('grade').value=s.grade||'';document.getElementById('section').value=s.section_name||'';document.getElementById('teacherName').value=s.submitted_by||'';selectedGender=s.gender||'';selectedCurriculum=s.curriculum||'';document.querySelectorAll('[data-gender]').forEach(x=>x.classList.toggle('active',x.dataset.gender===selectedGender));document.querySelectorAll('[data-curriculum]').forEach(x=>x.classList.toggle('active',x.dataset.curriculum===selectedCurriculum));clearChecks();(s.support_skills||[]).forEach(v=>{const x=[...document.querySelectorAll('input[name="supportSkill"]')].find(c=>c.value===v);if(x)x.checked=true});(s.treatment_methods||[]).forEach(v=>{const x=[...document.querySelectorAll('input[name="treatmentMethod"]')].find(c=>c.value===v);if(x)x.checked=true});updateCounts();setBasicLocked(true);document.getElementById('teacherName').disabled=false;document.getElementById('readonlyNote').classList.add('show');document.querySelector('#submitBtn .submit-main').textContent='حفظ التقييم';}
+function populateStudentGradeFilter(){const sel=document.getElementById('studentGradeFilter');const values=['KG1','KG2','KG3','الأول','الثاني','الثالث','الرابع','الخامس','السادس','السابع','الثامن','التاسع','العاشر','الحادي عشر','الثاني عشر'];sel.innerHTML='<option value="">كل الصفوف</option>'+values.map(v=>`<option value="${v}">${v}</option>`).join('')}
+function applyStudentFilters(){const q=document.getElementById('studentSearch').value.trim().toLowerCase();const g=document.getElementById('studentGenderFilter').value;const gr=document.getElementById('studentGradeFilter').value;renderStudents(allStudents.filter(s=>(!q||(s.student_name||'').toLowerCase().includes(q))&&(!g||s.gender===g)&&(!gr||s.grade===gr)))}
+document.getElementById('studentSearch').addEventListener('input',applyStudentFilters);document.getElementById('studentGenderFilter').addEventListener('change',applyStudentFilters);document.getElementById('studentGradeFilter').addEventListener('change',applyStudentFilters);
+
+
+
+/* Gender */
+document.querySelectorAll("[data-gender]").forEach(button => {
+
+  button.addEventListener("click", () => {
+
+    document
+      .querySelectorAll("[data-gender]")
+      .forEach(b => b.classList.remove("active"));
+
+    button.classList.add("active");
+
+    selectedGender =
+      button.getAttribute("data-gender");
+
+  });
+
+});
+
+
+/* Curriculum */
+document.querySelectorAll("[data-curriculum]").forEach(button => {
+
+  button.addEventListener("click", () => {
+
+    document
+      .querySelectorAll("[data-curriculum]")
+      .forEach(b => b.classList.remove("active"));
+
+    button.classList.add("active");
+
+    selectedCurriculum =
+      button.getAttribute("data-curriculum");
+
+  });
+
+});
+
+
+/* Grades */
+const grades = {
+
+  "رياض أطفال":[
+    "KG1",
+    "KG2",
+    "KG3"
+  ],
+
+  "ابتدائي":[
+    "الأول",
+    "الثاني",
+    "الثالث",
+    "الرابع",
+    "الخامس",
+    "السادس"
+  ],
+
+  "متوسط":[
+    "السابع",
+    "الثامن",
+    "التاسع"
+  ],
+
+  "ثانوي":[
+    "العاشر",
+    "الحادي عشر",
+    "الثاني عشر"
+  ]
+
+};
+
+
+const stage =
+  document.getElementById("stage");
+
+const grade =
+  document.getElementById("grade");
+
+
+stage.addEventListener("change", () => {
+
+  grade.innerHTML =
+    '<option value="">اختر الصف</option>';
+
+  const list =
+    grades[stage.value] || [];
+
+  list.forEach(item => {
+
+    const option =
+      document.createElement("option");
+
+    option.value = item;
+    option.textContent = item;
+
+    grade.appendChild(option);
+
+  });
+
+  grade.disabled =
+    list.length === 0;
+
+});
+
+
+loadStudents();
+
+/* Form Submit */
+document
+  .getElementById("studentForm")
+  .addEventListener("submit", async function(event){
+
+    event.preventDefault();
+
+    const message =
+      document.getElementById("message");
+
+    const submitBtn =
+      document.getElementById("submitBtn");
+
+
+    message.className = "message";
+    message.textContent = "";
+
+
+    if(!selectedGender){
+
+      message.className =
+        "message error";
+
+      message.textContent =
+        "يرجى اختيار بنين أو بنات.";
+
+      return;
+    }
+
+
+    if(!selectedCurriculum){
+
+      message.className =
+        "message error";
+
+      message.textContent =
+        "يرجى اختيار القسم الأمريكي أو البريطاني.";
+
+      return;
+    }
+
+
+    if(formMode === "existing" && !selectedStudentId){ message.className="message error"; message.textContent="يرجى اختيار الطالب المسجل أولًا."; return; }
+
+    const payload = {
+
+      student_name:
+        document.getElementById("studentName")
+        .value.trim(),
+
+      gender:
+        selectedGender,
+
+      stage:
+        stage.value,
+
+      grade:
+        grade.value,
+
+      section_name:
+        document.getElementById("section")
+        .value.trim(),
+
+      curriculum:
+        selectedCurriculum,
+
+      submitted_by:
+        document.getElementById("teacherName")
+        .value.trim(),
+
+      support_skills:
+        [...document.querySelectorAll('input[name="supportSkill"]:checked')].map(x => x.value),
+
+      treatment_methods:
+        [...document.querySelectorAll('input[name="treatmentMethod"]:checked')].map(x => x.value)
+
+    };
+
+
+    submitBtn.disabled = true;
+
+    submitBtn.querySelector(".submit-main")
+      .textContent = "جارٍ الإرسال...";
+
+
+    try{
+
+      const response = await fetch(
+
+        SUPABASE_URL +
+       "/rest/v1/weak_arabic_students" + (formMode === "existing" ? "?id=eq." + encodeURIComponent(selectedStudentId) : ""),
+
+        {
+          method: formMode === "existing" ? "PATCH" : "POST",
+
+          headers:{
+            "apikey":SUPABASE_KEY,
+            "Authorization":
+              "Bearer " + SUPABASE_KEY,
+            "Content-Type":
+              "application/json",
+            "Prefer":
+              "return=minimal"
+          },
+
+          body:
+            JSON.stringify(payload)
+        }
+
+      );
+
+
+      if(!response.ok){
+
+        const text =
+          await response.text();
+
+        throw new Error(text);
+
+      }
+
+
+      message.className =
+        "message success";
+
+      message.innerHTML =
+        (formMode === "existing" ? "✓ تم حفظ التقييم العلاجي للطالب بنجاح.<br>" : "✓ تم إرسال بيانات الطالب بنجاح.<br>") +
+        "<small>شكرًا لتعاونكم.</small>";
+
+
+      document
+        .getElementById("studentForm")
+        .reset();
+
+
+      selectedGender = "";
+      selectedCurriculum = "";
+      selectedStudentId = null;
+      setBasicLocked(false);
+      clearChecks();
+      if(formMode === "existing") loadStudents();
+
+
+      document
+        .querySelectorAll(".choice")
+        .forEach(b =>
+          b.classList.remove("active")
+        );
+
+
+      grade.innerHTML =
+        '<option value="">اختر الصف</option>';
+
+      grade.disabled = true;
+
+
+      window.scrollTo({
+        top:
+          document.body.scrollHeight,
+        behavior:"smooth"
+      });
+
+
+    }catch(error){
+
+      console.error(error);
+
+      message.className =
+        "message error";
+
+      message.innerHTML =
+        "تعذر إرسال البيانات حاليًا.<br>" +
+        "<small>يرجى المحاولة مرة أخرى أو التواصل مع مسؤول البرنامج.</small>";
+
+    }finally{
+
+      submitBtn.disabled = false;
+
+      submitBtn.querySelector(".submit-main")
+        .textContent = formMode === "existing" ? "حفظ التقييم" : "إرسال البيانات";
+
+    }
+
+  });
+
+</script>
+
+</body>
+</html>
