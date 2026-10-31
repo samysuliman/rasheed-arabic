@@ -1585,6 +1585,7 @@ function render(){
             >
               كلمة مرور جديدة
             </button>
+            <button class="small-btn btn-gold" type="button" onclick="printOneCard(${student.id})">🪪 طباعة</button>
 
           `;
 
@@ -3100,6 +3101,22 @@ async function resetAllPasswords(){
   btn.disabled=false;
   try{await loadData();}catch(e){}
   if(ok&&confirm("تم إنشاء "+ok+" كلمة مرور جديدة.\n\nهل تريد طباعة بطاقات الدخول الآن؟"))printLoginCards();
+}
+
+/* ---------- طباعة بطاقة طالب واحد من صفه في الجدول ---------- */
+async function printOneCard(studentId){
+  const st=students.find(x=>Number(x.id)===Number(studentId));if(!st)return;
+  const have=generatedCredentials.find(x=>Number(x.student_id)===Number(studentId)&&x.password);
+  if(have){printLoginCards([have]);return;}
+  if(!confirm("كلمة مرور "+st.student_name+" غير ظاهرة (لا تُحفظ لأسباب أمنية).\n\nهل تريد إنشاء كلمة مرور جديدة له وطباعة بطاقته؟\nكلمة المرور القديمة ستتوقف."))return;
+  try{
+    const data=await callEdgeFunction(CREATE_FUNCTION,{student_id:Number(studentId),reset_password:true});
+    const c=normalizeCredentials(data,st);
+    if(!c.password){alert("تعذر إنشاء كلمة المرور.");return;}
+    rememberCredential(c);
+    printLoginCards([c]);
+    loadData().catch(()=>{});
+  }catch(e){alert("تعذر إنشاء كلمة المرور: "+(e&&e.message||e));}
 }
 
 /* ---------- بطاقات الدخول (للطباعة أو الحفظ PDF) ---------- */
