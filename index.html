@@ -145,6 +145,8 @@ footer{background:var(--green);color:#dce9e4;padding:17px 0;margin-top:4px}
   .benefits{grid-template-columns:1fr 1fr;gap:8px}.benefit{padding:10px 8px}.benefit-ico{width:35px;height:35px;min-width:35px;font-size:18px}.benefit b{font-size:12px}.benefit span{font-size:9px}
   .footer-inner{display:block;text-align:center}.footer-links{justify-content:center;margin-top:8px}
 }
+/* الدخول الموحد: نوع الحساب يُحدَّد تلقائيًا */
+.role-title,.role-grid{display:none!important}
 </style>
 </head>
 <body>
@@ -305,24 +307,8 @@ function updateLoginHint(){
 
   if(!userInput) return;
 
-  if(role==='student'){
-
-    userInput.placeholder=
-      'رقم الطالب أو البريد الإلكتروني (مثال: RA0004)';
-
-    userInput.inputMode='text';
-
-  }else if(role==='hod'){
-
-    userInput.placeholder='الاسم';
-    userInput.inputMode='text';
-
-  }else{
-
-    userInput.placeholder='البريد الإلكتروني';
-    userInput.inputMode='email';
-
-  }
+  userInput.placeholder='رقم الطالب أو البريد الإلكتروني';
+  userInput.inputMode='text';
 }
 
   roleInputs.forEach(r=>r.addEventListener('change',updateLoginHint));
@@ -454,13 +440,7 @@ async function signInHodByName(name,password){
     const chosenRole=selectedRole();
 
     if(!identifier || !password){
-   showError(
-  chosenRole==='hod'
-    ? 'اكتب الاسم وكلمة المرور.'
-    : chosenRole==='student'
-      ? 'اكتب رقم الطالب وكلمة المرور.'
-      : 'اكتب البريد الإلكتروني وكلمة المرور.'
-);
+   showError('اكتب بيانات الدخول وكلمة المرور.');
       return;
     }
 
@@ -475,37 +455,20 @@ async function signInHodByName(name,password){
       let session;
       let role;
 
-   if(chosenRole==='hod'){
-  session=await signInHodByName(identifier,password);
-  role='hod';
-
-}else if(isStudentUsername){
-
-  if(chosenRole!=='student'){
-    throw new Error('STUDENT_ROLE_REQUIRED');
-  }
-
+   // نوع الحساب يُحدَّد تلقائيًا: رقم الطالب RA، أو البريد الإلكتروني، أو اسم رئيس القسم
+   if(isStudentUsername){
   session=await signInStudentByUsername(identifier,password);
   role='student';
-
-}else{
-
-  if(!identifier.includes('@')){
-    throw new Error('INVALID_IDENTIFIER');
-  }
-
+}else if(identifier.includes('@')){
   session=await signInByEmail(identifier,password);
   role=await detectRole(session);
-
   if(!role){
     throw new Error('ROLE_NOT_FOUND');
   }
-}   
-
-      // الاختيار في البطاقة حماية إضافية من دخول حساب بدور غير مقصود.
-      if(chosenRole && role!==chosenRole && !(role==='admin' && chosenRole==='admin')){
-        throw new Error('ROLE_MISMATCH');
-      }
+}else{
+  session=await signInHodByName(identifier,password);
+  role='hod';
+}
 
      saveSession(
   session,
@@ -532,7 +495,7 @@ async function signInHodByName(name,password){
       }else if(code==='STUDENT_LOGIN_NOT_READY' || code==='FUNCTION_NOT_FOUND'){
         showError('خدمة دخول الطلاب لم تُفعّل بعد.');
       }else{
-      showError(chosenRole==='hod'?'تعذر تسجيل الدخول. تحقق من الاسم وكلمة المرور.':chosenRole==='student'?'تعذر تسجيل الدخول. تحقق من رقم الطالب وكلمة المرور.':'تعذر تسجيل الدخول. تحقق من البريد الإلكتروني وكلمة المرور.');
+      showError('تعذر تسجيل الدخول. تحقق من بيانات الدخول وكلمة المرور.');
       }
     }finally{
       if(btn){

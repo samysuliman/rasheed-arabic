@@ -1,854 +1,274 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
-
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>مركز الإدارة | رشيد العربية</title>
-
 <style>
+:root{--green:#07583f;--green2:#0b6c50;--gold:#c99a2e;--bg:#f4f8f6;--line:#dbe7e1;--muted:#62756d;--danger:#b42318;--ok:#137a3c}
 *{box-sizing:border-box}
-
-:root{
-  --green:#07583f;
-  --green2:#0b6c50;
-  --gold:#c9a227;
-  --bg:#f4f8f6;
-  --text:#17392c;
-  --muted:#6e7e77;
-  --border:#d8e5df;
-}
-
-body{
-  margin:0;
-  font-family:Tahoma,Arial,sans-serif;
-  background:var(--bg);
-  color:var(--text);
-}
-
-a{text-decoration:none;color:inherit}
-button{font:inherit}
-
-.topbar{
-  background:linear-gradient(135deg,var(--green),#064631);
-  color:#fff;
-}
-
-.nav{
-  width:min(1200px,94%);
-  min-height:76px;
-  margin:auto;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:18px;
-}
-
-.brand{
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-
-.logo{
-  width:55px;
-  height:55px;
-  object-fit:contain;
-  background:#fff;
-  border-radius:14px;
-  padding:4px;
-}
-
-.brand strong{
-  display:block;
-  font-size:20px;
-}
-
-.brand small{
-  display:block;
-  margin-top:4px;
-  opacity:.8;
-}
-
-.nav-actions{
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-}
-
-.nav-btn{
-  padding:9px 13px;
-  border-radius:11px;
-  border:1px solid rgba(255,255,255,.28);
-  background:rgba(255,255,255,.08);
-  color:#fff;
-  cursor:pointer;
-}
-
-.page{
-  width:min(1200px,94%);
-  margin:26px auto 55px;
-}
-
-.hero{
-  background:linear-gradient(135deg,#07583f,#0c7154);
-  border-radius:25px;
-  padding:28px;
-  color:#fff;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:20px;
-}
-
-.hero h1{
-  margin:0 0 8px;
-  font-size:29px;
-}
-
-.hero p{
-  margin:0;
-  line-height:1.9;
-  opacity:.9;
-}
-
-.hero-side{
-  background:rgba(255,255,255,.12);
-  border:1px solid rgba(255,255,255,.2);
-  border-radius:17px;
-  padding:15px 20px;
-  min-width:190px;
-  text-align:center;
-}
-
-.hero-side strong{
-  display:block;
-  color:#f5d76b;
-  font-size:18px;
-}
-
-.hero-side span{
-  display:block;
-  margin-top:5px;
-  font-size:12px;
-}
-
-.stats{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:14px;
-  margin:18px 0 24px;
-}
-
-.stat{
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:18px;
-  padding:18px;
-}
-
-.stat span{
-  color:var(--muted);
-  font-size:12px;
-}
-
-.stat strong{
-  display:block;
-  color:var(--green);
-  font-size:28px;
-  margin-top:7px;
-}
-
-.section-head{
-  margin:27px 0 13px;
-}
-
-.section-head h2{
-  margin:0;
-  color:var(--green);
-}
-
-.section-head p{
-  margin:6px 0 0;
-  color:var(--muted);
-  font-size:13px;
-}
-
-.main-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:16px;
-}
-
-.main-grid.owner-mode{
-  grid-template-columns:repeat(5,1fr);
-}
-
-.card{
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:21px;
-  padding:22px;
-  min-height:220px;
-  position:relative;
-  overflow:hidden;
-}
-
-.card:before{
-  content:"";
-  position:absolute;
-  top:0;
-  right:0;
-  left:0;
-  height:5px;
-  background:linear-gradient(90deg,var(--green),var(--gold));
-}
-
-.card:hover{
-  transform:translateY(-3px);
-  box-shadow:0 12px 30px rgba(0,0,0,.07);
-}
-
-.icon{
-  width:62px;
-  height:62px;
-  border-radius:18px;
-  background:#edf7f2;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:30px;
-  margin-bottom:14px;
-}
-
-.card h3{
-  margin:0 0 9px;
-  color:var(--green);
-}
-
-.card p{
-  margin:0;
-  color:var(--muted);
-  font-size:13px;
-  line-height:1.8;
-}
-
-.go{
-  display:inline-block;
-  margin-top:15px;
-  padding:7px 11px;
-  border-radius:999px;
-  background:#f3f8f5;
-  border:1px solid #dcebe4;
-  color:var(--green);
-  font-size:11px;
-  font-weight:700;
-}
-
-.admin-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:12px;
-}
-
-.mini{
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:17px;
-  padding:17px;
-}
-
-.mini strong{
-  display:block;
-  color:var(--green);
-  margin-bottom:6px;
-}
-
-.mini span{
-  color:var(--muted);
-  font-size:12px;
-  line-height:1.7;
-}
-
-.notice{
-  padding:14px 16px;
-  border-radius:13px;
-  margin-bottom:16px;
-}
-
-.info{
-  background:#eef6f2;
-  color:var(--green);
-}
-
-.error{
-  background:#fff1f1;
-  color:#963434;
-}
-
+body{margin:0;font-family:Tahoma,Arial,sans-serif;background:var(--bg);color:#17392c}
+a{color:inherit}
+.wrap{width:min(1150px,94%);margin:auto}
+.topbar{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+.nav{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 0}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand img{width:42px;height:42px;object-fit:contain}
+.brand strong{display:block;color:var(--green)}
+.brand small{color:var(--muted)}
+.btn{border:1px solid var(--line);background:#fff;color:var(--green);border-radius:10px;padding:8px 12px;font:inherit;font-size:13px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
+.btn:hover{border-color:var(--green)}
+.btn-primary{background:var(--green);color:#fff;border-color:var(--green)}
+.btn-danger{color:var(--danger);border-color:#f1cfcc;background:#fff7f6}
+.btn-ok{color:var(--ok);border-color:#bfe5cc;background:#f0fbf4}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.hero{background:linear-gradient(135deg,var(--green),#064631);color:#fff;border-radius:22px;padding:22px;margin:18px 0;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+.hero h1{margin:0 0 4px;font-size:22px}
+.hero p{margin:0;opacity:.85;font-size:13px}
+.badge{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:12px;padding:8px 12px;font-size:13px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:8px}
+.stat{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px;text-decoration:none}
+.stat span{font-size:12px;color:var(--muted)}
+.stat b{display:block;font-size:26px;color:var(--green)}
+.stat.warn b{color:#a15c00}
+.jump{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 4px}
+.jump a{background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:13px;text-decoration:none;color:var(--green);font-weight:700}
+.sec{margin:26px 0 8px;scroll-margin-top:70px}
+.sec h2{margin:0;color:var(--green);font-size:19px}
+.sec p{margin:3px 0 12px;color:var(--muted);font-size:13px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;text-decoration:none;display:block;transition:.15s}
+.card:hover{border-color:var(--green);transform:translateY(-2px);box-shadow:0 8px 20px rgba(6,63,52,.07)}
+.card .ic{font-size:26px}
+.card h3{margin:8px 0 4px;font-size:15px;color:var(--green)}
+.card span{font-size:12.5px;color:var(--muted);line-height:1.6}
+.levels{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
+.lv{background:#fff;border:2px solid var(--line);border-top:5px solid var(--c);border-radius:14px;padding:12px;text-decoration:none}
+.lv b{display:block;color:var(--c);font-size:15px}
+.lv span{font-size:12px;color:var(--muted)}
+.census{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:12px}
+.cz{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px}
+.cz-head{display:flex;gap:10px;align-items:flex-start}
+.cz-head .ic{font-size:26px}
+.cz h3{margin:0 0 4px;font-size:15px;color:var(--green)}
+.pill{display:inline-block;border-radius:999px;padding:3px 10px;font-size:12px;font-weight:700}
+.pill.open{background:#e6f6ec;color:var(--ok)}
+.pill.closed{background:#fdecea;color:var(--danger)}
+.pill.late{background:#fff3df;color:#a15c00}
+.cz-meta{font-size:12.5px;color:var(--muted);margin:8px 0 10px;line-height:1.8}
+.cz-actions{display:flex;flex-wrap:wrap;gap:6px}
+.cz-date{display:none;gap:6px;align-items:center;margin-top:8px}
+.cz-date.show{display:flex}
+input[type=date],input[type=text]{font:inherit;font-size:13px;border:1px solid var(--line);border-radius:9px;padding:7px 9px}
+.notice{padding:12px 14px;border-radius:12px;margin:16px 0;font-size:13px;background:#fff;border:1px solid var(--line)}
+.notice.error{background:#fff2f2;border-color:#efc7c7;color:var(--danger)}
 .hide{display:none!important}
-
-footer{
-  text-align:center;
-  color:#7a8982;
-  padding:25px;
-  font-size:12px;
-}
-
-@media(max-width:1100px){
-  .main-grid,
-  .main-grid.owner-mode{
-    grid-template-columns:repeat(2,1fr);
-  }
-}
-
-@media(max-width:700px){
-  .hero{display:block}
-  .hero-side{margin-top:16px}
-  .stats,
-  .main-grid,
-  .main-grid.owner-mode,
-  .admin-grid{
-    grid-template-columns:1fr;
-  }
-}
+dialog{border:0;border-radius:18px;padding:0;width:min(480px,94vw);box-shadow:0 20px 60px rgba(0,0,0,.25)}
+dialog form{padding:18px;display:grid;gap:10px}
+dialog h3{margin:0;color:var(--green)}
+dialog label{display:grid;gap:4px;font-size:12px;color:var(--muted)}
+dialog .warn{background:#fff8e6;border:1px solid #f0d58c;color:#7a5a00;border-radius:10px;padding:10px;font-size:12.5px;line-height:1.7}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:26px 0}
+@media(max-width:640px){.stats{grid-template-columns:1fr 1fr 1fr}.stat b{font-size:20px}.census{grid-template-columns:1fr}}
 </style>
 </head>
-
 <body>
-
-<header class="topbar">
-
-<div class="nav">
-
-<a class="brand" href="admin-hub.html">
-
-<img
-  src="rasheed-arabic-logo.png"
-  class="logo"
-  alt="رشيد العربية"
-  onerror="this.style.display='none'"
->
-
-<div>
-<strong>رشيد العربية</strong>
-<small>مركز الإدارة</small>
-</div>
-
-</a>
-
-<div class="nav-actions">
-
-<button
-  class="nav-btn"
-  onclick="location.href='index.html'"
->
-الواجهة الرئيسية
-</button>
-
-<button
-  class="nav-btn"
-  id="logoutBtn"
->
-تسجيل الخروج
-</button>
-
-</div>
-
-</div>
-
-</header>
-
-
-<main class="page">
-
-<div id="notice" class="notice info">
-جارٍ التحقق من الصلاحيات...
-</div>
-
-<div id="adminArea" class="hide">
-
-
-<section class="hero">
-
-<div>
-
-<h1>
-مركز إدارة رشيد العربية
-</h1>
-
-<p>
-جميع أدوات إدارة البرنامج في مكان واحد:
-الطلاب، الحسابات، المستخدمون، الحصر، المحتوى، المتابعة والتقارير.
-</p>
-
-</div>
-
-<div class="hero-side">
-
-<strong id="permissionTitle">
-صلاحية المدير
-</strong>
-
-<span id="permissionText">
-وصول إلى أدوات الإدارة
-</span>
-
-</div>
-
-</section>
-
-
-<section class="stats">
-
-<div class="stat">
-<span>إجمالي الطلاب</span>
-<strong id="studentCount">—</strong>
-</div>
-
-<div class="stat">
-<span>حسابات الطلاب المنشأة</span>
-<strong id="accountCount">—</strong>
-</div>
-
-<div class="stat">
-<span>حسابات لم تُنشأ بعد</span>
-<strong id="missingCount">—</strong>
-</div>
-
-</section>
-
-
-<div class="section-head">
-<h2>الإدارة الرئيسية</h2>
-<p>اختر القسم الذي تريد إدارته.</p>
-</div>
-
-
-<section class="main-grid" id="mainGrid">
-
-
-<a class="card" href="levels.html">
-
-<div class="icon">🎯</div>
-
-<h3>المستويات والدروس الخاصة</h3>
-
-<p>
-المستوى A والمستوى B والمستوى المتقدم والدروس الخاصة: الطلاب والحضور ومواعيد الحصص وروابطها.
-</p>
-
-<span class="go">فتح المستويات</span>
-
-</a>
-
-
-<a class="card" href="census-hub.html">
-
-<div class="icon">📋</div>
-
-<h3>الحصر</h3>
-
-<p>
-الوصول إلى نماذج حصر الطلاب والكتب ومتابعة البيانات المسجلة.
-</p>
-
-<span class="go">فتح الحصر</span>
-
-</a>
-
-
-<a class="card" href="student-accounts.html">
-
-<div class="icon">👨‍🎓</div>
-
-<h3>حسابات الطلاب</h3>
-
-<p>
-إنشاء الحسابات وتعديل الأسماء وكلمات المرور والتفعيل والتعطيل والحذف.
-</p>
-
-<span class="go">إدارة الحسابات</span>
-
-</a>
-
-
-<a class="card" href="teacher-dashboard.html">
-
-<div class="icon">👨‍🏫</div>
-
-<h3>لوحة المعلم</h3>
-
-<p>
-إدارة الطلاب والمواد التعليمية والواجبات والاختبارات ومتابعة الأنشطة.
-</p>
-
-<span class="go">فتح لوحة المعلم</span>
-
-</a>
-
-
-<a class="card" href="academic-management.html">
-
-<div class="icon">🏫</div>
-
-<h3>الإدارة الأكاديمية</h3>
-
-<p>
-إدارة السنة والفصل الدراسي والمسار والصفوف والمواد وإسناد المعلمين.
-</p>
-
-<span class="go">إدارة المواد والفصول</span>
-
-</a>
-
-
-<a class="card" href="admin.html">
-
-<div class="icon">📊</div>
-
-<h3>إدارة الطلاب</h3>
-
-<p>
-عرض بيانات الطلاب والإحصائيات والتقارير والتصدير.
-</p>
-
-<span class="go">فتح لوحة الإدارة</span>
-
-</a>
-
-
-<a
-  id="userManagementCard"
-  class="card hide"
-  href="user-management.html"
->
-
-<div class="icon">👥</div>
-
-<h3>
-إدارة المستخدمين والصلاحيات
-</h3>
-
-<p>
-إدارة المديرين والمعلمين وأولياء الأمور والطلاب والتفعيل والتعطيل وتغيير الأدوار.
-</p>
-
-<span class="go">
-إدارة المستخدمين
-</span>
-
-</a>
-
-</section>
-
-
-<div class="section-head">
-<h2>لوحات الحصر والإدارة</h2>
-<p>وصول سريع إلى الأنظمة الإدارية الحالية.</p>
-</div>
-
-
-<section class="admin-grid">
-
-<a class="mini" href="admin.html">
-<strong>غير الناطقين بالعربية</strong>
-<span>إدارة بيانات الطلاب المسجلين في البرنامج.</span>
-</a>
-
-<a class="mini" href="admin-weak.html">
-<strong>الطلاب الضعاف</strong>
-<span>متابعة حصر الطلاب الضعاف في اللغة العربية.</span>
-</a>
-
-<a class="mini" href="admin-identity-books.html">
-<strong>كتب مواد الهوية</strong>
-<span>متابعة الكتب غير المستلمة لمواد الهوية.</span>
-</a>
-
-<a class="mini" href="admin-all-missing-books.html">
-<strong>جميع الكتب</strong>
-<span>متابعة جميع الكتب الدراسية غير المستلمة.</span>
-</a>
-
-</section>
-
-
-</div>
-
+<header class="topbar"><div class="wrap nav">
+  <a class="brand" href="admin-hub.html">
+    <img src="rasheed-arabic-logo.png" alt="" onerror="this.style.display='none'">
+    <div><strong>رشيد العربية</strong><small>مركز الإدارة</small></div>
+  </a>
+  <div style="display:flex;gap:6px">
+    <a class="btn" href="index.html">الواجهة</a>
+    <button class="btn" id="logoutBtn">تسجيل الخروج</button>
+  </div>
+</div></header>
+
+<main class="wrap">
+  <div id="notice" class="notice">جارٍ التحقق من الصلاحيات...</div>
+
+  <div id="adminArea" class="hide">
+    <section class="hero">
+      <div><h1>مركز إدارة رشيد العربية</h1><p>المدرسة، والحصص الافتراضية، والحصر والتقارير — في مكان واحد.</p></div>
+      <div class="badge" id="permission">🛡️ مدير</div>
+    </section>
+
+    <div class="stats">
+      <a class="stat" href="admin.html"><span>طلاب البرنامج</span><b id="studentCount">—</b></a>
+      <a class="stat" href="student-accounts.html"><span>لهم حسابات</span><b id="accountCount">—</b></a>
+      <a class="stat warn" href="student-accounts.html"><span>بدون حساب</span><b id="missingCount">—</b></a>
+    </div>
+
+    <nav class="jump">
+      <a href="#school">🏫 المدرسة</a>
+      <a href="#virtual">🎥 الحصص الافتراضية</a>
+      <a href="#census">📋 الحصر والتقارير</a>
+    </nav>
+
+    <!-- ١) المدرسة -->
+    <section class="sec" id="school">
+      <h2>🏫 المدرسة</h2>
+      <p>الطلاب والمعلمون والفصول والمواد — أساس النظام.</p>
+      <div class="grid">
+        <a class="card" href="admin.html"><div class="ic">📇</div><h3>سجل الطلاب</h3><span>بيانات طلاب العربية لغير الناطقين بها، مع التقارير والتصدير.</span></a>
+        <a class="card" href="student-accounts.html"><div class="ic">🔑</div><h3>حسابات الطلاب</h3><span>إنشاء الحسابات الناقصة بضغطة، وكلمات المرور، والتفعيل والإيقاف.</span></a>
+        <a class="card" href="teacher-dashboard.html"><div class="ic">👨‍🏫</div><h3>لوحة المعلم</h3><span>المواد والواجبات والاختبارات والعروض وسجل الدرجات.</span></a>
+        <a class="card" href="academic-management.html"><div class="ic">🗂️</div><h3>الإدارة الأكاديمية</h3><span>السنة والفصل الدراسي والفصول والمواد وإسناد المعلمين، ومزامنة الحصر.</span></a>
+        <a class="card hide" id="userManagementCard" href="user-management.html"><div class="ic">👥</div><h3>المستخدمون والصلاحيات</h3><span>المديرون والمعلمون ورؤساء الأقسام وأولياء الأمور.</span></a>
+      </div>
+    </section>
+
+    <!-- ٢) الحصص الافتراضية -->
+    <section class="sec" id="virtual">
+      <h2>🎥 الحصص الافتراضية</h2>
+      <p>المستويات والدروس الخاصة: الطلاب والحضور ورابط الحصة.</p>
+      <div class="levels" id="levels"><a class="lv" style="--c:#07583f" href="levels.html"><b>فتح المستويات</b><span>—</span></a></div>
+    </section>
+
+    <!-- ٣) الحصر والتقارير -->
+    <section class="sec" id="census">
+      <h2>📋 الحصر والتقارير</h2>
+      <p>تشغيل الحصر وإيقافه وتحديد آخر موعد، ونسخ الرابط لإرساله، وعرض النتائج وتصديرها.
+        <button class="btn" id="copyHub" style="margin-right:6px">🔗 نسخ رابط مركز الحصر</button></p>
+      <div class="census" id="censusList"><div class="notice">جارٍ التحميل...</div></div>
+    </section>
+  </div>
 </main>
 
-<footer>
-© 2026 Rasheed Arabic — جميع الحقوق محفوظة
-</footer>
+<dialog id="roundDlg">
+  <form method="dialog">
+    <h3>🔄 بدء حصر جديد</h3>
+    <div id="roundFor" style="font-weight:700"></div>
+    <div class="warn">سيُنقل الحصر الحالي (<b id="roundCount">0</b> سجل) إلى <b>الأرشيف</b> كما هو، وتبدأ النتائج فارغة.
+      الرابط نفسه لا يتغير. تقدر ترجع للحصر القديم من «📦 الأرشيف» في أي وقت.</div>
+    <label>اسم الحصر الجديد<input type="text" name="rname" placeholder="مثال: الفصل الدراسي الثاني 2026" required></label>
+    <label>آخر موعد (اختياري)<input type="date" name="rcloses"></label>
+    <div style="display:flex;gap:8px">
+      <button class="btn btn-primary" value="go">بدء الحصر الجديد</button>
+      <button class="btn" value="cancel" formnovalidate>إلغاء</button>
+    </div>
+  </form>
+</dialog>
 
+<footer>© 2026 رشيد العربية</footer>
 
+<script src="assets/js/rasheed-core.js"></script>
 <script>
+(function(){
+const R=window.Rasheed,$=id=>document.getElementById(id);
+const BASE=location.href.replace(/[^/]*$/,'');
+let forms=[],roundTarget=null;
 
-const SUPABASE_URL =
-"https://wcyamoqmpwpribsgspjn.supabase.co";
+$('logoutBtn').onclick=()=>R.logout('index.html');
+$('copyHub').onclick=()=>copy(BASE+'census-hub.html');
 
-const SUPABASE_KEY =
-"sb_publishable_3eJET0uhZw4D4DowMK13fQ_oWK3PdIQ";
-
-const ADMIN_KEY =
-"rasheed_arabic_admin_session_v1";
-
-const PORTAL_KEY =
-"rasheed_arabic_portal_session_v1";
-
-
-function getSession(){
-
-  try{
-
-    return (
-      JSON.parse(
-        localStorage.getItem(ADMIN_KEY) ||
-        "null"
-      )
-      ||
-      JSON.parse(
-        localStorage.getItem(PORTAL_KEY) ||
-        "null"
-      )
-    );
-
-  }catch{
-
-    return null;
-
-  }
-
-}
-
-
-async function api(path,options={}){
-
-  const session =
-    getSession();
-
-  if(!session?.access_token){
-    throw new Error("NO_SESSION");
-  }
-
-  const headers = {
-    apikey:SUPABASE_KEY,
-    Authorization:
-      "Bearer " +
-      session.access_token,
-    ...(options.headers || {})
-  };
-
-  if(options.body){
-    headers["Content-Type"] =
-      "application/json";
-  }
-
-  return fetch(
-    SUPABASE_URL + path,
-    {
-      ...options,
-      headers
-    }
-  );
-
-}
-
-
-async function rpc(name){
-
-  const response =
-    await api(
-      "/rest/v1/rpc/" + name,
-      {
-        method:"POST",
-        body:"{}"
-      }
-    );
-
-  if(!response.ok){
-    return false;
-  }
-
-  return (
-    await response.json()
-  ) === true;
-
-}
-
+function todayRiyadh(){return new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Riyadh'}).format(new Date());}
+function fmt(d){try{return new Intl.DateTimeFormat('ar-SA',{weekday:'long',day:'numeric',month:'long',calendar:'gregory'}).format(new Date(d+'T12:00:00'));}catch{return d;}}
+async function copy(t){try{await navigator.clipboard.writeText(t);R.toast('تم نسخ الرابط');}catch{prompt('انسخ الرابط:',t);}}
 
 async function loadStats(){
-
-  const studentsResponse =
-    await api(
-      "/rest/v1/non_native_students?select=id"
-    );
-
-  const accountsResponse =
-    await api(
-      "/rest/v1/student_accounts?select=student_id"
-    );
-
-  if(
-    !studentsResponse.ok ||
-    !accountsResponse.ok
-  ){
-    return;
-  }
-
-  const students =
-    await studentsResponse.json();
-
-  const accounts =
-    await accountsResponse.json();
-
-  document
-  .getElementById("studentCount")
-  .textContent =
-    students.length;
-
-  document
-  .getElementById("accountCount")
-  .textContent =
-    accounts.length;
-
-  document
-  .getElementById("missingCount")
-  .textContent =
-    Math.max(
-      0,
-      students.length -
-      accounts.length
-    );
-
-}
-
-
-function ownerInterface(){
-
-  document
-  .getElementById(
-    "userManagementCard"
-  )
-  .classList
-  .remove("hide");
-
-  document
-  .getElementById(
-    "mainGrid"
-  )
-  .classList
-  .add("owner-mode");
-
-  document
-  .getElementById(
-    "permissionTitle"
-  )
-  .textContent =
-    "👑 مالك المنصة";
-
-  document
-  .getElementById(
-    "permissionText"
-  )
-  .textContent =
-    "صلاحية التحكم الأعلى";
-
-}
-
-
-document
-.getElementById("logoutBtn")
-.addEventListener(
-  "click",
-  () => {
-
-    localStorage.removeItem(
-      ADMIN_KEY
-    );
-
-    localStorage.removeItem(
-      PORTAL_KEY
-    );
-
-    location.href =
-      "login.html";
-
-  }
-);
-
-
-(async function(){
-
-  const notice =
-    document.getElementById(
-      "notice"
-    );
-
   try{
+    const [s,a]=await Promise.all([R.get('non_native_students?select=id'),R.get('student_accounts?select=student_id')]);
+    $('studentCount').textContent=s.length;$('accountCount').textContent=a.length;
+    $('missingCount').textContent=Math.max(0,s.length-a.length);
+  }catch(e){console.warn(e);}
+}
 
-    const session =
-      getSession();
+async function loadLevels(){
+  try{
+    const [lv,st]=await Promise.all([R.get('arabic_levels?select=id,name_ar,color,class_start,class_end,is_private&order=sort_order'),R.get('level_students?select=level_id&active=eq.true')]);
+    const hm=t=>{if(!t)return'';const[h,m]=t.split(':').map(Number);return(((h+11)%12)+1)+':'+String(m).padStart(2,'0');};
+    $('levels').innerHTML=lv.map(l=>{
+      const n=st.filter(s=>s.level_id===l.id).length;
+      const t=l.is_private?'من أي دولة':(l.class_start?hm(l.class_start)+' – '+hm(l.class_end):'');
+      return `<a class="lv" style="--c:${R.esc(l.color)}" href="levels.html#${R.esc(l.id)}"><b>${R.esc(l.name_ar)}</b><span>${n} طالب${t?' · '+R.esc(t):''}</span></a>`;
+    }).join('');
+  }catch(e){console.warn(e);}
+}
 
-    if(!session?.access_token){
+function state(f){
+  if(!f.is_open) return {cls:'closed',txt:'⏸️ موقوف'};
+  if(f.closes_on && todayRiyadh()>f.closes_on) return {cls:'late',txt:'⏰ انتهى الموعد'};
+  return {cls:'open',txt:'🟢 مفتوح'};
+}
 
-      location.href =
-        "login.html";
-
-      return;
-    }
-
-    const admin =
-      await rpc(
-        "is_rasheed_arabic_admin"
-      );
-
-    if(!admin){
-
-      notice.className =
-        "notice error";
-
-      notice.textContent =
-        "هذا الحساب لا يملك صلاحية الإدارة.";
-
-      return;
-    }
-
-    notice.classList.add("hide");
-
-    document
-    .getElementById("adminArea")
-    .classList
-    .remove("hide");
-
-    await loadStats();
-
-    const owner =
-      await rpc(
-        "is_rasheed_arabic_owner"
-      );
-
-    if(owner){
-      ownerInterface();
-    }
-
-  }catch(error){
-
-    console.error(error);
-
-    notice.className =
-      "notice error";
-
-    notice.textContent =
-      "تعذر فتح مركز الإدارة.";
-
+async function loadCensus(){
+  try{
+    forms=await R.get('census_forms?select=*&order=sort_order');
+  }catch(e){
+    $('censusList').innerHTML='<div class="notice error">'+R.esc(R.errorText(e))+'</div>';return;
   }
+  const counts=await Promise.all(forms.map(f=>R.get(f.table_name+'?select=id').then(r=>r.length).catch(()=>null)));
+  $('censusList').innerHTML=forms.map((f,i)=>{
+    const s=state(f);
+    return `<div class="cz" data-id="${R.esc(f.id)}">
+      <div class="cz-head"><div class="ic">${R.esc(f.icon||'📋')}</div>
+        <div><h3>${R.esc(f.title)}</h3><span class="pill ${s.cls}">${s.txt}</span></div></div>
+      <div class="cz-meta">
+        ${f.round_name?'📌 '+R.esc(f.round_name)+'<br>':''}
+        📅 آخر موعد: <b>${f.closes_on?R.esc(fmt(f.closes_on)):'بدون موعد'}</b><br>
+        📝 الردود الحالية: <b>${counts[i]==null?'—':counts[i]}</b>
+      </div>
+      <div class="cz-actions">
+        ${f.is_open?'<button class="btn btn-danger" data-act="stop">⏸️ إيقاف</button>':'<button class="btn btn-ok" data-act="start">▶️ تشغيل</button>'}
+        <button class="btn" data-act="date">📅 الموعد</button>
+        <button class="btn" data-act="copy">🔗 نسخ الرابط</button>
+        <a class="btn" href="${R.esc(f.form_page)}" target="_blank">📝 النموذج</a>
+        <a class="btn btn-primary" href="${R.esc(f.admin_page)}">📊 النتائج والتصدير</a>
+        ${f.allow_new_round?'<button class="btn" data-act="round">🔄 حصر جديد</button><a class="btn" href="census-archive.html?form='+encodeURIComponent(f.id)+'">📦 الأرشيف</a>':''}
+      </div>
+      <div class="cz-date"><input type="date" value="${R.esc(f.closes_on||'')}"><button class="btn btn-primary" data-act="saveDate">حفظ</button><button class="btn" data-act="clearDate">بدون موعد</button></div>
+      ${f.allow_new_round?'':'<div class="cz-meta" style="margin:8px 0 0">ℹ️ هذا الحصر هو سجل طلاب المدرسة، لذلك لا يُفرَّغ.</div>'}
+    </div>`;
+  }).join('');
+}
 
+$('censusList').addEventListener('click',async e=>{
+  const b=e.target.closest('[data-act]');if(!b)return;
+  const card=b.closest('.cz'),f=forms.find(x=>x.id===card.dataset.id);
+  const act=b.dataset.act;
+  try{
+    if(act==='copy') return copy(BASE+f.form_page);
+    if(act==='date') return card.querySelector('.cz-date').classList.toggle('show');
+    if(act==='round'){
+      roundTarget=f;
+      $('roundFor').textContent=f.title;
+      $('roundCount').textContent=(await R.get(f.table_name+'?select=id')).length;
+      $('roundDlg').querySelector('form').reset();
+      return $('roundDlg').showModal();
+    }
+    b.disabled=true;
+    let open=f.is_open,closes=f.closes_on||null;
+    if(act==='stop') open=false;
+    if(act==='start'){ open=true; if(closes && todayRiyadh()>closes) closes=null; }
+    if(act==='saveDate'){ closes=card.querySelector('input[type=date]').value||null; if(closes && closes>=todayRiyadh()) open=true; }
+    if(act==='clearDate') closes=null;
+    await R.rpc('census_set',{p_id:f.id,p_is_open:open,p_closes_on:closes});
+    R.toast(act==='stop'?'تم إيقاف الحصر':act==='start'?'تم تشغيل الحصر':'تم حفظ الموعد');
+    await loadCensus();
+  }catch(err){console.error(err);alert(R.errorText(err));b.disabled=false;}
+});
+
+$('roundDlg').addEventListener('close',async()=>{
+  if($('roundDlg').returnValue!=='go'||!roundTarget) return;
+  const fm=$('roundDlg').querySelector('form');
+  try{
+    const r=await R.rpc('census_new_round',{p_id:roundTarget.id,p_round_name:fm.rname.value.trim(),p_closes_on:fm.rcloses.value||null});
+    R.toast('بدأ الحصر الجديد — أُرشف '+r.archived+' سجل');
+    await loadCensus();
+  }catch(err){console.error(err);alert(R.errorText(err));}
+});
+
+(async function init(){
+  const notice=$('notice');
+  if(!R.session()?.access_token){location.href='index.html#login';return;}
+  if(!await R.isAdmin()){notice.className='notice error';notice.textContent='هذا الحساب لا يملك صلاحية الإدارة.';return;}
+  notice.classList.add('hide');$('adminArea').classList.remove('hide');
+  try{ if(await R.rpc('is_rasheed_arabic_owner')===true){ $('userManagementCard').classList.remove('hide'); $('permission').textContent='👑 مالك المنصة'; } }catch{}
+  loadStats();loadLevels();loadCensus();
+  if(location.hash) setTimeout(()=>document.querySelector(location.hash)?.scrollIntoView(),300);
 })();
-
+})();
 </script>
-
 </body>
 </html>

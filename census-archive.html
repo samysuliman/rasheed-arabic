@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>أرشيف الحصر | رشيد العربية</title>
+<style>
+:root{--green:#07583f;--gold:#c99a2e;--bg:#f4f8f6;--line:#dbe7e1;--muted:#62756d;--danger:#b42318}
+*{box-sizing:border-box}
+body{margin:0;font-family:Tahoma,Arial,sans-serif;background:var(--bg);color:#17392c}
+header{background:linear-gradient(135deg,var(--green),#064631);color:#fff;padding:14px 0}
+.wrap{width:min(1150px,94%);margin:auto}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.top h1{margin:0;font-size:19px}
+.btn{border:0;border-radius:10px;padding:9px 13px;font:inherit;font-size:13px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px;background:#fff;color:var(--green);border:1px solid var(--line)}
+header .btn{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.3)}
+.panel{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px;margin:18px 0}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+select{font:inherit;font-size:13px;border:1px solid var(--line);border-radius:9px;padding:8px 10px;background:#fff;min-width:260px}
+.muted{color:var(--muted);font-size:13px}
+.tablewrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th,td{padding:8px 6px;border-bottom:1px solid #edf3f0;text-align:right;white-space:nowrap}
+th{background:#f6faf8;color:var(--muted)}
+.alert{padding:12px 14px;border-radius:12px;background:#fff2f2;border:1px solid #efc7c7;color:var(--danger);font-size:13px}
+.hide{display:none!important}
+@media print{header,.row,.noprint{display:none!important}.panel{border:0;padding:0}body{background:#fff}}
+</style>
+</head>
+<body>
+<header><div class="wrap top">
+  <h1>📦 أرشيف الحصر</h1>
+  <a class="btn" href="admin-hub.html#census">مركز الإدارة</a>
+</div></header>
+
+<main class="wrap">
+  <div id="msg" class="alert hide"></div>
+  <section class="panel">
+    <h2 id="formTitle" style="margin:0 0 6px;color:var(--green);font-size:18px"></h2>
+    <p class="muted" style="margin:0 0 14px">الحصر السابق محفوظ هنا كما كان عند بدء الحصر الجديد.</p>
+    <div class="row">
+      <select id="roundSelect"></select>
+      <button class="btn" data-export="pdf">🖨️ PDF</button>
+      <button class="btn" data-export="word">📝 Word</button>
+      <button class="btn" data-export="csv">⬇ CSV</button>
+    </div>
+    <div class="muted" id="roundMeta"></div>
+    <div class="tablewrap"><table><thead id="thead"></thead><tbody id="tbody"></tbody></table></div>
+  </section>
+</main>
+
+<script src="assets/js/rasheed-core.js"></script>
+<script>
+(async function(){
+  const R=window.Rasheed, $=id=>document.getElementById(id);
+  const formId=new URLSearchParams(location.search).get('form')||'';
+  // أسماء الأعمدة الشائعة بالعربية
+  const LABELS={student_name:'اسم الطالب',gender:'القسم',stage:'المرحلة',grade:'الصف',section_name:'الشعبة',curriculum:'المسار',submitted_by:'المُدخِل',teacher_name:'المعلم',created_at:'تاريخ الإدخال',books:'الكتب',notes:'ملاحظات',subject:'المادة',weakness_areas:'جوانب الضعف',support_plan:'خطة الدعم'};
+  const HIDE=new Set(['id']);
+  let rounds=[],current=null,cols=[];
+  function fail(t){$('msg').textContent=t;$('msg').classList.remove('hide');}
+  try{
+    if(!await R.isAdmin()) return fail('هذه الصفحة للمدير فقط. سجّل الدخول بحساب المدير.');
+    const [form]=await R.get('census_forms?select=title&id=eq.'+encodeURIComponent(formId));
+    $('formTitle').textContent=form?form.title:'الحصر';
+    rounds=await R.get('census_archive?select=id,round_no,round_name,archived_at,row_count&form_id=eq.'+encodeURIComponent(formId)+'&order=round_no.desc');
+    if(!rounds.length){$('roundSelect').classList.add('hide');$('roundMeta').textContent='لا يوجد حصر مؤرشف بعد لهذا النموذج.';return;}
+    $('roundSelect').innerHTML=rounds.map(r=>`<option value="${r.id}">${R.esc(r.round_name||('الحصر '+r.round_no))} — ${r.row_count} سجل</option>`).join('');
+    $('roundSelect').onchange=()=>load(+$('roundSelect').value);
+    load(rounds[0].id);
+  }catch(e){console.error(e);fail(R.errorText(e));}
+
+  async function load(id){
+    const [row]=await R.get('census_archive?select=*&id=eq.'+id);
+    current=row;
+    const data=row.rows||[];
+    cols=[...new Set(data.flatMap(o=>Object.keys(o)))].filter(k=>!HIDE.has(k));
+    $('roundMeta').textContent='أُرشف في '+new Date(row.archived_at).toLocaleString('ar-SA',{calendar:'gregory'})+' · '+data.length+' سجل';
+    $('thead').innerHTML='<tr><th>#</th>'+cols.map(c=>`<th>${R.esc(LABELS[c]||c)}</th>`).join('')+'</tr>';
+    $('tbody').innerHTML=data.map((o,i)=>'<tr><td>'+(i+1)+'</td>'+cols.map(c=>`<td>${R.esc(cell(o[c]))}</td>`).join('')+'</tr>').join('');
+  }
+  function cell(v){if(v==null)return '';if(Array.isArray(v))return v.join('، ');if(typeof v==='object')return JSON.stringify(v);if(/^\d{4}-\d\d-\d\dT/.test(v))return new Date(v).toLocaleDateString('ar-SA',{calendar:'gregory'});return String(v);}
+  document.querySelectorAll('[data-export]').forEach(b=>b.onclick=()=>{
+    if(!current) return;
+    const head=['#',...cols.map(c=>LABELS[c]||c)];
+    const body=(current.rows||[]).map((o,i)=>[i+1,...cols.map(c=>cell(o[c]))]);
+    R.exportTable(b.dataset.export,{title:$('formTitle').textContent+' — '+(current.round_name||''),head,rows:body,filename:'census_'+formId+'_round'+current.round_no});
+  });
+})();
+</script>
+</body>
+</html>
