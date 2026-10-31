@@ -622,12 +622,13 @@ tr:hover td{
       >
         إنشاء جميع الحسابات الناقصة
       </button>
+<button id="resetAllBtn" class="btn btn-danger" type="button" onclick="resetAllPasswords()">🔁 كلمات مرور جديدة للجميع</button>
 
       <button
         id="exportAllBtn"
         class="btn btn-blue"
       >
-        تنزيل جميع الحسابات CSV
+        📄 تنزيل جميع الحسابات (PDF / Word)
       </button>
 
       <button
@@ -635,7 +636,7 @@ tr:hover td{
         class="btn btn-primary"
         disabled
       >
-        تنزيل كلمات المرور الجديدة CSV
+        📄 تنزيل كلمات المرور الجديدة (PDF / Word)
       </button>
 <button class="btn btn-gold" type="button" onclick="printLoginCards()">🪪 بطاقات الدخول</button>
 
@@ -3047,6 +3048,60 @@ $("logoutBtn")
 </script>
 
 <script>
+/* ---------- التنزيل بصيغة PDF أو Word بدل CSV ---------- */
+function downloadCSV(rows,filename){
+  const title=String(filename||"رشيد العربية").replace(/\.csv$/i,"");
+  const old=document.getElementById("fmtPick");if(old)old.remove();
+  const box=document.createElement("div");box.id="fmtPick";
+  box.style.cssText="position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:9999;display:flex;align-items:center;justify-content:center;direction:rtl;font-family:inherit";
+  box.innerHTML='<div style="background:#fff;border-radius:16px;padding:22px;min-width:270px;text-align:center;box-shadow:0 10px 40px rgba(0,0,0,.25)"><div style="font-weight:800;font-size:17px;margin-bottom:6px">اختر صيغة التنزيل</div><div style="color:#666;font-size:13px;margin-bottom:16px">'+escFmt(title)+'</div><div style="display:flex;gap:10px;justify-content:center"><button type="button" class="btn btn-danger" data-f="pdf">📕 PDF</button><button type="button" class="btn btn-blue" data-f="word">📘 Word</button></div><button type="button" data-f="x" style="margin-top:14px;background:none;border:0;color:#888;cursor:pointer">إلغاء</button></div>';
+  box.addEventListener("click",e=>{const f=e.target.closest("[data-f]");if(e.target===box||(f&&f.dataset.f==="x")){box.remove();return;}if(!f)return;box.remove();exportFmt(f.dataset.f,rows,title);});
+  document.body.appendChild(box);
+}
+function escFmt(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function exportFmt(type,rows,title){
+  const head=rows[0]||[],body=rows.slice(1);
+  const date=new Date().toLocaleDateString("ar-SA-u-ca-gregory");
+  const table='<table><thead><tr><th>#</th>'+head.map(h=>'<th>'+escFmt(h)+'</th>').join("")+'</tr></thead><tbody>'+body.map((r,i)=>'<tr><td>'+(i+1)+'</td>'+r.map(v=>'<td>'+escFmt(v)+'</td>').join("")+'</tr>').join("")+'</tbody></table>';
+  const css='body{font-family:Tahoma,Arial,sans-serif;direction:rtl;color:#1a1a1a;margin:18px}h1{font-size:18px;color:#0f5132;margin:0 0 4px}.sub{color:#666;font-size:12px;margin-bottom:12px}table{width:100%;border-collapse:collapse;font-size:12px}th,td{border:1px solid #bbb;padding:6px 8px;text-align:right}th{background:#0f5132;color:#fff}tr:nth-child(even) td{background:#f4f7f5}@page{size:A4 landscape;margin:12mm}';
+  const html='<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><title>'+escFmt(title)+'</title><style>'+css+'</style></head><body><h1>'+escFmt(title)+'</h1><div class="sub">رشيد العربية · '+date+' · عدد الطلاب: '+body.length+'</div>'+table+'</body></html>';
+  if(type==="word"){
+    const blob=new Blob(["\ufeff"+html.replace('<html ','<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" ')],{type:"application/msword"});
+    const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=(/كلمات المرور/.test(title)?"Rasheed-New-Passwords":"Rasheed-Student-Accounts")+"-"+new Date().toISOString().slice(0,10)+".doc";document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},1500);
+  }else{
+    const w=window.open("","_blank");
+    if(!w){alert("اسمح بالنوافذ المنبثقة لهذا الموقع ثم أعد المحاولة.");return;}
+    w.document.open();w.document.write(html.replace('</body>','<script>window.onload=function(){setTimeout(function(){window.print()},300)}<\/script></body>'));w.document.close();
+  }
+}
+
+/* ---------- كلمات مرور جديدة لجميع الطلاب ---------- */
+async function resetAllPasswords(){
+  const targets=students.filter(st=>{const a=getAccount(st.id);return a&&a.is_active!==false;});
+  if(!targets.length){alert("لا توجد حسابات طلاب فعّالة.");return;}
+  const typed=prompt("سيتم إنشاء كلمة مرور جديدة لـ "+targets.length+" طالبًا، ولن تعمل كلمات المرور القديمة بعد ذلك.\n\nللمتابعة اكتب: تأكيد");
+  if(typed===null)return;
+  if(typed.trim()!=="تأكيد"){alert("لم يتم التنفيذ. يجب كتابة كلمة «تأكيد».");return;}
+  const btn=$("resetAllBtn");btn.disabled=true;
+  $("bulkBox").classList.remove("hide");
+  let ok=0,fail=0;
+  for(let i=0;i<targets.length;i++){
+    const st=targets[i];
+    $("bulkText").textContent="كلمة مرور جديدة "+(i+1)+" من "+targets.length+" — "+st.student_name;
+    $("progressBar").style.width=((i/targets.length)*100)+"%";
+    try{
+      const data=await callEdgeFunction(CREATE_FUNCTION,{student_id:Number(st.id),reset_password:true});
+      const c=normalizeCredentials(data,st);
+      if(c.password){rememberCredential(c);ok++;}else{fail++;}
+    }catch(e){console.error(e);fail++;}
+  }
+  $("progressBar").style.width="100%";
+  $("bulkText").textContent="✓ تم إنشاء "+ok+" كلمة مرور جديدة"+(fail?" — تعذر "+fail+" (أعد المحاولة لهم من الجدول)":"");
+  btn.disabled=false;
+  try{await loadData();}catch(e){}
+  if(ok&&confirm("تم إنشاء "+ok+" كلمة مرور جديدة.\n\nهل تريد طباعة بطاقات الدخول الآن؟"))printLoginCards();
+}
+
 /* ---------- بطاقات الدخول (للطباعة أو الحفظ PDF) ---------- */
 async function printLoginCards(list){
   const items=(Array.isArray(list)&&list.filter(Boolean).length)?list.filter(Boolean):generatedCredentials;
