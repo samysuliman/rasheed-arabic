@@ -638,7 +638,7 @@ tr:hover td{
       >
         📄 تنزيل كلمات المرور الجديدة (PDF / Word)
       </button>
-<button class="btn btn-gold" type="button" onclick="printLoginCards()">🪪 بطاقات الدخول</button>
+<button class="btn btn-gold" type="button" onclick="printLoginCards()">🪪 طباعة بطاقات الدخول</button>
 
     </div>
 
@@ -3112,17 +3112,17 @@ async function printLoginCards(list){
   let levelOf={};
   try{
     const [lv,ls]=await Promise.all([
-      api("/rest/v1/arabic_levels?select=id,name_ar,name_en,color").then(r=>r.ok?r.json():[]),
+      api("/rest/v1/arabic_levels?select=id,name_ar,name_en,color&order=id").then(r=>r.ok?r.json():[]),
       api("/rest/v1/level_students?select=student_id,level_id&active=eq.true").then(r=>r.ok?r.json():[])
     ]);
-    const byId={};lv.forEach(l=>byId[l.id]=l);
+    const byId={};lv.forEach((l,i)=>{l._o=i;byId[l.id]=l;});
     ls.forEach(x=>{if(x.student_id&&byId[x.level_id])levelOf[x.student_id]=byId[x.level_id];});
   }catch(e){console.warn("levels",e);}
   const base=location.href.replace(/[^/]*$/,"");
   const loginUrl=base+"index.html";
   const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
   const flag=c=>String(c||"").includes("أمريك")?"🇺🇸":String(c||"").includes("بريطان")?"🇬🇧":"";
-  const cards=items.map(c=>{
+  const cardOf=c=>{
     const st=students.find(x=>Number(x.id)===Number(c.student_id))||{};
     const lv=levelOf[c.student_id];
     const cls=[st.grade,st.section_name||c.section_name].filter(Boolean).join(" ");
@@ -3136,7 +3136,15 @@ async function printLoginCards(list){
         <div><span>كلمة المرور · Password</span><b>${esc(c.password||"—")}</b></div></div>
       <div class="foot">🔗 ${esc(loginUrl.replace(/^https?:\/\//,""))}<br>ادخل باسم المستخدم وكلمة المرور · Log in with your username and password</div>
     </div>`;
-  }).join("");
+  };
+  const groups=[];const gmap={};
+  items.forEach(c=>{const lv=levelOf[c.student_id];const k=lv?String(lv.id):"none";
+    if(!gmap[k]){gmap[k]={k,name:lv?lv.name_ar:"بدون مستوى",color:lv?.color||"#07583f",o:lv?lv._o:999,list:[]};groups.push(gmap[k]);}
+    gmap[k].list.push(c);});
+  groups.sort((a,b)=>a.o-b.o);
+  groups.forEach(g=>g.list.sort((a,b)=>String(a.student_name).localeCompare(String(b.student_name),"ar")));
+  const filterBtns=groups.length>1?`<button class="f on" data-k="all">الكل (${items.length})</button>`+groups.map(g=>`<button class="f" data-k="${esc(g.k)}" style="--c:${esc(g.color)}">${esc(g.name)} (${g.list.length})</button>`).join(""):"";
+  const cards=groups.map(g=>`<section class="grp" data-k="${esc(g.k)}"><h2 style="--c:${esc(g.color)}">${esc(g.name)} · ${g.list.length} طالب</h2><div class="sheet">${g.list.map(cardOf).join("")}</div></section>`).join("");
   const css=`@page{size:A4;margin:10mm}*{box-sizing:border-box}body{margin:0;font-family:Tahoma,Arial,sans-serif;direction:rtl;color:#17392c;background:#fff}
   .bar{padding:12px;text-align:center;background:#f4f8f6;border-bottom:1px solid #dbe7e1}.bar button{font:inherit;font-weight:700;padding:10px 18px;border-radius:10px;border:0;background:#07583f;color:#fff;cursor:pointer}
   .sheet{display:grid;grid-template-columns:1fr 1fr;gap:6mm;padding:6mm}
@@ -3148,13 +3156,17 @@ async function printLoginCards(list){
   .cred{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}.cred div{background:#f6faf8;border:1px solid #dbe7e1;border-radius:9px;padding:6px 8px}
   .cred span{display:block;font-size:9.5px;color:#62756d}.cred b{display:block;font-size:17px;direction:ltr;text-align:center;letter-spacing:1px;font-family:Consolas,monospace;margin-top:2px}
   .foot{margin-top:auto;font-size:9.5px;color:#62756d;line-height:1.5;direction:rtl}
-  @media print{.bar{display:none}.sheet{padding:0}}`;
+  .bar .f{background:#fff;color:#17392c;border:1.5px solid var(--c,#07583f);margin:3px;padding:7px 12px}.bar .f.on{background:var(--c,#07583f);color:#fff}
+  .grp h2{margin:6mm 6mm 0;font-size:15px;color:var(--c);border-bottom:2px solid var(--c);padding-bottom:4px}
+  .grp+.grp{page-break-before:always;break-before:page}.grp.hide{display:none}
+  @media print{.bar{display:none}.sheet{padding:0}.grp h2{margin:0 0 4mm}}`;
   const w=window.open("","_blank");
   if(!w){alert("اسمح بالنوافذ المنبثقة لعرض البطاقات.");return;}
   w.document.open();
   w.document.write(`<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><title>بطاقات الدخول — رشيد العربية</title><style>${css}</style></head><body>
-    <div class="bar"><button onclick="print()">🖨️ طباعة / حفظ PDF</button> &nbsp; <span>${items.length} بطاقة · قصّ على الخط المنقّط</span></div>
-    <div class="sheet">${cards}</div></body></html>`);
+    <div class="bar"><button onclick="print()">🖨️ طباعة / حفظ PDF</button> &nbsp; <span id="cnt">${items.length} بطاقة · قصّ على الخط المنقّط</span>${filterBtns?`<div style="margin-top:8px">اطبع مستوى واحدًا: ${filterBtns}</div>`:""}</div>
+    ${cards}
+    <script>document.querySelectorAll(".bar .f").forEach(b=>b.onclick=()=>{const k=b.dataset.k;document.querySelectorAll(".bar .f").forEach(x=>x.classList.toggle("on",x===b));let n=0;const vis=[];document.querySelectorAll(".grp").forEach(g=>{const show=k==="all"||g.dataset.k===k;g.classList.toggle("hide",!show);if(show){n+=g.querySelectorAll(".card").length;vis.push(g);}});vis.forEach((g,i)=>g.style.breakBefore=g.style.pageBreakBefore=i?"page":"auto");document.getElementById("cnt").textContent=n+" بطاقة · قصّ على الخط المنقّط";});<\/script></body></html>`);
   w.document.close();
 }
 </script>
