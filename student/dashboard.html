@@ -24,16 +24,30 @@ html{scroll-behavior:smooth}body{margin:0;font-family:Tahoma,Arial,sans-serif;ba
 
 @media(max-width:980px){.subjects{grid-template-columns:repeat(2,1fr)}.tools{grid-template-columns:repeat(2,1fr)}.grade-grid{grid-template-columns:repeat(2,1fr)}.profile{grid-template-columns:auto 1fr}.yearbox{grid-column:1/-1;min-width:0}}
 @media(max-width:580px){.page{width:min(94%,100%)}.profile{grid-template-columns:1fr;text-align:center}.avatar{margin:auto}.chips{justify-content:center}.subjects,.tools,.grade-grid,.annual-grid{grid-template-columns:1fr}.topin{min-height:66px}.brand img{width:48px;height:48px}.brand b{font-size:17px}.section-head{align-items:flex-start;flex-direction:column}.workspace{padding:15px}}
+/* إضافات: مطلوب مني + حصتي + ثنائي اللغة */
+.en{display:block;font-size:.72em;font-weight:400;color:var(--muted);direction:ltr;letter-spacing:.2px}
+h2 .en,h1 .en{display:inline;margin-right:8px}
+.tool .en{margin-top:2px}
+.joinbox{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;background:linear-gradient(135deg,var(--g),var(--g2));color:#fff;border-radius:22px;padding:18px 20px;margin-top:16px;box-shadow:var(--shadow)}
+.joinbox b{font-size:18px}.joinbox .en{color:rgba(255,255,255,.75)}
+.joinbox .join{background:#fff;color:var(--g);border-radius:14px;padding:12px 18px;font-weight:800;text-decoration:none;font-size:16px;text-align:center}
+.tasks{display:grid;gap:10px}
+.task{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--border);border-radius:18px;padding:14px 16px}
+.task .ic{font-size:26px}.task .tb{flex:1;min-width:0}
+.task strong{display:block}.task .meta{color:var(--muted);font-size:12.5px;margin-top:3px}
+.task.late{border-color:#efc7c7;background:#fff8f7}.task.late .due{color:var(--danger);font-weight:700}
+.task .go{background:var(--g);color:#fff;border-radius:12px;padding:10px 14px;text-decoration:none;font-weight:700;white-space:nowrap;text-align:center}
+.alldone{background:var(--gs);border:1px solid var(--border);border-radius:18px;padding:18px;text-align:center;color:var(--g);font-weight:700}
 </style>
 </head>
 <body>
 <header class="top"><div class="topin">
-  <a class="brand" href="../index.html"><img src="../rasheed-arabic-logo.png" alt="رشيد العربية" onerror="this.style.display='none'"><span><b>رشيد العربية</b><small>بوابة الطالب التعليمية</small></span></a>
-  <button class="btn btn-light" id="logoutBtn" type="button">تسجيل الخروج</button>
+  <a class="brand" href="../index.html"><img src="../rasheed-arabic-logo.png" alt="رشيد العربية" onerror="this.style.display='none'"><span><b>رشيد العربية</b><small>بوابة الطالب · Student Portal</small></span></a>
+  <button class="btn btn-light" id="logoutBtn" type="button">خروج</button>
 </div></header>
 
 <main class="page">
-  <div id="loading" class="loading">جارٍ تحميل ملف الطالب والمواد...</div>
+  <div id="loading" class="loading">جارٍ التحميل... · Loading...</div>
   <div id="errorBox" class="error hide"></div>
 
   <section id="profileCard" class="profile hide">
@@ -53,20 +67,23 @@ html{scroll-behavior:smooth}body{margin:0;font-family:Tahoma,Arial,sans-serif;ba
     <div class="yearbox"><b id="yearName">السنة الدراسية</b><span id="termName">الفصل الدراسي</span><span id="termWeight">وزن الفصل في النتيجة السنوية: 50%</span></div>
   </section>
 
-  <div class="section-head"><div><h2>موادي الدراسية</h2><p>تظهر المواد المسندة إلى صفك ومسارك في الفصل الدراسي الحالي.</p></div><span class="badge" id="subjectCount">0 مواد</span></div>
+  <section id="joinBox" class="joinbox hide"></section>
+  <div class="section-head" id="tasksHead"><div><h2>📌 مطلوب مني <span class="en">My Tasks</span></h2><p>الواجبات والاختبارات التي لم تُسلَّم بعد · Not submitted yet</p></div><span class="badge" id="tasksCount">—</span></div>
+  <section id="tasksList" class="tasks"><div class="empty">جارٍ التحميل... · Loading...</div></section>
+  <div class="section-head"><div><h2>📚 موادي الدراسية <span class="en">My Subjects</span></h2><p>اختر المادة لتفتح الواجبات والاختبارات والملفات · Choose a subject</p></div><span class="badge" id="subjectCount">0 مواد</span></div>
   <section id="subjectsGrid" class="subjects"><div class="empty">جارٍ تحميل المواد...</div></section>
 
   <section id="workspace" class="workspace hide">
-    <div class="workspace-title"><div><h2 id="workspaceSubject">المادة</h2><p id="workspaceMeta">—</p></div><div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><span class="badge" id="workspaceTeacher">المعلم: —</span><button class="back-subjects" id="backToSubjects" type="button">↩ العودة إلى المواد</button></div></div>
+    <div class="workspace-title"><div><h2 id="workspaceSubject">المادة</h2><p id="workspaceMeta">—</p></div><div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><span class="badge" id="workspaceTeacher">المعلم: —</span><button class="back-subjects" id="backToSubjects" type="button">↩ المواد · Back</button></div></div>
     <div class="tools" id="toolsGrid">
-      <button class="tool" data-view="homework"><span class="ico">📝</span><strong>الواجبات</strong></button>
-      <button class="tool" data-view="tests"><span class="ico">✅</span><strong>الاختبارات</strong></button>
-      <button class="tool" data-view="worksheets"><span class="ico">📄</span><strong>أوراق العمل</strong></button>
-      <button class="tool" data-view="attachments"><span class="ico">📎</span><strong>مرفقات المادة</strong></button>
-      <button class="tool" data-view="presentations"><span class="ico">📊</span><strong>العروض التقديمية</strong></button>
-      <button class="tool" data-view="videos"><span class="ico">🎬</span><strong>الفيديوهات</strong></button>
-      <button class="tool" data-view="virtual"><span class="ico">🎥</span><strong>الحصص الافتراضية</strong></button>
-      <button class="tool" data-view="gradebook"><span class="ico">🏆</span><strong>سجل الدرجات</strong></button>
+      <button class="tool" data-view="homework"><span class="ico">📝</span><strong>الواجبات</strong><span class="en">Homework</span></button>
+      <button class="tool" data-view="tests"><span class="ico">✅</span><strong>الاختبارات</strong><span class="en">Quizzes</span></button>
+      <button class="tool" data-view="worksheets"><span class="ico">📄</span><strong>أوراق العمل</strong><span class="en">Worksheets</span></button>
+      <button class="tool" data-view="attachments"><span class="ico">📎</span><strong>مرفقات المادة</strong><span class="en">Files</span></button>
+      <button class="tool" data-view="presentations"><span class="ico">📊</span><strong>العروض التقديمية</strong><span class="en">Presentations</span></button>
+      <button class="tool" data-view="videos"><span class="ico">🎬</span><strong>الفيديوهات</strong><span class="en">Videos</span></button>
+      <button class="tool" data-view="virtual"><span class="ico">🎥</span><strong>الحصص الافتراضية</strong><span class="en">Online classes</span></button>
+      <button class="tool" data-view="gradebook"><span class="ico">🏆</span><strong>سجل الدرجات</strong><span class="en">Grades</span></button>
     </div>
     <div class="content" id="contentPanel"><div class="empty">اختر إحدى أدوات المادة أعلاه.</div></div>
   </section>
@@ -95,6 +112,8 @@ async function init(){
   try{
     portal=await rpc('get_my_academic_portal');
     renderPortal();
+    loadJoin();
+    loadTasks();
   }catch(e){
     console.error(e);
     if(String(e.message).includes('get_my_academic_portal')){
@@ -142,6 +161,42 @@ async function openSubject(csId){
   if(!resourcesCache.has(csId)){
     try{resourcesCache.set(csId,await rpc('get_my_subject_resources',{p_class_subject_id:csId}))}catch(e){console.warn(e);}
   }
+}
+/* ---------- حصتي (المستوى الافتراضي) ---------- */
+function hm(t){if(!t)return '';const [h,m]=String(t).split(':').map(Number);return (((h+11)%12)+1)+':'+String(m).padStart(2,'0');}
+async function loadJoin(){
+  try{
+    const rows=await rpc('get_my_level_class');
+    const lv=(rows||[]).find(x=>validUrl(x.meeting_url));
+    if(!lv) return;
+    $('joinBox').innerHTML=`<div><b>🎥 حصتي: ${esc(lv.name_ar)}</b><span class="en">My online class${lv.name_en?' · '+esc(lv.name_en):''}</span>${lv.class_start?`<div style="margin-top:4px">⏰ ${esc(hm(lv.class_start))} – ${esc(hm(lv.class_end))}</div>`:''}</div><a class="join" target="_blank" rel="noopener" href="${esc(lv.meeting_url)}">ادخل حصتي<span class="en" style="color:var(--muted)">Join class</span></a>`;
+    $('joinBox').classList.remove('hide');
+  }catch(e){console.warn('level class',e);}
+}
+
+/* ---------- مطلوب مني ---------- */
+async function loadTasks(){
+  const subs=portal?.subjects||[];
+  await Promise.all(subs.map(async s=>{const id=Number(s.class_subject_id);if(!resourcesCache.has(id)){try{resourcesCache.set(id,await rpc('get_my_subject_resources',{p_class_subject_id:id}))}catch(e){console.warn(e)}}}));
+  const now=Date.now(),items=[];
+  for(const s of subs){
+    const r=resourcesCache.get(Number(s.class_subject_id));if(!r)continue;
+    for(const a of (r.assessments||[])){
+      if(a.submitted_at!=null||a.recipient_id==null)continue;
+      const quiz=['quiz','test','exam'].includes(String(a.kind||'').toLowerCase());
+      items.push({s,a,quiz,due:a.due_at?new Date(a.due_at).getTime():Infinity});
+    }
+  }
+  items.sort((x,y)=>x.due-y.due);
+  $('tasksCount').textContent=items.length?items.length+' مطلوب':'✓';
+  if(!items.length){$('tasksList').innerHTML='<div class="alldone">🎉 لا يوجد شيء مطلوب منك الآن — أحسنت!<span class="en">Nothing due right now. Well done!</span></div>';return}
+  $('tasksList').innerHTML=items.map(({s,a,quiz,due})=>{
+    const late=due<now;
+    return `<div class="task${late?' late':''}"><div class="ic">${quiz?'✅':'📝'}</div><div class="tb"><strong>${esc(a.title||'نشاط')}</strong>
+      <div class="meta">${esc(s.icon||'📚')} ${esc(s.name_ar)} · ${quiz?'اختبار · Quiz':'واجب · Homework'}</div>
+      <div class="meta due">${a.due_at?(late?'⏰ انتهى الموعد · Overdue — ':'📅 آخر موعد · Due: ')+esc(fmt(a.due_at)):'بدون موعد · No due date'}</div></div>
+      <a class="go" href="../student-assessment.html?recipient_id=${encodeURIComponent(a.recipient_id)}">ابدأ ▶<span class="en" style="color:rgba(255,255,255,.8)">Start</span></a></div>`;
+  }).join('');
 }
 function currentResources(){return currentSubject?resourcesCache.get(Number(currentSubject.class_subject_id))||null:null}
 function materialsOf(types){const r=currentResources();return (r?.materials||[]).filter(x=>types.includes(String(x.material_type||'').toLowerCase()))}
