@@ -857,6 +857,8 @@ tr:hover td{
         نسخ البيانات
       </button>
 
+      <button class="btn btn-gold" type="button" onclick="currentCredential&&currentCredential.password?printLoginCards([currentCredential]):alert('لا توجد كلمة مرور جديدة لهذا الطالب.')">🪪 طباعة بطاقته</button>
+
       <button
         id="closeModalBtn"
         class="btn btn-light"
@@ -2461,6 +2463,7 @@ function renderGeneratedCredentials(){
                 item.password || "—"
               )}
             </span>
+            <button class="small-btn btn-gold" type="button" style="margin-right:6px" onclick="printLoginCards([generatedCredentials.find(x=>Number(x.student_id)===${Number(item.student_id)})])">🪪 بطاقته</button>
 
           </td>
 
@@ -3045,8 +3048,9 @@ $("logoutBtn")
 
 <script>
 /* ---------- بطاقات الدخول (للطباعة أو الحفظ PDF) ---------- */
-async function printLoginCards(){
-  if(!generatedCredentials.length){
+async function printLoginCards(list){
+  const items=(Array.isArray(list)&&list.filter(Boolean).length)?list.filter(Boolean):generatedCredentials;
+  if(!items.length){
     alert("لا توجد كلمات مرور جديدة في هذه الجلسة.\n\nأنشئ الحسابات الناقصة أو اضغط «كلمة مرور جديدة» لطالب، ثم اطبع البطاقات.");
     return;
   }
@@ -3063,7 +3067,7 @@ async function printLoginCards(){
   const loginUrl=base+"index.html";
   const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
   const flag=c=>String(c||"").includes("أمريك")?"🇺🇸":String(c||"").includes("بريطان")?"🇬🇧":"";
-  const cards=generatedCredentials.map(c=>{
+  const cards=items.map(c=>{
     const st=students.find(x=>Number(x.id)===Number(c.student_id))||{};
     const lv=levelOf[c.student_id];
     const cls=[st.grade,st.section_name||c.section_name].filter(Boolean).join(" ");
@@ -3094,7 +3098,7 @@ async function printLoginCards(){
   if(!w){alert("اسمح بالنوافذ المنبثقة لعرض البطاقات.");return;}
   w.document.open();
   w.document.write(`<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><title>بطاقات الدخول — رشيد العربية</title><style>${css}</style></head><body>
-    <div class="bar"><button onclick="print()">🖨️ طباعة / حفظ PDF</button> &nbsp; <span>${generatedCredentials.length} بطاقة · قصّ على الخط المنقّط</span></div>
+    <div class="bar"><button onclick="print()">🖨️ طباعة / حفظ PDF</button> &nbsp; <span>${items.length} بطاقة · قصّ على الخط المنقّط</span></div>
     <div class="sheet">${cards}</div></body></html>`);
   w.document.close();
 }
