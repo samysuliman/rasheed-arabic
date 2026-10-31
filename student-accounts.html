@@ -637,6 +637,7 @@ tr:hover td{
       >
         تنزيل كلمات المرور الجديدة CSV
       </button>
+<button class="btn btn-gold" type="button" onclick="printLoginCards()">🪪 بطاقات الدخول</button>
 
     </div>
 
@@ -760,7 +761,8 @@ tr:hover td{
       كلمات المرور التي تم إنشاؤها الآن
     </h2>
 
-    <button
+    <button id="printCardsBtn" class="btn btn-gold" type="button" onclick="printLoginCards()">🪪 طباعة بطاقات الدخول</button>
+<button
       id="copyAllBtn"
       class="btn btn-light"
     >
@@ -3041,5 +3043,61 @@ $("logoutBtn")
 
 </script>
 
+<script>
+/* ---------- بطاقات الدخول (للطباعة أو الحفظ PDF) ---------- */
+async function printLoginCards(){
+  if(!generatedCredentials.length){
+    alert("لا توجد كلمات مرور جديدة في هذه الجلسة.\n\nأنشئ الحسابات الناقصة أو اضغط «كلمة مرور جديدة» لطالب، ثم اطبع البطاقات.");
+    return;
+  }
+  let levelOf={};
+  try{
+    const [lv,ls]=await Promise.all([
+      api("/rest/v1/arabic_levels?select=id,name_ar,name_en,color").then(r=>r.ok?r.json():[]),
+      api("/rest/v1/level_students?select=student_id,level_id&active=eq.true").then(r=>r.ok?r.json():[])
+    ]);
+    const byId={};lv.forEach(l=>byId[l.id]=l);
+    ls.forEach(x=>{if(x.student_id&&byId[x.level_id])levelOf[x.student_id]=byId[x.level_id];});
+  }catch(e){console.warn("levels",e);}
+  const base=location.href.replace(/[^/]*$/,"");
+  const loginUrl=base+"index.html";
+  const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  const flag=c=>String(c||"").includes("أمريك")?"🇺🇸":String(c||"").includes("بريطان")?"🇬🇧":"";
+  const cards=generatedCredentials.map(c=>{
+    const st=students.find(x=>Number(x.id)===Number(c.student_id))||{};
+    const lv=levelOf[c.student_id];
+    const cls=[st.grade,st.section_name||c.section_name].filter(Boolean).join(" ");
+    const cur=st.curriculum||c.curriculum||"";
+    return `<div class="card" style="--c:${esc(lv?.color||"#07583f")}">
+      <div class="head"><img src="${esc(base)}rasheed-arabic-logo.png" alt=""><div><b>رشيد العربية</b><small>Rasheed Arabic</small></div>
+        ${lv?`<span class="lv">${esc(lv.name_ar)}${lv.name_en?`<small>${esc(lv.name_en)}</small>`:""}</span>`:""}</div>
+      <div class="name">${esc(c.student_name)}</div>
+      <div class="info">${cls?`الصف: <b>${esc(cls)}</b>`:""}${cur?` · ${flag(cur)} ${esc(cur)}`:""}</div>
+      <div class="cred"><div><span>اسم المستخدم · Username</span><b>${esc(c.username)}</b></div>
+        <div><span>كلمة المرور · Password</span><b>${esc(c.password||"—")}</b></div></div>
+      <div class="foot">🔗 ${esc(loginUrl.replace(/^https?:\/\//,""))}<br>ادخل باسم المستخدم وكلمة المرور · Log in with your username and password</div>
+    </div>`;
+  }).join("");
+  const css=`@page{size:A4;margin:10mm}*{box-sizing:border-box}body{margin:0;font-family:Tahoma,Arial,sans-serif;direction:rtl;color:#17392c;background:#fff}
+  .bar{padding:12px;text-align:center;background:#f4f8f6;border-bottom:1px solid #dbe7e1}.bar button{font:inherit;font-weight:700;padding:10px 18px;border-radius:10px;border:0;background:#07583f;color:#fff;cursor:pointer}
+  .sheet{display:grid;grid-template-columns:1fr 1fr;gap:6mm;padding:6mm}
+  .card{border:1.5px dashed #9bb5aa;border-top:6px solid var(--c);border-radius:12px;padding:10px 12px;page-break-inside:avoid;break-inside:avoid;height:62mm;display:flex;flex-direction:column}
+  .head{display:flex;align-items:center;gap:8px}.head img{width:38px;height:38px;object-fit:contain}
+  .head b{display:block;color:#07583f;font-size:15px}.head small{display:block;color:#62756d;font-size:10px;direction:ltr;text-align:right}
+  .lv{margin-right:auto;background:var(--c);color:#fff;border-radius:999px;padding:4px 10px;font-size:12px;font-weight:700;text-align:center;line-height:1.2}.lv small{display:block;font-size:9px;opacity:.9;font-weight:400;color:#fff!important;text-align:center}
+  .name{font-size:17px;font-weight:800;margin:8px 0 2px}.info{font-size:12px;color:#4d6158}
+  .cred{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}.cred div{background:#f6faf8;border:1px solid #dbe7e1;border-radius:9px;padding:6px 8px}
+  .cred span{display:block;font-size:9.5px;color:#62756d}.cred b{display:block;font-size:17px;direction:ltr;text-align:center;letter-spacing:1px;font-family:Consolas,monospace;margin-top:2px}
+  .foot{margin-top:auto;font-size:9.5px;color:#62756d;line-height:1.5;direction:rtl}
+  @media print{.bar{display:none}.sheet{padding:0}}`;
+  const w=window.open("","_blank");
+  if(!w){alert("اسمح بالنوافذ المنبثقة لعرض البطاقات.");return;}
+  w.document.open();
+  w.document.write(`<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><title>بطاقات الدخول — رشيد العربية</title><style>${css}</style></head><body>
+    <div class="bar"><button onclick="print()">🖨️ طباعة / حفظ PDF</button> &nbsp; <span>${generatedCredentials.length} بطاقة · قصّ على الخط المنقّط</span></div>
+    <div class="sheet">${cards}</div></body></html>`);
+  w.document.close();
+}
+</script>
 </body>
 </html>
