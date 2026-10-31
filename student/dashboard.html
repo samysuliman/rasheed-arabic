@@ -37,6 +37,25 @@ h2 .en,h1 .en{display:inline;margin-right:8px}
 .task strong{display:block}.task .meta{color:var(--muted);font-size:12.5px;margin-top:3px}
 .task.late{border-color:#efc7c7;background:#fff8f7}.task.late .due{color:var(--danger);font-weight:700}
 .task .go{background:var(--g);color:#fff;border-radius:12px;padding:10px 14px;text-decoration:none;font-weight:700;white-space:nowrap;text-align:center}
+/* ===== تنظيم الصفحة ===== */
+.profile{padding:16px 20px;border-radius:22px;gap:14px}
+.avatar{width:58px;height:58px;font-size:30px;border-radius:18px}
+.profile h1{font-size:22px;margin:0 0 8px}
+#campusChip,#schoolSectionChip,#sectionChip,#termWeight,#activeChip{display:none}
+.yearbox{min-width:0;padding:9px 13px}
+.quick{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+.qt{background:#fff;border:1px solid var(--border);border-radius:18px;padding:14px;display:flex;align-items:center;gap:12px;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.03);text-align:right;color:var(--text)}
+.qt .qi{font-size:24px;width:46px;height:46px;border-radius:14px;background:var(--gs);display:grid;place-items:center;flex:none}
+.qt b{display:block;font-size:19px;color:var(--g)}.qt span{display:block;font-size:12px;color:var(--muted)}
+.qt.alert{border-color:#efc7c7;background:#fff8f7}.qt.alert b{color:var(--danger)}
+.subjects{grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.subject{padding:14px;border-radius:18px;display:grid;grid-template-columns:auto 1fr;column-gap:12px;row-gap:2px;align-items:center}.subject-icon{grid-row:span 2}
+.subject-icon{width:48px;height:48px;font-size:26px;margin:0;flex:none;border-radius:14px}
+.subject h3{font-size:16px}.subject p{display:none}.teacher{margin-top:4px}
+.subject .pend{position:absolute;top:8px;left:8px;background:var(--danger);color:#fff;border-radius:999px;font-size:11px;padding:2px 8px;font-weight:800}
+.joinbox .next{font-size:13px;margin-top:6px;color:rgba(255,255,255,.9)}
+@media(max-width:980px){.subjects{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:580px){.profile{grid-template-columns:auto 1fr;text-align:right;padding:14px;gap:12px}.avatar{margin:0}.chips{justify-content:flex-start}.yearbox{grid-column:1/-1;padding:8px 12px}.quick{gap:8px}.qt{flex-direction:column;text-align:center;padding:10px 6px;gap:6px}.qt .qi{width:38px;height:38px;font-size:20px}.qt b{font-size:16px}.qt span{font-size:11px}.subjects{grid-template-columns:1fr 1fr;gap:10px}.subject{display:flex;flex-direction:column;text-align:center;padding:12px 8px;gap:8px}.section-head p{display:none}.section-head{margin:20px 2px 10px}.section-head h2{font-size:19px}.joinbox{padding:14px 16px}.joinbox .join{width:100%}}
 .alldone{background:var(--gs);border:1px solid var(--border);border-radius:18px;padding:18px;text-align:center;color:var(--g);font-weight:700}
 </style>
 </head>
@@ -61,17 +80,18 @@ h2 .en,h1 .en{display:inline;margin-right:8px}
         <span class="chip" id="campusChip">🏫 المجمع: —</span>
         <span class="chip" id="schoolSectionChip">👥 القسم: —</span>
         <span class="chip" id="curriculumChip"><span class="flag">🏫</span> المسار: —</span>
-        <span class="chip">🟢 طالب نشط</span>
+        <span class="chip" id="activeChip">🟢 طالب نشط</span>
       </div>
     </div>
     <div class="yearbox"><b id="yearName">السنة الدراسية</b><span id="termName">الفصل الدراسي</span><span id="termWeight">وزن الفصل في النتيجة السنوية: 50%</span></div>
   </section>
 
+  <section id="quick" class="quick hide"></section>
   <section id="joinBox" class="joinbox hide"></section>
   <section id="upcomingBox" class="hide" style="margin-top:14px"></section>
   <div class="section-head" id="tasksHead"><div><h2>📌 مطلوب مني <span class="en">My Tasks</span></h2><p>الواجبات والاختبارات التي لم تُسلَّم بعد · Not submitted yet</p></div><span class="badge" id="tasksCount">—</span></div>
   <section id="tasksList" class="tasks"><div class="empty">جارٍ التحميل... · Loading...</div></section>
-  <div class="section-head"><div><h2>📚 موادي الدراسية <span class="en">My Subjects</span></h2><p>اختر المادة لتفتح الواجبات والاختبارات والملفات · Choose a subject</p></div><span class="badge" id="subjectCount">0 مواد</span></div>
+  <div class="section-head" id="subjectsHead"><div><h2>📚 موادي الدراسية <span class="en">My Subjects</span></h2><p>اختر المادة لتفتح الواجبات والاختبارات والملفات · Choose a subject</p></div><span class="badge" id="subjectCount">0 مواد</span></div>
   <section id="subjectsGrid" class="subjects"><div class="empty">جارٍ تحميل المواد...</div></section>
 
   <section id="workspace" class="workspace hide">
@@ -129,9 +149,9 @@ async function init(){
 function renderPortal(){
   $('loading').classList.add('hide');$('profileCard').classList.remove('hide');
   const p=portal?.profile||{},term=portal?.term||{},year=portal?.year||{},cls=portal?.class||{};
-  $('studentName').textContent=p.student_name||'الطالب';
-  $('accountChip').textContent='الحساب: '+(p.username||'—');
-  $('gradeChip').textContent='الصف: '+(p.grade||cls.grade||'—');
+  $('studentName').textContent='مرحبًا، '+(p.student_name||'الطالب')+' 👋';
+  $('accountChip').textContent='👤 '+(p.username||'—');
+  $('gradeChip').textContent='🎓 الصف: '+(p.section_name||cls.section_name||p.grade||cls.grade||'—');
   $('sectionChip').textContent='الشعبة: '+(p.section_name||cls.section_name||'—');
   $('campusChip').textContent='🏫 المجمع: '+(cls.campus_name||'—');
   const sg=cls.school_section_gender||'';$('schoolSectionChip').textContent=(sg==='بنين'?'👦':sg==='بنات'?'👧':'👥')+' القسم: '+(cls.school_section_name||'—');
@@ -172,6 +192,8 @@ async function loadJoin(){
     if(!lv) return;
     $('joinBox').innerHTML=`<div><b>🎥 حصتي: ${esc(lv.name_ar)}</b><span class="en">My online class${lv.name_en?' · '+esc(lv.name_en):''}</span>${lv.class_start?`<div style="margin-top:4px">⏰ ${esc(hm(lv.class_start))} – ${esc(hm(lv.class_end))}</div>`:''}</div><a class="join" target="_blank" rel="noopener" href="${esc(lv.meeting_url)}">ادخل حصتي<span class="en" style="color:var(--muted)">Join class</span></a>`;
     $('joinBox').classList.remove('hide');
+    window.__lv=lv;$('upcomingBox').classList.add('hide');mergeNext();renderQuick();
+    const ch=document.createElement('span');ch.className='chip';ch.textContent='🎥 '+lv.name_ar;document.querySelector('.chips').appendChild(ch);
   }catch(e){console.warn('level class',e);}
 }
 
@@ -190,6 +212,9 @@ async function loadTasks(){
   }
   items.sort((x,y)=>x.due-y.due);
   renderUpcoming(subs,now);
+  window.__tasks=items;renderQuick();
+  const per={};items.forEach(i=>{const k=Number(i.s.class_subject_id);per[k]=(per[k]||0)+1});
+  document.querySelectorAll('.subject').forEach(b=>{const n=per[Number(b.dataset.cs)];b.querySelector('.pend')?.remove();if(n)b.insertAdjacentHTML('beforeend',`<span class="pend">${n}</span>`)});
   $('tasksCount').textContent=items.length?items.length+' مطلوب':'✓';
   if(!items.length){$('tasksList').innerHTML='<div class="alldone">🎉 لا يوجد شيء مطلوب منك الآن — أحسنت!<span class="en">Nothing due right now. Well done!</span></div>';return}
   $('tasksList').innerHTML=items.map(({s,a,quiz,due})=>{
@@ -205,7 +230,8 @@ function renderUpcoming(subs,now){
   const list=[];
   for(const s of subs){const r=resourcesCache.get(Number(s.class_subject_id));for(const v of (r?.virtual_lessons||[])){const st=new Date(v.starts_at).getTime();const en=v.ends_at?new Date(v.ends_at).getTime():st+3600e3;if(en>now)list.push({s,v,st,live:st<=now})}}
   list.sort((a,b)=>a.st-b.st);
-  if(!list.length)return;
+  window.__up=list;mergeNext();
+  if(!list.length||!$('joinBox').classList.contains('hide'))return;
   $('upcomingBox').innerHTML=`<div class="section-head" style="margin-top:6px"><div><h2>📅 حصصي القادمة <span class="en">Upcoming classes</span></h2></div></div><div class="tasks">`+list.slice(0,3).map(({s,v,live})=>`<div class="task"><div class="ic">🎥</div><div class="tb"><strong>${esc(v.title||'حصة')}</strong><div class="meta">${esc(s.name_ar)}</div><div class="meta">${live?'<b style="color:var(--g)">● الآن · Live</b>':'🗓 '+esc(fmt(v.starts_at))}</div></div>${validUrl(v.meeting_url)?`<a class="go" target="_blank" rel="noopener" href="${esc(v.meeting_url)}">دخول<span class="en" style="color:rgba(255,255,255,.8)">Join</span></a>`:''}</div>`).join('')+'</div>';
   $('upcomingBox').classList.remove('hide');
 }
@@ -242,6 +268,25 @@ async function showView(view,btn){
 document.addEventListener('click',e=>{const b=e.target.closest('.tool');if(b)showView(b.dataset.view,b)});
 $('backToSubjects').addEventListener('click',()=>{currentSubject=null;$('subjectsGrid').classList.remove('subject-open');document.querySelectorAll('.subject').forEach(x=>{x.classList.remove('active');x.classList.remove('hide')});$('workspace').classList.add('hide');document.querySelectorAll('.tool').forEach(x=>x.classList.remove('active'));$('contentPanel').innerHTML='<div class="empty">اختر إحدى أدوات المادة أعلاه.</div>';$('subjectsGrid').scrollIntoView({behavior:'smooth',block:'start'});});
 $('logoutBtn').addEventListener('click',()=>{localStorage.removeItem(PORTAL_KEY);localStorage.removeItem(ADMIN_KEY);location.replace('../index.html')});
+/* ---------- لوحة مختصرة أعلى الصفحة ---------- */
+function mergeNext(){
+  const box=$('joinBox');if(box.classList.contains('hide'))return;
+  const n=(window.__up||[])[0];box.querySelector('.next')?.remove();if(!n)return;
+  const t=n.live?'🔴 الحصة مباشرة الآن · Live now':'📅 الحصة القادمة · Next: '+esc(fmt(n.v.starts_at));
+  box.firstElementChild?.insertAdjacentHTML('beforeend',`<div class="next">${t}</div>`);
+}
+function go(id){const el=$(id);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});}
+function renderQuick(){
+  const items=window.__tasks;if(!items)return;
+  const now=Date.now(),late=items.filter(i=>i.due<now).length,lv=window.__lv,subs=(portal?.subjects||[]).length;
+  $('quick').innerHTML=
+    `<button class="qt${late?' alert':''}" type="button" data-go="tasksHead"><span class="qi">📌</span><div><b>${items.length||'✓'}</b><span>${items.length?(late?late+' متأخر · Overdue':'مطلوب مني · To do'):'لا شيء مطلوب · All done'}</span></div></button>`+
+    (lv?`<button class="qt" type="button" data-go="joinBox"><span class="qi">🎥</span><div><b>${esc(hm(lv.class_start)||'—')}</b><span>حصتي · ${esc(lv.name_ar)}</span></div></button>`
+       :`<button class="qt" type="button" data-go="upcomingBox"><span class="qi">🎥</span><div><b>${(window.__up||[]).length}</b><span>حصص قادمة · Classes</span></div></button>`)+
+    `<button class="qt" type="button" data-go="subjectsHead"><span class="qi">📚</span><div><b>${subs}</b><span>موادي · Subjects</span></div></button>`;
+  $('quick').classList.remove('hide');
+  $('quick').querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>go(b.dataset.go));
+}
 init();
 })();
 </script>
