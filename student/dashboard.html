@@ -68,6 +68,7 @@ h2 .en,h1 .en{display:inline;margin-right:8px}
   </section>
 
   <section id="joinBox" class="joinbox hide"></section>
+  <section id="upcomingBox" class="hide" style="margin-top:14px"></section>
   <div class="section-head" id="tasksHead"><div><h2>📌 مطلوب مني <span class="en">My Tasks</span></h2><p>الواجبات والاختبارات التي لم تُسلَّم بعد · Not submitted yet</p></div><span class="badge" id="tasksCount">—</span></div>
   <section id="tasksList" class="tasks"><div class="empty">جارٍ التحميل... · Loading...</div></section>
   <div class="section-head"><div><h2>📚 موادي الدراسية <span class="en">My Subjects</span></h2><p>اختر المادة لتفتح الواجبات والاختبارات والملفات · Choose a subject</p></div><span class="badge" id="subjectCount">0 مواد</span></div>
@@ -188,6 +189,7 @@ async function loadTasks(){
     }
   }
   items.sort((x,y)=>x.due-y.due);
+  renderUpcoming(subs,now);
   $('tasksCount').textContent=items.length?items.length+' مطلوب':'✓';
   if(!items.length){$('tasksList').innerHTML='<div class="alldone">🎉 لا يوجد شيء مطلوب منك الآن — أحسنت!<span class="en">Nothing due right now. Well done!</span></div>';return}
   $('tasksList').innerHTML=items.map(({s,a,quiz,due})=>{
@@ -197,6 +199,15 @@ async function loadTasks(){
       <div class="meta due">${a.due_at?(late?'⏰ انتهى الموعد · Overdue — ':'📅 آخر موعد · Due: ')+esc(fmt(a.due_at)):'بدون موعد · No due date'}</div></div>
       <a class="go" href="../student-assessment.html?recipient_id=${encodeURIComponent(a.recipient_id)}">ابدأ ▶<span class="en" style="color:rgba(255,255,255,.8)">Start</span></a></div>`;
   }).join('');
+}
+/* ---------- حصصي القادمة ---------- */
+function renderUpcoming(subs,now){
+  const list=[];
+  for(const s of subs){const r=resourcesCache.get(Number(s.class_subject_id));for(const v of (r?.virtual_lessons||[])){const st=new Date(v.starts_at).getTime();const en=v.ends_at?new Date(v.ends_at).getTime():st+3600e3;if(en>now)list.push({s,v,st,live:st<=now})}}
+  list.sort((a,b)=>a.st-b.st);
+  if(!list.length)return;
+  $('upcomingBox').innerHTML=`<div class="section-head" style="margin-top:6px"><div><h2>📅 حصصي القادمة <span class="en">Upcoming classes</span></h2></div></div><div class="tasks">`+list.slice(0,3).map(({s,v,live})=>`<div class="task"><div class="ic">🎥</div><div class="tb"><strong>${esc(v.title||'حصة')}</strong><div class="meta">${esc(s.name_ar)}</div><div class="meta">${live?'<b style="color:var(--g)">● الآن · Live</b>':'🗓 '+esc(fmt(v.starts_at))}</div></div>${validUrl(v.meeting_url)?`<a class="go" target="_blank" rel="noopener" href="${esc(v.meeting_url)}">دخول<span class="en" style="color:rgba(255,255,255,.8)">Join</span></a>`:''}</div>`).join('')+'</div>';
+  $('upcomingBox').classList.remove('hide');
 }
 function currentResources(){return currentSubject?resourcesCache.get(Number(currentSubject.class_subject_id))||null:null}
 function materialsOf(types){const r=currentResources();return (r?.materials||[]).filter(x=>types.includes(String(x.material_type||'').toLowerCase()))}
