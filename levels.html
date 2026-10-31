@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>المستويات والدروس الخاصة | رشيد العربية</title>
+<title>الحصص الافتراضية | رشيد العربية</title>
 <style>
 :root{--green:#07583f;--green2:#0b6c50;--gold:#c99a2e;--bg:#f4f8f6;--line:#dbe7e1;--muted:#62756d;--danger:#b42318;--lv:#07583f}
 *{box-sizing:border-box}
@@ -77,9 +77,10 @@ dialog label{font-size:12px;color:var(--muted);display:grid;gap:4px}
 <body>
 <header>
   <div class="wrap top">
-    <div><h1>المستويات والدروس الخاصة</h1><small>متابعة طلاب العربية لغير الناطقين بها</small></div>
+    <div><h1>🎥 الحصص الافتراضية</h1><small>المستويات والدروس الخاصة — العربية لغير الناطقين بها</small></div>
     <div style="display:flex;gap:8px">
-      <a class="btn btn-light" href="admin-hub.html">مركز الإدارة</a>
+      <a class="btn btn-light" href="teacher-dashboard.html">لوحة المعلم</a>
+      <a class="btn btn-light" href="admin-hub.html" id="hubLink">مركز الإدارة</a>
       <button class="btn btn-light" id="logoutBtn">تسجيل الخروج</button>
     </div>
   </div>
@@ -97,6 +98,8 @@ dialog label{font-size:12px;color:var(--muted);display:grid;gap:4px}
       </div>
       <div style="display:flex;gap:8px;flex-wrap:wrap">
         <a class="btn btn-primary" id="lvLink" target="_blank" rel="noopener">🎥 دخول الحصة</a>
+        <button class="btn btn-soft" id="waBtn">📲 إرسال عبر واتساب</button>
+        <a class="btn btn-soft" id="toolsLink">🧰 أدوات المستوى</a>
         <button class="btn btn-soft" id="editLevelBtn">⚙️ إعدادات المستوى</button>
       </div>
     </div>
@@ -113,7 +116,9 @@ dialog label{font-size:12px;color:var(--muted);display:grid;gap:4px}
       <button class="btn btn-soft" id="allPresentBtn">✔ الكل حاضر</button>
       <input type="search" id="search" placeholder="بحث بالاسم أو الصف...">
       <button class="btn btn-primary" id="addStudentBtn">+ إضافة طالب</button>
-      <button class="btn btn-light" id="exportBtn">⬇ تصدير CSV</button>
+      <button class="btn btn-light" data-export="pdf">🖨️ PDF</button>
+      <button class="btn btn-light" data-export="word">📝 Word</button>
+      <button class="btn btn-light" data-export="csv">⬇ CSV</button>
     </div>
 
     <div style="overflow-x:auto">
@@ -155,6 +160,19 @@ dialog label{font-size:12px;color:var(--muted);display:grid;gap:4px}
   </form>
 </dialog>
 
+<!-- نافذة واتساب -->
+<dialog id="waDlg">
+  <form method="dialog">
+    <h3>📲 رسالة الحصة</h3>
+    <textarea id="waText" rows="14" style="direction:rtl;font-size:13px;line-height:1.7"></textarea>
+    <div class="actions">
+      <a class="btn btn-primary" id="waSend" target="_blank" rel="noopener">فتح واتساب</a>
+      <button class="btn btn-light" type="button" id="waCopy">نسخ الرسالة</button>
+      <button class="btn btn-light" value="cancel">إغلاق</button>
+    </div>
+  </form>
+</dialog>
+
 <!-- نافذة إعدادات المستوى -->
 <dialog id="levelDlg">
   <form method="dialog" id="levelForm">
@@ -189,6 +207,7 @@ dialog label{font-size:12px;color:var(--muted);display:grid;gap:4px}
   </form>
 </dialog>
 
+<script src="assets/js/rasheed-core.js"></script>
 <script>
 (function(){
 const SUPABASE_URL='https://wcyamoqmpwpribsgspjn.supabase.co';
@@ -319,7 +338,7 @@ function rateFor(id){
 function statusOn(id,date){return attendance.find(a=>a.student_id===id&&a.session_date===date)?.status||'';}
 
 function render(){
-  const priv=current.is_private;
+  const priv=current.is_private, pending=current.id==='PENDING';
   const date=$('dateInput').value;
   const list=levelStudents();
   const all=students.filter(s=>s.level_id===current.id);
@@ -329,7 +348,12 @@ function render(){
   const link=current.meeting_url;
   $('lvLink').classList.toggle('hide',!link);
   if(link) $('lvLink').href=link;
-  $('allPresentBtn').classList.toggle('hide',priv);
+  $('allPresentBtn').classList.toggle('hide',priv||pending);
+  $('dateInput').parentElement.classList.toggle('hide',priv||pending);
+  $('waBtn').classList.toggle('hide',priv||pending);
+  $('toolsLink').classList.toggle('hide',pending);
+  $('toolsLink').href='teacher-dashboard.html#level='+encodeURIComponent(current.name_ar);
+  if(pending) $('lvTime').textContent='🧭 طلاب لم يُحدَّد مستواهم بعد — اضغط «تعديل» لنقل الطالب إلى مستواه';
 
   // الإحصائيات
   const ids=new Set(all.map(s=>s.id));
@@ -343,7 +367,6 @@ function render(){
   $('l2').textContent=priv?'حصص قادمة':'حاضر في التاريخ المختار';
   $('l3').textContent=priv?'حصص تمت':'غائب';
   $('l4').textContent=priv?'ملغاة / لم يحضر':'نسبة الحضور العامة';
-  $('dateInput').parentElement.classList.toggle('hide',priv);
   if(priv){
     const mine=lessons.filter(l=>ids.has(l.student_id));
     $('sPresent').textContent=mine.filter(l=>l.status==='scheduled'&&new Date(l.lesson_at)>Date.now()).length;
@@ -353,6 +376,7 @@ function render(){
 
   $('thead').innerHTML=priv
     ? '<tr><th>#</th><th>الطالب</th><th>الدولة / التوقيت</th><th>الحصص</th><th class="hide-sm">الحصة القادمة</th><th></th></tr>'
+    : pending ? '<tr><th>#</th><th>الطالب</th><th>الصف</th><th>المنهج</th><th></th></tr>'
     : '<tr><th>#</th><th>الطالب</th><th>الصف</th><th class="hide-sm">المنهج</th><th>الحضور ('+esc(date)+')</th><th>النسبة</th><th></th></tr>';
 
   if(!list.length){
@@ -361,7 +385,7 @@ function render(){
   }
 
   $('tbody').innerHTML=list.map((s,i)=>{
-    const note=s.notes?`<span class="note">⚠ ${esc(s.notes)}</span>`:'';
+    const note=(s.notes?`<span class="note">⚠ ${esc(s.notes)}</span>`:'')+(!s.student_id&&'student_id' in s?'<span class="note">⚠ غير مربوط بسجل الطلاب — لن تصله الواجبات</span>':'');
     if(priv){
       const mine=lessons.filter(l=>l.student_id===s.id);
       const done=mine.filter(l=>l.status==='done').length;
@@ -379,6 +403,7 @@ function render(){
         <td style="white-space:nowrap"><button class="btn btn-soft" data-lessonadd="${s.id}">+ حصة</button> <button class="btn btn-light" data-edit="${s.id}">تعديل</button></td>
       </tr>`;
     }
+    if(pending) return `<tr><td>${i+1}</td><td><b>${esc(s.student_name)}</b>${note}</td><td><span class="tag">${esc(s.school_class||'—')}</span></td><td>${esc(s.curriculum||'')}</td><td><button class="btn btn-primary" data-edit="${s.id}">تحديد المستوى</button></td></tr>`;
     const st=statusOn(s.id,date);
     const r=rateFor(s.id);
     const color=r==null?'':(r>=90?'#137a3c':r>=75?'#a15c00':'#b42318');
@@ -524,24 +549,35 @@ $('lessonDlg').addEventListener('close',async()=>{
   catch(e){fail(e);}
 });
 
-/* ---------- التصدير ---------- */
-$('exportBtn').onclick=()=>{
+/* ---------- التصدير PDF / Word / CSV ---------- */
+document.querySelectorAll('[data-export]').forEach(btn=>btn.onclick=()=>{
   const priv=current.is_private;
-  const head=priv?['الاسم','الدولة','المنطقة الزمنية','التواصل','الباقة','الحصص المنجزة','ملاحظات']:['الاسم','الصف','المنهج','نسبة الحضور','حاضر','غائب','متأخر','بعذر','ملاحظات'];
-  const rows=levelStudents().map(s=>{
-    if(priv){const done=lessons.filter(l=>l.student_id===s.id&&l.status==='done').length;return [s.student_name,s.country,s.time_zone,s.contact,s.lessons_package,done,s.notes];}
+  const head=priv?['#','الاسم','الدولة','المنطقة الزمنية','التواصل','الباقة','الحصص المنجزة','ملاحظات']:['#','الاسم','الصف','المنهج','نسبة الحضور','حاضر','غائب','متأخر','بعذر','ملاحظات'];
+  const rows=levelStudents().map((s,i)=>{
+    if(priv){const done=lessons.filter(l=>l.student_id===s.id&&l.status==='done').length;return [i+1,s.student_name,s.country,s.time_zone,s.contact,s.lessons_package,done,s.notes];}
     const a=attendance.filter(x=>x.student_id===s.id);const c=k=>a.filter(x=>x.status===k).length;const r=rateFor(s.id);
-    return [s.student_name,s.school_class,s.curriculum,r==null?'':r+'%',c('present'),c('absent'),c('late'),c('excused'),s.notes];
+    return [i+1,s.student_name,s.school_class,s.curriculum,r==null?'':r+'%',c('present'),c('absent'),c('late'),c('excused'),s.notes];
   });
-  const csv='\ufeff'+[head,...rows].map(r=>r.map(x=>'"'+String(x??'').replace(/"/g,'""')+'"').join(',')).join('\n');
-  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download=(current.name_en||current.id).replace(/\s+/g,'_')+'_'+todayISO()+'.csv';a.click();
-};
+  window.Rasheed.exportTable(btn.dataset.export,{title:'🎥 '+current.name_ar+(current.name_en?' — '+current.name_en:''),head,rows,filename:(current.name_en||current.id).replace(/\s+/g,'_')});
+});
+
+/* ---------- رسالة واتساب ---------- */
+const DOTS={A:'🟢',B:'🔵',ADV:'🟠',PRIVATE:'🟣',PENDING:'⚪'};
+function waMessage(){
+  const t=current.class_start?`⏰ ${hm(current.class_start)} – ${hm(current.class_end)}`:'';
+  const lines=levelStudents().map(s=>`* ${s.student_name}${s.school_class?' — '+s.school_class:''}${s.curriculum?' — '+s.curriculum:''}`);
+  return [`${DOTS[current.id]||'🎥'} ${current.name_ar}${current.name_en?' — '+current.name_en:''}`,'📚 حصة اللغة العربية لغير الناطقين بها',t,...lines,current.meeting_url?'🔗 رابط الحصة:':'',current.meeting_url||''].filter(Boolean).join('\n');
+}
+$('waBtn').onclick=()=>{const m=waMessage();$('waText').value=m;$('waSend').href='https://wa.me/?text='+encodeURIComponent(m);$('waDlg').showModal();};
+$('waText').oninput=()=>{$('waSend').href='https://wa.me/?text='+encodeURIComponent($('waText').value);};
+$('waCopy').onclick=async()=>{try{await navigator.clipboard.writeText($('waText').value);toast('تم نسخ الرسالة');}catch{$('waText').select();document.execCommand('copy');toast('تم نسخ الرسالة');}};
 
 /* ---------- عام ---------- */
 $('search').oninput=render;
 $('dateInput').value=todayISO();
 $('dateInput').onchange=render;
 $('logoutBtn').onclick=()=>{localStorage.removeItem(ADMIN_KEY);localStorage.removeItem(PORTAL_KEY);location.href='index.html';};
+window.Rasheed.isAdmin().then(ok=>{if(!ok)$('hubLink').classList.add('hide')});
 if(!readSession()) fail(new Error('NO_SESSION'));
 else loadAll().catch(fail);
 })();
