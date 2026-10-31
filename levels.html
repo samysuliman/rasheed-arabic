@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>المستويات والدروس الخاصة | رشيد العربية</title>
+<style>
+:root{--green:#07583f;--green2:#0b6c50;--gold:#c99a2e;--bg:#f4f8f6;--line:#dbe7e1;--muted:#62756d;--danger:#b42318;--lv:#07583f}
+*{box-sizing:border-box}
+body{margin:0;font-family:Tahoma,Arial,sans-serif;background:var(--bg);color:#17392c}
+header{background:linear-gradient(135deg,var(--green),#064631);color:#fff;padding:14px 0}
+.wrap{width:min(1150px,94%);margin:auto}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.top h1{margin:0;font-size:19px}
+.top small{opacity:.8}
+.btn{border:0;border-radius:10px;padding:9px 13px;font:inherit;font-size:13px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.btn-light{background:#fff;color:var(--green);border:1px solid var(--line)}
+.btn-primary{background:var(--lv);color:#fff}
+.btn-soft{background:#eef5f1;color:var(--green)}
+.btn-danger{background:#fff0ef;color:var(--danger)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+header .btn-light{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.3)}
+.tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0}
+.tab{background:#fff;border:2px solid var(--line);border-radius:16px;padding:13px;cursor:pointer;text-align:right;font:inherit}
+.tab b{display:block;font-size:15px}
+.tab span{color:var(--muted);font-size:12px}
+.tab.active{border-color:var(--c);box-shadow:0 6px 18px rgba(0,0,0,.07)}
+.tab .dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--c);margin-left:6px}
+.panel{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px;margin-bottom:16px}
+.panel-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;border-bottom:3px solid var(--lv);padding-bottom:12px;margin-bottom:14px}
+.panel-head h2{margin:0 0 4px;color:var(--lv);font-size:20px}
+.meta{color:var(--muted);font-size:13px;display:flex;gap:14px;flex-wrap:wrap}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
+.stat{background:#f8fbf9;border:1px solid var(--line);border-radius:12px;padding:10px}
+.stat span{font-size:11px;color:var(--muted)}
+.stat b{display:block;font-size:22px;color:var(--lv)}
+.toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+input,select,textarea{font:inherit;font-size:13px;border:1px solid var(--line);border-radius:9px;padding:8px 10px;background:#fff}
+.toolbar input[type=search]{flex:1;min-width:160px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{padding:9px 7px;border-bottom:1px solid #edf3f0;text-align:right;vertical-align:middle}
+th{background:#f6faf8;color:var(--muted);font-weight:700;font-size:12px}
+.att{display:inline-flex;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.att button{border:0;background:#fff;padding:6px 9px;cursor:pointer;font:inherit;font-size:12px;color:#55675f}
+.att button+button{border-right:1px solid var(--line)}
+.att button.on[data-s=present]{background:#e6f6ec;color:#137a3c;font-weight:700}
+.att button.on[data-s=absent]{background:#fdecea;color:var(--danger);font-weight:700}
+.att button.on[data-s=late]{background:#fff6e0;color:#a15c00;font-weight:700}
+.att button.on[data-s=excused]{background:#eef2ff;color:#3448c5;font-weight:700}
+.pct{font-weight:700}
+.tag{display:inline-block;background:#f1f5f3;border-radius:7px;padding:2px 7px;font-size:11px;color:#4d6158}
+.note{color:#a15c00;font-size:11px;display:block;margin-top:3px}
+.muted{color:var(--muted)}
+.hide{display:none!important}
+.alert{padding:12px 14px;border-radius:12px;margin:14px 0;font-size:13px;line-height:1.7}
+.alert.err{background:#fff2f2;border:1px solid #efc7c7;color:var(--danger)}
+.alert.ok{background:#eefaf2;border:1px solid #bfe5cc;color:#137a3c}
+.lessons{margin-top:6px;font-size:12px}
+.lessons li{margin:3px 0}
+dialog{border:0;border-radius:18px;padding:0;width:min(520px,94vw);box-shadow:0 20px 60px rgba(0,0,0,.25)}
+dialog form{padding:18px;display:grid;gap:10px}
+dialog h3{margin:0 0 4px;color:var(--green)}
+dialog label{font-size:12px;color:var(--muted);display:grid;gap:4px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.actions{display:flex;gap:8px;justify-content:flex-start;margin-top:6px}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#17392c;color:#fff;padding:10px 16px;border-radius:12px;font-size:13px;z-index:50}
+@media(max-width:760px){
+  .tabs{grid-template-columns:repeat(2,1fr)}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .hide-sm{display:none}
+  .row2{grid-template-columns:1fr}
+  th,td{padding:8px 4px}
+  .att button{padding:6px 6px}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap top">
+    <div><h1>المستويات والدروس الخاصة</h1><small>متابعة طلاب العربية لغير الناطقين بها</small></div>
+    <div style="display:flex;gap:8px">
+      <a class="btn btn-light" href="admin-hub.html">مركز الإدارة</a>
+      <button class="btn btn-light" id="logoutBtn">تسجيل الخروج</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div id="globalMsg" class="alert err hide"></div>
+  <div class="tabs" id="tabs"></div>
+
+  <section class="panel hide" id="panel">
+    <div class="panel-head">
+      <div>
+        <h2 id="lvTitle"></h2>
+        <div class="meta"><span id="lvTime"></span><span id="lvCount"></span></div>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <a class="btn btn-primary" id="lvLink" target="_blank" rel="noopener">🎥 دخول الحصة</a>
+        <button class="btn btn-soft" id="editLevelBtn">⚙️ إعدادات المستوى</button>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><span>عدد الطلاب</span><b id="sTotal">0</b></div>
+      <div class="stat"><span id="l2">حاضر في التاريخ المختار</span><b id="sPresent">0</b></div>
+      <div class="stat"><span id="l3">غائب</span><b id="sAbsent">0</b></div>
+      <div class="stat"><span id="l4">نسبة الحضور العامة</span><b id="sRate">—</b></div>
+    </div>
+
+    <div class="toolbar">
+      <label class="muted" style="font-size:12px">تاريخ الحصة <input type="date" id="dateInput"></label>
+      <button class="btn btn-soft" id="allPresentBtn">✔ الكل حاضر</button>
+      <input type="search" id="search" placeholder="بحث بالاسم أو الصف...">
+      <button class="btn btn-primary" id="addStudentBtn">+ إضافة طالب</button>
+      <button class="btn btn-light" id="exportBtn">⬇ تصدير CSV</button>
+    </div>
+
+    <div style="overflow-x:auto">
+      <table>
+        <thead id="thead"></thead>
+        <tbody id="tbody"><tr><td class="muted">جارٍ التحميل...</td></tr></tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<!-- نافذة الطالب -->
+<dialog id="studentDlg">
+  <form method="dialog" id="studentForm">
+    <h3 id="studentDlgTitle">إضافة طالب</h3>
+    <label>اسم الطالب<input name="student_name" required></label>
+    <div class="row2">
+      <label>المستوى<select name="level_id" id="levelSelect"></select></label>
+      <label>المنهج<select name="curriculum"><option value="">—</option><option>بريطاني</option><option>أمريكي</option><option>آخر</option></select></label>
+    </div>
+    <div class="row2 school-only">
+      <label>الصف والشعبة في المدرسة<input name="school_class" placeholder="مثال: Y3B أو G6B"></label>
+      <label>&nbsp;</label>
+    </div>
+    <div class="row2 private-only">
+      <label>الدولة<input name="country" placeholder="مثال: بريطانيا"></label>
+      <label>المنطقة الزمنية<select name="time_zone" id="tzSelect"></select></label>
+    </div>
+    <div class="row2 private-only">
+      <label>التواصل (واتساب / بريد)<input name="contact"></label>
+      <label>عدد الحصص في الباقة<input name="lessons_package" type="number" min="0"></label>
+    </div>
+    <label>ملاحظات<textarea name="notes" rows="2"></textarea></label>
+    <div class="actions">
+      <button class="btn btn-primary" value="save" id="saveStudentBtn">حفظ</button>
+      <button class="btn btn-light" value="cancel" formnovalidate>إلغاء</button>
+      <button class="btn btn-danger" type="button" id="archiveStudentBtn" style="margin-right:auto">إيقاف الطالب</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- نافذة إعدادات المستوى -->
+<dialog id="levelDlg">
+  <form method="dialog" id="levelForm">
+    <h3>إعدادات المستوى</h3>
+    <div class="row2">
+      <label>بداية الحصة<input type="time" name="class_start"></label>
+      <label>نهاية الحصة<input type="time" name="class_end"></label>
+    </div>
+    <label>رابط الحصة (Zoom / Meet)<input type="url" name="meeting_url" placeholder="https://..."></label>
+    <div class="actions">
+      <button class="btn btn-primary" value="save">حفظ</button>
+      <button class="btn btn-light" value="cancel" formnovalidate>إلغاء</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- نافذة الحصة الخاصة -->
+<dialog id="lessonDlg">
+  <form method="dialog" id="lessonForm">
+    <h3 id="lessonDlgTitle">جدولة حصة خاصة</h3>
+    <div class="row2">
+      <label>التاريخ والوقت (بتوقيت السعودية)<input type="datetime-local" name="lesson_at" required></label>
+      <label>المدة بالدقائق<input type="number" name="duration_min" value="30" min="10"></label>
+    </div>
+    <div class="muted" id="lessonLocalTime" style="font-size:12px"></div>
+    <label>موضوع الحصة<input name="topic"></label>
+    <label>رابط الحصة<input type="url" name="meeting_url" placeholder="https://..."></label>
+    <div class="actions">
+      <button class="btn btn-primary" value="save">حفظ</button>
+      <button class="btn btn-light" value="cancel" formnovalidate>إلغاء</button>
+    </div>
+  </form>
+</dialog>
+
+<script>
+(function(){
+const SUPABASE_URL='https://wcyamoqmpwpribsgspjn.supabase.co';
+const SUPABASE_KEY='sb_publishable_3eJET0uhZw4D4DowMK13fQ_oWK3PdIQ';
+const ADMIN_KEY='rasheed_arabic_admin_session_v1';
+const PORTAL_KEY='rasheed_arabic_portal_session_v1';
+const SCHOOL_TZ='Asia/Riyadh';
+const TZ_LIST=['Asia/Riyadh','Asia/Dubai','Asia/Kuwait','Asia/Qatar','Africa/Cairo','Europe/London','Europe/Paris','Europe/Berlin','Europe/Istanbul','America/New_York','America/Chicago','America/Los_Angeles','America/Toronto','Asia/Karachi','Asia/Kolkata','Asia/Jakarta','Asia/Kuala_Lumpur','Australia/Sydney'];
+const STATUS={present:'حاضر',absent:'غائب',late:'متأخر',excused:'بعذر'};
+const LESSON_STATUS={scheduled:'مجدولة',done:'تمت',cancelled:'ملغاة',no_show:'لم يحضر'};
+
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+let levels=[],students=[],attendance=[],lessons=[];
+let current=null,editing=null,lessonFor=null;
+
+/* ---------- الجلسة مع تجديد تلقائي للرمز ---------- */
+function readSession(){
+  try{return JSON.parse(localStorage.getItem(ADMIN_KEY)||'null')||JSON.parse(localStorage.getItem(PORTAL_KEY)||'null');}catch{return null;}
+}
+function writeSession(s){
+  try{
+    if(localStorage.getItem(ADMIN_KEY)) localStorage.setItem(ADMIN_KEY,JSON.stringify(s));
+    const p=JSON.parse(localStorage.getItem(PORTAL_KEY)||'null');
+    if(p) localStorage.setItem(PORTAL_KEY,JSON.stringify({...p,...s}));
+  }catch{}
+}
+function tokenExpired(s){
+  try{const p=JSON.parse(atob(s.access_token.split('.')[1].replace(/-/g,'+').replace(/_/g,'/')));return p.exp*1000<Date.now()+60000;}catch{return false;}
+}
+async function refresh(s){
+  if(!s?.refresh_token) return s;
+  const r=await fetch(SUPABASE_URL+'/auth/v1/token?grant_type=refresh_token',{method:'POST',headers:{apikey:SUPABASE_KEY,'Content-Type':'application/json'},body:JSON.stringify({refresh_token:s.refresh_token})});
+  if(!r.ok) return s;
+  const n=await r.json();
+  const merged={...s,...n};
+  writeSession(merged);
+  return merged;
+}
+async function api(path,opt={}){
+  let s=readSession();
+  if(!s?.access_token) throw new Error('NO_SESSION');
+  if(tokenExpired(s)) s=await refresh(s);
+  const headers={apikey:SUPABASE_KEY,Authorization:'Bearer '+s.access_token,...(opt.body?{'Content-Type':'application/json'}:{}),...(opt.headers||{})};
+  let r=await fetch(SUPABASE_URL+path,{...opt,headers});
+  if(r.status===401){
+    s=await refresh(s);
+    headers.Authorization='Bearer '+s.access_token;
+    r=await fetch(SUPABASE_URL+path,{...opt,headers});
+  }
+  if(!r.ok){const t=await r.text();throw new Error(t||('HTTP '+r.status));}
+  return r.status===204?null:r.json().catch(()=>null);
+}
+const get=p=>api('/rest/v1/'+p);
+const post=(t,b,prefer='return=representation')=>api('/rest/v1/'+t,{method:'POST',body:JSON.stringify(b),headers:{Prefer:prefer}});
+const patch=(t,q,b)=>api('/rest/v1/'+t+'?'+q,{method:'PATCH',body:JSON.stringify(b),headers:{Prefer:'return=representation'}});
+const del=(t,q)=>api('/rest/v1/'+t+'?'+q,{method:'DELETE'});
+
+function toast(msg){const d=document.createElement('div');d.className='toast';d.textContent=msg;document.body.appendChild(d);setTimeout(()=>d.remove(),2200);}
+function fail(e){
+  console.error(e);
+  const m=String(e?.message||e);
+  let text='حدث خطأ: '+m.slice(0,200);
+  if(m==='NO_SESSION') text='انتهت الجلسة. سجّل الدخول من الصفحة الرئيسية ثم ارجع لهذه الصفحة.';
+  else if(/relation .* does not exist|Could not find the table|PGRST205/.test(m)) text='جداول المستويات غير موجودة بعد في قاعدة البيانات. شغّل ملف supabase/levels.sql في Supabase > SQL Editor.';
+  else if(/Failed to fetch/.test(m)) text='تعذر الاتصال بقاعدة البيانات. تأكد أن مشروع Supabase غير متوقف (Paused).';
+  else if(/row-level security|permission denied|42501/.test(m)) text='هذا الحساب لا يملك صلاحية إدارة المستويات.';
+  $('globalMsg').textContent=text;$('globalMsg').classList.remove('hide');
+}
+
+/* ---------- الوقت ---------- */
+function todayISO(){return new Intl.DateTimeFormat('en-CA',{timeZone:SCHOOL_TZ}).format(new Date());}
+function hm(t){if(!t) return '';const [h,m]=t.split(':').map(Number);const h12=((h+11)%12)+1;return h12+':'+String(m).padStart(2,'0');}
+function fmtIn(tz,date){try{return new Intl.DateTimeFormat('ar',{timeZone:tz,weekday:'short',day:'numeric',month:'short',hour:'numeric',minute:'2-digit'}).format(date);}catch{return '';}}
+// datetime-local بتوقيت السعودية (UTC+3 ثابت بدون توقيت صيفي) ← ISO
+function riyadhLocalToISO(v){return v?new Date(v+':00+03:00').toISOString():null;}
+function isoToRiyadhLocal(iso){const d=new Date(new Date(iso).getTime()+3*3600e3);return d.toISOString().slice(0,16);}
+
+/* ---------- التحميل ---------- */
+async function loadAll(){
+  $('globalMsg').classList.add('hide');
+  [levels,students]=await Promise.all([
+    get('arabic_levels?select=*&order=sort_order'),
+    get('level_students?select=*&active=eq.true&order=student_name')
+  ]);
+  const ids=students.map(s=>s.id);
+  attendance=ids.length?await get('level_attendance?select=student_id,session_date,status'):[];
+  lessons=await get('private_lessons?select=*&order=lesson_at');
+  $('levelSelect').innerHTML=levels.map(l=>`<option value="${esc(l.id)}">${esc(l.name_ar)}</option>`).join('');
+  $('tzSelect').innerHTML='<option value="">—</option>'+TZ_LIST.map(z=>`<option>${z}</option>`).join('');
+  renderTabs();
+  const want=(location.hash||'').slice(1);
+  selectLevel(levels.find(l=>l.id===want)?.id||current?.id||levels[0]?.id);
+}
+
+function renderTabs(){
+  $('tabs').innerHTML=levels.map(l=>{
+    const n=students.filter(s=>s.level_id===l.id).length;
+    const t=l.is_private?'من أي دولة':(l.class_start?hm(l.class_start)+' – '+hm(l.class_end):'');
+    return `<button class="tab ${current?.id===l.id?'active':''}" style="--c:${esc(l.color)}" data-id="${esc(l.id)}"><b><span class="dot"></span>${esc(l.name_ar)}</b><span>${n} طالب · ${esc(t)}</span></button>`;
+  }).join('');
+  $('tabs').querySelectorAll('.tab').forEach(b=>b.onclick=()=>selectLevel(b.dataset.id));
+}
+
+function selectLevel(id){
+  current=levels.find(l=>l.id===id);
+  if(!current) return;
+  history.replaceState(null,'','#'+id);
+  document.documentElement.style.setProperty('--lv',current.color||'#07583f');
+  $('panel').classList.remove('hide');
+  renderTabs();render();
+}
+
+/* ---------- العرض ---------- */
+function levelStudents(){
+  const q=$('search').value.trim().toLowerCase();
+  return students.filter(s=>s.level_id===current.id&&(!q||(s.student_name+' '+(s.school_class||'')+' '+(s.country||'')).toLowerCase().includes(q)))
+    .sort((a,b)=>gradeKey(a.school_class)-gradeKey(b.school_class)||a.student_name.localeCompare(b.student_name,'ar'));
+}
+function gradeKey(c){const m=/(\d+)/.exec(c||'');return m?+m[1]:99;}
+function rateFor(id){
+  const rows=attendance.filter(a=>a.student_id===id);
+  if(!rows.length) return null;
+  const ok=rows.filter(a=>a.status==='present'||a.status==='late'||a.status==='excused').length;
+  return Math.round(ok*100/rows.length);
+}
+function statusOn(id,date){return attendance.find(a=>a.student_id===id&&a.session_date===date)?.status||'';}
+
+function render(){
+  const priv=current.is_private;
+  const date=$('dateInput').value;
+  const list=levelStudents();
+  const all=students.filter(s=>s.level_id===current.id);
+  $('lvTitle').textContent=current.name_ar+(current.name_en?' — '+current.name_en:'');
+  $('lvTime').textContent=priv?'🌍 طلاب من خارج المدرسة · كل طالب بتوقيته':(current.class_start?'⏰ '+hm(current.class_start)+' – '+hm(current.class_end)+' (بتوقيت السعودية)':'⏰ لم يُحدد موعد');
+  $('lvCount').textContent='👥 '+all.length+' طالب';
+  const link=current.meeting_url;
+  $('lvLink').classList.toggle('hide',!link);
+  if(link) $('lvLink').href=link;
+  $('allPresentBtn').classList.toggle('hide',priv);
+
+  // الإحصائيات
+  const ids=new Set(all.map(s=>s.id));
+  const day=attendance.filter(a=>ids.has(a.student_id)&&a.session_date===date);
+  const allAtt=attendance.filter(a=>ids.has(a.student_id));
+  const okAll=allAtt.filter(a=>a.status!=='absent').length;
+  $('sTotal').textContent=all.length;
+  $('sPresent').textContent=day.filter(a=>a.status==='present'||a.status==='late').length;
+  $('sAbsent').textContent=day.filter(a=>a.status==='absent').length;
+  $('sRate').textContent=allAtt.length?Math.round(okAll*100/allAtt.length)+'%':'—';
+  $('l2').textContent=priv?'حصص قادمة':'حاضر في التاريخ المختار';
+  $('l3').textContent=priv?'حصص تمت':'غائب';
+  $('l4').textContent=priv?'ملغاة / لم يحضر':'نسبة الحضور العامة';
+  $('dateInput').parentElement.classList.toggle('hide',priv);
+  if(priv){
+    const mine=lessons.filter(l=>ids.has(l.student_id));
+    $('sPresent').textContent=mine.filter(l=>l.status==='scheduled'&&new Date(l.lesson_at)>Date.now()).length;
+    $('sAbsent').textContent=mine.filter(l=>l.status==='done').length;
+    $('sRate').textContent=mine.filter(l=>l.status==='cancelled'||l.status==='no_show').length;
+  }
+
+  $('thead').innerHTML=priv
+    ? '<tr><th>#</th><th>الطالب</th><th>الدولة / التوقيت</th><th>الحصص</th><th class="hide-sm">الحصة القادمة</th><th></th></tr>'
+    : '<tr><th>#</th><th>الطالب</th><th>الصف</th><th class="hide-sm">المنهج</th><th>الحضور ('+esc(date)+')</th><th>النسبة</th><th></th></tr>';
+
+  if(!list.length){
+    $('tbody').innerHTML=`<tr><td colspan="7" class="muted" style="text-align:center;padding:24px">${priv?'لا يوجد طلاب دروس خاصة بعد. اضغط «إضافة طالب» لإضافة أول طالب.':'لا يوجد طلاب في هذا المستوى.'}</td></tr>`;
+    return;
+  }
+
+  $('tbody').innerHTML=list.map((s,i)=>{
+    const note=s.notes?`<span class="note">⚠ ${esc(s.notes)}</span>`:'';
+    if(priv){
+      const mine=lessons.filter(l=>l.student_id===s.id);
+      const done=mine.filter(l=>l.status==='done').length;
+      const next=mine.find(l=>l.status==='scheduled'&&new Date(l.lesson_at)>Date.now()-3600e3);
+      const pkg=s.lessons_package?` / ${s.lessons_package}`:'';
+      const remain=s.lessons_package?`<span class="tag">متبقي ${Math.max(0,s.lessons_package-done)}</span>`:'';
+      const nextTxt=next?`${esc(fmtIn(SCHOOL_TZ,new Date(next.lesson_at)))} 🇸🇦${s.time_zone&&s.time_zone!==SCHOOL_TZ?'<br><span class="muted">'+esc(fmtIn(s.time_zone,new Date(next.lesson_at)))+' عند الطالب</span>':''}`:'<span class="muted">—</span>';
+      const hist=mine.slice(-4).reverse().map(l=>`<li>${esc(fmtIn(SCHOOL_TZ,new Date(l.lesson_at)))} — <select data-lesson="${l.id}">${Object.entries(LESSON_STATUS).map(([k,v])=>`<option value="${k}" ${l.status===k?'selected':''}>${v}</option>`).join('')}</select>${l.topic?' · '+esc(l.topic):''}</li>`).join('');
+      return `<tr>
+        <td>${i+1}</td>
+        <td><b>${esc(s.student_name)}</b>${s.contact?`<br><span class="muted">${esc(s.contact)}</span>`:''}${note}${hist?`<ul class="lessons">${hist}</ul>`:''}</td>
+        <td>${esc(s.country||'—')}<br><span class="muted">${esc(s.time_zone||'')}</span></td>
+        <td><b>${done}${pkg}</b> تمت ${remain}</td>
+        <td class="hide-sm">${nextTxt}</td>
+        <td style="white-space:nowrap"><button class="btn btn-soft" data-lessonadd="${s.id}">+ حصة</button> <button class="btn btn-light" data-edit="${s.id}">تعديل</button></td>
+      </tr>`;
+    }
+    const st=statusOn(s.id,date);
+    const r=rateFor(s.id);
+    const color=r==null?'':(r>=90?'#137a3c':r>=75?'#a15c00':'#b42318');
+    return `<tr>
+      <td>${i+1}</td>
+      <td><b>${esc(s.student_name)}</b>${note}</td>
+      <td><span class="tag">${esc(s.school_class||'—')}</span></td>
+      <td class="hide-sm">${esc(s.curriculum||'')}</td>
+      <td><div class="att" data-student="${s.id}">${Object.entries(STATUS).map(([k,v])=>`<button type="button" data-s="${k}" class="${st===k?'on':''}">${v}</button>`).join('')}</div></td>
+      <td class="pct" style="color:${color}">${r==null?'—':r+'%'}</td>
+      <td><button class="btn btn-light" data-edit="${s.id}">تعديل</button></td>
+    </tr>`;
+  }).join('');
+}
+
+/* ---------- الحضور ---------- */
+async function setStatus(studentId,status){
+  const date=$('dateInput').value;
+  const prev=statusOn(studentId,date);
+  try{
+    if(prev===status){
+      await del('level_attendance',`student_id=eq.${studentId}&session_date=eq.${date}`);
+      attendance=attendance.filter(a=>!(a.student_id===studentId&&a.session_date===date));
+    }else{
+      await post('level_attendance?on_conflict=student_id,session_date',{student_id:studentId,session_date:date,status,updated_at:new Date().toISOString()},'resolution=merge-duplicates,return=minimal');
+      attendance=attendance.filter(a=>!(a.student_id===studentId&&a.session_date===date));
+      attendance.push({student_id:studentId,session_date:date,status});
+    }
+    render();
+  }catch(e){fail(e);}
+}
+$('tbody').addEventListener('click',e=>{
+  const b=e.target.closest('.att button');
+  if(b) return setStatus(b.parentElement.dataset.student,b.dataset.s);
+  const ed=e.target.closest('[data-edit]');
+  if(ed) return openStudent(students.find(s=>s.id===ed.dataset.edit));
+  const la=e.target.closest('[data-lessonadd]');
+  if(la) return openLesson(students.find(s=>s.id===la.dataset.lessonadd));
+});
+$('tbody').addEventListener('change',async e=>{
+  const sel=e.target.closest('select[data-lesson]');
+  if(!sel) return;
+  try{
+    await patch('private_lessons','id=eq.'+sel.dataset.lesson,{status:sel.value});
+    const l=lessons.find(x=>x.id===sel.dataset.lesson); if(l) l.status=sel.value;
+    toast('تم تحديث الحصة');render();
+  }catch(err){fail(err);}
+});
+$('allPresentBtn').onclick=async()=>{
+  const date=$('dateInput').value;
+  const todo=levelStudents().filter(s=>!statusOn(s.id,date));
+  if(!todo.length) return toast('كل الطلاب محدد حضورهم');
+  try{
+    await post('level_attendance?on_conflict=student_id,session_date',todo.map(s=>({student_id:s.id,session_date:date,status:'present'})),'resolution=merge-duplicates,return=minimal');
+    todo.forEach(s=>attendance.push({student_id:s.id,session_date:date,status:'present'}));
+    toast('تم تسجيل '+todo.length+' حاضر');render();
+  }catch(e){fail(e);}
+};
+
+/* ---------- الطلاب ---------- */
+function toggleFields(levelId){
+  const priv=levels.find(l=>l.id===levelId)?.is_private;
+  document.querySelectorAll('#studentForm .private-only').forEach(x=>x.classList.toggle('hide',!priv));
+  document.querySelectorAll('#studentForm .school-only').forEach(x=>x.classList.toggle('hide',!!priv));
+}
+function openStudent(s){
+  editing=s||null;
+  const f=$('studentForm');f.reset();
+  $('studentDlgTitle').textContent=s?'تعديل بيانات الطالب':'إضافة طالب إلى '+current.name_ar;
+  const v=s||{level_id:current.id};
+  ['student_name','level_id','curriculum','school_class','country','time_zone','contact','lessons_package','notes'].forEach(k=>{if(f[k]) f[k].value=v[k]??'';});
+  $('archiveStudentBtn').classList.toggle('hide',!s);
+  toggleFields(f.level_id.value);
+  $('studentDlg').showModal();
+}
+$('levelSelect').onchange=e=>toggleFields(e.target.value);
+$('addStudentBtn').onclick=()=>openStudent(null);
+$('studentDlg').addEventListener('close',async()=>{
+  if($('studentDlg').returnValue!=='save') return;
+  const f=$('studentForm');
+  const body={};
+  ['student_name','level_id','curriculum','school_class','country','time_zone','contact','notes'].forEach(k=>body[k]=f[k].value.trim()||null);
+  body.lessons_package=f.lessons_package.value?+f.lessons_package.value:null;
+  if(!body.student_name) return;
+  try{
+    if(editing){
+      const [row]=await patch('level_students','id=eq.'+editing.id,body);
+      Object.assign(editing,row||body);
+      toast(body.level_id!==current.id?'تم نقل الطالب':'تم الحفظ');
+    }else{
+      const [row]=await post('level_students',body);
+      students.push(row);toast('تمت إضافة الطالب');
+    }
+    renderTabs();render();
+  }catch(e){fail(e);}
+});
+$('archiveStudentBtn').onclick=async()=>{
+  if(!editing||!confirm('إيقاف '+editing.student_name+'؟ سيختفي من القائمة ويبقى سجله محفوظًا.')) return;
+  try{
+    await patch('level_students','id=eq.'+editing.id,{active:false});
+    students=students.filter(s=>s.id!==editing.id);
+    $('studentDlg').close('cancel');toast('تم إيقاف الطالب');renderTabs();render();
+  }catch(e){fail(e);}
+};
+
+/* ---------- إعدادات المستوى ---------- */
+$('editLevelBtn').onclick=()=>{
+  const f=$('levelForm');
+  f.class_start.value=(current.class_start||'').slice(0,5);
+  f.class_end.value=(current.class_end||'').slice(0,5);
+  f.meeting_url.value=current.meeting_url||'';
+  $('levelDlg').showModal();
+};
+$('levelDlg').addEventListener('close',async()=>{
+  if($('levelDlg').returnValue!=='save') return;
+  const f=$('levelForm');
+  const body={class_start:f.class_start.value||null,class_end:f.class_end.value||null,meeting_url:f.meeting_url.value.trim()||null};
+  try{const [row]=await patch('arabic_levels','id=eq.'+current.id,body);Object.assign(current,row||body);toast('تم حفظ الإعدادات');renderTabs();render();}
+  catch(e){fail(e);}
+});
+
+/* ---------- الحصص الخاصة ---------- */
+function openLesson(s){
+  lessonFor=s;
+  const f=$('lessonForm');f.reset();
+  $('lessonDlgTitle').textContent='حصة خاصة — '+s.student_name;
+  f.meeting_url.value=current.meeting_url||'';
+  updateLocal();
+  $('lessonDlg').showModal();
+}
+function updateLocal(){
+  const v=$('lessonForm').lesson_at.value;
+  const tz=lessonFor?.time_zone;
+  $('lessonLocalTime').textContent=v&&tz&&tz!==SCHOOL_TZ?'🕒 عند الطالب ('+tz+'): '+fmtIn(tz,new Date(riyadhLocalToISO(v))):'';
+}
+$('lessonForm').lesson_at.addEventListener('input',updateLocal);
+$('lessonDlg').addEventListener('close',async()=>{
+  if($('lessonDlg').returnValue!=='save'||!lessonFor) return;
+  const f=$('lessonForm');
+  const body={student_id:lessonFor.id,lesson_at:riyadhLocalToISO(f.lesson_at.value),duration_min:+f.duration_min.value||30,topic:f.topic.value.trim()||null,meeting_url:f.meeting_url.value.trim()||null};
+  if(!body.lesson_at) return;
+  try{const [row]=await post('private_lessons',body);lessons.push(row);lessons.sort((a,b)=>a.lesson_at.localeCompare(b.lesson_at));toast('تمت جدولة الحصة');render();}
+  catch(e){fail(e);}
+});
+
+/* ---------- التصدير ---------- */
+$('exportBtn').onclick=()=>{
+  const priv=current.is_private;
+  const head=priv?['الاسم','الدولة','المنطقة الزمنية','التواصل','الباقة','الحصص المنجزة','ملاحظات']:['الاسم','الصف','المنهج','نسبة الحضور','حاضر','غائب','متأخر','بعذر','ملاحظات'];
+  const rows=levelStudents().map(s=>{
+    if(priv){const done=lessons.filter(l=>l.student_id===s.id&&l.status==='done').length;return [s.student_name,s.country,s.time_zone,s.contact,s.lessons_package,done,s.notes];}
+    const a=attendance.filter(x=>x.student_id===s.id);const c=k=>a.filter(x=>x.status===k).length;const r=rateFor(s.id);
+    return [s.student_name,s.school_class,s.curriculum,r==null?'':r+'%',c('present'),c('absent'),c('late'),c('excused'),s.notes];
+  });
+  const csv='\ufeff'+[head,...rows].map(r=>r.map(x=>'"'+String(x??'').replace(/"/g,'""')+'"').join(',')).join('\n');
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download=(current.name_en||current.id).replace(/\s+/g,'_')+'_'+todayISO()+'.csv';a.click();
+};
+
+/* ---------- عام ---------- */
+$('search').oninput=render;
+$('dateInput').value=todayISO();
+$('dateInput').onchange=render;
+$('logoutBtn').onclick=()=>{localStorage.removeItem(ADMIN_KEY);localStorage.removeItem(PORTAL_KEY);location.href='index.html';};
+if(!readSession()) fail(new Error('NO_SESSION'));
+else loadAll().catch(fail);
+})();
+</script>
+</body>
+</html>
