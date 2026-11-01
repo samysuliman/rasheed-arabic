@@ -163,7 +163,7 @@ function renderPortal(){
 }
 function renderSubjects(rows){
   $('subjectCount').textContent=`${rows.length} مواد`;
-  $('subjectsGrid').innerHTML=rows.length?rows.map(s=>`<button class="subject" data-cs="${esc(s.class_subject_id)}"><div class="subject-icon">${esc(s.icon||'📚')}</div><h3>${esc(s.name_ar)}</h3><p>افتح المادة للوصول إلى الواجبات والاختبارات والملفات والحصص.</p><div class="teacher">👨‍🏫 ${esc(s.teacher_name||'سيتم إسناد المعلم')}</div></button>`).join(''):'<div class="empty">لا توجد مواد مسندة إلى صفك في الفصل الحالي.</div>';
+  $('subjectsGrid').innerHTML=rows.length?rows.map(s=>`<button class="subject" data-cs="${esc(s.class_subject_id)}"><div class="subject-icon">${esc(s.icon||'📚')}</div><h3>${esc(s.name_ar)}<span class="en">${esc(subjEn(s))}</span></h3><p>افتح المادة للوصول إلى الواجبات والاختبارات والملفات والحصص.</p><div class="teacher">👨‍🏫 ${esc(s.teacher_name||'سيتم إسناد المعلم')}</div></button>`).join(''):'<div class="empty">لا توجد مواد مسندة إلى صفك في الفصل الحالي.</div>';
   document.querySelectorAll('.subject').forEach(b=>b.addEventListener('click',()=>openSubject(Number(b.dataset.cs))));
 }
 async function openSubject(csId){
@@ -175,13 +175,20 @@ async function openSubject(csId){
     x.classList.toggle('hide',!selected);
   });
   $('subjectsGrid').classList.add('subject-open');
-  $('workspace').classList.remove('hide');$('workspaceSubject').textContent=(s.icon||'📚')+' '+s.name_ar;$('workspaceTeacher').textContent='المعلم: '+(s.teacher_name||'—');
+  $('workspace').classList.remove('hide');$('workspaceSubject').innerHTML=esc((s.icon||'📚')+' '+s.name_ar)+'<span class="en">'+esc(subjEn(s))+'</span>';$('workspaceTeacher').textContent='المعلم: '+(s.teacher_name||'—');
   const p=portal.profile||{},t=portal.term||{},c=portal.class||{};$('workspaceMeta').textContent=[c.campus_name,c.school_section_name,p.curriculum,p.grade,p.section_name,t.name_ar].filter(Boolean).join(' • ');
   document.querySelectorAll('.tool').forEach(x=>x.classList.remove('active'));$('contentPanel').innerHTML='<div class="empty">اختر إحدى أدوات المادة أعلاه.</div>';
   $('workspace').scrollIntoView({behavior:'smooth',block:'start'});
   if(!resourcesCache.has(csId)){
     try{resourcesCache.set(csId,await rpc('get_my_subject_resources',{p_class_subject_id:csId}))}catch(e){console.warn(e);}
   }
+}
+/* ---------- أسماء المواد بالإنجليزية ---------- */
+function subjEn(s){
+  const base={ARABIC:'Arabic Language',LIFE_SKILLS:'Life Skills',QURAN:'The Holy Quran',SEERAH:'Prophet\'s Biography (Seerah)',ISLAMIC_HISTORY:'Islamic History',ISLAMIC:'Islamic Studies',SOCIAL:'Social Studies'}[String(s.code||'').toUpperCase()]||'';
+  const lv=String(s.name_ar||'').split(' — ')[1]||'';
+  const lvEn={'المستوى A':'Level A','المستوى B':'Level B','المستوى المتقدم':'Advanced Level','المتقدم':'Advanced Level','الدروس الخاصة':'Private Lessons'}[lv.trim()]||'';
+  return base+(base&&lvEn?' — '+lvEn:'');
 }
 /* ---------- حصتي (المستوى الافتراضي) ---------- */
 function hm(t){if(!t)return '';const [h,m]=String(t).split(':').map(Number);return (((h+11)%12)+1)+':'+String(m).padStart(2,'0');}
@@ -220,7 +227,7 @@ async function loadTasks(){
   $('tasksList').innerHTML=items.map(({s,a,quiz,due})=>{
     const late=due<now;
     return `<div class="task${late?' late':''}"><div class="ic">${quiz?'✅':'📝'}</div><div class="tb"><strong>${esc(a.title||'نشاط')}</strong>
-      <div class="meta">${esc(s.icon||'📚')} ${esc(s.name_ar)} · ${quiz?'اختبار · Quiz':'واجب · Homework'}</div>
+      <div class="meta">${esc(s.icon||'📚')} ${esc(s.name_ar)} (${esc(subjEn(s))}) · ${quiz?'اختبار · Quiz':'واجب · Homework'}</div>
       <div class="meta due">${a.due_at?(late?'⏰ انتهى الموعد · Overdue — ':'📅 آخر موعد · Due: ')+esc(fmt(a.due_at)):'بدون موعد · No due date'}</div></div>
       <a class="go" href="../student-assessment.html?recipient_id=${encodeURIComponent(a.recipient_id)}">ابدأ ▶<span class="en" style="color:rgba(255,255,255,.8)">Start</span></a></div>`;
   }).join('');
