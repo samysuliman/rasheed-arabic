@@ -45,7 +45,7 @@
     back.innerHTML = `<div class="rs-box" role="dialog" aria-modal="true" aria-label="طلب اشتراك">
       <div class="rs-head"><button class="rs-x" type="button" data-x aria-label="إغلاق">×</button>
         <b>✨ اشترك في رشيد العربية</b><small>Subscribe · دروس مباشرة مع المعلم سامي سليمان</small>
-        <div class="rs-price"><span class="gold">${PRICE} شهريًا</span><span>${LESSONS} حصص كل شهر</span><span>لكل مادة</span></div></div>
+        <div class="rs-price"><span class="gold">${PRICE} للمادة</span><span>باقة ${LESSONS} حصص</span><span>حصص فردية مباشرة</span></div></div>
       <form class="rs-body" novalidate>
         <label>المادة · Subject</label>
         <select name="subject">${SUBJECTS.map(s => `<option value="${s.code}"${s.code === sel.code ? ' selected' : ''}>${s.icon} ${esc(s.ar)} · ${esc(s.en)}</option>`).join('')}</select>
