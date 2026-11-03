@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>الاشتراكات | رشيد العربية</title>
+<style>
+:root{--green:#07583f;--gold:#c99a2e;--bg:#f4f8f6;--line:#dbe7e1;--muted:#62756d;--danger:#b42318}
+*{box-sizing:border-box}
+body{margin:0;font-family:Tahoma,Arial,sans-serif;background:var(--bg);color:#17392c}
+header{background:linear-gradient(135deg,var(--green),#064631);color:#fff;padding:14px 0}
+.wrap{width:min(1180px,94%);margin:auto}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.top h1{margin:0;font-size:19px}
+.btn{border:1px solid var(--line);border-radius:10px;padding:8px 12px;font:inherit;font-size:13px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px;background:#fff;color:var(--green)}
+.btn.green{background:var(--green);color:#fff;border-color:var(--green)}
+.btn.gold{background:var(--gold);color:#1f2a18;border-color:var(--gold)}
+.btn.sm{padding:6px 9px;font-size:12px}
+header .btn{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.3)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0}
+.stat{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px}
+.stat b{display:block;font-size:26px;color:var(--green)}.stat span{font-size:12px;color:var(--muted)}
+.stat.alert b{color:var(--danger)}
+.tabs{display:flex;gap:8px;flex-wrap:wrap}
+.tab{border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px 16px;font:inherit;font-weight:800;cursor:pointer;color:var(--muted)}
+.tab.on{background:var(--green);color:#fff;border-color:var(--green)}
+.panel{background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px;margin:14px 0}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+.row input,.row select{font:inherit;font-size:13px;border:1px solid var(--line);border-radius:9px;padding:8px 10px;background:#fff}
+.muted{color:var(--muted);font-size:13px}
+.tablewrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th,td{padding:9px 6px;border-bottom:1px solid #edf3f0;text-align:right;vertical-align:middle}
+th{background:#f6faf8;color:var(--muted);white-space:nowrap}
+td a{color:var(--green)}
+.pill{display:inline-block;border-radius:999px;padding:3px 9px;font-size:11.5px;font-weight:800;white-space:nowrap}
+.p-new{background:#fff4d6;color:#7a5a00}.p-contacted{background:#e8f1ff;color:#1d4ed8}.p-active{background:#e7f7ee;color:#067647}.p-closed{background:#f1f1f1;color:#666}
+.p-exp{background:#fff1f1;color:var(--danger)}.p-soon{background:#fff4d6;color:#7a5a00}
+.actions{display:flex;gap:6px;flex-wrap:wrap}
+.alert{padding:12px 14px;border-radius:12px;background:#fff2f2;border:1px solid #efc7c7;color:var(--danger);font-size:13px;margin-top:14px}
+.hide{display:none!important}
+dialog{border:0;border-radius:18px;padding:0;width:min(440px,94vw);box-shadow:0 24px 60px rgba(0,0,0,.25)}
+dialog form{padding:18px}dialog h3{margin:0 0 10px;color:var(--green)}
+dialog label{display:block;font-size:13px;font-weight:700;margin:10px 0 4px}
+dialog input,dialog select{width:100%;font:inherit;border:1px solid var(--line);border-radius:10px;padding:9px 10px}
+.flow{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+@media(max-width:760px){.stats{grid-template-columns:repeat(2,1fr)}td{white-space:nowrap}}
+</style>
+</head>
+<body>
+<header><div class="wrap top">
+  <h1>⭐ الاشتراكات والدروس الخاصة</h1>
+  <div class="row" style="margin:0"><a class="btn" href="levels.html#PRIVATE">🎥 الدروس الخاصة</a><a class="btn" href="admin-hub.html">مركز الإدارة</a></div>
+</div></header>
+
+<main class="wrap">
+  <div id="msg" class="alert hide"></div>
+  <div class="stats">
+    <div class="stat" id="stNew"><b>—</b><span>طلبات جديدة</span></div>
+    <div class="stat"><b id="stActive">—</b><span>اشتراكات فعّالة</span></div>
+    <div class="stat" id="stSoon"><b>—</b><span>تنتهي خلال 7 أيام</span></div>
+    <div class="stat"><b id="stIncome">—</b><span>الدخل الشهري المتوقع</span></div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab on" data-tab="req">📥 طلبات الاشتراك</button>
+    <button class="tab" data-tab="subs">⭐ الاشتراكات الفعّالة</button>
+  </div>
+
+  <section class="panel" id="tab-req">
+    <div class="row">
+      <select id="reqFilter"><option value="open">الطلبات المفتوحة</option><option value="all">كل الطلبات</option><option value="new">جديدة</option><option value="contacted">تم التواصل</option><option value="active">مفعّلة</option><option value="closed">مغلقة</option></select>
+      <span style="flex:1"></span>
+      <button class="btn sm" data-exp="pdf" data-t="req">PDF</button><button class="btn sm" data-exp="word" data-t="req">Word</button><button class="btn sm" data-exp="csv" data-t="req">CSV</button>
+    </div>
+    <p class="muted" style="margin:0 0 10px">الخطوات: <b>➕ تحويل للدروس الخاصة</b> ← <b>🔑 إنشاء الحساب (PR)</b> ← <b>📅 الجدول وواتساب</b>.</p>
+    <div class="tablewrap"><table><thead><tr><th>التاريخ</th><th>الطالب</th><th>المادة</th><th>التواصل</th><th>الدولة</th><th>الحالة</th><th>الإجراءات</th></tr></thead><tbody id="reqBody"><tr><td colspan="7" class="muted">جارٍ التحميل...</td></tr></tbody></table></div>
+  </section>
+
+  <section class="panel hide" id="tab-subs">
+    <div class="row">
+      <button class="btn green" id="addSub">➕ اشتراك يدوي لطالب</button>
+      <span style="flex:1"></span>
+      <button class="btn sm" data-exp="pdf" data-t="subs">PDF</button><button class="btn sm" data-exp="word" data-t="subs">Word</button><button class="btn sm" data-exp="csv" data-t="subs">CSV</button>
+    </div>
+    <div class="tablewrap"><table><thead><tr><th>الطالب</th><th>المادة</th><th>من</th><th>إلى</th><th>المتبقي</th><th>الحصص</th><th>الحالة</th><th>الإجراءات</th></tr></thead><tbody id="subBody"><tr><td colspan="8" class="muted">جارٍ التحميل...</td></tr></tbody></table></div>
+  </section>
+</main>
+
+<dialog id="subDlg"><form method="dialog" id="subForm">
+  <h3>➕ اشتراك يدوي</h3>
+  <label>الطالب</label><select name="student" id="subStudent" required></select>
+  <label>المادة</label><select name="subject"><option value="QURAN">📖 القرآن الكريم</option><option value="SEERAH">🕌 السيرة النبوية</option></select>
+  <label>المدة (أشهر)</label><input name="months" type="number" min="1" max="12" value="1">
+  <div class="row" style="margin-top:14px"><button class="btn green" value="ok">حفظ وفتح المادة للطالب</button><button class="btn" value="cancel" formnovalidate>إلغاء</button></div>
+</form></dialog>
+
+<script src="assets/js/rasheed-core.js"></script>
+<script>
+(()=>{
+const R=window.Rasheed,$=id=>document.getElementById(id),esc=R.esc;
+const SUBJ={ARABIC:'📘 اللغة العربية',QURAN:'📖 القرآن الكريم',TAJWEED:'🎙️ التجويد',SEERAH:'🕌 السيرة النبوية',SEERAH_KIDS:'🌙 السيرة النبوية للأطفال'};
+const STATUS={new:'جديد',contacted:'تم التواصل',active:'مفعّل',closed:'مغلق'};
+const PRICE=100;
+let reqs=[],subs=[],students=[];
+const today=()=>new Date().toISOString().slice(0,10);
+const days=d=>Math.round((new Date(d+'T00:00:00')-new Date(today()+'T00:00:00'))/864e5);
+const fmt=v=>{try{return new Intl.DateTimeFormat('ar-SA-u-ca-gregory',{dateStyle:'medium'}).format(new Date(v))}catch{return v}};
+const addMonths=(d,m)=>{const x=new Date(d+'T00:00:00');x.setMonth(x.getMonth()+m);return x.toISOString().slice(0,10)};
+function err(e){$('msg').textContent='تعذر التنفيذ: '+R.errorText(e);$('msg').classList.remove('hide')}
+
+async function load(){
+  try{
+    if(!R.session()){location.replace('index.html#login');return}
+    if(!(await R.isAdmin())){$('msg').textContent='هذه الصفحة للمدير فقط.';$('msg').classList.remove('hide');return}
+    [reqs,subs,students]=await Promise.all([
+      R.get('subscription_requests?select=*&order=created_at.desc'),
+      R.get('student_subscriptions?select=*&order=ends_on.asc'),
+      R.get('non_native_students?select=id,student_name,grade,section_name&order=student_name')
+    ]);
+    render();
+  }catch(e){err(e)}
+}
+const stName=id=>students.find(s=>Number(s.id)===Number(id))?.student_name||('#'+id);
+const isPrivate=id=>String(students.find(s=>Number(s.id)===Number(id))?.grade||'').trim()==='دروس خاصة';
+const uname=id=>(isPrivate(id)?'PR':'RA')+String(id).padStart(4,'0');
+
+function render(){
+  const act=subs.filter(s=>s.is_active&&days(s.ends_on)>=0);
+  const soon=act.filter(s=>days(s.ends_on)<=7);
+  const nNew=reqs.filter(r=>r.status==='new').length;
+  $('stNew').querySelector('b').textContent=nNew;$('stNew').classList.toggle('alert',nNew>0);
+  $('stActive').textContent=act.length;
+  $('stSoon').querySelector('b').textContent=soon.length;$('stSoon').classList.toggle('alert',soon.length>0);
+  $('stIncome').textContent='$'+(act.length*PRICE);
+  renderReqs();renderSubs();
+}
+function filteredReqs(){const f=$('reqFilter').value;return reqs.filter(r=>f==='all'?true:f==='open'?['new','contacted'].includes(r.status):r.status===f)}
+function renderReqs(){
+  const rows=filteredReqs();
+  $('reqBody').innerHTML=rows.length?rows.map(r=>{
+    const wa=r.phone?String(r.phone).replace(/[^\d]/g,''):'';
+    const mail=`mailto:${encodeURIComponent(r.email)}?subject=${encodeURIComponent('اشتراكك في رشيد العربية — '+(SUBJ[r.subject_code]||'').replace(/^\S+\s/,''))}&body=${encodeURIComponent('السلام عليكم '+r.full_name+'،\nشكرًا لاهتمامك بالاشتراك في رشيد العربية.\n')}`;
+    const conv=r.student_id
+      ?`<span class="pill p-active">${esc(uname(r.student_id))}</span><a class="btn sm" href="student-accounts.html">🔑 الحساب</a><a class="btn sm" href="levels.html#PRIVATE">📅 الجدول وواتساب</a>`
+      :`<button class="btn sm gold" data-conv="${r.id}">➕ تحويل للدروس الخاصة</button>`;
+    return `<tr><td>${esc(fmt(r.created_at))}<div class="muted">${r.source==='portal'?'من بوابة الطالب'+(r.student_username?' · '+esc(r.student_username):''):'من الواجهة'}</div></td>
+      <td><b>${esc(r.full_name)}</b>${r.message?`<div class="muted" style="max-width:220px">${esc(r.message)}</div>`:''}</td>
+      <td>${esc(SUBJ[r.subject_code]||r.subject_code)}</td>
+      <td><a href="${mail}">✉️ ${esc(r.email)}</a>${wa?`<br><a target="_blank" rel="noopener" href="https://wa.me/${wa}">💬 ${esc(r.phone)}</a>`:''}</td>
+      <td>${esc(r.country||'—')}</td>
+      <td><select data-status="${r.id}">${Object.entries(STATUS).map(([k,v])=>`<option value="${k}"${k===r.status?' selected':''}>${v}</option>`).join('')}</select></td>
+      <td><div class="actions">${conv}</div></td></tr>`}).join(''):'<tr><td colspan="7" class="muted">لا توجد طلبات هنا بعد.</td></tr>';
+}
+function subStatus(s){if(!s.is_active)return '<span class="pill p-closed">موقوف</span>';const d=days(s.ends_on);if(d<0)return '<span class="pill p-exp">منتهي</span>';if(d<=7)return '<span class="pill p-soon">ينتهي قريبًا</span>';return '<span class="pill p-active">فعّال</span>'}
+function renderSubs(){
+  $('subBody').innerHTML=subs.length?subs.map(s=>{const d=days(s.ends_on);return `<tr><td><b>${esc(stName(s.student_id))}</b><div class="muted">${esc(uname(s.student_id))}</div></td><td>${esc(SUBJ[s.subject_code]||s.subject_code)}</td><td>${esc(fmt(s.starts_on))}</td><td>${esc(fmt(s.ends_on))}</td><td>${d<0?'—':d+' يوم'}</td><td>${s.lessons_total}</td><td>${subStatus(s)}</td>
+    <td><div class="actions"><button class="btn sm green" data-renew="${s.id}">🔁 تجديد شهر</button><button class="btn sm" data-toggle="${s.id}">${s.is_active?'⏸️ إيقاف':'▶️ تفعيل'}</button></div></td></tr>`}).join(''):'<tr><td colspan="8" class="muted">لا توجد اشتراكات بعد. حوّل طلبًا أو أضف اشتراكًا يدويًا.</td></tr>';
+}
+
+document.addEventListener('click',async e=>{
+  const t=e.target.closest('[data-tab]');if(t){document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on',x===t));$('tab-req').classList.toggle('hide',t.dataset.tab!=='req');$('tab-subs').classList.toggle('hide',t.dataset.tab!=='subs');return}
+  const c=e.target.closest('[data-conv]');if(c){
+    const r=reqs.find(x=>String(x.id)===c.dataset.conv);
+    if(!confirm('تحويل «'+r.full_name+'» إلى الدروس الخاصة؟\n\nسيُنشأ له سجل منفصل عن المدرسة (حسابه يبدأ بـ PR)'+(['QURAN','SEERAH','SEERAH_KIDS','TAJWEED'].includes(r.subject_code)?'، وتُفتح له المادة المدفوعة لمدة شهر.':'.')))return;
+    c.disabled=true;
+    try{const id=await R.rpc('convert_subscription_request',{p_request_id:Number(r.id)});R.toast('✓ تم التحويل — الخطوة التالية: إنشاء الحساب');await load();
+      if(confirm('تم التحويل ✓\n\nالخطوة التالية: إنشاء حساب الطالب ('+uname(id)+').\nهل تريد فتح صفحة الحسابات الآن؟'))location.href='student-accounts.html';
+    }catch(ex){c.disabled=false;err(ex)}return}
+  const rn=e.target.closest('[data-renew]');if(rn){const s=subs.find(x=>String(x.id)===rn.dataset.renew);const base=days(s.ends_on)>=0?s.ends_on:today();
+    try{await R.api('/rest/v1/student_subscriptions?id=eq.'+s.id,{method:'PATCH',body:JSON.stringify({ends_on:addMonths(base,1),is_active:true,starts_on:days(s.ends_on)>=0?s.starts_on:today(),updated_at:new Date().toISOString()}),headers:{Prefer:'return=minimal'}});R.toast('✓ تم التجديد شهرًا');load()}catch(ex){err(ex)}return}
+  const tg=e.target.closest('[data-toggle]');if(tg){const s=subs.find(x=>String(x.id)===tg.dataset.toggle);
+    try{await R.api('/rest/v1/student_subscriptions?id=eq.'+s.id,{method:'PATCH',body:JSON.stringify({is_active:!s.is_active,updated_at:new Date().toISOString()}),headers:{Prefer:'return=minimal'}});load()}catch(ex){err(ex)}return}
+  const ex=e.target.closest('[data-exp]');if(ex){
+    if(ex.dataset.t==='req'){R.exportTable(ex.dataset.exp,{title:'طلبات الاشتراك — رشيد العربية',filename:'Rasheed-Subscription-Requests',head:['التاريخ','الطالب','المادة','البريد','الجوال','الدولة','الحالة'],rows:filteredReqs().map(r=>[fmt(r.created_at),r.full_name,(SUBJ[r.subject_code]||r.subject_code).replace(/^\S+\s/,''),r.email,r.phone||'',r.country||'',STATUS[r.status]])})}
+    else{R.exportTable(ex.dataset.exp,{title:'الاشتراكات — رشيد العربية',filename:'Rasheed-Subscriptions',head:['الطالب','الحساب','المادة','من','إلى','الحصص','الحالة'],rows:subs.map(s=>[stName(s.student_id),uname(s.student_id),(SUBJ[s.subject_code]||s.subject_code).replace(/^\S+\s/,''),s.starts_on,s.ends_on,s.lessons_total,!s.is_active?'موقوف':days(s.ends_on)<0?'منتهي':'فعّال'])})}
+    return}
+});
+document.addEventListener('change',async e=>{
+  if(e.target.id==='reqFilter'){renderReqs();return}
+  const st=e.target.closest('[data-status]');if(st){try{await R.api('/rest/v1/subscription_requests?id=eq.'+st.dataset.status,{method:'PATCH',body:JSON.stringify({status:st.value}),headers:{Prefer:'return=minimal'}});const r=reqs.find(x=>String(x.id)===st.dataset.status);r.status=st.value;render();R.toast('✓ تم تحديث الحالة')}catch(ex){err(ex)}}
+});
+$('addSub').onclick=()=>{$('subStudent').innerHTML=students.map(s=>`<option value="${s.id}">${esc(s.student_name)} — ${esc(uname(s.id))}</option>`).join('');$('subDlg').showModal()};
+$('subDlg').addEventListener('close',async()=>{if($('subDlg').returnValue!=='ok')return;const f=new FormData($('subForm'));const m=Math.max(1,Math.min(12,Number(f.get('months'))||1));
+  try{await R.api('/rest/v1/student_subscriptions',{method:'POST',body:JSON.stringify({student_id:Number(f.get('student')),subject_code:f.get('subject'),starts_on:today(),ends_on:addMonths(today(),m),lessons_total:10*m}),headers:{Prefer:'return=minimal'}});R.toast('✓ تم فتح المادة للطالب');load()}catch(ex){err(ex)}});
+load();
+})();
+</script>
+</body>
+</html>

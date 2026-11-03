@@ -1288,8 +1288,9 @@ async function loadData(){
 
 function usernameForStudent(studentId){
 
+  const st=(typeof students!=="undefined"?students:[]).find(x=>Number(x.id)===Number(studentId));
   return (
-    "RA" +
+    (st&&String(st.grade||"").trim()==="دروس خاصة"?"PR":"RA") +
     String(studentId)
       .padStart(4,"0")
   );
