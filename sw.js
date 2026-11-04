@@ -1,5 +1,5 @@
 // Rasheed Arabic service worker: network-first, cache fallback for offline.
-const CACHE = 'rasheed-v1';
+const CACHE = 'rasheed-v2';
 const SHELL = ['./', './index.html', './manifest.webmanifest', './assets/app/icon-192.png'];
 
 self.addEventListener('install', e => {
