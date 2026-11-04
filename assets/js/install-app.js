@@ -7,7 +7,8 @@
 
   var standalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
   if (standalone) return;
-  try { if (Date.now() - (+localStorage.getItem('rasheedInstallHidden') || 0) < 3 * 864e5) return; } catch (e) {}
+  var snoozed = false;
+  try { snoozed = Date.now() - (+localStorage.getItem('rasheedInstallHidden') || 0) < 864e5; } catch (e) {}
 
   var ua = navigator.userAgent;
   var isIOS = /iphone|ipad|ipod/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
@@ -15,8 +16,8 @@
   var deferred = null;
 
   var css = '' +
-    '#rsInstall{position:fixed;inset:auto 12px 12px 12px;z-index:9999;max-width:460px;margin:0 auto;background:#063f34;color:#fff;border-radius:18px;box-shadow:0 14px 40px rgba(0,0,0,.28);padding:12px 12px 12px 14px;display:flex;align-items:center;gap:11px;font-family:inherit;direction:rtl;animation:rsUp .35s ease}' +
-    '@keyframes rsUp{from{transform:translateY(30px);opacity:0}to{transform:none;opacity:1}}' +
+    '#rsInstall{position:fixed;inset:12px 12px auto 12px;z-index:9999;max-width:460px;margin:0 auto;background:#063f34;color:#fff;border-radius:18px;box-shadow:0 14px 40px rgba(0,0,0,.28);padding:12px 12px 12px 14px;display:flex;align-items:center;gap:11px;font-family:inherit;direction:rtl;animation:rsUp .35s ease}' +
+    '@keyframes rsUp{from{transform:translateY(-30px);opacity:0}to{transform:none;opacity:1}}' +
     '#rsInstall img{width:46px;height:46px;border-radius:12px;flex:none;background:#000}' +
     '#rsInstall .t{flex:1;min-width:0;line-height:1.35}' +
     '#rsInstall b{display:block;font-size:14px}' +
@@ -52,14 +53,36 @@
       '<button type="button" class="go">تثبيت<span>Install</span></button>' +
       '<button type="button" class="x" aria-label="إغلاق">×</button></div>');
     b.querySelector('.x').onclick = function () { hide(true); };
-    b.querySelector('.go').onclick = function () {
-      if (deferred) { deferred.prompt(); deferred.userChoice.then(function () { deferred = null; hide(true); }); }
-      else if (isIOS) { iosHelp(); }
-    };
+    b.querySelector('.go').onclick = install;
     document.body.appendChild(b);
   }
 
-  window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); deferred = e; show(); });
-  window.addEventListener('appinstalled', function () { hide(true); });
-  if (isIOS && isMobile) setTimeout(show, 2500);
+  function androidHelp() {
+    var m = el('<div id="rsIos"><div class="box"><h4>ثبّت رشيد العربية على جوالك<span class="en">Install Rasheed Arabic on your phone</span></h4>' +
+      '<ol><li>اضغط قائمة Chrome <b>⋮</b> أعلى الشاشة<span class="en">Tap the Chrome menu ⋮ at the top</span></li>' +
+      '<li>اختر <b>«تثبيت التطبيق»</b> أو <b>«إضافة إلى الشاشة الرئيسية»</b><span class="en">Choose “Install app” or “Add to Home screen”</span></li>' +
+      '<li>اضغط <b>«تثبيت»</b><span class="en">Tap “Install”</span></li></ol>' +
+      '<button type="button">فهمت · Got it</button></div></div>');
+    m.addEventListener('click', function (e) { if (e.target === m || e.target.tagName === 'BUTTON') m.remove(); });
+    document.body.appendChild(m);
+  }
+  function install() {
+    if (deferred) { deferred.prompt(); deferred.userChoice.then(function () { deferred = null; hide(false); }); }
+    else if (isIOS) iosHelp(); else androidHelp();
+  }
+  window.rasheedInstall = install;
+
+  // Permanent "install app" link in the top bar, always available.
+  function addNavLink() {
+    var ref = document.querySelector('.nav-learn'); if (!ref || document.getElementById('rsNavInstall')) return;
+    var a = document.createElement('a'); a.href = '#'; a.id = 'rsNavInstall'; a.className = ref.className;
+    a.innerHTML = '📲 ثبّت التطبيق<span class="en">Install app</span>';
+    a.addEventListener('click', function (e) { e.preventDefault(); install(); });
+    ref.parentNode.appendChild(a);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', addNavLink); else addNavLink();
+
+  window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); deferred = e; if (!snoozed) show(); });
+  window.addEventListener('appinstalled', function () { hide(false); });
+  if (isMobile && !snoozed) setTimeout(function () { if (!deferred && !document.getElementById('rsInstall')) show(); }, 3500);
 })();
