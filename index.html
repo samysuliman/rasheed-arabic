@@ -246,6 +246,7 @@ footer{background:#032a22!important;border-top:1px solid rgba(217,180,90,.4);mar
 .mat{margin:20px 0 6px;background:#fff;border:1.5px solid rgba(217,180,90,.6);border-radius:26px;padding:22px;box-shadow:0 18px 40px rgba(0,0,0,.28)}
 .mat .en{display:block;direction:ltr;unicode-bidi:isolate;font-size:.8em;color:#6b7f78;font-weight:600}
 .mat-t{margin:16px 0 10px;color:var(--green);font-size:17px;text-align:right}.mat-t .en{text-align:right;color:#9a7a20}
+.rv-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:14px}.rv{background:linear-gradient(160deg,#063f34,#0d6e56);color:#fff;border:1px solid rgba(217,180,90,.6);border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:8px}.rv-st{color:#f1d58a;font-size:18px;letter-spacing:2px}.rv-st small{color:#fff;font-size:12px;letter-spacing:0}.rv p{margin:0;font-size:14px;line-height:1.7}.rv b{color:#f1d58a;font-size:14px}.rv .en{color:rgba(255,255,255,.72)!important;font-size:12px}.rv-all{display:block;text-align:center;margin-top:12px;font-weight:900;color:#9a7a20}.rv-sec[hidden]{display:none!important}
 .mat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.mat-grid.five{grid-template-columns:repeat(5,1fr)}
 .mat figure{margin:0;text-align:center}.mat img{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:12px;border:2px solid #e7ce91;box-shadow:0 8px 20px rgba(0,0,0,.15);display:block}
 .mat figcaption{margin-top:7px;font-size:13px;font-weight:800;color:var(--green);line-height:1.35}.mat figcaption .en{text-align:center;font-size:11px}
@@ -371,6 +372,13 @@ footer{background:#032a22!important;border-top:1px solid rgba(217,180,90,.4);mar
         <figure><img src="assets/books/seerah-3.webp" alt="السيرة النبوية - الجزء الثالث" loading="lazy"><figcaption>الجزء الثالث<span class="en">Part 3</span></figcaption></figure>
       </div>
     </section>
+
+    <section class="mat rv-sec" id="reviews" aria-label="آراء أولياء الأمور" hidden>
+      <div class="pkg-head"><h2>آراء أولياء الأمور والطلاب<span class="en">What parents &amp; students say</span></h2><p>آراء حقيقية وافق أصحابها على نشرها<span class="en">Real feedback, published with permission</span></p></div>
+      <div class="rv-grid" id="rvGrid"></div>
+      <a class="rv-all" href="testimonials.html">كل الآراء ←<span class="en">All reviews</span></a>
+    </section>
+<script>(function(){var sec=document.getElementById('reviews');if(!sec)return;var U='https://wcyamoqmpwpribsgspjn.supabase.co/rest/v1/rpc/get_rasheed_public_feedback',K='sb_publishable_3eJET0uhZw4D4DowMK13fQ_oWK3PdIQ';function esc(t){return String(t==null?'':t).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}fetch(U,{method:'POST',headers:{apikey:K,Authorization:'Bearer '+K,'Content-Type':'application/json'},body:'{}'}).then(function(r){return r.ok?r.json():[]}).then(function(d){if(!d||!d.length)return;d=d.slice(0,6);document.getElementById('rvGrid').innerHTML=d.map(function(x){var a=(x.explanation+x.progress+x.engagement+x.communication)/4,st='';for(var i=1;i<=5;i++)st+=i<=Math.round(a)?'★':'☆';return '<article class="rv"><div class="rv-st">'+st+' <small>'+a.toFixed(1)+'</small></div>'+(x.comment?'<p>«'+esc(x.comment)+'»</p>':'')+'<b>'+esc(x.full_name)+'</b><span class="en">'+(x.role==='parent'?'ولي أمر · Parent':'طالب · Student')+'</span></article>'}).join('');sec.hidden=false}).catch(function(){})})();</script>
 
   </section>
 
