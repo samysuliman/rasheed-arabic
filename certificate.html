@@ -47,9 +47,9 @@ body{margin:0;font-family:Cairo,"Segoe UI",Tahoma,sans-serif;background:#eef3f0;
 .c3{bottom:44px;right:44px;border-left:0;border-top:0}.c3:after{bottom:6px;right:8px}
 .c4{bottom:44px;left:44px;border-right:0;border-top:0}.c4:after{bottom:6px;left:8px}
 .content{position:absolute;inset:62px 96px 60px;display:flex;flex-direction:column;align-items:center;text-align:center}
-.logo{height:74px;width:auto;margin-top:4px}
+.logo{height:96px;width:auto;margin-top:4px}
 .title{font-family:"Aref Ruqaa",Amiri,serif;font-weight:700;color:var(--green);font-size:72px;line-height:1.05;margin:6px 0 0}
-.title-en{font-family:"Cormorant Garamond",serif;font-weight:600;letter-spacing:6px;text-transform:uppercase;color:#9a7a20;font-size:20px;margin-top:2px}
+.title-en{font-family:"Cormorant Garamond",serif;font-weight:600;letter-spacing:6px;text-transform:uppercase;color:#9a7a20;font-size:20px;margin-top:10px}
 .orn{display:flex;align-items:center;gap:12px;color:var(--gold);margin:10px 0 6px}
 .orn i{display:block;width:150px;height:2px;background:linear-gradient(90deg,transparent,var(--gold))}.orn i:last-child{transform:scaleX(-1)}
 .lead{font-family:Amiri,serif;font-size:22px;color:#33544a;margin:4px 0 0}
@@ -102,6 +102,9 @@ body{margin:0;font-family:Cairo,"Segoe UI",Tahoma,sans-serif;background:#eef3f0;
    <div class="f"><label>البرنامج / المادة</label><select id="prog"></select></div>
    <div class="row">
     <div class="f"><label>المستوى (اختياري)</label><input id="level" placeholder="المستوى الأول"></div>
+    <div class="f"><label>المستوى بالإنجليزية</label><input id="levelEn" dir="ltr" placeholder="Level 1"></div>
+   </div>
+   <div class="row">
     <div class="f"><label>عدد الحصص</label><input id="lessons" type="number" min="1" value="10"></div>
    </div>
    <div class="row">
@@ -121,11 +124,11 @@ body{margin:0;font-family:Cairo,"Segoe UI",Tahoma,sans-serif;background:#eef3f0;
      <div class="title-en">Certificate of Completion</div>
      <div class="orn"><i></i>✦ ❖ ✦<i></i></div>
      <p class="lead" id="oLead">تشهد «رشيد العربية» بأنّ الطالب</p>
-     <p class="lead-en">Rasheed Arabic hereby certifies that</p>
+     <p class="lead-en" dir="ltr">Rasheed Arabic hereby certifies that</p>
      <div class="name" id="oNameAr">اسم الطالب</div>
-     <div class="name-en" id="oNameEn">Student Name</div>
+     <div class="name-en" id="oNameEn" dir="ltr">Student Name</div>
      <p class="body" id="oBody"></p>
-     <p class="body-en" id="oBodyEn"></p>
+     <p class="body-en" id="oBodyEn" dir="ltr"></p>
      <div class="note" id="oNote"></div>
      <div class="foot">
       <div class="sig"><div class="v" id="oDate"></div><div class="ln"></div><div class="k">تاريخ الإتمام<span>Date of completion</span></div></div>
@@ -155,20 +158,20 @@ var sel=$('prog');P.forEach(function(p){var o=document.createElement('option');o
 var q=new URLSearchParams(location.search);
 var today=new Date();$('date').value=today.toISOString().slice(0,10);
 $('serial').value='RA-'+today.getFullYear()+'-'+String(Math.floor(Math.random()*9000)+1000);
-['nameAr','nameEn','level','lessons','date','serial','note'].forEach(function(k){if(q.get(k))$(k).value=q.get(k)});
+['nameAr','nameEn','level','levelEn','lessons','date','serial','note'].forEach(function(k){if(q.get(k))$(k).value=q.get(k)});
 if(q.get('prog'))sel.value=q.get('prog');if(q.get('g')==='f')document.querySelector('input[name=g][value=f]').checked=true;
 function esc(t){return String(t).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 var AM=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
 function render(){
  var f=document.querySelector('input[name=g]:checked').value==='f';
  var p=P.filter(function(x){return x[0]===sel.value})[0]||P[0];
- var n=parseInt($('lessons').value,10)||0,lv=$('level').value.trim();
+ var n=parseInt($('lessons').value,10)||0,lv=$('level').value.trim(),lvE=$('levelEn').value.trim();
  $('oLead').textContent='تشهد «رشيد العربية» بأنّ '+(f?'الطالبة':'الطالب');
  $('oNameAr').textContent=$('nameAr').value.trim()||(f?'اسم الطالبة':'اسم الطالب');
  $('oNameEn').textContent=$('nameEn').value.trim();
  var ls=n?(n===1?'حصة واحدة':n===2?'حصتين':(n<=10?n+' حصص':n+' حصة')):'';
  $('oBody').innerHTML=(f?'قد أتمّت':'قد أتمّ')+' بنجاح <b>'+esc(p[1])+'</b>'+(lv?' – '+esc(lv):'')+(ls?'،<br>في '+ls+' فردية مباشرة مع المعلم،':'،')+' '+(f?'مع تمنّياتنا لها':'مع تمنّياتنا له')+' بدوام التوفيق والتقدّم.';
- $('oBodyEn').innerHTML='has successfully completed <b>'+esc(p[2])+'</b>'+(lv?' – '+esc(lv):'')+(n?', through '+n+' live one-to-one lesson'+(n>1?'s':''):'')+'.';
+ $('oBodyEn').innerHTML='has successfully completed <b>'+esc(p[2])+'</b>'+(lvE?' – '+esc(lvE):'')+(n?', through '+n+' live one-to-one lesson'+(n>1?'s':''):'')+'.';
  $('oNote').textContent=$('note').value.trim();
  var d=$('date').value?new Date($('date').value+'T12:00:00'):null;
  $('oDate').textContent=d?d.getDate()+' '+AM[d.getMonth()]+' '+d.getFullYear():'';
