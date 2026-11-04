@@ -194,7 +194,7 @@ async function openSubject(csId){
 }
 /* ---------- أسماء المواد بالإنجليزية ---------- */
 function subjEn(s){
-  const base={ARABIC:'Arabic Language',LIFE_SKILLS:'Life Skills',QURAN:'The Holy Quran',SEERAH:'Prophet\'s Biography (Seerah)',ISLAMIC_HISTORY:'Islamic History',ISLAMIC:'Islamic Studies',SOCIAL:'Social Studies'}[String(s.code||'').toUpperCase()]||'';
+  const base={ARABIC:'Arabic Language',LIFE_SKILLS:'Life Skills',QURAN:'The Holy Quran',SEERAH:'Prophet\'s Biography (Seerah)',QURAN_FOUNDATIONS:'Qur\'an Foundations',QURAN_TAJWEED:'Recitation & Tajweed',QURAN_HIFZ:'Memorization (Hifz)',QURAN_IJAZAH:'Ijazah & Sanad',AQEEDAH:'Islamic Creed (Aqeedah)',FIQH:'Fiqh',HADITH:'Hadith',TAFSEER:'Tafsir',ISLAMIC_HISTORY:'Islamic History',ISLAMIC:'Islamic Studies',SOCIAL:'Social Studies'}[String(s.code||'').toUpperCase()]||'';
   const lv=String(s.name_ar||'').split(' — ')[1]||'';
   const lvEn={'المستوى A':'Level A','المستوى B':'Level B','المستوى المتقدم':'Advanced Level','المتقدم':'Advanced Level','الدروس الخاصة':'Private Lessons'}[lv.trim()]||'';
   return base+(base&&lvEn?' — '+lvEn:'');
