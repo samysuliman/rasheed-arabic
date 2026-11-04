@@ -90,7 +90,7 @@ dialog input,dialog select{width:100%;font:inherit;border:1px solid var(--line);
 <dialog id="subDlg"><form method="dialog" id="subForm">
   <h3>➕ اشتراك يدوي</h3>
   <label>الطالب</label><select name="student" id="subStudent" required></select>
-  <label>المادة</label><select name="subject"><option value="QURAN">📖 القرآن الكريم</option><option value="SEERAH">🕌 السيرة النبوية</option></select>
+  <label>المادة</label><select name="subject"><optgroup label="مسارات القرآن"><option value="QURAN_FOUNDATIONS">🔤 التأسيس والقراءة</option><option value="QURAN_TAJWEED">🎙️ التلاوة والتجويد</option><option value="QURAN_HIFZ">🧠 الحفظ والإتقان</option><option value="QURAN_IJAZAH">🎓 الإجازة والسند</option><option value="QURAN">📖 القرآن الكريم (طلاب المستويات)</option></optgroup><optgroup label="العلوم الشرعية"><option value="AQEEDAH">🤍 العقيدة</option><option value="FIQH">⚖️ الفقه</option><option value="HADITH">📚 الحديث النبوي</option><option value="TAFSEER">📖 التفسير</option><option value="SEERAH">🕌 السيرة النبوية</option></optgroup></select>
   <label>عدد الباقات (كل باقة 10 حصص · 100$)</label><input name="months" type="number" min="1" max="12" value="1">
   <div class="row" style="margin-top:14px"><button class="btn green" value="ok">حفظ وفتح المادة للطالب</button><button class="btn" value="cancel" formnovalidate>إلغاء</button></div>
 </form></dialog>
@@ -99,7 +99,7 @@ dialog input,dialog select{width:100%;font:inherit;border:1px solid var(--line);
 <script>
 (()=>{
 const R=window.Rasheed,$=id=>document.getElementById(id),esc=R.esc;
-const SUBJ={ARABIC:'📘 اللغة العربية',QURAN:'📖 القرآن الكريم',TAJWEED:'🎙️ التجويد',SEERAH:'🕌 السيرة النبوية',SEERAH_KIDS:'🌙 السيرة النبوية للأطفال'};
+const SUBJ={ARABIC:'📘 اللغة العربية',QURAN:'📖 القرآن الكريم',TAJWEED:'🎙️ التجويد',SEERAH:'🕌 السيرة النبوية',SEERAH_KIDS:'🌙 السيرة النبوية للأطفال',QURAN_FOUNDATIONS:'🔤 التأسيس والقراءة',QURAN_TAJWEED:'🎙️ التلاوة والتجويد',QURAN_HIFZ:'🧠 الحفظ والإتقان',QURAN_IJAZAH:'🎓 الإجازة والسند',AQEEDAH:'🤍 العقيدة',FIQH:'⚖️ الفقه',HADITH:'📚 الحديث النبوي',TAFSEER:'📖 التفسير'};
 const STATUS={new:'جديد',contacted:'تم التواصل',active:'مفعّل',closed:'مغلق'};
 const PRICE=100;
 let reqs=[],subs=[],students=[];

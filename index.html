@@ -178,7 +178,17 @@ footer{background:var(--green);color:#dce9e4;padding:17px 0;margin-top:4px}
 .learn-cta{font:inherit;cursor:pointer;border:0;border-radius:14px;padding:13px 26px;font-weight:900;font-size:16px;background:#d2a23a;color:#1f2a18;box-shadow:0 10px 22px rgba(0,0,0,.18);animation:learnPulse 2.4s ease-in-out infinite}
 .learn-cta:hover{background:#fff}
 @keyframes learnPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.04)}}
-@media(max-width:760px){.learn{padding:18px;border-radius:20px}.learn h2{font-size:22px}.learn-grid{grid-template-columns:repeat(2,1fr)}.learn-price{transform:none;width:100%}.learn-foot{flex-direction:column;align-items:stretch}.learn-cta{width:100%}}
+.learn-grid.two{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.learn-img{font:inherit;cursor:pointer;border:0;padding:0;background:#fff;border-radius:20px;overflow:hidden;display:flex;flex-direction:column;text-align:center;color:#063f34;box-shadow:0 12px 26px rgba(0,0,0,.2);transition:.2s}
+.learn-img:hover{transform:translateY(-4px);box-shadow:0 18px 36px rgba(0,0,0,.28)}
+.learn-img img{width:100%;aspect-ratio:1/1;object-fit:contain;display:block;background:#fbf8ef}
+.learn-top .en,.program-title .en,.login-card .en,.founder .en,.classroom-caption .en{text-align:inherit}
+.learn-top .en{text-align:right}
+.learn-price .en{text-align:center}
+.learn-img .li-body{padding:12px 10px 14px;display:flex;flex-direction:column;gap:8px;align-items:center}
+.learn-img b{font-size:16px;line-height:1.35}.learn-img b .en{font-size:11px}
+.learn-img em{font-style:normal;font-weight:900;font-size:13px;background:#d2a23a;color:#1f2a18;border-radius:999px;padding:6px 14px}
+@media(max-width:760px){.learn{padding:18px;border-radius:20px}.learn h2{font-size:22px}.learn-grid,.learn-grid.two{grid-template-columns:repeat(2,1fr);gap:10px}.learn-img b{font-size:13.5px}.learn-img em{font-size:12px;padding:5px 10px}.learn-price{transform:none;width:100%}.learn-foot{flex-direction:column;align-items:stretch}.learn-cta{width:100%}}
 #togglePassword{display:none!important}.password-wrap input{padding-left:14px!important}
 </style>
 </head>
@@ -238,11 +248,9 @@ footer{background:var(--green);color:#dce9e4;padding:17px 0;margin-top:4px}
         </div>
         <div class="learn-price"><b dir="ltr">$100</b><span>للمادة الواحدة<span class="en">per subject</span></span><em>باقة 10 حصص<span class="en">10-lesson package</span></em></div>
       </div>
-      <div class="learn-grid">
-        <button type="button" class="learn-card" data-sub="ARABIC"><i>📘</i><b>اللغة العربية</b><small>Arabic Language</small></button>
-        <button type="button" class="learn-card" data-sub="QURAN"><i>📖</i><b>القرآن الكريم</b><small>The Holy Quran</small></button>
-        <button type="button" class="learn-card" data-sub="TAJWEED"><i>🎙️</i><b>التجويد</b><small>Tajweed</small></button>
-        <button type="button" class="learn-card" data-sub="SEERAH_KIDS"><i>🌙</i><b>السيرة النبوية للأطفال</b><small>Seerah for Kids</small></button>
+      <div class="learn-grid two">
+        <button type="button" class="learn-img" data-sub="ARABIC"><img src="assets/isl-arabic.webp" alt="اللغة العربية" loading="lazy"><span class="li-body"><b>اللغة العربية<span class="en">Arabic Language</span></b><em>اشترك · Subscribe</em></span></button>
+        <a class="learn-img" href="islamic-studies.html"><img src="assets/isl-main.webp" alt="القرآن الكريم والعلوم الشرعية" loading="lazy"><span class="li-body"><b>القرآن الكريم والعلوم الشرعية<span class="en">Qur'an &amp; Islamic Studies · 9 subjects</span></b><em>اختر مادتك · Choose ←</em></span></a>
       </div>
       <div class="learn-foot">
         <ul><li>✔ حصص فردية مباشرة<span class="en">1-to-1 live</span></li><li>✔ حساب خاص وجدول مواعيد<span class="en">Own account &amp; schedule</span></li><li>✔ واجبات ومتابعة ودرجات<span class="en">Homework &amp; grades</span></li></ul>
