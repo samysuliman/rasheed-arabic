@@ -18,7 +18,7 @@
   var css = '' +
     '#rsInstall{position:fixed;inset:12px 12px auto 12px;z-index:9999;max-width:460px;margin:0 auto;background:#063f34;color:#fff;border-radius:18px;box-shadow:0 14px 40px rgba(0,0,0,.28);padding:12px 12px 12px 14px;display:flex;align-items:center;gap:11px;font-family:inherit;direction:rtl;animation:rsUp .35s ease}' +
     '@keyframes rsUp{from{transform:translateY(-30px);opacity:0}to{transform:none;opacity:1}}' +
-    '#rsInstall img{width:46px;height:46px;border-radius:12px;flex:none;background:#000}' +
+    '#rsInstall img{width:46px;height:46px;border-radius:12px;flex:none;background:#fff}' +
     '#rsInstall .t{flex:1;min-width:0;line-height:1.35}' +
     '#rsInstall b{display:block;font-size:14px}' +
     '#rsInstall small{display:block;font-size:11.5px;opacity:.85;direction:ltr;text-align:right}' +
