@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>شهادة إتمام | رشيد العربية</title>
+<link rel="icon" href="assets/logo-mark.webp?v=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Aref+Ruqaa:wght@400;700&family=Cairo:wght@400;600;800&family=Cormorant+Garamond:ital,wght@0,600;1,500&display=swap" rel="stylesheet">
+<style>
+:root{--green:#063f34;--green2:#0a5c49;--gold:#d2a23a;--gold2:#f1d58a;--ink:#17372f;--paper:#fffdf6}
+*{box-sizing:border-box}
+body{margin:0;font-family:Cairo,"Segoe UI",Tahoma,sans-serif;background:#eef3f0;color:var(--ink)}
+.wrap{max-width:1240px;margin:0 auto;padding:18px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+.top h1{margin:0;font-size:22px;color:var(--green)}
+.top h1 small{display:block;font-size:13px;color:#8a6d1e;font-weight:600}
+.btn{font:inherit;font-weight:800;border:0;border-radius:12px;padding:11px 20px;cursor:pointer;background:var(--green);color:#fff;box-shadow:0 6px 16px rgba(6,63,52,.2)}
+.btn.gold{background:var(--gold);color:#1f2a18}
+.layout{display:grid;grid-template-columns:320px 1fr;gap:18px;align-items:start}
+.panel{background:#fff;border:1px solid #d9e6df;border-radius:18px;padding:16px;position:sticky;top:12px}
+.panel h2{margin:0 0 10px;font-size:16px;color:var(--green)}
+.f{margin-bottom:11px}
+.f label{display:block;font-size:12.5px;font-weight:800;margin-bottom:4px;color:#33544a}
+.f input,.f select,.f textarea{width:100%;font:inherit;font-size:14px;border:1px solid #cfe0d7;border-radius:10px;padding:9px 11px;background:#fbfdfc;color:var(--ink)}
+.f textarea{min-height:56px;resize:vertical}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.seg{display:flex;gap:6px}.seg label{flex:1;text-align:center;border:1px solid #cfe0d7;border-radius:10px;padding:8px;cursor:pointer;font-weight:800;font-size:13px;margin:0}
+.seg input{display:none}.seg input:checked+span{color:#fff}.seg label:has(input:checked){background:var(--green);border-color:var(--green);color:#fff}
+.hint{font-size:12px;color:#5e7a70;line-height:1.6;margin:8px 0 0}
+.stage{background:#dfe8e3;border-radius:18px;padding:14px;overflow:hidden}
+.scaler{transform-origin:top right}
+
+/* ===== Certificate (A4 landscape @96dpi) ===== */
+.cert{width:1123px;height:794px;position:relative;background:var(--paper);overflow:hidden;
+ background-image:radial-gradient(circle at 50% 46%,rgba(210,162,58,.10),transparent 55%),
+ repeating-linear-gradient(45deg,rgba(6,63,52,.018) 0 2px,transparent 2px 14px)}
+.frame{position:absolute;inset:22px;border:10px solid var(--green);border-radius:6px}
+.frame:before{content:"";position:absolute;inset:6px;border:2px solid var(--gold)}
+.frame:after{content:"";position:absolute;inset:14px;border:1px solid rgba(210,162,58,.55)}
+.corner{position:absolute;width:86px;height:86px;border:3px solid var(--gold);z-index:2}
+.corner:after{content:"✦";position:absolute;color:var(--gold);font-size:22px}
+.c1{top:44px;right:44px;border-left:0;border-bottom:0}.c1:after{top:6px;right:8px}
+.c2{top:44px;left:44px;border-right:0;border-bottom:0}.c2:after{top:6px;left:8px}
+.c3{bottom:44px;right:44px;border-left:0;border-top:0}.c3:after{bottom:6px;right:8px}
+.c4{bottom:44px;left:44px;border-right:0;border-top:0}.c4:after{bottom:6px;left:8px}
+.content{position:absolute;inset:62px 96px 60px;display:flex;flex-direction:column;align-items:center;text-align:center}
+.logo{height:74px;width:auto;margin-top:4px}
+.title{font-family:"Aref Ruqaa",Amiri,serif;font-weight:700;color:var(--green);font-size:72px;line-height:1.05;margin:6px 0 0}
+.title-en{font-family:"Cormorant Garamond",serif;font-weight:600;letter-spacing:6px;text-transform:uppercase;color:#9a7a20;font-size:20px;margin-top:2px}
+.orn{display:flex;align-items:center;gap:12px;color:var(--gold);margin:10px 0 6px}
+.orn i{display:block;width:150px;height:2px;background:linear-gradient(90deg,transparent,var(--gold))}.orn i:last-child{transform:scaleX(-1)}
+.lead{font-family:Amiri,serif;font-size:22px;color:#33544a;margin:4px 0 0}
+.lead-en{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:17px;color:#6c7f78;margin:0}
+.name{font-family:Amiri,serif;font-weight:700;font-size:54px;color:var(--green);line-height:1.25;margin:8px 0 0;padding:0 40px 2px;border-bottom:2px solid rgba(210,162,58,.7);min-width:520px}
+.name-en{font-family:"Cormorant Garamond",serif;font-weight:600;font-size:24px;color:#8a6d1e;margin-top:4px;letter-spacing:1px;min-height:28px}
+.body{font-family:Amiri,serif;font-size:22px;line-height:1.7;color:#24443a;margin:10px 0 0;max-width:860px}
+.body b{color:var(--green);font-size:25px}
+.body-en{font-family:"Cormorant Garamond",serif;font-size:17px;color:#5e7068;margin:0;max-width:860px;line-height:1.45}
+.body-en b{color:var(--green)}
+.note{font-family:Amiri,serif;font-size:18px;color:#8a6d1e;margin-top:6px;min-height:0}
+.foot{margin-top:auto;width:100%;display:grid;grid-template-columns:1fr 150px 1fr;align-items:end;gap:20px}
+.sig{text-align:center}
+.sig .v{font-family:"Aref Ruqaa",serif;font-size:30px;color:var(--green);line-height:1.2;min-height:38px}
+.sig .ln{height:1.5px;background:var(--ink);opacity:.5;margin:2px 30px 6px}
+.sig .k{font-size:14px;font-weight:800;color:#33544a}
+.sig .k span{display:block;font-family:"Cormorant Garamond",serif;font-weight:600;font-size:14px;color:#6c7f78}
+.seal{width:140px;height:140px;border-radius:50%;margin:0 auto;position:relative;display:grid;place-items:center;
+ background:radial-gradient(circle,#f6dc95 0 52%,#d2a23a 53% 56%,#f1d58a 57% 100%);box-shadow:0 6px 16px rgba(120,90,20,.25),inset 0 0 0 4px #b98a22}
+.seal:before{content:"";position:absolute;inset:12px;border-radius:50%;border:1.5px dashed #9a7a20}
+.seal img{width:62px;height:62px;object-fit:contain}
+.seal .st{position:absolute;bottom:22px;font-size:10px;font-weight:800;color:#5b4710;letter-spacing:.5px}
+.serial{position:absolute;bottom:34px;left:0;right:0;text-align:center;font-size:11.5px;color:#7d8f88;letter-spacing:.5px;z-index:3}
+
+@media(max-width:900px){.layout{grid-template-columns:1fr}.panel{position:static}}
+@page{size:A4 landscape;margin:0}
+@media print{
+ body{background:#fff}.wrap{padding:0;max-width:none}.top,.panel{display:none!important}
+ .layout{display:block}.stage{padding:0;background:none;border-radius:0}
+ .scaler{transform:none!important;height:auto!important}
+ .cert{width:297mm;height:210mm;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+ .cert>*{zoom:1}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+ <div class="top">
+  <h1>قالب شهادة إتمام<small>Certificate of Completion · Rasheed Arabic</small></h1>
+  <button class="btn gold" id="printBtn" type="button">🖨️ طباعة / حفظ PDF</button>
+ </div>
+ <div class="layout">
+  <form class="panel" id="form" onsubmit="return false">
+   <h2>بيانات الشهادة</h2>
+   <div class="f"><label>الطالب</label><div class="seg">
+    <label><input type="radio" name="g" value="m" checked><span>طالب</span></label>
+    <label><input type="radio" name="g" value="f"><span>طالبة</span></label></div></div>
+   <div class="f"><label>اسم الطالب بالعربية</label><input id="nameAr" placeholder="مثال: حمزة أرسلان"></div>
+   <div class="f"><label>اسم الطالب بالإنجليزية</label><input id="nameEn" dir="ltr" placeholder="e.g. Hamza Arsalan"></div>
+   <div class="f"><label>البرنامج / المادة</label><select id="prog"></select></div>
+   <div class="row">
+    <div class="f"><label>المستوى (اختياري)</label><input id="level" placeholder="المستوى الأول"></div>
+    <div class="f"><label>عدد الحصص</label><input id="lessons" type="number" min="1" value="10"></div>
+   </div>
+   <div class="row">
+    <div class="f"><label>تاريخ الإتمام</label><input id="date" type="date"></div>
+    <div class="f"><label>رقم الشهادة</label><input id="serial" dir="ltr"></div>
+   </div>
+   <div class="f"><label>عبارة إضافية (اختياري)</label><textarea id="note" placeholder="مثال: مع التقدير لجدّه واجتهاده"></textarea></div>
+   <p class="hint">💡 للحفظ PDF: اضغط «طباعة»، واختر «حفظ كملف PDF»، وفعّل «رسومات الخلفية». البيانات لا تُحفظ في أي مكان.</p>
+  </form>
+  <div class="stage" id="stage"><div class="scaler" id="scaler">
+   <div class="cert" id="cert">
+    <div class="frame"></div>
+    <div class="corner c1"></div><div class="corner c2"></div><div class="corner c3"></div><div class="corner c4"></div>
+    <div class="content">
+     <img class="logo" src="assets/logo-full.webp?v=1" alt="رشيد العربية">
+     <div class="title">شهادة إتمام</div>
+     <div class="title-en">Certificate of Completion</div>
+     <div class="orn"><i></i>✦ ❖ ✦<i></i></div>
+     <p class="lead" id="oLead">تشهد «رشيد العربية» بأنّ الطالب</p>
+     <p class="lead-en">Rasheed Arabic hereby certifies that</p>
+     <div class="name" id="oNameAr">اسم الطالب</div>
+     <div class="name-en" id="oNameEn">Student Name</div>
+     <p class="body" id="oBody"></p>
+     <p class="body-en" id="oBodyEn"></p>
+     <div class="note" id="oNote"></div>
+     <div class="foot">
+      <div class="sig"><div class="v" id="oDate"></div><div class="ln"></div><div class="k">تاريخ الإتمام<span>Date of completion</span></div></div>
+      <div class="seal"><img src="assets/logo-mark.webp?v=1" alt=""><span class="st">RASHEED ARABIC</span></div>
+      <div class="sig"><div class="v">سامي سليمان رشيد</div><div class="ln"></div><div class="k">المعلم والمؤسس<span>Samy Suliman Rasheed · Teacher &amp; Founder</span></div></div>
+     </div>
+    </div>
+    <div class="serial" id="oSerial"></div>
+   </div>
+  </div></div>
+ </div>
+</div>
+<script>
+(function(){
+var P=[
+ ['ARABIC','برنامج تعليم اللغة العربية لغير الناطقين بها','Arabic for Non-Native Speakers'],
+ ['QURAN_FOUNDATIONS','القرآن الكريم: التأسيس والقراءة',"Qur'an: Foundations & Reading"],
+ ['QURAN_TAJWEED','القرآن الكريم: التلاوة والتجويد',"Qur'an: Recitation & Tajweed"],
+ ['QURAN_HIFZ','القرآن الكريم: الحفظ والإتقان',"Qur'an: Memorization (Hifz)"],
+ ['AQEEDAH','العقيدة','Islamic Creed (Aqeedah)'],
+ ['FIQH','الفقه','Islamic Jurisprudence (Fiqh)'],
+ ['HADITH','الحديث النبوي','Prophetic Hadith'],
+ ['TAFSEER','التفسير',"Qur'an Interpretation (Tafsir)"],
+ ['SEERAH','السيرة النبوية',"Prophet's Biography (Seerah)"]];
+var $=function(i){return document.getElementById(i)};
+var sel=$('prog');P.forEach(function(p){var o=document.createElement('option');o.value=p[0];o.textContent=p[1];sel.appendChild(o)});
+var q=new URLSearchParams(location.search);
+var today=new Date();$('date').value=today.toISOString().slice(0,10);
+$('serial').value='RA-'+today.getFullYear()+'-'+String(Math.floor(Math.random()*9000)+1000);
+['nameAr','nameEn','level','lessons','date','serial','note'].forEach(function(k){if(q.get(k))$(k).value=q.get(k)});
+if(q.get('prog'))sel.value=q.get('prog');if(q.get('g')==='f')document.querySelector('input[name=g][value=f]').checked=true;
+function esc(t){return String(t).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+var AM=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+function render(){
+ var f=document.querySelector('input[name=g]:checked').value==='f';
+ var p=P.filter(function(x){return x[0]===sel.value})[0]||P[0];
+ var n=parseInt($('lessons').value,10)||0,lv=$('level').value.trim();
+ $('oLead').textContent='تشهد «رشيد العربية» بأنّ '+(f?'الطالبة':'الطالب');
+ $('oNameAr').textContent=$('nameAr').value.trim()||(f?'اسم الطالبة':'اسم الطالب');
+ $('oNameEn').textContent=$('nameEn').value.trim();
+ var ls=n?(n===1?'حصة واحدة':n===2?'حصتين':(n<=10?n+' حصص':n+' حصة')):'';
+ $('oBody').innerHTML=(f?'قد أتمّت':'قد أتمّ')+' بنجاح <b>'+esc(p[1])+'</b>'+(lv?' – '+esc(lv):'')+(ls?'،<br>في '+ls+' فردية مباشرة مع المعلم،':'،')+' '+(f?'مع تمنّياتنا لها':'مع تمنّياتنا له')+' بدوام التوفيق والتقدّم.';
+ $('oBodyEn').innerHTML='has successfully completed <b>'+esc(p[2])+'</b>'+(lv?' – '+esc(lv):'')+(n?', through '+n+' live one-to-one lesson'+(n>1?'s':''):'')+'.';
+ $('oNote').textContent=$('note').value.trim();
+ var d=$('date').value?new Date($('date').value+'T12:00:00'):null;
+ $('oDate').textContent=d?d.getDate()+' '+AM[d.getMonth()]+' '+d.getFullYear():'';
+ $('oSerial').textContent=$('serial').value.trim()?'رقم الشهادة · Certificate No. '+$('serial').value.trim():'';
+}
+function fit(){var st=$('stage'),sc=$('scaler'),w=st.clientWidth-28,s=Math.min(1,w/1123);sc.style.transform='scale('+s+')';sc.style.height=(794*s)+'px';}
+$('form').addEventListener('input',render);$('form').addEventListener('change',render);
+window.addEventListener('resize',fit);
+$('printBtn').addEventListener('click',function(){
+ var t=($('nameEn').value.trim()||$('nameAr').value.trim()||'certificate');var o=document.title;document.title='Certificate - '+t;window.print();setTimeout(function(){document.title=o},500)});
+render();fit();
+})();
+</script>
+</body>
+</html>
