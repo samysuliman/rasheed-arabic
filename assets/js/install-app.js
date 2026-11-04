@@ -8,7 +8,7 @@
   var standalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
   if (standalone) return;
   var snoozed = false;
-  try { snoozed = Date.now() - (+localStorage.getItem('rasheedInstallHidden') || 0) < 864e5; } catch (e) {}
+  try { snoozed = Date.now() - (+localStorage.getItem('rasheedInstallClosed') || 0) < 864e5; } catch (e) {}
 
   var ua = navigator.userAgent;
   var isIOS = /iphone|ipad|ipod/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
@@ -32,7 +32,7 @@
     '#rsIos button{width:100%;background:#063f34;color:#fff;border:0;border-radius:12px;padding:11px;font-weight:900;font-family:inherit;font-size:14px}';
 
   function el(html) { var d = document.createElement('div'); d.innerHTML = html; return d.firstChild; }
-  function hide(remember) { var b = document.getElementById('rsInstall'); if (b) b.remove(); if (remember) try { localStorage.setItem('rasheedInstallHidden', Date.now()); } catch (e) {} }
+  function hide(remember) { var b = document.getElementById('rsInstall'); if (b) b.remove(); if (remember) try { localStorage.setItem('rasheedInstallClosed', Date.now()); } catch (e) {} }
 
   function iosHelp() {
     var m = el('<div id="rsIos"><div class="box"><h4>ثبّت رشيد العربية على جوالك<span class="en">Install Rasheed Arabic on your iPhone</span></h4>' +
