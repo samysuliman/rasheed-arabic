@@ -236,6 +236,20 @@ footer{background:#032a22!important;border-top:1px solid rgba(217,180,90,.4);mar
 .pkg-more{display:inline-block;margin-top:12px;font-weight:900;color:#9a7a20}
 .footer-links{flex-wrap:wrap;justify-content:flex-end}
 @media(max-width:760px){.pkg{grid-template-columns:1fr;padding:16px;border-radius:20px}.pkg-head h2{font-size:20px}.pkg-price b{font-size:38px}.footer-links{justify-content:center;gap:10px 14px}}
+
+/* === Founder video & materials (batch 3) === */
+.founder-video-btn{display:block;width:100%;margin:6px 0 12px;font:inherit;cursor:pointer;border:0;border-radius:14px;padding:11px 14px;background:linear-gradient(135deg,#063f34,#0d6e56);color:#fff;font-weight:900;font-size:15px;box-shadow:0 8px 18px rgba(6,63,52,.25)}
+.founder-video-btn .en{display:block;font-size:11px;font-weight:700;color:#f1d58a}
+.vmodal{position:fixed;inset:0;z-index:10001;background:rgba(0,0,0,.78);display:grid;place-items:center;padding:16px}.vmodal[hidden]{display:none}
+.vbox{position:relative;width:min(960px,100%)}.vbox video{width:100%;border-radius:16px;border:2px solid #d9b45a;background:#000;display:block}
+.vclose{position:absolute;top:-14px;left:-10px;width:38px;height:38px;border-radius:50%;border:0;background:#d9b45a;color:#063f34;font-size:22px;font-weight:900;cursor:pointer}
+.mat{margin:20px 0 6px;background:#fff;border:1.5px solid rgba(217,180,90,.6);border-radius:26px;padding:22px;box-shadow:0 18px 40px rgba(0,0,0,.28)}
+.mat .en{display:block;direction:ltr;unicode-bidi:isolate;font-size:.8em;color:#6b7f78;font-weight:600}
+.mat-t{margin:16px 0 10px;color:var(--green);font-size:17px;text-align:right}.mat-t .en{text-align:right;color:#9a7a20}
+.mat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.mat-grid.five{grid-template-columns:repeat(5,1fr)}
+.mat figure{margin:0;text-align:center}.mat img{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:12px;border:2px solid #e7ce91;box-shadow:0 8px 20px rgba(0,0,0,.15);display:block}
+.mat figcaption{margin-top:7px;font-size:13px;font-weight:800;color:var(--green);line-height:1.35}.mat figcaption .en{text-align:center;font-size:11px}
+@media(max-width:760px){.mat{padding:16px;border-radius:20px}.mat-grid.five{grid-template-columns:repeat(3,1fr)}.mat-grid{gap:10px}}
 </style>
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#063f34">
@@ -255,6 +269,7 @@ footer{background:#032a22!important;border-top:1px solid rgba(217,180,90,.4);mar
       <a href="#learn" class="nav-learn">✨ تعلّم معنا<span class="en">Learn with us</span></a>
       <a href="islamic-studies.html" class="nav-learn">📖 القرآن الكريم والعلوم الشرعية<span class="en">Qur'an &amp; Islamic Studies</span></a>
       <a href="#packages" class="nav-learn">💳 الباقات<span class="en">Packages</span></a>
+      <a href="#materials" class="nav-learn">📚 المواد<span class="en">Materials</span></a>
     </nav>
     <div class="head-actions">
       <a class="head-btn admin-link" href="admin-hub.html">مركز الإدارة<span class="en">Admin</span></a>
@@ -275,7 +290,10 @@ footer{background:#032a22!important;border-top:1px solid rgba(217,180,90,.4);mar
         <li><span class="ico">🎓</span><span>خبرة تربوية وتعليمية تمتد لأكثر من 20 عامًا.<span class="en">20+ years of teaching experience.</span></span></li>
         <li><span class="ico">📘</span><span>إعداد برامج ومناهج ومواد تعليمية للعربية للناطقين بغيرها.<span class="en">Designs Arabic programs and curricula.</span></span></li>
         <li><span class="ico">🧑‍🏫</span><span>تدريب المعلمين وتوظيف الاستراتيجيات التفاعلية والتقنية التعليمية.<span class="en">Teacher trainer in interactive learning.</span></span></li>
+        <li><span class="ico">🏛️</span><span>خريج الأزهر الشريف: ليسانس أصول الدين بتقدير ممتاز ودبلومة التربية.<span class="en">Al-Azhar graduate: B.A. (Excellent) &amp; Diploma in Education.</span></span></li>
+        <li><span class="ico">🏆</span><span>جائزة الشركة الوطنية للتعليم – المركز الثاني (2025).<span class="en">National Education Award – 2nd place (2025).</span></span></li>
       </ul>
+      <button type="button" class="founder-video-btn" id="founderVideoBtn" hidden>▶ شاهد الفيديو التعريفي<span class="en">Watch the intro video</span></button>
       <a class="founder-more" href="https://samysuliman.github.io/portfolio/" target="_blank" rel="noopener">الملف المهني للمؤسس ←<span class="en">Founder profile</span></a>
     </div>
   </aside>
@@ -329,6 +347,24 @@ footer{background:#032a22!important;border-top:1px solid rgba(217,180,90,.4);mar
           <li>استرداد كامل قبل أول حصة<span class="en">Full refund before the first lesson</span></li>
         </ul>
         <a class="pkg-more" href="policy.html">السياسة كاملة ←<span class="en">Full policy</span></a>
+      </div>
+    </section>
+
+    <section class="mat" id="materials" aria-label="نماذج من المواد">
+      <div class="pkg-head"><h2>نماذج من المواد التعليمية<span class="en">Sample learning materials</span></h2><p>من تأليف المؤسس وإعداده، وتُستخدم في الحصص<span class="en">Written by the founder and used in our lessons</span></p></div>
+      <div id="matSeries"><h3 class="mat-t">سلسلة رشيد في تعليم العربية<span class="en">Rasheed series for learning Arabic</span></h3>
+      <div class="mat-grid">
+        <figure><img src="assets/media/arabic-letters.webp" alt="كتاب الحروف العربية - المستوى الأول" loading="lazy"><figcaption>كتاب الحروف العربية<span class="en">Arabic Letters · Level 1</span></figcaption></figure>
+        <figure><img src="assets/media/practice.webp" alt="كراسة التدريبات - المستوى الأول" loading="lazy"><figcaption>كراسة التدريبات<span class="en">Practice Workbook · Level 1</span></figcaption></figure>
+        <figure><img src="assets/media/letter-stories.webp" alt="قصص الحروف - المستوى الثاني" loading="lazy"><figcaption>قصص الحروف<span class="en">Letter Stories · Level 2</span></figcaption></figure>
+      </div></div>
+      <h3 class="mat-t">التجويد والسيرة النبوية<span class="en">Tajweed &amp; the Prophet's biography</span></h3>
+      <div class="mat-grid five">
+        <figure><img src="assets/books/tajweed-1.webp" alt="أعلام القراء - الجزء الأول" loading="lazy"><figcaption>أحكام التجويد ١<span class="en">Tajweed · Part 1</span></figcaption></figure>
+        <figure><img src="assets/books/tajweed-2.webp" alt="أعلام القراء - الجزء الثاني" loading="lazy"><figcaption>أحكام التجويد ٢<span class="en">Tajweed · Part 2</span></figcaption></figure>
+        <figure><img src="assets/books/tajweed-3.webp" alt="أعلام القراء - الجزء الثالث" loading="lazy"><figcaption>أحكام التجويد ٣<span class="en">Tajweed · Part 3</span></figcaption></figure>
+        <figure><img src="assets/books/seerah-kids.webp" alt="نور الحق - السيرة للأطفال" loading="lazy"><figcaption>السيرة للأطفال<span class="en">The Light of Truth</span></figcaption></figure>
+        <figure><img src="assets/books/seerah.webp" alt="السيرة النبوية" loading="lazy"><figcaption>السيرة النبوية<span class="en">The Prophetic Biography</span></figcaption></figure>
       </div>
     </section>
 
@@ -632,5 +668,11 @@ async function signInHodByName(name,password){
 <script src="assets/js/subscribe.js"></script>
 <script>document.querySelectorAll('[data-sub]').forEach(b=>b.addEventListener('click',()=>window.RasheedSubscribe&&RasheedSubscribe.open({subject:b.dataset.sub,source:'home'})));</script>
 <script src="assets/js/install-app.js" defer></script>
+<div class="vmodal" id="vmodal" hidden><div class="vbox"><button type="button" class="vclose" id="vclose" aria-label="إغلاق">×</button><video id="fvideo" controls playsinline preload="none" poster="assets/logo-full.webp?v=1"></video></div></div>
+<script>(function(){var src='assets/media/founder-intro.mp4',btn=document.getElementById('founderVideoBtn'),m=document.getElementById('vmodal'),v=document.getElementById('fvideo');
+fetch(src,{method:'HEAD'}).then(function(r){if(r.ok)btn.hidden=false}).catch(function(){});
+var ms=document.getElementById('matSeries');if(ms){fetch('assets/media/arabic-letters.webp',{method:'HEAD'}).then(function(r){if(!r.ok)ms.hidden=true}).catch(function(){ms.hidden=true})}
+btn.onclick=function(){if(!v.src)v.src=src;m.hidden=false;v.play().catch(function(){})};
+function close(){v.pause();m.hidden=true}document.getElementById('vclose').onclick=close;m.onclick=function(e){if(e.target===m)close()};})();</script>
 </body>
 </html>
