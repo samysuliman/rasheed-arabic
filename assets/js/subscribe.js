@@ -7,12 +7,19 @@
   const PRICE = '100$';
   const LESSONS = 10;
   const SUBJECTS = [
-    { code: 'ARABIC', ar: 'اللغة العربية', en: 'Arabic Language', icon: '📘' },
-    { code: 'QURAN', ar: 'القرآن الكريم', en: 'The Holy Quran', icon: '📖' },
-    { code: 'TAJWEED', ar: 'التجويد', en: 'Tajweed', icon: '🎙️' },
-    { code: 'SEERAH_KIDS', ar: 'السيرة النبوية للأطفال', en: 'Seerah for Kids', icon: '🌙' },
-    { code: 'SEERAH', ar: 'السيرة النبوية', en: "Prophet's Biography", icon: '🕌' }
+    { code: 'ARABIC', ar: 'اللغة العربية', en: 'Arabic Language', icon: '📘', g: 'ar' },
+    { code: 'QURAN_FOUNDATIONS', ar: 'التأسيس والقراءة', en: "Qur'an Foundations & Reading", icon: '🔤', g: 'q' },
+    { code: 'QURAN_TAJWEED', ar: 'التلاوة والتجويد', en: 'Recitation & Tajweed', icon: '🎙️', g: 'q' },
+    { code: 'QURAN_HIFZ', ar: 'الحفظ والإتقان', en: 'Memorization (Hifz)', icon: '🧠', g: 'q' },
+    { code: 'QURAN_IJAZAH', ar: 'الإجازة والسند', en: 'Ijazah & Sanad', icon: '🎓', g: 'q' },
+    { code: 'AQEEDAH', ar: 'العقيدة', en: 'Islamic Creed (Aqeedah)', icon: '🤍', g: 's' },
+    { code: 'FIQH', ar: 'الفقه', en: 'Islamic Jurisprudence (Fiqh)', icon: '⚖️', g: 's' },
+    { code: 'HADITH', ar: 'الحديث النبوي', en: 'Prophetic Hadith', icon: '📚', g: 's' },
+    { code: 'TAFSEER', ar: 'التفسير', en: 'Tafsir', icon: '📖', g: 's' },
+    { code: 'SEERAH', ar: 'السيرة النبوية', en: "Prophet's Biography (Seerah)", icon: '🕌', g: 's' }
   ];
+  const ALIAS = { QURAN: 'QURAN_FOUNDATIONS', TAJWEED: 'QURAN_TAJWEED', SEERAH_KIDS: 'SEERAH' };
+  const GROUPS = [['ar', 'اللغة العربية · Arabic'], ['q', 'مسارات القرآن الكريم · Qur\'an paths'], ['s', 'العلوم الشرعية · Islamic sciences']];
   const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
   const css = `
@@ -40,7 +47,8 @@
   function open(opts = {}) {
     ensureCss();
     close();
-    const sel = SUBJECTS.find(x => x.code === opts.subject) || SUBJECTS[1];
+    const want = ALIAS[opts.subject] || opts.subject;
+    const sel = SUBJECTS.find(x => x.code === want) || SUBJECTS[0];
     const back = document.createElement('div'); back.className = 'rs-back'; back.id = 'rsBack';
     back.innerHTML = `<div class="rs-box" role="dialog" aria-modal="true" aria-label="طلب اشتراك">
       <div class="rs-head"><button class="rs-x" type="button" data-x aria-label="إغلاق">×</button>
@@ -48,7 +56,7 @@
         <div class="rs-price"><span class="gold">${PRICE} للمادة</span><span>باقة ${LESSONS} حصص</span><span>حصص فردية مباشرة</span></div></div>
       <form class="rs-body" novalidate>
         <label>المادة · Subject</label>
-        <select name="subject">${SUBJECTS.map(s => `<option value="${s.code}"${s.code === sel.code ? ' selected' : ''}>${s.icon} ${esc(s.ar)} · ${esc(s.en)}</option>`).join('')}</select>
+        <select name="subject">${GROUPS.map(([g, label]) => `<optgroup label="${esc(label)}">` + SUBJECTS.filter(s => s.g === g).map(s => `<option value="${s.code}"${s.code === sel.code ? ' selected' : ''}>${s.icon} ${esc(s.ar)} · ${esc(s.en)}</option>`).join('') + '</optgroup>').join('')}</select>
         <label>اسم الطالب · Student name</label>
         <input name="name" required maxlength="120" value="${esc(opts.name || '')}" autocomplete="name">
         <div class="rs-row">
