@@ -422,7 +422,7 @@ footer{background:#032a22!important;border-top:1px solid rgba(217,180,90,.4);mar
         <h2>⭐ تقييمات اختبارات رشيد العربية<span class="en">Rasheed Arabic Quiz Reviews</span></h2>
         <p>آراء وتقييمات اعتمد نشرها بعد موافقة المشاركين<span class="en">Approved feedback shared with permission</span></p>
       </div>
-      <div id="quizReviewCards" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:15px" aria-live="polite"></div>
+      <div id="quizReviewCards" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:15px;align-items:start" aria-live="polite"></div>
       <p id="quizReviewState" style="text-align:center;color:#65766f">جارٍ تحميل التقييمات... / Loading reviews...</p>
       <div style="text-align:center;margin-top:18px">
         <a href="quiz-feedback-reviews.html" class="rv-all" style="display:inline-block">عرض جميع تقييمات الاختبارات<span class="en">View all quiz reviews</span></a>
@@ -443,11 +443,11 @@ footer{background:#032a22!important;border-top:1px solid rgba(217,180,90,.4);mar
           var n=Math.max(0,Math.min(5,Math.round(Number(r.rating)||0)));
           var stars='★'.repeat(n)+'☆'.repeat(5-n);
           var rec={yes:'نعم / Yes',maybe:'ربما / Maybe',no:'لا / No'}[r.recommend]||'—';
-          return '<article style="background:white;border:1px solid #dbe7e1;border-radius:16px;padding:19px;box-shadow:0 3px 12px #063f3410">'
+          return '<article style="background:white;border:1px solid #dbe7e1;border-radius:16px;padding:14px 17px;box-shadow:0 3px 12px #063f3410">'
             +'<div style="color:#d2a23a;font-size:24px" aria-label="'+n+' من 5">'+stars+'</div>'
             +'<b>'+esc(r.display_name||'مشارك')+'</b> <span style="color:#65766f">· '+esc(r.level||'')+'</span>'
-            +(r.comment&&String(r.comment).trim()?'<p style="white-space:pre-wrap;overflow-wrap:anywhere">'+esc(r.comment)+'</p>':'')
-            +'<p style="font-size:14px;color:#466b5a">هل توصي بالاختبارات؟ '+esc(rec)+'</p></article>';
+            +(r.comment&&String(r.comment).trim()?'<p style="white-space:pre-wrap;overflow-wrap:anywhere;margin:9px 0">'+esc(r.comment)+'</p>':'')
+            +'<p style="font-size:14px;color:#466b5a;margin:8px 0 0">هل توصي بالاختبارات؟ '+esc(rec)+'</p></article>';
         }).join('');
       }).catch(function(){status.textContent='تعذر تحميل التقييمات حاليًا / Reviews unavailable';});
     })();
