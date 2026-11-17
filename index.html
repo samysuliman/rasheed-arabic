@@ -415,6 +415,43 @@ footer{background:#032a22!important;border-top:1px solid rgba(217,180,90,.4);mar
     </section>
 <script>(function(){var sec=document.getElementById('reviews');if(!sec)return;var U='https://wcyamoqmpwpribsgspjn.supabase.co/rest/v1/rpc/get_rasheed_public_feedback',K='sb_publishable_3eJET0uhZw4D4DowMK13fQ_oWK3PdIQ';function esc(t){return String(t==null?'':t).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}fetch(U,{method:'POST',headers:{apikey:K,Authorization:'Bearer '+K,'Content-Type':'application/json'},body:'{}'}).then(function(r){return r.ok?r.json():[]}).then(function(d){if(!d||!d.length)return;d=d.slice(0,6);document.getElementById('rvGrid').innerHTML=d.map(function(x){var a=(x.explanation+x.progress+x.engagement+x.communication)/4,st='';for(var i=1;i<=5;i++)st+=i<=Math.round(a)?'★':'☆';return '<article class="rv"><div class="rv-st">'+st+' <small>'+a.toFixed(1)+'</small></div>'+(x.comment?'<p>«'+esc(x.comment)+'»</p>':'')+'<b>'+esc(x.full_name)+'</b><span class="en">'+(x.role==='parent'?'ولي أمر · Parent':'طالب · Student')+'</span></article>'}).join('');sec.hidden=false}).catch(function(){})})();</script>
 
+
+    <!-- Quiz feedback: independent of existing parent/student testimonials -->
+    <section class="mat" id="quiz-reviews" aria-label="تقييمات اختبارات رشيد العربية" style="margin-top:25px">
+      <div class="pkg-head">
+        <h2>⭐ تقييمات اختبارات رشيد العربية<span class="en">Rasheed Arabic Quiz Reviews</span></h2>
+        <p>آراء وتقييمات اعتمد نشرها بعد موافقة المشاركين<span class="en">Approved feedback shared with permission</span></p>
+      </div>
+      <div id="quizReviewCards" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:15px" aria-live="polite"></div>
+      <p id="quizReviewState" style="text-align:center;color:#65766f">جارٍ تحميل التقييمات... / Loading reviews...</p>
+      <div style="text-align:center;margin-top:18px">
+        <a href="quiz-feedback-reviews.html" class="rv-all" style="display:inline-block">عرض جميع تقييمات الاختبارات<span class="en">View all quiz reviews</span></a>
+      </div>
+    </section>
+    <script src="feedback-config.js"></script>
+    <script>
+    (function(){
+      'use strict';
+      var area=document.getElementById('quizReviewCards'),status=document.getElementById('quizReviewState');
+      if(!area||!status||typeof window.fbRequest!=='function')return;
+      var esc=window.fbEscape||function(v){return String(v||'').replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})};
+      window.fbRequest('rpc/rasheed_quiz_survey_public',{method:'POST',body:'{}'})
+      .then(function(data){
+        if(!Array.isArray(data)||!data.length){status.textContent='لا توجد تقييمات منشورة حتى الآن / No published reviews yet';return;}
+        status.hidden=true;
+        area.innerHTML=data.slice(0,6).map(function(r){
+          var n=Math.max(0,Math.min(5,Math.round(Number(r.rating)||0)));
+          var stars='★'.repeat(n)+'☆'.repeat(5-n);
+          var rec={yes:'نعم / Yes',maybe:'ربما / Maybe',no:'لا / No'}[r.recommend]||'—';
+          return '<article style="background:white;border:1px solid #dbe7e1;border-radius:16px;padding:19px;box-shadow:0 3px 12px #063f3410">'
+            +'<div style="color:#d2a23a;font-size:24px" aria-label="'+n+' من 5">'+stars+'</div>'
+            +'<b>'+esc(r.display_name||'مشارك')+'</b> <span style="color:#65766f">· '+esc(r.level||'')+'</span>'
+            +(r.comment&&String(r.comment).trim()?'<p style="white-space:pre-wrap;overflow-wrap:anywhere">'+esc(r.comment)+'</p>':'')
+            +'<p style="font-size:14px;color:#466b5a">هل توصي بالاختبارات؟ '+esc(rec)+'</p></article>';
+        }).join('');
+      }).catch(function(){status.textContent='تعذر تحميل التقييمات حاليًا / Reviews unavailable';});
+    })();
+    </script>
   </section>
 
   <aside class="login-card card-shell" id="login">
