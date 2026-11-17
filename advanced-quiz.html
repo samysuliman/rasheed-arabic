@@ -26,4 +26,4 @@ function showQuestion(index){
 }
 function moveQuestion(delta){showQuestion(currentQuestion+delta);}
 showQuestion(0);
-</script></body></html>
+</script><script>(async function(){const b=document.getElementById('begin');if(!b)return;b.disabled=true;const msg=document.getElementById('startMsg');try{const r=await fetch('https://wcyamoqmpwpribsgspjn.supabase.co/rest/v1/rpc/rasheed_quiz_link_status',{method:'POST',headers:{'apikey':'sb_publishable_3eJET0uhZw4D4DowMK13fQ_oWK3PdIQ','Content-Type':'application/json'},body:JSON.stringify({p_quiz_code:'ADV-1'}),cache:'no-store'});if(!r.ok)throw Error('status '+r.status);const open=await r.json();if(open===true){b.disabled=false}else{if(msg)msg.textContent='الاختبار مغلق حاليًا للطلاب الجدد | This quiz is currently closed to new students.';b.disabled=true}}catch(e){if(msg)msg.textContent='تعذر التحقق من حالة الاختبار. يرجى المحاولة لاحقًا | Please try again later.';b.disabled=true}})();</script></body></html>

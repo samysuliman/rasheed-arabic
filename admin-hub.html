@@ -138,6 +138,7 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:26px 0}
           <span>اختبار (1) – المستوى A: عرض نتائج الطلاب، طباعة الكشوف بالشعارات، تصدير الدرجات، واعتماد المحاولات وإعادة الاختبار.</span>
         </a>
       </div>
+      <section class="card" style="margin:14px 0;padding:18px"><h3>🔗 روابط اختبارات اللغة العربية</h3><p>تعطيل الرابط يمنع الطلاب الجدد فقط، ولا يوقف من بدأ الاختبار بالفعل.</p><div id="quizLinks" class="grid"><p>جارٍ تحميل الروابط...</p></div></section>
       <div class="census" id="censusList"><div class="notice">جارٍ التحميل...</div></div>
     </section>
   </div>
@@ -278,5 +279,7 @@ $('roundDlg').addEventListener('close',async()=>{
 })();
 })();
 </script>
-</body>
+<script>
+(function(){const codes=[['A-1','المستوى A','quiz-a-1.html'],['B-1','المستوى B','quiz-b-1/'],['ADV-1','المستوى المتقدم','advanced-quiz.html']];const host=document.getElementById('quizLinks');if(!host)return;async function load(){if(!window.Rasheed||!await Rasheed.isAdmin()){host.textContent='يلزم تسجيل الدخول بحساب المدير';return}host.innerHTML='';for(const [code,label,path] of codes){const open=await Rasheed.rpc('rasheed_quiz_link_status',{p_quiz_code:code});const el=document.createElement('div');el.className='card';el.style.padding='12px';const title=document.createElement('strong');title.textContent=label+' — '+(open?'🟢 مفعل':'⏸️ معطل');const link=document.createElement('a');link.href=path;link.target='_blank';link.textContent=' فتح الاختبار ';const copy=document.createElement('button');copy.className='btn';copy.textContent='نسخ الرابط';copy.onclick=async()=>{try{await navigator.clipboard.writeText(new URL(path,location.href).href);alert('تم نسخ الرابط')}catch(e){prompt('انسخ الرابط',new URL(path,location.href).href)}};const toggle=document.createElement('button');toggle.className='btn';toggle.textContent=open?'تعطيل':'تفعيل';toggle.onclick=async()=>{if(!confirm((open?'تعطيل':'تفعيل')+' '+label+' للطلاب الجدد؟'))return;toggle.disabled=true;try{await Rasheed.rpc('rasheed_quiz_admin_set_link',{p_quiz_code:code,p_is_open:!open});await load()}catch(e){alert(e.message||e);toggle.disabled=false}};el.append(title,document.createElement('br'),link,document.createElement('br'),copy,' ',toggle);host.append(el)}}window.addEventListener('load',()=>load().catch(e=>host.textContent='تعذر تحميل الروابط: '+e.message))})();
+</script></body>
 </html>
